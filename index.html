@@ -4,279 +4,313 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Game Portal</title>
+    <title>Game Portal</title>
+
+    <!-- Edgy-looking font -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            background: #000;
-            color: white;
-            font-family: Arial, sans-serif;
+            background: #05070a;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
         }
 
-        /* HEADER */
-
+        /* TOP BAR */
         header {
-            background: #050505;
-            border-bottom: 2px solid #39ff14;
-            padding: 15px;
-            text-align: center;
+            height: 70px;
+            background: #080b10;
+            border-bottom: 2px solid #168cff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        header h1 {
-            color: #39ff14;
-            margin: 0;
+        .logo {
+            color: #168cff;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
-        /* HOME SCREEN */
+        .settingsButton {
+            background: transparent;
+            color: #168cff;
+            border: 1px solid #168cff;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
 
+        .settingsButton:hover {
+            background: #168cff;
+            color: #000;
+        }
+
+        /* HOME */
         #homeScreen {
-            padding: 20px;
+            padding: 30px;
         }
 
-        .category {
+        .title {
+            color: #168cff;
+            font-size: 32px;
             margin-bottom: 25px;
+            letter-spacing: 2px;
         }
 
-        .category h2 {
-            color: #39ff14;
-        }
-
-        /* GAME BUTTONS */
-
+        /* GAME GRID */
         .games {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 16px;
+        }
+
+        /* GAME CARD */
+        .game {
+            width: 150px;
+            background: #0b0f15;
+            border: 1px solid #168cff;
+            border-radius: 8px;
+            padding: 8px;
+            transition: 0.2s;
+            box-shadow: 0 0 8px rgba(22, 140, 255, 0.15);
+        }
+
+        .game:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 18px rgba(22, 140, 255, 0.5);
+        }
+
+        .game img {
+            width: 100%;
+            height: 105px;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+            background: #111820;
+        }
+
+        .game h3 {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            margin: 9px 0;
+            letter-spacing: 1px;
         }
 
         .gameButton {
-            background: #111;
-            color: #39ff14;
-            border: 1px solid #39ff14;
-            border-radius: 8px;
-            padding: 10px;
-            width: 120px;
-            min-height: 45px;
+            width: 100%;
+            background: #168cff;
+            color: #000;
+            border: none;
+            padding: 7px;
+            border-radius: 5px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
-            font-weight: bold;
         }
 
         .gameButton:hover {
-            background: #39ff14;
-            color: #000;
-            box-shadow: 0 0 10px #39ff14;
-        }
-
-        /* TAB SETTINGS */
-
-        .tab-settings {
-            width: 280px;
-            background: #111;
-            border: 1px solid #39ff14;
-            border-radius: 10px;
-            padding: 18px;
-            margin: 20px auto;
-            box-shadow: 0 0 12px #39ff14;
-        }
-
-        .tab-settings h2 {
-            color: #39ff14;
-            text-align: center;
-            margin-top: 0;
-        }
-
-        .tab-settings label {
-            display: block;
-            color: white;
-            margin-top: 12px;
-            margin-bottom: 5px;
-        }
-
-        .tab-settings input,
-        .tab-settings select {
-            width: 100%;
-            padding: 9px;
-            background: #000;
-            color: white;
-            border: 1px solid #39ff14;
-            border-radius: 5px;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .tab-buttons button {
-            flex: 1;
-            padding: 8px;
-            background: #39ff14;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .tab-buttons button:hover {
-            box-shadow: 0 0 8px #39ff14;
+            background: #54b0ff;
         }
 
         /* GAME SCREEN */
-
         #gameScreen {
-            padding: 10px;
-            text-align: center;
+            display: none;
+            padding: 15px;
         }
 
-        #gameScreen button {
-            background: #39ff14;
+        .gameTopBar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .gameControl {
+            background: #168cff;
             color: #000;
             border: none;
+            padding: 9px 15px;
             border-radius: 5px;
-            padding: 10px 15px;
-            margin: 5px;
-            font-weight: bold;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
         }
 
-        #gameScreen button:hover {
-            box-shadow: 0 0 10px #39ff14;
+        .gameControl:hover {
+            background: #54b0ff;
         }
 
         #gameFrame {
-            display: block;
             width: 100%;
-            height: 700px;
-            border: 1px solid #39ff14;
-            margin-top: 10px;
+            height: calc(100vh - 120px);
+            border: 2px solid #168cff;
+            border-radius: 7px;
             background: #000;
         }
 
+        /* MOBILE */
+        @media (max-width: 600px) {
+            #homeScreen {
+                padding: 18px;
+            }
+
+            .games {
+                gap: 10px;
+            }
+
+            .game {
+                width: 135px;
+            }
+
+            .game img {
+                height: 95px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <!-- HEADER -->
-
     <header>
-        <h1>🎮 My Game Portal</h1>
+        <div class="logo">GAME PORTAL</div>
+
+        <button class="settingsButton" onclick="openSettings()">
+            ⚙ SETTINGS
+        </button>
     </header>
 
 
-    <!-- TAB SETTINGS -->
-
-    <div class="tab-settings">
-
-        <h2>Tab Settings</h2>
-
-        <label for="tabTitle">Tab title:</label>
-
-        <input
-            type="text"
-            id="tabTitle"
-            placeholder="My Game Portal"
-            maxlength="40"
-        >
-
-        <label for="tabIcon">Choose an icon:</label>
-
-        <select id="tabIcon">
-            <option value="🎮">🎮 Game Controller</option>
-            <option value="⭐">⭐ Star</option>
-            <option value="🚀">🚀 Rocket</option>
-            <option value="🔥">🔥 Fire</option>
-            <option value="👾">👾 Alien</option>
-            <option value="🟢">🟢 Green Circle</option>
-        </select>
-
-        <div class="tab-buttons">
-
-            <button onclick="applyTabSettings()">
-                Apply
-            </button>
-
-            <button onclick="resetTabSettings()">
-                Reset
-            </button>
-
-        </div>
-
-    </div>
-
-
     <!-- HOME SCREEN -->
-
     <div id="homeScreen">
 
-        <div class="category">
+        <div class="title">
+            GAMES
+        </div>
 
-            <h2>⭐ Popular Games</h2>
+        <div class="games">
 
-            <div class="games">
+            <!-- SLOPE -->
+            <div class="game">
+                <img src="images/slope.png" alt="Slope">
+                <h3>Slope</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Slope', 'https://finnbaltazar1111.github.io/slope/')">
-                    Slope
+                    PLAY
                 </button>
+            </div>
+
+
+            <!-- STICKMAN HOOK -->
+            <div class="game">
+                <img src="images/stickman-hook.png" alt="Stickman Hook">
+                <h3>Stickman Hook</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Stickman Hook', 'https://stickman-pi.vercel.app/')">
-                    Stickman Hook
+                    PLAY
                 </button>
+            </div>
+
+
+            <!-- SUBWAY SURFERS -->
+            <div class="game">
+                <img src="images/subway-surfers.png" alt="Subway Surfers">
+                <h3>Subway Surfers</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Subway Surfers', 'https://testingherokuapp.github.io/subwaysurfer/')">
-                    Subway Surfers
+                    PLAY
                 </button>
+            </div>
+
+
+            <!-- GEOMETRY DASH -->
+            <div class="game">
+                <img src="images/geometry-dash.png" alt="Geometry Dash">
+                <h3>Geometry Dash</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Geometry Dash', 'https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">
-                    Geometry Dash
+                    PLAY
                 </button>
+            </div>
+
+
+            <!-- PAPER IO 2 -->
+            <div class="game">
+                <img src="images/paper-io-2.png" alt="Paper IO 2">
+                <h3>Paper IO 2</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Paper IO 2', 'https://gameunblocked-2025.github.io/projects/paperio2/index.html')">
-                    Paper IO 2
+                    PLAY
                 </button>
+            </div>
+
+
+            <!-- SLOW ROADS -->
+            <div class="game">
+                <img src="images/slow-roads.png" alt="Slow Roads">
+                <h3>Slow Roads</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Slow Roads', 'https://hackingschoolwebsites.github.io/slowroads/')">
-                    Slow Roads
+                    PLAY
                 </button>
+            </div>
 
+
+            <!-- KHAN ACADEMY -->
+            <div class="game">
+                <img src="images/khan-academy.png" alt="Khan Academy">
+                <h3>Khan Academy</h3>
+
+                <button class="gameButton"
+                    onclick="openGame('Khan Academy', 'https://www.khanacademy.org/')">
+                    OPEN
+                </button>
             </div>
 
         </div>
-
     </div>
 
 
     <!-- GAME SCREEN -->
+    <div id="gameScreen">
 
-    <div id="gameScreen" style="display:none;">
+        <div class="gameTopBar">
 
-        <button onclick="goHome()">
-            ← Back to Games
-        </button>
+            <button class="gameControl" onclick="goHome()">
+                ← BACK
+            </button>
 
-        <button onclick="fullscreenGame()">
-            ⛶ Fullscreen
-        </button>
+            <button class="gameControl" onclick="fullscreenGame()">
+                ⛶ FULLSCREEN
+            </button>
+
+        </div>
 
         <iframe
             id="gameFrame"
             src=""
-            width="100%"
-            height="700"
             frameborder="0"
             allowfullscreen>
         </iframe>
@@ -284,12 +318,9 @@
     </div>
 
 
-    <!-- JAVASCRIPT -->
-
     <script>
 
         /* OPEN GAME */
-
         function openGame(name, url) {
 
             document.getElementById("homeScreen").style.display = "none";
@@ -298,11 +329,11 @@
 
             document.getElementById("gameFrame").src = url;
 
+            document.title = name + " - Game Portal";
         }
 
 
         /* GO BACK HOME */
-
         function goHome() {
 
             document.getElementById("gameFrame").src = "";
@@ -311,103 +342,25 @@
 
             document.getElementById("homeScreen").style.display = "block";
 
+            document.title = "Game Portal";
         }
 
 
         /* FULLSCREEN */
-
         function fullscreenGame() {
 
             const game = document.getElementById("gameFrame");
 
             if (game.requestFullscreen) {
-
                 game.requestFullscreen();
-
             }
-
         }
 
 
-        /* TAB SETTINGS */
+        /* OPEN SEPARATE SETTINGS PAGE */
+        function openSettings() {
 
-        function applyTabSettings() {
-
-            const title =
-                document.getElementById("tabTitle").value;
-
-            const icon =
-                document.getElementById("tabIcon").value;
-
-
-            if (title.trim() !== "") {
-
-                document.title = title;
-
-            }
-
-
-            let favicon =
-                document.querySelector("link[rel='icon']");
-
-
-            if (!favicon) {
-
-                favicon = document.createElement("link");
-
-                favicon.rel = "icon";
-
-                document.head.appendChild(favicon);
-
-            }
-
-
-            const canvas =
-                document.createElement("canvas");
-
-            canvas.width = 64;
-            canvas.height = 64;
-
-
-            const ctx =
-                canvas.getContext("2d");
-
-
-            ctx.font = "48px Arial";
-
-            ctx.textAlign = "center";
-
-            ctx.textBaseline = "middle";
-
-            ctx.fillText(icon, 32, 34);
-
-
-            favicon.href =
-                canvas.toDataURL("image/png");
-
-        }
-
-
-        /* RESET TAB SETTINGS */
-
-        function resetTabSettings() {
-
-            document.title = "My Game Portal";
-
-            document.getElementById("tabTitle").value = "";
-
-            document.getElementById("tabIcon").value = "🎮";
-
-
-            const favicon =
-                document.querySelector("link[rel='icon']");
-
-
-            if (favicon) {
-
-                favicon.remove();
-
-            }
+            window.location.href = "settings.html";
 
         }
 
