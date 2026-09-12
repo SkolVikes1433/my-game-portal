@@ -6,7 +6,7 @@
 
     <title>Game Portal</title>
 
-    <!-- Edgy-looking font -->
+    <!-- Edgy font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -17,7 +17,7 @@
         body {
             margin: 0;
             background: #05070a;
-            color: #ffffff;
+            color: white;
             font-family: 'Rajdhani', sans-serif;
         }
 
@@ -56,7 +56,7 @@
 
         .settingsButton:hover {
             background: #168cff;
-            color: #000;
+            color: black;
         }
 
         /* HOME */
@@ -114,7 +114,7 @@
         .gameButton {
             width: 100%;
             background: #168cff;
-            color: #000;
+            color: black;
             border: none;
             padding: 7px;
             border-radius: 5px;
@@ -142,7 +142,7 @@
 
         .gameControl {
             background: #168cff;
-            color: #000;
+            color: black;
             border: none;
             padding: 9px 15px;
             border-radius: 5px;
@@ -161,11 +161,12 @@
             height: calc(100vh - 120px);
             border: 2px solid #168cff;
             border-radius: 7px;
-            background: #000;
+            background: black;
         }
 
         /* MOBILE */
         @media (max-width: 600px) {
+
             #homeScreen {
                 padding: 18px;
             }
@@ -187,113 +188,141 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- TOP BAR -->
     <header>
-        <div class="logo">GAME PORTAL</div>
+
+        <div class="logo">
+            GAME PORTAL
+        </div>
 
         <button class="settingsButton" onclick="openSettings()">
             ⚙ SETTINGS
         </button>
+
     </header>
 
 
-    <!-- HOME SCREEN -->
+    <!-- HOME PAGE -->
     <div id="homeScreen">
 
         <div class="title">
             GAMES
         </div>
 
+        <!-- NO CATEGORIES OR SORTING -->
         <div class="games">
+
 
             <!-- SLOPE -->
             <div class="game">
+
                 <img src="images/slope.png" alt="Slope">
+
                 <h3>Slope</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Slope', 'https://finnbaltazar1111.github.io/slope/')">
                     PLAY
                 </button>
+
             </div>
 
 
             <!-- STICKMAN HOOK -->
             <div class="game">
+
                 <img src="images/stickman-hook.png" alt="Stickman Hook">
+
                 <h3>Stickman Hook</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Stickman Hook', 'https://stickman-pi.vercel.app/')">
                     PLAY
                 </button>
+
             </div>
 
 
             <!-- SUBWAY SURFERS -->
             <div class="game">
+
                 <img src="images/subway-surfers.png" alt="Subway Surfers">
+
                 <h3>Subway Surfers</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Subway Surfers', 'https://testingherokuapp.github.io/subwaysurfer/')">
                     PLAY
                 </button>
+
             </div>
 
 
             <!-- GEOMETRY DASH -->
             <div class="game">
+
                 <img src="images/geometry-dash.png" alt="Geometry Dash">
+
                 <h3>Geometry Dash</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Geometry Dash', 'https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">
                     PLAY
                 </button>
+
             </div>
 
 
             <!-- PAPER IO 2 -->
             <div class="game">
+
                 <img src="images/paper-io-2.png" alt="Paper IO 2">
+
                 <h3>Paper IO 2</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Paper IO 2', 'https://gameunblocked-2025.github.io/projects/paperio2/index.html')">
                     PLAY
                 </button>
+
             </div>
 
 
             <!-- SLOW ROADS -->
             <div class="game">
+
                 <img src="images/slow-roads.png" alt="Slow Roads">
+
                 <h3>Slow Roads</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Slow Roads', 'https://hackingschoolwebsites.github.io/slowroads/')">
                     PLAY
                 </button>
+
             </div>
 
 
             <!-- KHAN ACADEMY -->
             <div class="game">
+
                 <img src="images/khan-academy.png" alt="Khan Academy">
+
                 <h3>Khan Academy</h3>
 
                 <button class="gameButton"
                     onclick="openGame('Khan Academy', 'https://www.khanacademy.org/')">
                     OPEN
                 </button>
+
             </div>
+
 
         </div>
     </div>
 
 
-    <!-- GAME SCREEN -->
+    <!-- GAME PAGE -->
     <div id="gameScreen">
 
         <div class="gameTopBar">
@@ -308,6 +337,7 @@
 
         </div>
 
+
         <iframe
             id="gameFrame"
             src=""
@@ -320,7 +350,7 @@
 
     <script>
 
-        /* OPEN GAME */
+        /* OPEN A GAME */
         function openGame(name, url) {
 
             document.getElementById("homeScreen").style.display = "none";
@@ -333,7 +363,7 @@
         }
 
 
-        /* GO BACK HOME */
+        /* BACK TO GAMES */
         function goHome() {
 
             document.getElementById("gameFrame").src = "";
@@ -357,7 +387,7 @@
         }
 
 
-        /* OPEN SEPARATE SETTINGS PAGE */
+        /* OPEN SETTINGS PAGE */
         function openSettings() {
 
             window.location.href = "settings.html";
