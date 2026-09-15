@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Settings - Void Network V6</title>
-<link id="favicon" rel="icon" type="image/jpeg" href="khan-academy.jpg">
+    <title>Settings - Game Portal</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -59,8 +59,7 @@
             font-size: 17px;
         }
 
-        input,
-        select {
+        input {
             width: 100%;
             padding: 10px;
             background: #05070a;
@@ -69,6 +68,34 @@
             border-radius: 5px;
             font-family: 'Rajdhani', sans-serif;
             font-size: 16px;
+        }
+
+        .icon-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #05070a;
+            border: 1px solid #168cff;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .icon-option:hover {
+            background: #101923;
+        }
+
+        .icon-option img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .icon-name {
+            font-size: 18px;
+            font-weight: 600;
         }
 
         button {
@@ -99,91 +126,115 @@
             background: #168cff;
             color: black;
         }
+
+        .selected {
+            outline: 2px solid #54b0ff;
+        }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="logo">GAME PORTAL</div>
-    </header>
+<header>
+    <div class="logo">GAME PORTAL</div>
+</header>
 
-    <div class="settings">
+<div class="settings">
 
-        <h1>⚙ SETTINGS</h1>
+    <h1>⚙ SETTINGS</h1>
 
-        <label for="titleInput">
-            Tab Title
-        </label>
+    <label for="titleInput">
+        Tab Title
+    </label>
 
-        <input
-            id="titleInput"
-            type="text"
-            placeholder="Game Portal">
+    <input
+        id="titleInput"
+        type="text"
+        placeholder="Game Portal"
+    >
 
+    <label>
+        Tab Icon
+    </label>
 
-        <label for="iconInput">
-            Tab Icon
-        </label>
+    <!-- KHAN ACADEMY -->
+    <div
+        class="icon-option selected"
+        id="khanOption"
+        onclick="selectKhan()"
+    >
+        <img src="khan-academy.jpg" alt="Khan Academy">
 
-        <select id="iconInput">
-            <option value="🎮">🎮 Game Controller</option>
-            <option value="🕹️">🕹️ Joystick</option>
-            <option value="⭐">⭐ Star</option>
-            <option value="⚡">⚡ Lightning</option>
-            <option value="🔵">🔵 Blue Circle</option>
-        </select>
-
-
-        <br>
-
-        <button class="back" onclick="goBack()">
-            ← BACK
-        </button>
-
-        <button onclick="saveSettings()">
-            SAVE SETTINGS
-        </button>
-
+        <div class="icon-name">
+            Khan Academy
+        </div>
     </div>
 
+    <br>
 
-    <script>
+    <button class="back" onclick="goBack()">
+        ← BACK
+    </button>
 
-        /* LOAD SAVED SETTINGS */
-        const savedTitle = localStorage.getItem("tabTitle");
+    <button onclick="saveSettings()">
+        SAVE SETTINGS
+    </button>
 
-        if (savedTitle) {
-            document.getElementById("titleInput").value = savedTitle;
-        }
+</div>
 
+<script>
 
-        /* SAVE SETTINGS */
-        function saveSettings() {
+    /* LOAD SAVED TITLE */
+    const savedTitle = localStorage.getItem("tabTitle");
 
-            const title =
-                document.getElementById("titleInput").value;
-
-            const icon =
-                document.getElementById("iconInput").value;
-
-            localStorage.setItem("tabTitle", title || "Game Portal");
-
-            localStorage.setItem("tabIcon", icon);
-
-            alert("Settings saved!");
-
-        }
+    if (savedTitle) {
+        document.getElementById("titleInput").value = savedTitle;
+    }
 
 
-        /* BACK TO HOME */
-        function goBack() {
+    /* SELECT KHAN ACADEMY */
+    function selectKhan() {
 
-            window.location.href = "index.html";
+        localStorage.setItem(
+            "tabIcon",
+            "khan-academy.jpg"
+        );
 
-        }
+        document
+            .getElementById("khanOption")
+            .classList.add("selected");
+    }
 
-    </script>
+
+    /* SAVE SETTINGS */
+    function saveSettings() {
+
+        const title =
+            document.getElementById("titleInput").value;
+
+        localStorage.setItem(
+            "tabTitle",
+            title || "Game Portal"
+        );
+
+        localStorage.setItem(
+            "tabIcon",
+            "khan-academy.jpg"
+        );
+
+        alert("Settings saved!");
+
+    }
+
+
+    /* BACK TO HOME */
+    function goBack() {
+
+        window.location.href = "index.html";
+
+    }
+
+</script>
 
 </body>
 </html>
