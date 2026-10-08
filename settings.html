@@ -6,6 +6,11 @@
 
     <title>Settings - Game Portal</title>
 
+    <!-- This is the browser tab icon -->
+    <link id="favicon" rel="icon" href="khan-academy.jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -15,7 +20,7 @@
             margin: 0;
             background: #05070a;
             color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         header {
@@ -30,7 +35,7 @@
         .logo {
             color: #168cff;
             font-size: 28px;
-            font-weight: bold;
+            font-weight: 700;
             letter-spacing: 2px;
         }
 
@@ -46,29 +51,35 @@
 
         h1 {
             color: #168cff;
+            margin-top: 0;
         }
 
         .label {
-            margin-top: 25px;
-            margin-bottom: 10px;
             font-size: 18px;
             font-weight: bold;
+            margin: 25px 0 10px;
         }
 
-        /* KHAN ACADEMY BUTTON */
         .khan-button {
             width: 100%;
             display: flex;
             align-items: center;
             gap: 15px;
+
             padding: 12px;
+
             background: #05070a;
             color: white;
+
             border: 2px solid #168cff;
             border-radius: 8px;
+
             cursor: pointer;
+
+            font-family: 'Rajdhani', sans-serif;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 700;
+            text-align: left;
         }
 
         .khan-button:hover {
@@ -86,27 +97,34 @@
             border-radius: 6px;
         }
 
-        button {
+        .back-button,
+        .save-button {
             margin-top: 25px;
             padding: 11px 20px;
             border-radius: 6px;
-            border: none;
-            background: #168cff;
-            color: black;
+
+            font-family: 'Rajdhani', sans-serif;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
+
             cursor: pointer;
         }
 
-        button:hover {
-            background: #54b0ff;
-        }
-
-        .back {
+        .back-button {
             background: transparent;
             color: #168cff;
             border: 1px solid #168cff;
             margin-right: 8px;
+        }
+
+        .save-button {
+            background: #168cff;
+            color: black;
+            border: none;
+        }
+
+        button:hover {
+            opacity: 0.85;
         }
     </style>
 </head>
@@ -125,7 +143,7 @@
         Tab Icon
     </div>
 
-    <!-- KHAN ACADEMY BUTTON -->
+    <!-- THE KHAN ACADEMY BUTTON -->
     <button
         class="khan-button"
         id="khanButton"
@@ -138,11 +156,17 @@
 
     <br>
 
-    <button class="back" onclick="goBack()">
+    <button
+        class="back-button"
+        onclick="goBack()"
+    >
         ← BACK
     </button>
 
-    <button onclick="saveSettings()">
+    <button
+        class="save-button"
+        onclick="saveSettings()"
+    >
         SAVE SETTINGS
     </button>
 
@@ -150,7 +174,6 @@
 
 <script>
 
-    /* SELECT KHAN ACADEMY */
     function selectKhan() {
 
         localStorage.setItem(
@@ -161,23 +184,31 @@
         document
             .getElementById("khanButton")
             .classList.add("selected");
+
+        applyIcon();
+
     }
 
 
-    /* SAVE SETTINGS */
+    function applyIcon() {
+
+        const favicon =
+            document.getElementById("favicon");
+
+        favicon.href = "khan-academy.jpg";
+
+    }
+
+
     function saveSettings() {
 
-        localStorage.setItem(
-            "tabIcon",
-            "khan-academy.jpg"
-        );
+        selectKhan();
 
         alert("Khan Academy selected!");
 
     }
 
 
-    /* BACK */
     function goBack() {
 
         window.location.href = "index.html";
