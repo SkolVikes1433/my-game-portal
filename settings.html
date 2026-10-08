@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Settings - Void Network V6</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Settings - Game Portal</title>
 
     <style>
         * {
@@ -17,7 +15,7 @@
             margin: 0;
             background: #05070a;
             color: white;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         header {
@@ -32,7 +30,7 @@
         .logo {
             color: #168cff;
             font-size: 28px;
-            font-weight: 700;
+            font-weight: bold;
             letter-spacing: 2px;
         }
 
@@ -48,66 +46,55 @@
 
         h1 {
             color: #168cff;
-            margin-top: 0;
-            letter-spacing: 2px;
         }
 
-        label {
-            display: block;
-            margin-top: 20px;
-            margin-bottom: 7px;
-            font-size: 17px;
+        .label {
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
         }
 
-        input {
-            width: 100%;
-            padding: 10px;
-            background: #05070a;
-            color: white;
-            border: 1px solid #168cff;
-            border-radius: 5px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 16px;
-        }
-
-        .icon-option {
+        /* KHAN ACADEMY BUTTON */
+        .khan-button {
             width: 100%;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             padding: 12px;
             background: #05070a;
-            border: 1px solid #168cff;
-            border-radius: 7px;
+            color: white;
+            border: 2px solid #168cff;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
         }
 
-        .icon-option:hover {
+        .khan-button:hover {
             background: #101923;
         }
 
-        .icon-option img {
-            width: 45px;
-            height: 45px;
-            object-fit: contain;
-            border-radius: 5px;
+        .khan-button.selected {
+            box-shadow: 0 0 15px #168cff;
         }
 
-        .icon-name {
-            font-size: 18px;
-            font-weight: 600;
+        .khan-button img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 6px;
         }
 
         button {
-            margin-top: 20px;
+            margin-top: 25px;
+            padding: 11px 20px;
+            border-radius: 6px;
+            border: none;
             background: #168cff;
             color: black;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 5px;
-            font-family: 'Rajdhani', sans-serif;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: bold;
             cursor: pointer;
         }
 
@@ -120,15 +107,6 @@
             color: #168cff;
             border: 1px solid #168cff;
             margin-right: 8px;
-        }
-
-        .back:hover {
-            background: #168cff;
-            color: black;
-        }
-
-        .selected {
-            outline: 2px solid #54b0ff;
         }
     </style>
 </head>
@@ -143,32 +121,20 @@
 
     <h1>⚙ SETTINGS</h1>
 
-    <label for="titleInput">
-        Tab Title
-    </label>
-
-    <input
-        id="titleInput"
-        type="text"
-        placeholder="Game Portal"
-    >
-
-    <label>
+    <div class="label">
         Tab Icon
-    </label>
+    </div>
 
-    <!-- KHAN ACADEMY -->
-    <div
-        class="icon-option selected"
-        id="khanOption"
+    <!-- KHAN ACADEMY BUTTON -->
+    <button
+        class="khan-button"
+        id="khanButton"
         onclick="selectKhan()"
     >
         <img src="khan-academy.jpg" alt="Khan Academy">
 
-        <div class="icon-name">
-            Khan Academy
-        </div>
-    </div>
+        <span>Khan Academy</span>
+    </button>
 
     <br>
 
@@ -184,14 +150,6 @@
 
 <script>
 
-    /* LOAD SAVED TITLE */
-    const savedTitle = localStorage.getItem("tabTitle");
-
-    if (savedTitle) {
-        document.getElementById("titleInput").value = savedTitle;
-    }
-
-
     /* SELECT KHAN ACADEMY */
     function selectKhan() {
 
@@ -201,7 +159,7 @@
         );
 
         document
-            .getElementById("khanOption")
+            .getElementById("khanButton")
             .classList.add("selected");
     }
 
@@ -209,25 +167,17 @@
     /* SAVE SETTINGS */
     function saveSettings() {
 
-        const title =
-            document.getElementById("titleInput").value;
-
-        localStorage.setItem(
-            "tabTitle",
-            title || "Game Portal"
-        );
-
         localStorage.setItem(
             "tabIcon",
             "khan-academy.jpg"
         );
 
-        alert("Settings saved!");
+        alert("Khan Academy selected!");
 
     }
 
 
-    /* BACK TO HOME */
+    /* BACK */
     function goBack() {
 
         window.location.href = "index.html";
