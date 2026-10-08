@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Settings - Game Portal</title>
+    <title>Settings - Void Network V6</title>
 
     <!-- This is the browser tab icon -->
     <link id="favicon" rel="icon" href="khan-academy.jpg">
@@ -214,7 +214,20 @@
         window.location.href = "index.html";
 
     }
+function selectKhan() {
+    localStorage.setItem("tabIcon", "khan-academy.jpg");
 
+    let favicon = document.getElementById("favicon");
+
+    if (!favicon) {
+        favicon = document.createElement("link");
+        favicon.id = "favicon";
+        favicon.rel = "icon";
+        document.head.appendChild(favicon);
+    }
+
+    favicon.href = "khan-academy.jpg";
+}
 </script>
 
 </body>
