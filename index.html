@@ -2,480 +2,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Void Network V6</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Void Network V6</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link id="favicon" rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Browser tab icon -->
-    <link id="favicon" rel="icon" href="favicon.ico">
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+body {
+    margin: 0;
+    background: #05070b;
+    color: #eaf3ff;
+    font-family: 'Rajdhani', sans-serif;
+}
 
-        body {
-            margin: 0;
-            background: #05070b;
-            color: #eaf3ff;
-            font-family: 'Rajdhani', sans-serif;
-        }
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 22px;
+    background: #080d15;
+    border-bottom: 2px solid #168cff;
+}
 
-        button, input {
-            font: inherit;
-        }
+.logo {
+    margin: 0;
+    color: #168cff;
+    font-family: 'Black Ops One', cursive;
+    font-size: 25px;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            padding: 18px 24px;
-            background: #080d15;
-            border-bottom: 2px solid #168cff;
-        }
+nav {
+    display: flex;
+    gap: 10px;
+}
 
-        .logo {
-            margin: 0;
-            color: #168cff;
-            font-family: 'Black Ops One', cursive;
-            font-size: clamp(20px, 4vw, 30px);
-            letter-spacing: 1px;
-        }
+.nav-button, .action-button {
+    display: inline-block;
+    padding: 10px 14px;
+    background: #0b1420;
+    color: white;
+    border: 1px solid #168cff;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+.nav-button:hover, .action-button:hover {
+    background: #168cff;
+    color: black;
+}
 
-        .nav-button {
-            background: #0b1420;
-            color: #eaf3ff;
-            border: 1px solid #168cff;
-            padding: 9px 14px;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-        }
+main {
+    max-width: 1250px;
+    margin: auto;
+    padding: 24px;
+}
 
-        .nav-button:hover {
-            background: #168cff;
-            color: #000;
-        }
+h2, .category-title {
+    font-family: 'Black Ops One', cursive;
+    color: #168cff;
+}
 
-        main {
-            max-width: 1200px;
-            margin: auto;
-            padding: 24px;
-        }
+.intro p {
+    color: #a1b0c3;
+    font-size: 17px;
+}
 
-        .intro {
-            margin-bottom: 22px;
-        }
+#search {
+    width: 100%;
+    padding: 13px;
+    margin: 12px 0 20px;
+    color: white;
+    background: #0b111b;
+    border: 1px solid #243a53;
+    border-radius: 4px;
+    outline: none;
+}
 
-        .intro h2 {
-            font-family: 'Black Ops One', cursive;
-            color: #168cff;
-            font-size: 21px;
-        }
+#search:focus {
+    border-color: #168cff;
+}
 
-        .intro p {
-            color: #9aaabd;
-            font-size: 17px;
-        }
+.category-title {
+    font-size: 17px;
+    margin: 20px 0 12px;
+}
 
-        #search {
-            width: 100%;
-            padding: 13px;
-            margin-bottom: 24px;
-            background: #0b111b;
-            color: white;
-            border: 1px solid #243a53;
-            border-radius: 5px;
-            outline: none;
-        }
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 10px;
+}
 
-        #search:focus {
-            border-color: #168cff;
-        }
+.game-card {
+    min-height: 55px;
+    padding: 12px 8px;
+    color: #eaf3ff;
+    background: #0b111b;
+    border: 1px solid #1c2c40;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Black Ops One', cursive;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
 
-        .category-title {
-            color: #168cff;
-            font-family: 'Black Ops One', cursive;
-            font-size: 17px;
-            margin: 25px 0 12px;
-        }
+.game-card:hover {
+    background: #101d2e;
+    border-color: #168cff;
+}
 
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-            gap: 10px;
-        }
+#noResults {
+    display: none;
+    color: #a1b0c3;
+}
 
-        .game-card {
-            min-height: 55px;
-            padding: 12px 8px;
-            background: #0b111b;
-            color: #eaf3ff;
-            border: 1px solid #1c2c40;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Black Ops One', cursive;
-            font-size: 12px;
-            overflow-wrap: anywhere;
-            transition: border-color 0.15s, background 0.15s;
-        }
+#gameScreen {
+    display: none;
+    padding: 16px;
+}
 
-        .game-card:hover {
-            border-color: #168cff;
-            background: #101d2e;
-        }
+.game-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+}
 
-        .game-card:focus-visible,
-        button:focus-visible,
-        a:focus-visible {
-            outline: 2px solid white;
-            outline-offset: 3px;
-        }
+#gameTitle {
+    margin: 0;
+    font-size: 20px;
+}
 
-        #gameScreen {
-            display: none;
-            padding: 15px;
-        }
+#gameFrame {
+    display: block;
+    width: 100%;
+    height: 75vh;
+    min-height: 400px;
+    background: black;
+    border: 1px solid #168cff;
+    border-radius: 4px;
+}
 
-        .game-toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-        }
+.note {
+    color: #8b9bb0;
+    font-size: 14px;
+}
 
-        #gameTitle {
-            color: #168cff;
-            font-family: 'Black Ops One', cursive;
-            font-size: 19px;
-            margin: 0;
-        }
+footer {
+    padding: 24px;
+    margin-top: 30px;
+    text-align: center;
+    color: #66778c;
+    border-top: 1px solid #172536;
+}
 
-        .game-actions {
-            display: flex;
-            gap: 8px;
-        }
+@media (max-width: 600px) {
+    header {
+        padding: 15px;
+    }
 
-        .action-button {
-            background: #0b1420;
-            color: white;
-            border: 1px solid #168cff;
-            padding: 9px 13px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    main {
+        padding: 15px;
+    }
 
-        .action-button:hover {
-            background: #168cff;
-            color: black;
-        }
+    .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-        #gameFrame {
-            display: block;
-            width: 100%;
-            height: 75vh;
-            min-height: 400px;
-            background: #000;
-            border: 1px solid #168cff;
-            border-radius: 5px;
-        }
-
-        .game-note {
-            color: #9aaabd;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        footer {
-            text-align: center;
-            color: #66778c;
-            padding: 25px 12px;
-            border-top: 1px solid #172536;
-            margin-top: 30px;
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 15px;
-            }
-
-            main {
-                padding: 15px;
-            }
-
-            .game-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            #gameFrame {
-                height: 65vh;
-                min-height: 350px;
-            }
-        }
-    </style>
+    #gameFrame {
+        height: 65vh;
+        min-height: 350px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
     <h1 class="logo">VOID NETWORK V6</h1>
-
-    <nav class="nav-buttons">
+    <nav>
         <a class="nav-button" href="index.html">Games</a>
         <a class="nav-button" href="settings.html">Tab Settings</a>
     </nav>
 </header>
 
-<!-- MAIN GAME LIBRARY -->
 <main id="homeScreen">
     <section class="intro">
         <h2>GAME PORTAL</h2>
-        <p>Choose a game and start playing.</p>
+        <p>Select a game below to play.</p>
     </section>
 
-    <input
-        id="search"
-        type="search"
+    <input id="search" type="search"
         placeholder="Search games..."
         aria-label="Search games"
-        oninput="filterGames()"
-    >
+        oninput="filterGames()">
 
     <h3 class="category-title">ALL GAMES</h3>
 
     <div class="game-grid" id="gameGrid">
 
-        <!-- EXISTING GAMES -->
-        <button class="game-card" data-name="Gaming Escape"
-            onclick="openGame('Gaming Escape','https://badpiggies.global.ssl.fastly.net/index.html')">
-            Gaming Escape
-        </button>
+        <button class="game-card" data-name="Gaming Escape" onclick="openGame('Gaming Escape','https://badpiggies.global.ssl.fastly.net/index.html')">Gaming Escape</button>
+        <button class="game-card" data-name="Slope Ball" onclick="openGame('Slope Ball','https://finnbaltazar1111.github.io/slope/')">Slope Ball</button>
+        <button class="game-card" data-name="Super Mario 64" onclick="openGame('Super Mario 64','https://arkshocer.github.io/sm64/')">Super Mario 64</button>
+        <button class="game-card" data-name="Subway Surfers" onclick="openGame('Subway Surfers','https://testingherokuapp.github.io/subwaysurfer/')">Subway Surfers</button>
+        <button class="game-card" data-name="There Is No Game" onclick="openGame('There Is No Game','https://unlocktheworld.github.io/There-is-no-game/index.html')">There Is No Game</button>
+        <button class="game-card" data-name="Geometry Dash" onclick="openGame('Geometry Dash','https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">Geometry Dash</button>
+        <button class="game-card" data-name="Stickman Hook" onclick="openGame('Stickman Hook','https://stickman-pi.vercel.app/')">Stickman Hook</button>
+        <button class="game-card" data-name="Paper IO 2" onclick="openGame('Paper IO 2','https://gameunblocked-2025.github.io/projects/paperio2/index.html')">Paper IO 2</button>
+        <button class="game-card" data-name="It Has No Name" onclick="openGame('It Has No Name','https://sites.google.com/view/unblockedgames-portal/home')">It Has No Name</button>
+        <button class="game-card" data-name="Slow Roads" onclick="openGame('Slow Roads','https://hackingschoolwebsites.github.io/slowroads/')">Slow Roads</button>
+        <button class="game-card" data-name="Super Mario Bros Deluxe" onclick="openGame('Super Mario Bros Deluxe','https://gamebackup.github.io/emu_games/games/super_mario_bros_deluxe/')">Super Mario Bros Deluxe</button>
+        <button class="game-card" data-name="Time Shooter" onclick="openGame('Time Shooter','https://unlocktheworld.github.io/Time-Shooter/index.html')">Time Shooter</button>
+        <button class="game-card" data-name="FNF" onclick="openGame('FNF','https://gamebackup.github.io/standalone_games/fnf/')">FNF</button>
+        <button class="game-card" data-name="The Annoying Button" onclick="openGame('The Annoying Button','https://unlocktheworld.github.io/bigredbutton/index.html')">The Annoying Button</button>
+        <button class="game-card" data-name="Portal 2D" onclick="openGame('Portal 2D','https://gamebackup.github.io/flash_games/games/portal2d/')">Portal 2D</button>
+        <button class="game-card" data-name="Deal Or No Deal" onclick="openGame('Deal Or No Deal','https://unlocktheworld.github.io/deal-or-no-deal/index.html')">Deal Or No Deal</button>
+        <button class="game-card" data-name="Tanuki Sunset" onclick="openGame('Tanuki Sunset','https://gamebackup.github.io/standalone_games/tanukisunset/')">Tanuki Sunset</button>
+        <button class="game-card" data-name="Doge Miner 1" onclick="openGame('Doge Miner 1','https://unlocktheworld.github.io/DogeMiner/index.html')">Doge Miner 1</button>
+        <button class="game-card" data-name="Doge Miner 2" onclick="openGame('Doge Miner 2','https://unlocktheworld.github.io/Dogeminer2/index.html')">Doge Miner 2</button>
+        <button class="game-card" data-name="Retro Bowl" onclick="openGame('Retro Bowl','https://gamebackup.github.io/standalone_games/retro%20bowl/')">Retro Bowl</button>
+        <button class="game-card" data-name="Drive Mad" onclick="openGame('Drive Mad','https://unlocktheworld.github.io/drive-mad/index.html')">Drive Mad</button>
+        <button class="game-card" data-name="Mario Kart" onclick="openGame('Mario Kart','https://gamebackup.github.io/standalone_games/supermariokart/')">Mario Kart</button>
+        <button class="game-card" data-name="Unfair Mario" onclick="openGame('Unfair Mario','https://unlocktheworld.github.io/unfair-mario/index.html')">Unfair Mario</button>
+        <button class="game-card" data-name="Mario Party" onclick="openGame('Mario Party','https://gamebackup.github.io/emu_games/games/mario_party/')">Mario Party</button>
+        <button class="game-card" data-name="MK49" onclick="openGame('MK49','https://mk49.cyou/')">MK49</button>
+        <button class="game-card" data-name="Mario Kart 64" onclick="openGame('Mario Kart 64','https://gamebackup.github.io/emu_games/games/mariokart64/')">Mario Kart 64</button>
+        <button class="game-card" data-name="Smash Karts" onclick="openGame('Smash Karts','https://unlocktheworld.github.io/smash-karts/index.html')">Smash Karts</button>
+        <button class="game-card" data-name="Super Mario Bros" onclick="openGame('Super Mario Bros','https://gamebackup.github.io/emu_games/games/mario3/')">Super Mario Bros</button>
+        <button class="game-card" data-name="Doodle Jump" onclick="openGame('Doodle Jump','https://unlocktheworld.github.io/doodle-jump/index.html')">Doodle Jump</button>
+        <button class="game-card" data-name="Paper Mario" onclick="openGame('Paper Mario','https://gamebackup.github.io/emu_games/games/paper_mario/')">Paper Mario</button>
+        <button class="game-card" data-name="Tiny Fishing" onclick="openGame('Tiny Fishing','https://majesticwafer.github.io/tiny-fishing/')">Tiny Fishing</button>
+        <button class="game-card" data-name="Mario Kart Super Circuit" onclick="openGame('Mario Kart Super Circuit','https://gamebackup.github.io/emu_games/games/mario_kart_super_circuit/')">Mario Kart Super Circuit</button>
+        <button class="game-card" data-name="Snow Rider 3D" onclick="openGame('Snow Rider 3D','https://itsvijaysingh.github.io/Snow-Rider3D/')">Snow Rider 3D</button>
+        <button class="game-card" data-name="Hacker Typing" onclick="openGame('Hacker Typing','https://tanksapka.github.io/hacker-typer/')">Hacker Typing</button>
+        <button class="game-card" data-name="1v1 LOL" onclick="openGame('1v1 LOL','https://unlocktheworld.github.io/1v1lol/index.html')">1v1 LOL</button>
+        <button class="game-card" data-name="Chrome Dino" onclick="openGame('Chrome Dino','https://map-l.github.io/play/chromedino/')">Chrome Dino</button>
+        <button class="game-card" data-name="Baldis Basics" onclick="openGame('Baldis Basics','https://map-l.github.io/play/baldis-basics-classic-remastered/')">Baldi's Basics</button>
+        <button class="game-card" data-name="Granny" onclick="openGame('Granny','https://map-l.github.io/play/granny/')">Granny</button>
+        <button class="game-card" data-name="Escape Road" onclick="openGame('Escape Road','https://escaperoadx.github.io/')">Escape Road</button>
+        <button class="game-card" data-name="Tomb Of The Mask" onclick="openGame('Tomb Of The Mask','https://map-l.github.io/play/totm/')">Tomb of the Mask</button>
+        <button class="game-card" data-name="FNAF 1" onclick="openGame('FNAF 1','https://dorukyum.github.io/FNAF-Web/')">FNAF 1</button>
+        <button class="game-card" data-name="FNAF 2" onclick="openGame('FNAF 2','https://sussygamedeveloper.github.io/FNAF2/')">FNAF 2</button>
+        <button class="game-card" data-name="Cookie Clicker" onclick="openGame('Cookie Clicker','https://ozh.github.io/cookieclicker/')">Cookie Clicker</button>
+        <button class="game-card" data-name="Cluster Rush" onclick="openGame('Cluster Rush','https://ethanyo.freetls.fastly.net/misc/cluster-rush/index.html')">Cluster Rush</button>
+        <button class="game-card" data-name="Block Blast" onclick="openGame('Block Blast','https://reunbozdo.github.io/')">Block Blast</button>
+        <button class="game-card" data-name="Flappy Bird" onclick="openGame('Flappy Bird','https://thorium.rocks/games/flappy-bird/')">Flappy Bird</button>
+        <button class="game-card" data-name="Crazy Cattle" onclick="openGame('Crazy Cattle','https://crazycattle3d.github.io/')">Crazy Cattle</button>
+        <button class="game-card" data-name="Snake Game" onclick="openGame('Snake Game','https://mohdriyaan.github.io/snake-game/')">Snake Game</button>
+        <button class="game-card" data-name="Minecraft" onclick="openGame('Minecraft','https://astraclientorg.github.io/play/wasm/18/')">Minecraft</button>
+        <button class="game-card" data-name="Temple Run" onclick="openGame('Temple Run','https://unlocktheworld.github.io')">Temple Run</button>
+        <button class="game-card" data-name="Xbox Cloud Gaming" onclick="openGame('Xbox Cloud Gaming','https://www.xbox.com/en-us/play')">Xbox Cloud Gaming</button>
+        <button class="game-card" data-name="Wheelie Life" onclick="openGame('Wheelie Life','https://scratch.mit.edu/projects/1231016758/fullscreen/')">Wheelie Life</button>
+        <button class="game-card" data-name="We Become What We Behold" onclick="openGame('We Become What We Behold','https://webecomewhatwebehold.github.io/#google_vignette')">We Become What We Behold</button>
 
-        <button class="game-card" data-name="Slope Ball"
-            onclick="openGame('Slope Ball','https://finnbaltazar1111.github.io/slope/')">
-            Slope Ball
-        </button>
-
-        <button class="game-card" data-name="Super Mario 64"
-            onclick="openGame('Super Mario 64','https://arkshocer.github.io/sm64/')">
-            Super Mario 64
-        </button>
-
-        <button class="game-card" data-name="Stickman Hook"
-            onclick="openGame('Stickman Hook','https://stickman-pi.vercel.app/')">
-            Stickman Hook
-        </button>
-
-        <button class="game-card" data-name="Subway Surfers"
-            onclick="openGame('Subway Surfers','https://testingherokuapp.github.io/subwaysurfer/')">
-            Subway Surfers
-        </button>
-
-        <button class="game-card" data-name="Geometry Dash"
-            onclick="openGame('Geometry Dash','https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">
-            Geometry Dash
-        </button>
-
-        <button class="game-card" data-name="Paper IO 2"
-            onclick="openGame('Paper IO 2','https://gameunblocked-2025.github.io/projects/paperio2/index.html')">
-            Paper IO 2
-        </button>
-
-        <button class="game-card" data-name="Slow Roads"
-            onclick="openGame('Slow Roads','https://hackingschoolwebsites.github.io/slowroads/')">
-            Slow Roads
-        </button>
-
-        <button class="game-card" data-name="Time Shooter"
-            onclick="openGame('Time Shooter','https://unlocktheworld.github.io/Time-Shooter/index.html')">
-            Time Shooter
-        </button>
-
-        <button class="game-card" data-name="There Is No Game"
-            onclick="openGame('There Is No Game','https://unlocktheworld.github.io/There-is-no-game/index.html')">
-            There Is No Game
-        </button>
-
-        <button class="game-card" data-name="The Annoying Button"
-            onclick="openGame('The Annoying Button','https://unlocktheworld.github.io/bigredbutton/index.html')">
-            The Annoying Button
-        </button>
-
-        <!-- ADDITIONAL GAMES -->
-        <button class="game-card" data-name="2048"
-            onclick="openGame('2048','https://play2048.co/')">
-            2048
-        </button>
-
-        <button class="game-card" data-name="Cookie Clicker"
-            onclick="openGame('Cookie Clicker','https://orteil.dashnet.org/cookieclicker/')">
-            Cookie Clicker
-        </button>
-
-        <button class="game-card" data-name="Hextris"
-            onclick="openGame('Hextris','https://hextris.io/')">
-            Hextris
-        </button>
-
-        <button class="game-card" data-name="Tetris"
-            onclick="openGame('Tetris','https://chvin.github.io/react-tetris/')">
-            Tetris
-        </button>
-
-        <button class="game-card" data-name="Little Alchemy 2"
-            onclick="openGame('Little Alchemy 2','https://littlealchemy2.com/')">
-            Little Alchemy 2
-        </button>
-
-        <button class="game-card" data-name="Drift Hunters"
-            onclick="openGame('Drift Hunters','https://www.drifted.com/drift-hunters/')">
-            Drift Hunters
-        </button>
-
-        <button class="game-card" data-name="Crossy Road"
-            onclick="openGame('Crossy Road','https://poki.com/en/g/crossy-road')">
-            Crossy Road
-        </button>
-
-        <button class="game-card" data-name="Chess"
-            onclick="openGame('Chess','https://www.chess.com/play/computer')">
-            Chess
-        </button>
-
-        <button class="game-card" data-name="Wordle"
-            onclick="openGame('Wordle','https://www.nytimes.com/games/wordle/index.html')">
-            Wordle
-        </button>
-
-        <button class="game-card" data-name="Pac-Man"
-            onclick="openGame('Pac-Man','https://www.google.com/logos/2010/pacman10-i.html')">
-            Pac-Man
-        </button>
+        <button class="game-card" data-name="Notflix 2.0" onclick="openGame('Notflix 2.0','https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit?slide=id.g3950afba0ed_0_0#slide=id.g3950afba0ed_0_0')">Notflix 2.0</button>
 
     </div>
 
-    <p id="noResults" style="display:none; color:#9aaabd;">
-        No games found. Try another search.
-    </p>
+    <p id="noResults">No games found.</p>
 </main>
 
-<!-- GAME PLAYER SCREEN -->
 <section id="gameScreen">
     <div class="game-toolbar">
-        <h2 id="gameTitle">Loading game...</h2>
+        <h2 id="gameTitle">Game</h2>
 
-        <div class="game-actions">
-            <button class="action-button" onclick="backToGames()">
-                ← Back to Games
-            </button>
-
-            <button class="action-button" onclick="fullscreenGame()">
-                Fullscreen
-            </button>
+        <div>
+            <button class="action-button" onclick="backToGames()">← Back to Games</button>
+            <button class="action-button" onclick="fullscreenGame()">Fullscreen</button>
         </div>
     </div>
 
-    <iframe
-        id="gameFrame"
+    <iframe id="gameFrame" src="about:blank"
         title="Game player"
-        src="about:blank"
         allow="fullscreen; autoplay; gamepad"
-        allowfullscreen
-    ></iframe>
+        allowfullscreen>
+    </iframe>
 
-    <p class="game-note">
-        If a game does not load here, that website may block embedding.
+    <p class="note">
+        Some websites block being displayed inside another website.
+        If a game does not load, it may need to be opened on its own website.
     </p>
 </section>
 
-<footer>
-    VOID NETWORK V6
-</footer>
+<footer>VOID NETWORK V6</footer>
 
 <script>
-    // Apply the icon and title selected on the Tab Settings page.
-    function applyTabSettings() {
-        const savedTitle = localStorage.getItem("customTabTitle");
-        const savedIcon = localStorage.getItem("selectedTabIcon");
+function applyTabSettings() {
+    const title = localStorage.getItem("customTabTitle");
+    const icon = localStorage.getItem("selectedTabIcon");
 
-        if (savedTitle && savedTitle.trim() !== "") {
-            document.title = savedTitle;
-        } else {
-            document.title = "Void Network V6";
-        }
+    document.title = title && title.trim()
+        ? title
+        : "Void Network V6";
 
-        if (savedIcon) {
-            document.getElementById("favicon").href = savedIcon;
-        }
+    if (icon) {
+        document.getElementById("favicon").href = icon;
     }
+}
 
-    // Open a game in the player screen on this same page.
-    function openGame(name, url) {
-        document.getElementById("homeScreen").style.display = "none";
-        document.getElementById("gameScreen").style.display = "block";
-        document.getElementById("gameTitle").textContent = name;
-        document.getElementById("gameFrame").src = url;
+function openGame(name, url) {
+    document.getElementById("homeScreen").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
+    document.getElementById("gameTitle").textContent = name;
+    document.getElementById("gameFrame").src = url;
+    window.scrollTo(0, 0);
+}
 
-        window.scrollTo(0, 0);
+function backToGames() {
+    document.getElementById("gameFrame").src = "about:blank";
+    document.getElementById("gameScreen").style.display = "none";
+    document.getElementById("homeScreen").style.display = "block";
+    window.scrollTo(0, 0);
+}
+
+function fullscreenGame() {
+    const frame = document.getElementById("gameFrame");
+
+    if (frame.requestFullscreen) {
+        frame.requestFullscreen();
+    } else if (frame.webkitRequestFullscreen) {
+        frame.webkitRequestFullscreen();
     }
+}
 
-    // Return to the game library.
-    function backToGames() {
-        document.getElementById("gameFrame").src = "about:blank";
-        document.getElementById("gameScreen").style.display = "none";
-        document.getElementById("homeScreen").style.display = "block";
+function filterGames() {
+    const query = document.getElementById("search").value.toLowerCase().trim();
+    const cards = document.querySelectorAll(".game-card");
+    let count = 0;
 
-        window.scrollTo(0, 0);
-    }
+    cards.forEach(card => {
+        const matches = card.dataset.name.toLowerCase().includes(query);
+        card.style.display = matches ? "" : "none";
+        if (matches) count++;
+    });
 
-    // Make the game player fullscreen.
-    function fullscreenGame() {
-        const frame = document.getElementById("gameFrame");
+    document.getElementById("noResults").style.display =
+        count === 0 ? "block" : "none";
+}
 
-        if (frame.requestFullscreen) {
-            frame.requestFullscreen();
-        } else if (frame.webkitRequestFullscreen) {
-            frame.webkitRequestFullscreen();
-        }
-    }
-
-    // Filter games by the name typed into the search box.
-    function filterGames() {
-        const searchText = document.getElementById("search")
-            .value.toLowerCase().trim();
-
-        const cards = document.querySelectorAll(".game-card");
-        let visibleCount = 0;
-
-        cards.forEach(function(card) {
-            const name = card.dataset.name.toLowerCase();
-            const matches = name.includes(searchText);
-
-            card.style.display = matches ? "" : "none";
-
-            if (matches) {
-                visibleCount++;
-            }
-        });
-
-        document.getElementById("noResults").style.display =
-            visibleCount === 0 ? "block" : "none";
-    }
-
-    applyTabSettings();
+applyTabSettings();
 </script>
 
 </body>
