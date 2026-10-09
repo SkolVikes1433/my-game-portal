@@ -4,13 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Void Network V6</title>
 
-    <!-- Browser tab icon -->
-    <link id="favicon" rel="icon" type="image/jpeg" href="khan-academy.jpg">
+    <link id="favicon" rel="icon" href="favicon.ico">
 
-    <!-- Edgy font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -32,34 +29,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .logo {
             color: #168cff;
-            font-size: 30px;
+            font-size: 29px;
             font-weight: 700;
             letter-spacing: 2px;
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         button, .nav-button {
             background: #101927;
-            color: #dcecff;
+            color: #eaf3ff;
             border: 1px solid #168cff;
-            padding: 9px 15px;
+            border-radius: 5px;
+            padding: 10px 15px;
             font-family: inherit;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
-            border-radius: 5px;
         }
 
         button:hover, .nav-button:hover {
@@ -81,19 +72,14 @@
             border-radius: 5px;
             font-family: inherit;
             font-size: 17px;
-            outline: none;
-        }
-
-        #search:focus {
-            border-color: #168cff;
         }
 
         main {
-            padding: 12px 24px 40px;
+            padding: 10px 24px 35px;
         }
 
         .category {
-            margin-top: 24px;
+            margin-top: 20px;
         }
 
         .category h2 {
@@ -113,18 +99,16 @@
             background: #0b111b;
             border: 1px solid #1c2c40;
             color: #eaf3ff;
-            padding: 14px 10px;
+            padding: 14px 8px;
             text-align: center;
             border-radius: 5px;
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
-            transition: border-color 0.15s, transform 0.15s;
         }
 
         .game-card:hover {
             border-color: #168cff;
-            transform: translateY(-2px);
         }
 
         #gameScreen {
@@ -143,7 +127,7 @@
 
         #gameTitle {
             color: #168cff;
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 700;
         }
 
@@ -151,9 +135,9 @@
             width: 100%;
             height: 75vh;
             min-height: 400px;
-            background: black;
             border: 1px solid #168cff;
             border-radius: 5px;
+            background: black;
         }
 
         .footer {
@@ -172,11 +156,7 @@
             }
 
             .logo {
-                font-size: 25px;
-            }
-
-            #gameFrame {
-                min-height: 350px;
+                font-size: 23px;
             }
         }
     </style>
@@ -186,21 +166,20 @@
 
 <header>
     <div class="logo">VOID NETWORK V6</div>
-
-    <nav>
-        <a class="nav-button" href="settings.html">Tab Settings</a>
-    </nav>
+    <a class="nav-button" href="settings.html">Tab Settings</a>
 </header>
 
 <div id="homeScreen">
     <div class="search-area">
-        <input id="search" type="search" placeholder="Search games..."
-               oninput="filterGames()">
+        <input id="search" type="search"
+            placeholder="Search games..."
+            oninput="filterGames()">
     </div>
 
     <main>
         <section class="category">
             <h2>10 Most Recent Games</h2>
+
             <div class="game-grid">
 
                 <button class="game-card" data-name="Gaming Escape"
@@ -272,25 +251,76 @@
         <button onclick="fullscreenGame()">⛶ Fullscreen</button>
     </div>
 
-    <iframe id="gameFrame" title="Game"
+    <iframe id="gameFrame"
+        title="Game"
         allowfullscreen
-        allow="fullscreen; gamepad; autoplay"
-        referrerpolicy="strict-origin-when-cross-origin">
+        allow="fullscreen; gamepad; autoplay">
     </iframe>
 </div>
 
 <script>
-    // Restore the chosen tab icon
-    function loadSavedTabIcon() {
-        const savedIcon = localStorage.getItem("selectedTabIcon");
+    // Tab cloaking presets — keep these keys identical to settings.html.
+    const cloakPresets = {
+        "Default": {
+            title: "Void Network V6",
+            icon: "favicon.ico"
+        },
+        "Google": {
+            title: "Google",
+            icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
+        },
+        "YouTube": {
+            title: "YouTube",
+            icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
+        },
+        "Canvas": {
+            title: "Dashboard",
+            icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
+        },
+        "Khan": {
+            title: "Khan Academy",
+            icon: "https://cdn.kastatic.org/images/favicon.ico"
+        },
+        "Docs": {
+            title: "Google Docs",
+            icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+        },
+        "Desmos": {
+            title: "Desmos | Graphing Calculator",
+            icon: "https://www.desmos.com/favicon.ico"
+        },
+        "Drive": {
+            title: "My Drive - Google Drive",
+            icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
+        },
+        "Google Classroom": {
+            title: "Home - Classroom",
+            icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
+        },
+        "XtraMath": {
+            title: "XtraMath",
+            icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
+        }
+    };
+
+    function applyTabCloak() {
+        const savedKey = localStorage.getItem("userCloak") || "Default";
+        const customTitle = localStorage.getItem("customTabTitle");
+        const preset = cloakPresets[savedKey];
+
         const favicon = document.getElementById("favicon");
 
-        if (savedIcon && favicon) {
-            favicon.href = savedIcon;
+        if (customTitle) {
+            document.title = customTitle;
+        } else if (preset) {
+            document.title = preset.title;
+        }
+
+        if (preset && favicon) {
+            favicon.href = preset.icon;
         }
     }
 
-    // Open a game in the current tab
     function openGame(name, url) {
         document.getElementById("homeScreen").style.display = "none";
         document.getElementById("gameScreen").style.display = "block";
@@ -299,7 +329,6 @@
         window.scrollTo(0, 0);
     }
 
-    // Return to the games page
     function backToGames() {
         document.getElementById("gameFrame").src = "about:blank";
         document.getElementById("gameScreen").style.display = "none";
@@ -309,7 +338,6 @@
         window.scrollTo(0, 0);
     }
 
-    // Make the game fullscreen
     function fullscreenGame() {
         const frame = document.getElementById("gameFrame");
 
@@ -320,17 +348,17 @@
         }
     }
 
-    // Search game names
     function filterGames() {
         const query = document.getElementById("search").value.toLowerCase();
 
         document.querySelectorAll(".game-card").forEach(card => {
-            const name = card.dataset.name.toLowerCase();
-            card.style.display = name.includes(query) ? "" : "none";
+            card.style.display =
+                card.dataset.name.toLowerCase().includes(query) ? "" : "none";
         });
     }
 
-    loadSavedTabIcon();
+    // Apply the saved tab title and icon whenever the main page loads.
+    applyTabCloak();
 </script>
 
 </body>
