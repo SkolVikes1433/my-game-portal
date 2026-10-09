@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Void Network V6</title>
 
-    <link id="favicon" rel="icon" href="favicon.ico">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Browser tab icon -->
+    <link id="favicon" rel="icon" href="favicon.ico">
 
     <style>
         * {
@@ -22,93 +24,123 @@
             font-family: 'Rajdhani', sans-serif;
         }
 
+        button, input {
+            font: inherit;
+        }
+
         header {
-            background: #080c13;
-            border-bottom: 2px solid #168cff;
-            padding: 18px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 12px;
+            padding: 18px 24px;
+            background: #080d15;
+            border-bottom: 2px solid #168cff;
         }
 
         .logo {
+            margin: 0;
             color: #168cff;
-            font-size: 29px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-family: 'Black Ops One', cursive;
+            font-size: clamp(20px, 4vw, 30px);
+            letter-spacing: 1px;
         }
 
-        button, .nav-button {
-            background: #101927;
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #0b1420;
             color: #eaf3ff;
             border: 1px solid #168cff;
+            padding: 9px 14px;
             border-radius: 5px;
-            padding: 10px 15px;
-            font-family: inherit;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
             text-decoration: none;
+            cursor: pointer;
         }
 
-        button:hover, .nav-button:hover {
+        .nav-button:hover {
             background: #168cff;
-            color: #05070b;
+            color: #000;
         }
 
-        .search-area {
-            padding: 22px 24px 5px;
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 24px;
+        }
+
+        .intro {
+            margin-bottom: 22px;
+        }
+
+        .intro h2 {
+            font-family: 'Black Ops One', cursive;
+            color: #168cff;
+            font-size: 21px;
+        }
+
+        .intro p {
+            color: #9aaabd;
+            font-size: 17px;
         }
 
         #search {
             width: 100%;
-            max-width: 450px;
-            padding: 12px;
+            padding: 13px;
+            margin-bottom: 24px;
             background: #0b111b;
             color: white;
-            border: 1px solid #263b54;
+            border: 1px solid #243a53;
             border-radius: 5px;
-            font-family: inherit;
-            font-size: 17px;
+            outline: none;
         }
 
-        main {
-            padding: 10px 24px 35px;
+        #search:focus {
+            border-color: #168cff;
         }
 
-        .category {
-            margin-top: 20px;
-        }
-
-        .category h2 {
+        .category-title {
             color: #168cff;
-            border-bottom: 1px solid #183550;
-            padding-bottom: 8px;
-            font-size: 23px;
+            font-family: 'Black Ops One', cursive;
+            font-size: 17px;
+            margin: 25px 0 12px;
         }
 
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
             gap: 10px;
         }
 
         .game-card {
+            min-height: 55px;
+            padding: 12px 8px;
             background: #0b111b;
-            border: 1px solid #1c2c40;
             color: #eaf3ff;
-            padding: 14px 8px;
-            text-align: center;
+            border: 1px solid #1c2c40;
             border-radius: 5px;
-            font-size: 17px;
-            font-weight: 700;
             cursor: pointer;
+            font-family: 'Black Ops One', cursive;
+            font-size: 12px;
+            overflow-wrap: anywhere;
+            transition: border-color 0.15s, background 0.15s;
         }
 
         .game-card:hover {
             border-color: #168cff;
+            background: #101d2e;
+        }
+
+        .game-card:focus-visible,
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 3px;
         }
 
         #gameScreen {
@@ -118,8 +150,8 @@
 
         .game-toolbar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 12px;
@@ -127,36 +159,70 @@
 
         #gameTitle {
             color: #168cff;
-            font-size: 24px;
-            font-weight: 700;
+            font-family: 'Black Ops One', cursive;
+            font-size: 19px;
+            margin: 0;
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-button {
+            background: #0b1420;
+            color: white;
+            border: 1px solid #168cff;
+            padding: 9px 13px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-button:hover {
+            background: #168cff;
+            color: black;
         }
 
         #gameFrame {
+            display: block;
             width: 100%;
             height: 75vh;
             min-height: 400px;
+            background: #000;
             border: 1px solid #168cff;
             border-radius: 5px;
-            background: black;
         }
 
-        .footer {
+        .game-note {
+            color: #9aaabd;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        footer {
             text-align: center;
-            color: #52677f;
-            padding: 20px;
+            color: #66778c;
+            padding: 25px 12px;
+            border-top: 1px solid #172536;
+            margin-top: 30px;
         }
 
         @media (max-width: 600px) {
             header {
-                padding: 14px;
+                padding: 15px;
             }
 
             main {
-                padding: 10px 14px 30px;
+                padding: 15px;
             }
 
-            .logo {
-                font-size: 23px;
+            .game-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            #gameFrame {
+                height: 65vh;
+                min-height: 350px;
             }
         }
     </style>
@@ -165,179 +231,217 @@
 <body>
 
 <header>
-    <div class="logo">VOID NETWORK V6</div>
-    <a class="nav-button" href="settings.html">Tab Settings</a>
+    <h1 class="logo">VOID NETWORK V6</h1>
+
+    <nav class="nav-buttons">
+        <a class="nav-button" href="index.html">Games</a>
+        <a class="nav-button" href="settings.html">Tab Settings</a>
+    </nav>
 </header>
 
-<div id="homeScreen">
-    <div class="search-area">
-        <input id="search" type="search"
-            placeholder="Search games..."
-            oninput="filterGames()">
+<!-- MAIN GAME LIBRARY -->
+<main id="homeScreen">
+    <section class="intro">
+        <h2>GAME PORTAL</h2>
+        <p>Choose a game and start playing.</p>
+    </section>
+
+    <input
+        id="search"
+        type="search"
+        placeholder="Search games..."
+        aria-label="Search games"
+        oninput="filterGames()"
+    >
+
+    <h3 class="category-title">ALL GAMES</h3>
+
+    <div class="game-grid" id="gameGrid">
+
+        <!-- EXISTING GAMES -->
+        <button class="game-card" data-name="Gaming Escape"
+            onclick="openGame('Gaming Escape','https://badpiggies.global.ssl.fastly.net/index.html')">
+            Gaming Escape
+        </button>
+
+        <button class="game-card" data-name="Slope Ball"
+            onclick="openGame('Slope Ball','https://finnbaltazar1111.github.io/slope/')">
+            Slope Ball
+        </button>
+
+        <button class="game-card" data-name="Super Mario 64"
+            onclick="openGame('Super Mario 64','https://arkshocer.github.io/sm64/')">
+            Super Mario 64
+        </button>
+
+        <button class="game-card" data-name="Stickman Hook"
+            onclick="openGame('Stickman Hook','https://stickman-pi.vercel.app/')">
+            Stickman Hook
+        </button>
+
+        <button class="game-card" data-name="Subway Surfers"
+            onclick="openGame('Subway Surfers','https://testingherokuapp.github.io/subwaysurfer/')">
+            Subway Surfers
+        </button>
+
+        <button class="game-card" data-name="Geometry Dash"
+            onclick="openGame('Geometry Dash','https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">
+            Geometry Dash
+        </button>
+
+        <button class="game-card" data-name="Paper IO 2"
+            onclick="openGame('Paper IO 2','https://gameunblocked-2025.github.io/projects/paperio2/index.html')">
+            Paper IO 2
+        </button>
+
+        <button class="game-card" data-name="Slow Roads"
+            onclick="openGame('Slow Roads','https://hackingschoolwebsites.github.io/slowroads/')">
+            Slow Roads
+        </button>
+
+        <button class="game-card" data-name="Time Shooter"
+            onclick="openGame('Time Shooter','https://unlocktheworld.github.io/Time-Shooter/index.html')">
+            Time Shooter
+        </button>
+
+        <button class="game-card" data-name="There Is No Game"
+            onclick="openGame('There Is No Game','https://unlocktheworld.github.io/There-is-no-game/index.html')">
+            There Is No Game
+        </button>
+
+        <button class="game-card" data-name="The Annoying Button"
+            onclick="openGame('The Annoying Button','https://unlocktheworld.github.io/bigredbutton/index.html')">
+            The Annoying Button
+        </button>
+
+        <!-- ADDITIONAL GAMES -->
+        <button class="game-card" data-name="2048"
+            onclick="openGame('2048','https://play2048.co/')">
+            2048
+        </button>
+
+        <button class="game-card" data-name="Cookie Clicker"
+            onclick="openGame('Cookie Clicker','https://orteil.dashnet.org/cookieclicker/')">
+            Cookie Clicker
+        </button>
+
+        <button class="game-card" data-name="Hextris"
+            onclick="openGame('Hextris','https://hextris.io/')">
+            Hextris
+        </button>
+
+        <button class="game-card" data-name="Tetris"
+            onclick="openGame('Tetris','https://chvin.github.io/react-tetris/')">
+            Tetris
+        </button>
+
+        <button class="game-card" data-name="Little Alchemy 2"
+            onclick="openGame('Little Alchemy 2','https://littlealchemy2.com/')">
+            Little Alchemy 2
+        </button>
+
+        <button class="game-card" data-name="Drift Hunters"
+            onclick="openGame('Drift Hunters','https://www.drifted.com/drift-hunters/')">
+            Drift Hunters
+        </button>
+
+        <button class="game-card" data-name="Crossy Road"
+            onclick="openGame('Crossy Road','https://poki.com/en/g/crossy-road')">
+            Crossy Road
+        </button>
+
+        <button class="game-card" data-name="Chess"
+            onclick="openGame('Chess','https://www.chess.com/play/computer')">
+            Chess
+        </button>
+
+        <button class="game-card" data-name="Wordle"
+            onclick="openGame('Wordle','https://www.nytimes.com/games/wordle/index.html')">
+            Wordle
+        </button>
+
+        <button class="game-card" data-name="Pac-Man"
+            onclick="openGame('Pac-Man','https://www.google.com/logos/2010/pacman10-i.html')">
+            Pac-Man
+        </button>
+
     </div>
 
-    <main>
-        <section class="category">
-            <h2>10 Most Recent Games</h2>
+    <p id="noResults" style="display:none; color:#9aaabd;">
+        No games found. Try another search.
+    </p>
+</main>
 
-            <div class="game-grid">
-
-                <button class="game-card" data-name="Gaming Escape"
-                    onclick="openGame('Gaming Escape','https://badpiggies.global.ssl.fastly.net/index.html')">
-                    Gaming Escape
-                </button>
-
-                <button class="game-card" data-name="Slope Ball"
-                    onclick="openGame('Slope Ball','https://finnbaltazar1111.github.io/slope/')">
-                    Slope Ball
-                </button>
-
-                <button class="game-card" data-name="Super Mario 64"
-                    onclick="openGame('Super Mario 64','https://arkshocer.github.io/sm64/')">
-                    Super Mario 64
-                </button>
-
-                <button class="game-card" data-name="Stickman Hook"
-                    onclick="openGame('Stickman Hook','https://stickman-pi.vercel.app/')">
-                    Stickman Hook
-                </button>
-
-                <button class="game-card" data-name="Subway Surfers"
-                    onclick="openGame('Subway Surfers','https://testingherokuapp.github.io/subwaysurfer/')">
-                    Subway Surfers
-                </button>
-
-                <button class="game-card" data-name="Geometry Dash"
-                    onclick="openGame('Geometry Dash','https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">
-                    Geometry Dash
-                </button>
-
-                <button class="game-card" data-name="Paper IO 2"
-                    onclick="openGame('Paper IO 2','https://gameunblocked-2025.github.io/projects/paperio2/index.html')">
-                    Paper IO 2
-                </button>
-
-                <button class="game-card" data-name="Slow Roads"
-                    onclick="openGame('Slow Roads','https://hackingschoolwebsites.github.io/slowroads/')">
-                    Slow Roads
-                </button>
-
-                <button class="game-card" data-name="Time Shooter"
-                    onclick="openGame('Time Shooter','https://unlocktheworld.github.io/Time-Shooter/index.html')">
-                    Time Shooter
-                </button>
-
-                <button class="game-card" data-name="There Is No Game"
-                    onclick="openGame('There Is No Game','https://unlocktheworld.github.io/There-is-no-game/index.html')">
-                    There Is No Game
-                </button>
-
-                <button class="game-card" data-name="The Annoying Button"
-                    onclick="openGame('The Annoying Button','https://unlocktheworld.github.io/bigredbutton/index.html')">
-                    The Annoying Button
-                </button>
-
-            </div>
-        </section>
-    </main>
-
-    <div class="footer">VOID NETWORK V6</div>
-</div>
-
-<div id="gameScreen">
+<!-- GAME PLAYER SCREEN -->
+<section id="gameScreen">
     <div class="game-toolbar">
-        <button onclick="backToGames()">← Back to Games</button>
-        <span id="gameTitle">Game</span>
-        <button onclick="fullscreenGame()">⛶ Fullscreen</button>
+        <h2 id="gameTitle">Loading game...</h2>
+
+        <div class="game-actions">
+            <button class="action-button" onclick="backToGames()">
+                ← Back to Games
+            </button>
+
+            <button class="action-button" onclick="fullscreenGame()">
+                Fullscreen
+            </button>
+        </div>
     </div>
 
-    <iframe id="gameFrame"
-        title="Game"
+    <iframe
+        id="gameFrame"
+        title="Game player"
+        src="about:blank"
+        allow="fullscreen; autoplay; gamepad"
         allowfullscreen
-        allow="fullscreen; gamepad; autoplay">
-    </iframe>
-</div>
+    ></iframe>
+
+    <p class="game-note">
+        If a game does not load here, that website may block embedding.
+    </p>
+</section>
+
+<footer>
+    VOID NETWORK V6
+</footer>
 
 <script>
-    // Tab cloaking presets — keep these keys identical to settings.html.
-    const cloakPresets = {
-        "Default": {
-            title: "Void Network V6",
-            icon: "favicon.ico"
-        },
-        "Google": {
-            title: "Google",
-            icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
-        },
-        "YouTube": {
-            title: "YouTube",
-            icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
-        },
-        "Canvas": {
-            title: "Dashboard",
-            icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
-        },
-        "Khan": {
-            title: "Khan Academy",
-            icon: "https://cdn.kastatic.org/images/favicon.ico"
-        },
-        "Docs": {
-            title: "Google Docs",
-            icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
-        },
-        "Desmos": {
-            title: "Desmos | Graphing Calculator",
-            icon: "https://www.desmos.com/favicon.ico"
-        },
-        "Drive": {
-            title: "My Drive - Google Drive",
-            icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
-        },
-        "Google Classroom": {
-            title: "Home - Classroom",
-            icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
-        },
-        "XtraMath": {
-            title: "XtraMath",
-            icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
-        }
-    };
+    // Apply the icon and title selected on the Tab Settings page.
+    function applyTabSettings() {
+        const savedTitle = localStorage.getItem("customTabTitle");
+        const savedIcon = localStorage.getItem("selectedTabIcon");
 
-    function applyTabCloak() {
-        const savedKey = localStorage.getItem("userCloak") || "Default";
-        const customTitle = localStorage.getItem("customTabTitle");
-        const preset = cloakPresets[savedKey];
-
-        const favicon = document.getElementById("favicon");
-
-        if (customTitle) {
-            document.title = customTitle;
-        } else if (preset) {
-            document.title = preset.title;
+        if (savedTitle && savedTitle.trim() !== "") {
+            document.title = savedTitle;
+        } else {
+            document.title = "Void Network V6";
         }
 
-        if (preset && favicon) {
-            favicon.href = preset.icon;
+        if (savedIcon) {
+            document.getElementById("favicon").href = savedIcon;
         }
     }
 
+    // Open a game in the player screen on this same page.
     function openGame(name, url) {
         document.getElementById("homeScreen").style.display = "none";
         document.getElementById("gameScreen").style.display = "block";
         document.getElementById("gameTitle").textContent = name;
         document.getElementById("gameFrame").src = url;
+
         window.scrollTo(0, 0);
     }
 
+    // Return to the game library.
     function backToGames() {
         document.getElementById("gameFrame").src = "about:blank";
         document.getElementById("gameScreen").style.display = "none";
         document.getElementById("homeScreen").style.display = "block";
-        document.getElementById("search").value = "";
-        filterGames();
+
         window.scrollTo(0, 0);
     }
 
+    // Make the game player fullscreen.
     function fullscreenGame() {
         const frame = document.getElementById("gameFrame");
 
@@ -348,18 +452,32 @@
         }
     }
 
+    // Filter games by the name typed into the search box.
     function filterGames() {
-        const query = document.getElementById("search").value.toLowerCase();
+        const searchText = document.getElementById("search")
+            .value.toLowerCase().trim();
 
-        document.querySelectorAll(".game-card").forEach(card => {
-            card.style.display =
-                card.dataset.name.toLowerCase().includes(query) ? "" : "none";
+        const cards = document.querySelectorAll(".game-card");
+        let visibleCount = 0;
+
+        cards.forEach(function(card) {
+            const name = card.dataset.name.toLowerCase();
+            const matches = name.includes(searchText);
+
+            card.style.display = matches ? "" : "none";
+
+            if (matches) {
+                visibleCount++;
+            }
         });
+
+        document.getElementById("noResults").style.display =
+            visibleCount === 0 ? "block" : "none";
     }
 
-    // Apply the saved tab title and icon whenever the main page loads.
-    applyTabCloak();
+    applyTabSettings();
 </script>
 
 </body>
 </html>
+```
