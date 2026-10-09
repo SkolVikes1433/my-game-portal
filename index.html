@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Void Network V6</title>
+
+    <!-- Browser tab icon -->
     <link id="favicon" rel="icon" type="image/jpeg" href="khan-academy.jpg">
 
-    <title>Void Network V6</title>
     <!-- Edgy font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
@@ -18,171 +20,163 @@
 
         body {
             margin: 0;
-            background: #05070a;
-            color: white;
+            background: #05070b;
+            color: #eaf3ff;
             font-family: 'Rajdhani', sans-serif;
         }
 
-        /* TOP BAR */
         header {
-            height: 70px;
-            background: #080b10;
+            background: #080c13;
             border-bottom: 2px solid #168cff;
+            padding: 18px 24px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .logo {
             color: #168cff;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 700;
             letter-spacing: 2px;
         }
 
-        .settingsButton {
-            background: transparent;
-            color: #168cff;
-            border: 1px solid #168cff;
-            padding: 9px 16px;
-            border-radius: 6px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .settingsButton:hover {
-            background: #168cff;
-            color: black;
-        }
-
-        /* HOME */
-        #homeScreen {
-            padding: 30px;
-        }
-
-        .title {
-            color: #168cff;
-            font-size: 32px;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
-
-        /* GAME GRID */
-        .games {
+        nav {
             display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* GAME CARD */
-        .game {
-            width: 150px;
-            background: #0b0f15;
+        button, .nav-button {
+            background: #101927;
+            color: #dcecff;
             border: 1px solid #168cff;
-            border-radius: 8px;
-            padding: 8px;
-            transition: 0.2s;
-            box-shadow: 0 0 8px rgba(22, 140, 255, 0.15);
-        }
-
-        .game:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 18px rgba(22, 140, 255, 0.5);
-        }
-
-        .game img {
-            width: 100%;
-            height: 105px;
-            object-fit: cover;
-            border-radius: 5px;
-            display: block;
-            background: #111820;
-        }
-
-        .game h3 {
-            color: white;
+            padding: 9px 15px;
+            font-family: inherit;
             font-size: 16px;
-            text-align: center;
-            margin: 9px 0;
-            letter-spacing: 1px;
-        }
-
-        .gameButton {
-            width: 100%;
-            background: #168cff;
-            color: black;
-            border: none;
-            padding: 7px;
-            border-radius: 5px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
         }
 
-        .gameButton:hover {
-            background: #54b0ff;
+        button:hover, .nav-button:hover {
+            background: #168cff;
+            color: #05070b;
         }
 
-        /* GAME SCREEN */
+        .search-area {
+            padding: 22px 24px 5px;
+        }
+
+        #search {
+            width: 100%;
+            max-width: 450px;
+            padding: 12px;
+            background: #0b111b;
+            color: white;
+            border: 1px solid #263b54;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 17px;
+            outline: none;
+        }
+
+        #search:focus {
+            border-color: #168cff;
+        }
+
+        main {
+            padding: 12px 24px 40px;
+        }
+
+        .category {
+            margin-top: 24px;
+        }
+
+        .category h2 {
+            color: #168cff;
+            border-bottom: 1px solid #183550;
+            padding-bottom: 8px;
+            font-size: 23px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .game-card {
+            background: #0b111b;
+            border: 1px solid #1c2c40;
+            color: #eaf3ff;
+            padding: 14px 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: border-color 0.15s, transform 0.15s;
+        }
+
+        .game-card:hover {
+            border-color: #168cff;
+            transform: translateY(-2px);
+        }
+
         #gameScreen {
             display: none;
             padding: 15px;
         }
 
-        .gameTopBar {
+        .game-toolbar {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
             margin-bottom: 12px;
         }
 
-        .gameControl {
-            background: #168cff;
-            color: black;
-            border: none;
-            padding: 9px 15px;
-            border-radius: 5px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 16px;
+        #gameTitle {
+            color: #168cff;
+            font-size: 25px;
             font-weight: 700;
-            cursor: pointer;
-        }
-
-        .gameControl:hover {
-            background: #54b0ff;
         }
 
         #gameFrame {
             width: 100%;
-            height: calc(100vh - 120px);
-            border: 2px solid #168cff;
-            border-radius: 7px;
+            height: 75vh;
+            min-height: 400px;
             background: black;
+            border: 1px solid #168cff;
+            border-radius: 5px;
         }
 
-        /* MOBILE */
+        .footer {
+            text-align: center;
+            color: #52677f;
+            padding: 20px;
+        }
+
         @media (max-width: 600px) {
-
-            #homeScreen {
-                padding: 18px;
+            header {
+                padding: 14px;
             }
 
-            .games {
-                gap: 10px;
+            main {
+                padding: 10px 14px 30px;
             }
 
-            .game {
-                width: 135px;
+            .logo {
+                font-size: 25px;
             }
 
-            .game img {
-                height: 95px;
+            #gameFrame {
+                min-height: 350px;
             }
         }
     </style>
@@ -190,213 +184,154 @@
 
 <body>
 
-    <!-- TOP BAR -->
-    <header>
+<header>
+    <div class="logo">VOID NETWORK V6</div>
 
-        <div class="logo">
-            Void Network V6
-        </div>
+    <nav>
+        <a class="nav-button" href="settings.html">Tab Settings</a>
+    </nav>
+</header>
 
-        <button class="settingsButton" onclick="openSettings()">
-            SETTINGS
-        </button>
-
-    </header>
-
-
-    <!-- HOME PAGE -->
-    <div id="homeScreen">
-
-        <div class="title">
-            GAMES
-        </div>
-
-        <!-- NO CATEGORIES OR SORTING -->
-        <div class="games">
-
-
-            <!-- SLOPE -->
-            <div class="game">
-
-                <img src="images/slope.png" alt="Slope">
-
-                <h3>Slope</h3>
-
-                <button class="gameButton"
-                    onclick="openGame('Slope', 'https://finnbaltazar1111.github.io/slope/')">
-                    PLAY
-                </button>
-
-            </div>
-
-
-            <!-- STICKMAN HOOK -->
-            <div class="game">
-
-                <img src="images/stickman-hook.png" alt="Stickman Hook">
-
-                <h3>Stickman Hook</h3>
-
-                <button class="gameButton"
-                    onclick="openGame('Stickman Hook', 'https://stickman-pi.vercel.app/')">
-                    PLAY
-                </button>
-
-            </div>
-
-
-            <!-- SUBWAY SURFERS -->
-            <div class="game">
-
-                <img src="images/subway-surfers.png" alt="Subway Surfers">
-
-                <h3>Subway Surfers</h3>
-
-                <button class="gameButton"
-                    onclick="openGame('Subway Surfers', 'https://testingherokuapp.github.io/subwaysurfer/')">
-                    PLAY
-                </button>
-
-            </div>
-
-
-            <!-- GEOMETRY DASH -->
-            <div class="game">
-
-                <img src="images/geometry-dash.png" alt="Geometry Dash">
-
-                <h3>Geometry Dash</h3>
-
-                <button class="gameButton"
-                    onclick="openGame('Geometry Dash', 'https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">
-                    PLAY
-                </button>
-
-            </div>
-
-
-            <!-- PAPER IO 2 -->
-            <div class="game">
-
-                <img src="images/paper-io-2.png" alt="Paper IO 2">
-
-                <h3>Paper IO 2</h3>
-
-                <button class="gameButton"
-                    onclick="openGame('Paper IO 2', 'https://gameunblocked-2025.github.io/projects/paperio2/index.html')">
-                    PLAY
-                </button>
-
-            </div>
-
-
-            <!-- SLOW ROADS -->
-            <div class="game">
-
-                <img src="images/slow-roads.png" alt="Slow Roads">
-
-                <h3>Slow Roads</h3>
-
-                <button class="gameButton"
-                    onclick="openGame('Slow Roads', 'https://hackingschoolwebsites.github.io/slowroads/')">
-                    PLAY
-                </button>
-
-            </div>
-
-
-            <!-- KHAN ACADEMY -->
-            <div class="game">
-
-                <img src="images/khan-academy.png" alt="Khan Academy">
-
-                <h3>Khan Academy</h3>
-
-                <button class="gameButton"
-                    onclick="openGame('Khan Academy', 'https://www.khanacademy.org/')">
-                    OPEN
-                </button>
-
-            </div>
-
-
-        </div>
+<div id="homeScreen">
+    <div class="search-area">
+        <input id="search" type="search" placeholder="Search games..."
+               oninput="filterGames()">
     </div>
 
+    <main>
+        <section class="category">
+            <h2>10 Most Recent Games</h2>
+            <div class="game-grid">
 
-    <!-- GAME PAGE -->
-    <div id="gameScreen">
+                <button class="game-card" data-name="Gaming Escape"
+                    onclick="openGame('Gaming Escape','https://badpiggies.global.ssl.fastly.net/index.html')">
+                    Gaming Escape
+                </button>
 
-        <div class="gameTopBar">
+                <button class="game-card" data-name="Slope Ball"
+                    onclick="openGame('Slope Ball','https://finnbaltazar1111.github.io/slope/')">
+                    Slope Ball
+                </button>
 
-            <button class="gameControl" onclick="goHome()">
-                ← BACK
-            </button>
+                <button class="game-card" data-name="Super Mario 64"
+                    onclick="openGame('Super Mario 64','https://arkshocer.github.io/sm64/')">
+                    Super Mario 64
+                </button>
 
-            <button class="gameControl" onclick="fullscreenGame()">
-                ⛶ FULLSCREEN
-            </button>
+                <button class="game-card" data-name="Stickman Hook"
+                    onclick="openGame('Stickman Hook','https://stickman-pi.vercel.app/')">
+                    Stickman Hook
+                </button>
 
-        </div>
+                <button class="game-card" data-name="Subway Surfers"
+                    onclick="openGame('Subway Surfers','https://testingherokuapp.github.io/subwaysurfer/')">
+                    Subway Surfers
+                </button>
 
+                <button class="game-card" data-name="Geometry Dash"
+                    onclick="openGame('Geometry Dash','https://mecanixcreations.github.io/GeometryDashLite-unity-web/')">
+                    Geometry Dash
+                </button>
 
-        <iframe
-            id="gameFrame"
-            src=""
-            frameborder="0"
-            allowfullscreen>
-        </iframe>
+                <button class="game-card" data-name="Paper IO 2"
+                    onclick="openGame('Paper IO 2','https://gameunblocked-2025.github.io/projects/paperio2/index.html')">
+                    Paper IO 2
+                </button>
 
+                <button class="game-card" data-name="Slow Roads"
+                    onclick="openGame('Slow Roads','https://hackingschoolwebsites.github.io/slowroads/')">
+                    Slow Roads
+                </button>
+
+                <button class="game-card" data-name="Time Shooter"
+                    onclick="openGame('Time Shooter','https://unlocktheworld.github.io/Time-Shooter/index.html')">
+                    Time Shooter
+                </button>
+
+                <button class="game-card" data-name="There Is No Game"
+                    onclick="openGame('There Is No Game','https://unlocktheworld.github.io/There-is-no-game/index.html')">
+                    There Is No Game
+                </button>
+
+                <button class="game-card" data-name="The Annoying Button"
+                    onclick="openGame('The Annoying Button','https://unlocktheworld.github.io/bigredbutton/index.html')">
+                    The Annoying Button
+                </button>
+
+            </div>
+        </section>
+    </main>
+
+    <div class="footer">VOID NETWORK V6</div>
+</div>
+
+<div id="gameScreen">
+    <div class="game-toolbar">
+        <button onclick="backToGames()">← Back to Games</button>
+        <span id="gameTitle">Game</span>
+        <button onclick="fullscreenGame()">⛶ Fullscreen</button>
     </div>
 
+    <iframe id="gameFrame" title="Game"
+        allowfullscreen
+        allow="fullscreen; gamepad; autoplay"
+        referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+</div>
 
-    <script>
+<script>
+    // Restore the chosen tab icon
+    function loadSavedTabIcon() {
+        const savedIcon = localStorage.getItem("selectedTabIcon");
+        const favicon = document.getElementById("favicon");
 
-        /* OPEN A GAME */
-        function openGame(name, url) {
-
-            document.getElementById("homeScreen").style.display = "none";
-
-            document.getElementById("gameScreen").style.display = "block";
-
-            document.getElementById("gameFrame").src = url;
-
-            document.title = name + " - Game Portal";
+        if (savedIcon && favicon) {
+            favicon.href = savedIcon;
         }
+    }
 
+    // Open a game in the current tab
+    function openGame(name, url) {
+        document.getElementById("homeScreen").style.display = "none";
+        document.getElementById("gameScreen").style.display = "block";
+        document.getElementById("gameTitle").textContent = name;
+        document.getElementById("gameFrame").src = url;
+        window.scrollTo(0, 0);
+    }
 
-        /* BACK TO GAMES */
-        function goHome() {
+    // Return to the games page
+    function backToGames() {
+        document.getElementById("gameFrame").src = "about:blank";
+        document.getElementById("gameScreen").style.display = "none";
+        document.getElementById("homeScreen").style.display = "block";
+        document.getElementById("search").value = "";
+        filterGames();
+        window.scrollTo(0, 0);
+    }
 
-            document.getElementById("gameFrame").src = "";
+    // Make the game fullscreen
+    function fullscreenGame() {
+        const frame = document.getElementById("gameFrame");
 
-            document.getElementById("gameScreen").style.display = "none";
-
-            document.getElementById("homeScreen").style.display = "block";
-
-            document.title = "Game Portal";
+        if (frame.requestFullscreen) {
+            frame.requestFullscreen();
+        } else if (frame.webkitRequestFullscreen) {
+            frame.webkitRequestFullscreen();
         }
+    }
 
+    // Search game names
+    function filterGames() {
+        const query = document.getElementById("search").value.toLowerCase();
 
-        /* FULLSCREEN */
-        function fullscreenGame() {
+        document.querySelectorAll(".game-card").forEach(card => {
+            const name = card.dataset.name.toLowerCase();
+            card.style.display = name.includes(query) ? "" : "none";
+        });
+    }
 
-            const game = document.getElementById("gameFrame");
-
-            if (game.requestFullscreen) {
-                game.requestFullscreen();
-            }
-        }
-
-
-        /* OPEN SETTINGS PAGE */
-        function openSettings() {
-
-            window.location.href = "settings.html";
-
-        }
-
-    </script>
+    loadSavedTabIcon();
+</script>
 
 </body>
 </html>
