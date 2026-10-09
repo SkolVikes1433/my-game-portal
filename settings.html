@@ -2,316 +2,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tab Settings</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings | Game Portal</title>
+<link id="favicon" rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link id="favicon" rel="icon" href="favicon.ico">
+<style>
+* { box-sizing: border-box; }
 
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+body {
+    margin: 0;
+    background: #05070b;
+    color: #edf5ff;
+    font-family: 'Rajdhani', sans-serif;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+header {
+    padding: 18px 24px;
+    background: #080c13;
+    border-bottom: 2px solid #168cff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
-        body {
-            margin: 0;
-            background: #05070b;
-            color: #eaf3ff;
-            font-family: 'Rajdhani', sans-serif;
-        }
+.logo {
+    color: #168cff;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
 
-        header {
-            padding: 20px;
-            background: #080c13;
-            border-bottom: 2px solid #168cff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+main {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 18px 35px;
+}
 
-        .logo {
-            font-size: 28px;
-            color: #168cff;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
+.panel {
+    background: #0b111b;
+    border: 1px solid #203650;
+    border-radius: 8px;
+    padding: 22px;
+    margin-bottom: 18px;
+}
 
-        button, input {
-            font-family: inherit;
-            font-size: 17px;
-        }
+h1, h2 { color: #168cff; }
 
-        button {
-            background: #101927;
-            border: 1px solid #168cff;
-            border-radius: 5px;
-            color: white;
-            padding: 10px 16px;
-            cursor: pointer;
-            font-weight: 700;
-        }
+h1 { font-size: 32px; margin: 0 0 6px; }
+h2 { font-size: 23px; margin-top: 0; }
 
-        button:hover {
-            background: #168cff;
-            color: #05070b;
-        }
+.muted { color: #91a7bf; }
 
-        main {
-            max-width: 850px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
+button, input {
+    font: inherit;
+    font-size: 17px;
+}
 
-        h1 {
-            color: #168cff;
-            font-size: 32px;
-            margin-bottom: 5px;
-        }
+button {
+    background: #101927;
+    color: white;
+    border: 1px solid #168cff;
+    border-radius: 5px;
+    padding: 11px 15px;
+    cursor: pointer;
+    font-weight: 700;
+}
 
-        .subtitle {
-            color: #94a8bf;
-            margin-bottom: 25px;
-            font-size: 17px;
-        }
+button:hover, button.selected {
+    background: #168cff;
+    color: #05070b;
+}
 
-        .panel {
-            background: #0b111b;
-            border: 1px solid #1c3550;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+.top-button { text-decoration: none; }
 
-        h2 {
-            color: #168cff;
-            margin-top: 0;
-            font-size: 23px;
-        }
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
 
-        .preset-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-            gap: 10px;
-        }
+.icon-option {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    min-height: 62px;
+    text-align: left;
+}
 
-        .preset {
-            min-height: 55px;
-        }
+.icon-option img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    background: white;
+    border-radius: 5px;
+    padding: 3px;
+}
 
-        input {
-            width: 100%;
-            background: #05070b;
-            color: white;
-            border: 1px solid #29415b;
-            border-radius: 5px;
-            padding: 12px;
-            margin: 8px 0 12px;
-            outline: none;
-        }
+input {
+    width: 100%;
+    padding: 12px;
+    background: #05070b;
+    border: 1px solid #29415b;
+    color: white;
+    border-radius: 5px;
+    margin: 8px 0 12px;
+}
 
-        input:focus {
-            border-color: #168cff;
-        }
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
 
-        .wide {
-            width: 100%;
-        }
+.actions button { width: 100%; }
 
-        .status {
-            color: #69b7ff;
-            margin-top: 12px;
-            min-height: 24px;
-        }
+#status {
+    min-height: 24px;
+    color: #69b7ff;
+    margin-bottom: 0;
+}
 
-        .note {
-            color: #8da2b9;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 500px) {
-            header {
-                padding: 15px;
-            }
-
-            .logo {
-                font-size: 23px;
-            }
-
-            main {
-                margin-top: 20px;
-                padding: 0 12px;
-            }
-
-            .panel {
-                padding: 15px;
-            }
-        }
-    </style>
+@media (max-width: 480px) {
+    header { padding: 14px; }
+    .logo { font-size: 23px; }
+    .panel { padding: 15px; }
+    .icon-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 
 <body>
-
 <header>
-    <div class="logo">VOID NETWORK V6</div>
-    <button onclick="location.href='index.html'">← Back to Games</button>
+    <div class="logo">GAME PORTAL</div>
+    <a class="top-button" href="index.html">
+        <button type="button">← BACK</button>
+    </a>
 </header>
 
 <main>
-    <h1>Tab Cloaking</h1>
-    <p class="subtitle">Customize the title and icon shown in your browser tab.</p>
+    <h1>⚙ SETTINGS</h1>
+    <p class="muted">Customize your browser tab.</p>
 
     <section class="panel">
-        <h2>Choose a Tab Preset</h2>
-        <p class="note">Select a preset to change your tab title and icon.</p>
+        <h2>Tab Icon</h2>
+        <p class="muted">Choose the icon you want to display in your browser tab.</p>
 
-        <div class="preset-grid">
-            <button class="preset" onclick="selectCloak('Default')">Void Network</button>
-            <button class="preset" onclick="selectCloak('Google')">Google</button>
-            <button class="preset" onclick="selectCloak('YouTube')">YouTube</button>
-            <button class="preset" onclick="selectCloak('Canvas')">Canvas</button>
-            <button class="preset" onclick="selectCloak('Khan')">Khan Academy</button>
-            <button class="preset" onclick="selectCloak('Docs')">Google Docs</button>
-            <button class="preset" onclick="selectCloak('Desmos')">Desmos</button>
-            <button class="preset" onclick="selectCloak('Drive')">Google Drive</button>
-            <button class="preset" onclick="selectCloak('Google Classroom')">Classroom</button>
-            <button class="preset" onclick="selectCloak('XtraMath')">XtraMath</button>
+        <div class="icon-grid">
+            <button type="button" class="icon-option" data-key="Khan">
+                <img src="https://cdn.kastatic.org/images/favicon.ico" alt="">
+                Khan Academy
+            </button>
+
+            <button type="button" class="icon-option" data-key="Google">
+                <img src="https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png" alt="">
+                Google
+            </button>
+
+            <button type="button" class="icon-option" data-key="YouTube">
+                <img src="https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png" alt="">
+                YouTube
+            </button>
+
+            <button type="button" class="icon-option" data-key="Canvas">
+                <img src="https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico" alt="">
+                Canvas
+            </button>
+
+            <button type="button" class="icon-option" data-key="Docs">
+                <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="">
+                Google Docs
+            </button>
+
+            <button type="button" class="icon-option" data-key="Desmos">
+                <img src="https://www.desmos.com/favicon.ico" alt="">
+                Desmos
+            </button>
+
+            <button type="button" class="icon-option" data-key="Drive">
+                <img src="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" alt="">
+                Google Drive
+            </button>
+
+            <button type="button" class="icon-option" data-key="Google Classroom">
+                <img src="https://edu.google.com/images/svg/gsuite-icons/classroom.svg" alt="">
+                Google Classroom
+            </button>
+
+            <button type="button" class="icon-option" data-key="XtraMath">
+                <img src="https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png" alt="">
+                XtraMath
+            </button>
+
+            <button type="button" class="icon-option" data-key="Default">
+                <img src="favicon.ico" alt="">
+                Game Portal
+            </button>
         </div>
-
-        <p id="presetStatus" class="status" aria-live="polite">No preset selected yet.</p>
     </section>
 
     <section class="panel">
         <h2>Custom Tab Title</h2>
-        <label for="customTitle">Enter a title for your browser tab</label>
-        <input id="customTitle" type="text" maxlength="80"
-               placeholder="Enter a custom title">
-
-        <button class="wide" onclick="saveCustomTitle()">Save Custom Title</button>
+        <label for="customTitle">Browser tab name</label>
+        <input id="customTitle" maxlength="80"
+               placeholder="Example: Khan Academy">
+        <p class="muted">Leave blank to use the selected preset's title.</p>
     </section>
 
     <section class="panel">
-        <h2>Reset Settings</h2>
-        <p class="note">Restore the default Void Network tab title and icon.</p>
-        <button class="wide" onclick="resetCloak()">Reset Tab Settings</button>
+        <h2>Save Your Settings</h2>
+        <p class="muted">Save your icon and title for both pages.</p>
+
+        <div class="actions">
+            <button type="button" id="saveButton">SAVE SETTINGS</button>
+            <button type="button" id="resetButton">RESET SETTINGS</button>
+        </div>
+
+        <p id="status" role="status" aria-live="polite"></p>
     </section>
+
+    <a href="index.html" class="top-button">
+        <button type="button">← BACK TO GAMES</button>
+    </a>
 </main>
 
 <script>
-    const cloakPresets = {
-        "Default": {
-            title: "Void Network V6",
-            icon: "favicon.ico"
-        },
-        "Google": {
-            title: "Google",
-            icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
-        },
-        "YouTube": {
-            title: "YouTube",
-            icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
-        },
-        "Canvas": {
-            title: "Dashboard",
-            icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
-        },
-        "Khan": {
-            title: "Khan Academy",
-            icon: "https://cdn.kastatic.org/images/favicon.ico"
-        },
-        "Docs": {
-            title: "Google Docs",
-            icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
-        },
-        "Desmos": {
-            title: "Desmos | Graphing Calculator",
-            icon: "https://www.desmos.com/favicon.ico"
-        },
-        "Drive": {
-            title: "My Drive - Google Drive",
-            icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
-        },
-        "Google Classroom": {
-            title: "Home - Classroom",
-            icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
-        },
-        "XtraMath": {
-            title: "XtraMath",
-            icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
-        }
-    };
-
-    function applyPreset(key) {
-        const preset = cloakPresets[key];
-        if (!preset) return;
-
-        localStorage.setItem("userCloak", key);
-        localStorage.removeItem("customTabTitle");
-        localStorage.setItem("selectedTabIcon", preset.icon);
-
-        document.title = preset.title;
-        document.getElementById("favicon").href = preset.icon;
-        document.getElementById("customTitle").value = "";
-
-        document.getElementById("presetStatus").textContent =
-            "Selected: " + preset.title + ". Your choice has been saved.";
+const presets = {
+    "Default": {
+        title: "Void Network V6",
+        icon: "favicon.ico"
+    },
+    "Google": {
+        title: "Google",
+        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
+    },
+    "YouTube": {
+        title: "YouTube",
+        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
+    },
+    "Canvas": {
+        title: "Dashboard",
+        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
+    },
+    "Khan": {
+        title: "Khan Academy",
+        icon: "https://cdn.kastatic.org/images/favicon.ico"
+    },
+    "Docs": {
+        title: "Google Docs",
+        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+    },
+    "Desmos": {
+        title: "Desmos | Graphing Calculator",
+        icon: "https://www.desmos.com/favicon.ico"
+    },
+    "Drive": {
+        title: "My Drive - Google Drive",
+        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
+    },
+    "Google Classroom": {
+        title: "Home - Classroom",
+        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
+    },
+    "XtraMath": {
+        title: "XtraMath",
+        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
     }
+};
 
-    function selectCloak(key) {
-        applyPreset(key);
-    }
+let selectedKey = localStorage.getItem("userCloak") || "Default";
 
-    function saveCustomTitle() {
-        const title = document.getElementById("customTitle").value.trim();
+const titleInput = document.getElementById("customTitle");
+const statusText = document.getElementById("status");
+const iconButtons = document.querySelectorAll(".icon-option");
 
-        if (!title) {
-            document.getElementById("presetStatus").textContent =
-                "Please enter a title first.";
-            return;
-        }
+function updateSelection() {
+    iconButtons.forEach(button => {
+        const selected = button.dataset.key === selectedKey;
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+    });
+}
 
-        localStorage.setItem("customTabTitle", title);
-        localStorage.setItem("userCloak", "Custom");
+iconButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        selectedKey = button.dataset.key;
+        updateSelection();
+        statusText.textContent =
+            "Selected " + presets[selectedKey].title + ". Click SAVE SETTINGS to apply.";
+    });
+});
 
-        document.title = title;
+document.getElementById("saveButton").addEventListener("click", () => {
+    const preset = presets[selectedKey];
+    const customTitle = titleInput.value.trim();
 
-        document.getElementById("presetStatus").textContent =
-            "Custom title saved: " + title;
-    }
-
-    function resetCloak() {
-        localStorage.removeItem("userCloak");
-        localStorage.removeItem("customTabTitle");
-        localStorage.removeItem("selectedTabIcon");
-
-        document.title = cloakPresets.Default.title;
-        document.getElementById("favicon").href = cloakPresets.Default.icon;
-        document.getElementById("customTitle").value = "";
-
-        document.getElementById("presetStatus").textContent =
-            "Tab settings reset.";
-    }
-
-    // Restore the selected preset when settings opens
-    const savedKey = localStorage.getItem("userCloak") || "Default";
-    const customTitle = localStorage.getItem("customTabTitle");
+    localStorage.setItem("userCloak", selectedKey);
+    localStorage.setItem("selectedTabIcon", preset.icon);
 
     if (customTitle) {
-        document.title = customTitle;
-        document.getElementById("customTitle").value = customTitle;
-        document.getElementById("presetStatus").textContent =
-            "Your custom tab title is active.";
-    } else if (cloakPresets[savedKey]) {
-        document.title = cloakPresets[savedKey].title;
-        document.getElementById("favicon").href = cloakPresets[savedKey].icon;
-        document.getElementById("presetStatus").textContent =
-            "Current preset: " + cloakPresets[savedKey].title;
+        localStorage.setItem("customTabTitle", customTitle);
+    } else {
+        localStorage.removeItem("customTabTitle");
     }
-</script>
 
+    document.title = customTitle || preset.title;
+    document.getElementById("favicon").href = preset.icon;
+
+    statusText.textContent =
+        "Settings saved! Your selection will load on the main page too.";
+});
+
+document.getElementById("resetButton").addEventListener("click", () => {
+    selectedKey = "Default";
+    titleInput.value = "";
+
+    localStorage.removeItem("userCloak");
+    localStorage.removeItem("selectedTabIcon");
+    localStorage.removeItem("customTabTitle");
+
+    document.title = presets.Default.title;
+    document.getElementById("favicon").href = presets.Default.icon;
+
+    updateSelection();
+    statusText.textContent = "Settings reset to Game Portal.";
+});
+
+const savedTitle = localStorage.getItem("customTabTitle");
+if (savedTitle) titleInput.value = savedTitle;
+
+if (!presets[selectedKey]) selectedKey = "Default";
+
+updateSelection();
+</script>
 </body>
 </html>
