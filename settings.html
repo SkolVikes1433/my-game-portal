@@ -1,13 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Settings</title>
 
-    <title>Settings - Void Network V6</title>
-
-    <!-- This is the browser tab icon -->
-    <link id="favicon" rel="icon" href="khan-academy.jpg">
+    <link id="favicon" rel="icon" href="favicon.ico">
 
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
@@ -18,113 +17,139 @@
 
         body {
             margin: 0;
-            background: #05070a;
-            color: white;
+            background: #05070b;
+            color: #eaf3ff;
             font-family: 'Rajdhani', sans-serif;
         }
 
         header {
-            height: 70px;
-            background: #080b10;
+            padding: 20px;
+            background: #080c13;
             border-bottom: 2px solid #168cff;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 0 25px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .logo {
-            color: #168cff;
             font-size: 28px;
+            color: #168cff;
             font-weight: 700;
             letter-spacing: 2px;
         }
 
-        .settings {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 25px;
-            background: #0b0f15;
+        button, input {
+            font-family: inherit;
+            font-size: 17px;
+        }
+
+        button {
+            background: #101927;
             border: 1px solid #168cff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(22, 140, 255, 0.2);
+            border-radius: 5px;
+            color: white;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        button:hover {
+            background: #168cff;
+            color: #05070b;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
         h1 {
             color: #168cff;
-            margin-top: 0;
+            font-size: 32px;
+            margin-bottom: 5px;
         }
 
-        .label {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 25px 0 10px;
+        .subtitle {
+            color: #94a8bf;
+            margin-bottom: 25px;
+            font-size: 17px;
         }
 
-        .khan-button {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-
-            padding: 12px;
-
-            background: #05070a;
-            color: white;
-
-            border: 2px solid #168cff;
+        .panel {
+            background: #0b111b;
+            border: 1px solid #1c3550;
             border-radius: 8px;
-
-            cursor: pointer;
-
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            text-align: left;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .khan-button:hover {
-            background: #101923;
-        }
-
-        .khan-button.selected {
-            box-shadow: 0 0 15px #168cff;
-        }
-
-        .khan-button img {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            border-radius: 6px;
-        }
-
-        .back-button,
-        .save-button {
-            margin-top: 25px;
-            padding: 11px 20px;
-            border-radius: 6px;
-
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-
-            cursor: pointer;
-        }
-
-        .back-button {
-            background: transparent;
+        h2 {
             color: #168cff;
-            border: 1px solid #168cff;
-            margin-right: 8px;
+            margin-top: 0;
+            font-size: 23px;
         }
 
-        .save-button {
-            background: #168cff;
-            color: black;
-            border: none;
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+            gap: 10px;
         }
 
-        button:hover {
-            opacity: 0.85;
+        .preset {
+            min-height: 55px;
+        }
+
+        input {
+            width: 100%;
+            background: #05070b;
+            color: white;
+            border: 1px solid #29415b;
+            border-radius: 5px;
+            padding: 12px;
+            margin: 8px 0 12px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #168cff;
+        }
+
+        .wide {
+            width: 100%;
+        }
+
+        .status {
+            color: #69b7ff;
+            margin-top: 12px;
+            min-height: 24px;
+        }
+
+        .note {
+            color: #8da2b9;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 500px) {
+            header {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            main {
+                margin-top: 20px;
+                padding: 0 12px;
+            }
+
+            .panel {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -132,102 +157,160 @@
 <body>
 
 <header>
-    <div class="logo">GAME PORTAL</div>
+    <div class="logo">VOID NETWORK V6</div>
+    <button onclick="location.href='index.html'">← Back to Games</button>
 </header>
 
-<div class="settings">
+<main>
+    <h1>Tab Cloaking</h1>
+    <p class="subtitle">Customize the title and icon shown in your browser tab.</p>
 
-    <h1>⚙ SETTINGS</h1>
+    <section class="panel">
+        <h2>Choose a Tab Preset</h2>
+        <p class="note">Select a preset to change your tab title and icon.</p>
 
-    <div class="label">
-        Tab Icon
-    </div>
+        <div class="preset-grid">
+            <button class="preset" onclick="selectCloak('Default')">Void Network</button>
+            <button class="preset" onclick="selectCloak('Google')">Google</button>
+            <button class="preset" onclick="selectCloak('YouTube')">YouTube</button>
+            <button class="preset" onclick="selectCloak('Canvas')">Canvas</button>
+            <button class="preset" onclick="selectCloak('Khan')">Khan Academy</button>
+            <button class="preset" onclick="selectCloak('Docs')">Google Docs</button>
+            <button class="preset" onclick="selectCloak('Desmos')">Desmos</button>
+            <button class="preset" onclick="selectCloak('Drive')">Google Drive</button>
+            <button class="preset" onclick="selectCloak('Google Classroom')">Classroom</button>
+            <button class="preset" onclick="selectCloak('XtraMath')">XtraMath</button>
+        </div>
 
-    <!-- THE KHAN ACADEMY BUTTON -->
-    <button
-        class="khan-button"
-        id="khanButton"
-        onclick="selectKhan()"
-    >
-        <img src="khan-academy.jpg" alt="Khan Academy">
+        <p id="presetStatus" class="status" aria-live="polite">No preset selected yet.</p>
+    </section>
 
-        <span>Khan Academy</span>
-    </button>
+    <section class="panel">
+        <h2>Custom Tab Title</h2>
+        <label for="customTitle">Enter a title for your browser tab</label>
+        <input id="customTitle" type="text" maxlength="80"
+               placeholder="Enter a custom title">
 
-    <br>
+        <button class="wide" onclick="saveCustomTitle()">Save Custom Title</button>
+    </section>
 
-    <button
-        class="back-button"
-        onclick="goBack()"
-    >
-        ← BACK
-    </button>
-
-    <button
-        class="save-button"
-        onclick="saveSettings()"
-    >
-        SAVE SETTINGS
-    </button>
-
-</div>
+    <section class="panel">
+        <h2>Reset Settings</h2>
+        <p class="note">Restore the default Void Network tab title and icon.</p>
+        <button class="wide" onclick="resetCloak()">Reset Tab Settings</button>
+    </section>
+</main>
 
 <script>
+    const cloakPresets = {
+        "Default": {
+            title: "Void Network V6",
+            icon: "favicon.ico"
+        },
+        "Google": {
+            title: "Google",
+            icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
+        },
+        "YouTube": {
+            title: "YouTube",
+            icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
+        },
+        "Canvas": {
+            title: "Dashboard",
+            icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
+        },
+        "Khan": {
+            title: "Khan Academy",
+            icon: "https://cdn.kastatic.org/images/favicon.ico"
+        },
+        "Docs": {
+            title: "Google Docs",
+            icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+        },
+        "Desmos": {
+            title: "Desmos | Graphing Calculator",
+            icon: "https://www.desmos.com/favicon.ico"
+        },
+        "Drive": {
+            title: "My Drive - Google Drive",
+            icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
+        },
+        "Google Classroom": {
+            title: "Home - Classroom",
+            icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
+        },
+        "XtraMath": {
+            title: "XtraMath",
+            icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
+        }
+    };
 
-    function selectKhan() {
+    function applyPreset(key) {
+        const preset = cloakPresets[key];
+        if (!preset) return;
 
-        localStorage.setItem(
-            "tabIcon",
-            "khan-academy.jpg"
-        );
+        localStorage.setItem("userCloak", key);
+        localStorage.removeItem("customTabTitle");
+        localStorage.setItem("selectedTabIcon", preset.icon);
 
-        document
-            .getElementById("khanButton")
-            .classList.add("selected");
+        document.title = preset.title;
+        document.getElementById("favicon").href = preset.icon;
+        document.getElementById("customTitle").value = "";
 
-        applyIcon();
-
+        document.getElementById("presetStatus").textContent =
+            "Selected: " + preset.title + ". Your choice has been saved.";
     }
 
-
-    function applyIcon() {
-
-        const favicon =
-            document.getElementById("favicon");
-
-        favicon.href = "khan-academy.jpg";
-
+    function selectCloak(key) {
+        applyPreset(key);
     }
 
+    function saveCustomTitle() {
+        const title = document.getElementById("customTitle").value.trim();
 
-    function saveSettings() {
+        if (!title) {
+            document.getElementById("presetStatus").textContent =
+                "Please enter a title first.";
+            return;
+        }
 
-        selectKhan();
+        localStorage.setItem("customTabTitle", title);
+        localStorage.setItem("userCloak", "Custom");
 
-        alert("Khan Academy selected!");
+        document.title = title;
 
+        document.getElementById("presetStatus").textContent =
+            "Custom title saved: " + title;
     }
 
+    function resetCloak() {
+        localStorage.removeItem("userCloak");
+        localStorage.removeItem("customTabTitle");
+        localStorage.removeItem("selectedTabIcon");
 
-    function goBack() {
+        document.title = cloakPresets.Default.title;
+        document.getElementById("favicon").href = cloakPresets.Default.icon;
+        document.getElementById("customTitle").value = "";
 
-        window.location.href = "index.html";
-
-    }
-function selectKhan() {
-    localStorage.setItem("tabIcon", "khan-academy.jpg");
-
-    let favicon = document.getElementById("favicon");
-
-    if (!favicon) {
-        favicon = document.createElement("link");
-        favicon.id = "favicon";
-        favicon.rel = "icon";
-        document.head.appendChild(favicon);
+        document.getElementById("presetStatus").textContent =
+            "Tab settings reset.";
     }
 
-    favicon.href = "khan-academy.jpg";
-}
+    // Restore the selected preset when settings opens
+    const savedKey = localStorage.getItem("userCloak") || "Default";
+    const customTitle = localStorage.getItem("customTabTitle");
+
+    if (customTitle) {
+        document.title = customTitle;
+        document.getElementById("customTitle").value = customTitle;
+        document.getElementById("presetStatus").textContent =
+            "Your custom tab title is active.";
+    } else if (cloakPresets[savedKey]) {
+        document.title = cloakPresets[savedKey].title;
+        document.getElementById("favicon").href = cloakPresets[savedKey].icon;
+        document.getElementById("presetStatus").textContent =
+            "Current preset: " + cloakPresets[savedKey].title;
+    }
 </script>
 
 </body>
