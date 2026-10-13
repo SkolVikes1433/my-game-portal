@@ -2,426 +2,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VOID NETWORK V6 | Tab Settings</title>
-<link rel="icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VOID NETWORK V6</title>
+  <link id="favicon" rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-<style>
-* { box-sizing: border-box; }
+  <style>
+    * { box-sizing: border-box; }
 
-body {
-    margin: 0;
-    background: #05070b;
-    color: #eaf3ff;
-    font-family: 'Rajdhani', sans-serif;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #05070d;
+      color: #eaf4ff;
+      font-family: 'Rajdhani', sans-serif;
+      background-image:
+        radial-gradient(ellipse at top, #10264b 0%, transparent 55%),
+        linear-gradient(#05070d, #080b13);
+    }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 18px 22px;
-    background: #080d15;
-    border-bottom: 2px solid #168cff;
-}
+    header {
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      background: #03060de8;
+      border-bottom: 1px solid #19385e;
+    }
 
-.logo, h2 {
-    font-family: 'Black Ops One', cursive;
-    color: #168cff;
-}
+    h1 {
+      margin: 0;
+      color: #48a9ff;
+      font: 27px 'Black Ops One', cursive;
+      letter-spacing: 1px;
+      text-shadow: 0 0 18px #087cff66;
+    }
 
-.logo { margin: 0; font-size: 25px; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+    nav a, .button {
+      padding: 10px 15px;
+      color: #eaf4ff;
+      background: #101b2c;
+      border: 1px solid #2b5682;
+      border-radius: 8px;
+      text-decoration: none;
+      font: 700 16px 'Rajdhani', sans-serif;
+      cursor: pointer;
+    }
 
-.nav-button {
-    padding: 10px 14px;
-    background: #0b1420;
-    color: white;
-    border: 1px solid #168cff;
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 16px;
-}
+    nav a:hover, .button:hover {
+      background: #17406a;
+      border-color: #48a9ff;
+    }
 
-.nav-button:hover { background: #168cff; color: black; }
+    main {
+      width: min(1150px, 94%);
+      margin: 28px auto;
+    }
 
-main {
-    max-width: 1100px;
-    margin: auto;
-    padding: 24px;
-}
+    .hero, .player-panel {
+      padding: 23px;
+      margin-bottom: 22px;
+      background: #0a111e;
+      border: 1px solid #1b3555;
+      border-radius: 14px;
+      box-shadow: 0 10px 35px #0005;
+    }
 
-h2 { margin-top: 0; }
+    h2 {
+      margin: 0 0 8px;
+      color: #55b2ff;
+      font-size: 25px;
+    }
 
-.description { color: #a1b0c3; }
+    p { color: #9cb2ce; }
 
-.panel {
-    padding: 20px;
-    margin-bottom: 22px;
-    background: #080d15;
-    border: 1px solid #1c2c40;
-    border-radius: 5px;
-}
+    .search {
+      width: 100%;
+      padding: 13px 15px;
+      margin-top: 12px;
+      color: white;
+      background: #050b15;
+      border: 1px solid #294362;
+      border-radius: 8px;
+      font: 18px 'Rajdhani', sans-serif;
+      outline: none;
+    }
 
-.preset-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
-    gap: 12px;
-}
+    .search:focus { border-color: #48a9ff; }
 
-.preset {
-    min-height: 120px;
-    padding: 12px 8px;
-    background: #0b111b;
-    color: #eaf3ff;
-    border: 1px solid #1c2c40;
-    border-radius: 5px;
-    cursor: pointer;
-    font: 700 16px 'Rajdhani', sans-serif;
-    overflow-wrap: anywhere;
-}
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 15px;
+    }
 
-.preset:hover {
-    background: #101d2e;
-    border-color: #168cff;
-}
+    .game-card {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-height: 165px;
+      padding: 17px;
+      text-align: left;
+      color: #eaf4ff;
+      background: #0c1727;
+      border: 1px solid #203c5d;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: .18s ease;
+      font-family: 'Rajdhani', sans-serif;
+    }
 
-.preset.selected {
-    border: 2px solid #168cff;
-    background: #10213a;
-    box-shadow: 0 0 12px #168cff33;
-}
+    .game-card:hover {
+      transform: translateY(-3px);
+      border-color: #48a9ff;
+      background: #11243b;
+      box-shadow: 0 8px 25px #087cff20;
+    }
 
-.logo-container {
-    height: 48px;
-    width: 48px;
-    margin: 0 auto 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .game-icon {
+      margin-bottom: 9px;
+      font-size: 32px;
+    }
 
-.logo-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
+    .game-name {
+      color: #eaf4ff;
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-.logo-fallback {
-    display: none;
-    width: 46px;
-    height: 46px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: #10213a;
-    border: 1px solid #168cff;
-    color: #55b2ff;
-    font: bold 24px Arial, sans-serif;
-}
+    .game-description {
+      margin-top: 5px;
+      color: #9cb2ce;
+      font-size: 15px;
+    }
 
-label {
-    display: block;
-    margin: 14px 0 6px;
-    font-weight: 700;
-    font-size: 17px;
-}
+    #noResults {
+      display: none;
+      padding: 20px 0;
+      color: #9cb2ce;
+    }
 
-input {
-    width: 100%;
-    padding: 12px;
-    color: white;
-    background: #0b111b;
-    border: 1px solid #243a53;
-    border-radius: 4px;
-    font: 16px 'Rajdhani', sans-serif;
-}
+    #playerPanel { display: none; }
 
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
-}
+    .player-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
 
-.action-button {
-    padding: 10px 16px;
-    color: white;
-    background: #0b1420;
-    border: 1px solid #168cff;
-    border-radius: 4px;
-    cursor: pointer;
-    font: 700 16px 'Rajdhani', sans-serif;
-}
+    .player-top h2 { margin: 0; }
 
-.action-button:hover { background: #168cff; color: black; }
+    #gameFrame {
+      display: block;
+      width: 100%;
+      height: min(72vh, 720px);
+      min-height: 400px;
+      border: 1px solid #294362;
+      border-radius: 8px;
+      background: #fff;
+    }
 
-#status {
-    min-height: 24px;
-    margin-top: 12px;
-    color: #70e6a0;
-}
+    .player-note { margin-bottom: 0; }
 
-.back {
-    color: #55b2ff;
-    text-decoration: none;
-    font-size: 17px;
-}
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: #7189a8;
+    }
 
-@media (max-width: 600px) {
-    header { padding: 15px; }
-    main { padding: 15px; }
-    .preset-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-</style>
+    @media (max-width: 550px) {
+      header { padding: 16px; }
+      h1 { font-size: 22px; }
+      main { width: 92%; margin: 18px auto; }
+      .hero, .player-panel { padding: 16px; }
+      #gameFrame { min-height: 320px; }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-    <h1 class="logo">VOID NETWORK V6</h1>
+  <header>
+    <h1>VOID NETWORK V6</h1>
     <nav>
-        <a class="nav-button" href="index.html">Games</a>
-        <a class="nav-button" href="settings.html">⚙ Tab Settings</a>
+      <a href="index.html">🎮 Games</a>
+      <a href="settings.html">⚙ Tab Settings</a>
     </nav>
-</header>
+  </header>
 
-<main>
-    <section class="panel">
-        <h2>Tab Cloaker</h2>
-        <p class="description">Choose a tab title and icon.</p>
-        <div class="preset-grid" id="presetGrid"></div>
+  <main>
+    <section class="hero">
+      <h2>Game Portal</h2>
+      <p>Find a game below and select it to try opening it here. Some game sites block embedding; if one does, use the Open Game button.</p>
+      <input id="gameSearch" class="search" type="search" placeholder="Search games..." aria-label="Search games">
     </section>
 
-    <section class="panel">
-        <h2>Custom Tab</h2>
-        <p class="description">Set your own tab title and icon URL.</p>
+    <section class="games-grid" id="gamesGrid" aria-label="Games"></section>
+    <p id="noResults">No games match your search.</p>
 
-        <label for="customTitle">Tab title</label>
-        <input id="customTitle" type="text" placeholder="Enter tab title">
-
-        <label for="customIcon">Icon URL</label>
-        <input id="customIcon" type="url" placeholder="Enter an icon image URL">
-
-        <div class="actions">
-            <button class="action-button" id="saveCustom" type="button">Save Custom Tab</button>
-            <button class="action-button" id="reset" type="button">Reset Settings</button>
+    <section class="player-panel" id="playerPanel">
+      <div class="player-top">
+        <h2 id="currentGameTitle">Game</h2>
+        <div>
+          <a id="openGame" class="button" href="#" target="_blank" rel="noopener noreferrer">Open Game ↗</a>
+          <button id="closeGame" class="button" type="button">Close Game</button>
         </div>
-
-        <div id="status" role="status" aria-live="polite"></div>
+      </div>
+      <iframe
+        id="gameFrame"
+        title="Selected game"
+        src="about:blank"
+        allow="fullscreen; autoplay; gamepad"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+      <p class="player-note">If the game does not load in this window, click “Open Game” to try the game's website directly.</p>
     </section>
+  </main>
 
-    <a class="back" href="index.html">← Back to Hub</a>
-</main>
+  <footer>VOID NETWORK V6 · Game Portal</footer>
 
-<script>
-/* EXACT SAME PRESET IDS, TITLES, AND ICON URLS AS index.html */
-const presets = [
-    {
-        id: "Default",
-        name: "Default",
-        title: "Void Network V6",
-        icon: "favicon.ico",
-        letter: "V"
-    },
-    {
-        id: "Khan",
-        name: "Khan Academy",
-        title: "Khan Academy",
-        icon: "https://cdn.kastatic.org/images/favicon.ico",
-        letter: "K"
-    },
-    {
-        id: "Google",
-        name: "Google",
-        title: "Google",
-        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png",
-        letter: "G"
-    },
-    {
-        id: "YouTube",
-        name: "YouTube",
-        title: "YouTube",
-        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png",
-        letter: "Y"
-    },
-    {
-        id: "Canvas",
-        name: "Canvas",
-        title: "Dashboard",
-        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico",
-        letter: "C"
-    },
-    {
-        id: "Docs",
-        name: "Google Docs",
-        title: "Google Docs",
-        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico",
-        letter: "D"
-    },
-    {
-        id: "Desmos",
-        name: "Desmos",
-        title: "Desmos | Graphing Calculator",
-        icon: "https://www.desmos.com/favicon.ico",
-        letter: "D"
-    },
-    {
-        id: "Drive",
-        name: "Google Drive",
-        title: "My Drive - Google Drive",
-        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png",
-        letter: "D"
-    },
-    {
-        id: "Google Classroom",
-        name: "Google Classroom",
-        title: "Home - Classroom",
-        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg",
-        letter: "C"
-    },
-    {
-        id: "XtraMath",
-        name: "XtraMath",
-        title: "XtraMath",
-        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png",
-        letter: "X"
-    }
-];
+  <script>
+    // This starter list can be expanded with your own game URLs.
+    const games = [
+      {
+        name: "Run 3",
+        icon: "🏃",
+        description: "Run and jump through space tunnels.",
+        url: "https://www.coolmathgames.com/0-run-3"
+      },
+      {
+        name: "Fireboy & Watergirl",
+        icon: "🔥",
+        description: "Work together to solve platform puzzles.",
+        url: "https://www.coolmathgames.com/0-fireboy-and-watergirl-in-the-forest-temple"
+      },
+      {
+        name: "Moto X3M",
+        icon: "🏍️",
+        description: "Ride through obstacle-filled tracks.",
+        url: "https://www.coolmathgames.com/0-moto-x3m"
+      },
+      {
+        name: "World's Hardest Game",
+        icon: "🟥",
+        description: "Navigate challenging levels.",
+        url: "https://www.coolmathgames.com/0-worlds-hardest-game"
+      },
+      {
+        name: "Bloxorz",
+        icon: "🧊",
+        description: "Guide a block across tricky platforms.",
+        url: "https://www.coolmathgames.com/0-bloxorz"
+      },
+      {
+        name: "OvO",
+        icon: "🕹️",
+        description: "A precision platform game.",
+        url: "https://www.coolmathgames.com/0-ovo"
+      },
+      {
+        name: "Papa's Pizzeria",
+        icon: "🍕",
+        description: "Take orders and prepare pizzas.",
+        url: "https://www.coolmathgames.com/0-papas-pizzeria"
+      },
+      {
+        name: "2048",
+        icon: "🔢",
+        description: "Combine matching number tiles.",
+        url: "https://www.coolmathgames.com/0-2048"
+      }
+    ];
 
-const grid = document.getElementById("presetGrid");
-const status = document.getElementById("status");
-const titleInput = document.getElementById("customTitle");
-const iconInput = document.getElementById("customIcon");
+    const grid = document.getElementById("gamesGrid");
+    const search = document.getElementById("gameSearch");
+    const noResults = document.getElementById("noResults");
+    const playerPanel = document.getElementById("playerPanel");
+    const frame = document.getElementById("gameFrame");
+    const title = document.getElementById("currentGameTitle");
+    const openGame = document.getElementById("openGame");
 
-function readStorage(key, fallback = "") {
-    try {
-        return localStorage.getItem(key) ?? fallback;
-    } catch (error) {
-        return fallback;
-    }
-}
+    function renderGames(query = "") {
+      grid.replaceChildren();
+      const filtered = games.filter(game =>
+        (game.name + " " + game.description).toLowerCase().includes(query.toLowerCase())
+      );
 
-function writeSettings(id, title, icon) {
-    try {
-        localStorage.setItem("userCloak", id);
-        localStorage.setItem("customTabTitle", title);
-        localStorage.setItem("selectedTabIcon", icon);
-        return true;
-    } catch (error) {
-        status.textContent = "Could not save settings in this browser.";
-        return false;
-    }
-}
+      filtered.forEach(game => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "game-card";
 
-function updateSelected() {
-    const selected = readStorage("userCloak", "Default");
+        const icon = document.createElement("span");
+        icon.className = "game-icon";
+        icon.textContent = game.icon;
 
-    document.querySelectorAll(".preset").forEach(button => {
-        const active = button.dataset.id === selected;
-        button.classList.toggle("selected", active);
-        button.setAttribute("aria-pressed", String(active));
-    });
-}
+        const name = document.createElement("span");
+        name.className = "game-name";
+        name.textContent = game.name;
 
-function selectPreset(preset) {
-    if (!writeSettings(preset.id, preset.title, preset.icon)) return;
+        const description = document.createElement("span");
+        description.className = "game-description";
+        description.textContent = game.description;
 
-    titleInput.value = preset.title;
-    iconInput.value = preset.icon;
+        card.append(icon, name, description);
+        card.addEventListener("click", () => launchGame(game));
+        grid.appendChild(card);
+      });
 
-    updateSelected();
-    status.textContent = preset.name + " selected and saved.";
-}
-
-function createPreset(preset) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "preset";
-    button.dataset.id = preset.id;
-
-    const logoContainer = document.createElement("div");
-    logoContainer.className = "logo-container";
-
-    const img = document.createElement("img");
-    img.alt = preset.name + " logo";
-    img.loading = "eager";
-    img.referrerPolicy = "no-referrer";
-
-    const fallback = document.createElement("span");
-    fallback.className = "logo-fallback";
-    fallback.textContent = preset.letter;
-
-    function showFallback() {
-        img.style.display = "none";
-        fallback.style.display = "flex";
+      noResults.style.display = filtered.length ? "none" : "block";
     }
 
-    img.addEventListener("error", showFallback);
-    img.addEventListener("load", () => {
-        img.style.display = "block";
-        fallback.style.display = "none";
+    function launchGame(game) {
+      title.textContent = game.name;
+      frame.src = game.url;
+      openGame.href = game.url;
+      playerPanel.style.display = "block";
+      playerPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    search.addEventListener("input", () => renderGames(search.value));
+
+    document.getElementById("closeGame").addEventListener("click", () => {
+      frame.src = "about:blank";
+      playerPanel.style.display = "none";
     });
 
-    img.src = preset.icon;
-    logoContainer.append(img, fallback);
+    // Apply the tab settings saved by settings.html.
+    function applyTabSettings() {
+      let savedTitle = "";
+      let savedIcon = "";
 
-    const label = document.createElement("span");
-    label.textContent = preset.name;
+      try {
+        savedTitle = localStorage.getItem("customTabTitle") || "";
+        savedIcon = localStorage.getItem("selectedTabIcon") || "";
+      } catch (error) {
+        // Use the default tab settings if storage is unavailable.
+      }
 
-    button.append(logoContainer, label);
-    button.addEventListener("click", () => selectPreset(preset));
+      document.title = savedTitle || "VOID NETWORK V6";
 
-    grid.appendChild(button);
-}
-
-presets.forEach(createPreset);
-
-titleInput.value = readStorage("customTabTitle");
-iconInput.value = readStorage("selectedTabIcon");
-updateSelected();
-
-document.getElementById("saveCustom").addEventListener("click", () => {
-    const title = titleInput.value.trim();
-    const icon = iconInput.value.trim();
-
-    if (!title) {
-        status.textContent = "Enter a tab title first.";
-        return;
+      const favicon = document.getElementById("favicon");
+      favicon.href = savedIcon || "favicon.ico";
     }
 
-    if (icon) {
-        try {
-            const url = new URL(icon);
-            if (!["https:", "http:"].includes(url.protocol)) {
-                status.textContent = "Use a valid HTTP or HTTPS icon URL.";
-                return;
-            }
-        } catch {
-            status.textContent = "That icon URL is not valid.";
-            return;
-        }
-    }
-
-    if (writeSettings("Custom", title, icon)) {
-        updateSelected();
-        status.textContent = "Custom tab settings saved.";
-    }
-});
-
-document.getElementById("reset").addEventListener("click", () => {
-    const defaultPreset = presets.find(preset => preset.id === "Default");
-    selectPreset(defaultPreset);
-});
-</script>
+    renderGames();
+    applyTabSettings();
+  </script>
 </body>
 </html>
