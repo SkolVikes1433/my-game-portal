@@ -6,11 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tab Settings</title>
 
-<link id="favicon" rel="icon"
-      href="https://www.google.com/favicon.ico">
-
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap"
-      rel="stylesheet">
+<link id="favicon" rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -59,10 +56,7 @@ h2 {
 
 .app-grid {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(135px, 1fr)
-    );
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
     gap: 12px;
     margin-top: 22px;
 }
@@ -75,12 +69,10 @@ h2 {
     align-items: center;
     justify-content: center;
     gap: 12px;
-
     background: #0b111b;
     color: #eaf3ff;
     border: 1px solid #263b53;
     border-radius: 7px;
-
     font-family: 'Black Ops One', cursive;
     font-size: 11px;
     cursor: pointer;
@@ -104,7 +96,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: #fff;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -115,10 +107,11 @@ h2 {
     object-fit: contain;
 }
 
-.app-button .letter-icon {
+.letter-icon {
     font-family: Arial, sans-serif;
     font-size: 32px;
     font-weight: bold;
+    color: #168cff;
 }
 
 .bottom-buttons {
@@ -179,14 +172,14 @@ footer {
     <h3>Tab Icon</h3>
 
     <p class="description">
-        Choose an app to change the browser tab title and icon.
+        Choose an app to change your browser tab title and icon.
         Your selection saves automatically.
     </p>
 
     <div class="app-grid" id="appGrid"></div>
 
     <div class="bottom-buttons">
-        <button class="action-button" id="resetButton">
+        <button class="action-button" id="resetButton" type="button">
             DEFAULT
         </button>
 
@@ -206,7 +199,7 @@ const presets = [
         id: "Default",
         label: "Default",
         title: "Void Network V6",
-        icon: "https://www.google.com/favicon.ico",
+        icon: "favicon.ico",
         image: "https://github.githubassets.com/favicons/favicon.png"
     },
     {
@@ -220,13 +213,6 @@ const presets = [
         id: "Google",
         label: "Google",
         title: "Google",
-        icon: "https://www.google.com/favicon.ico",
-        image: "https://www.google.com/favicon.ico"
-    },
-    {
-        id: "Google Images",
-        label: "Google Images",
-        title: "Google Images",
         icon: "https://www.google.com/favicon.ico",
         image: "https://www.google.com/favicon.ico"
     },
@@ -310,7 +296,6 @@ function updateSelection() {
 
     document.querySelectorAll(".app-button").forEach(button => {
         const active = button.dataset.preset === selected;
-
         button.classList.toggle("selected", active);
         button.setAttribute("aria-pressed", String(active));
     });
@@ -328,14 +313,12 @@ function selectPreset(preset) {
 
         status.textContent = preset.label + " selected!";
     } catch (error) {
-        status.textContent =
-            "Could not save. Check your browser storage settings.";
+        status.textContent = "Could not save your settings.";
     }
 }
 
 function makeButton(preset) {
     const button = document.createElement("button");
-
     button.type = "button";
     button.className = "app-button";
     button.dataset.preset = preset.id;
@@ -350,16 +333,11 @@ function makeButton(preset) {
     img.loading = "eager";
 
     img.onerror = function () {
-        /*
-          Do not substitute another app's logo.
-          Show a letter if the app icon cannot load.
-        */
         box.replaceChildren();
 
         const letter = document.createElement("span");
         letter.className = "letter-icon";
         letter.textContent = preset.label.charAt(0);
-        letter.style.color = "#168cff";
 
         box.appendChild(letter);
     };
@@ -372,9 +350,7 @@ function makeButton(preset) {
     button.appendChild(box);
     button.appendChild(label);
 
-    button.addEventListener("click", () => {
-        selectPreset(preset);
-    });
+    button.addEventListener("click", () => selectPreset(preset));
 
     grid.appendChild(button);
 }
@@ -386,15 +362,12 @@ document.getElementById("resetButton").addEventListener("click", () => {
 });
 
 const savedId = readSetting("userCloak", "Default");
-const savedPreset =
-    presets.find(preset => preset.id === savedId) || presets[0];
+const savedPreset = presets.find(p => p.id === savedId) || presets[0];
 
 document.title =
     readSetting("customTabTitle", "").trim() || savedPreset.title;
 
-setFavicon(
-    readSetting("selectedTabIcon", savedPreset.icon)
-);
+setFavicon(readSetting("selectedTabIcon", savedPreset.icon));
 
 updateSelection();
 </script>
