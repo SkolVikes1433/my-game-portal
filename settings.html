@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VOID NETWORK V6 | Settings</title>
   <link id="settingsFavicon" rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
       padding: 25px 18px;
       text-align: center;
       border-bottom: 1px solid #19385e;
-      background: rgba(3, 6, 13, .9);
+      background: #03060de8;
     }
 
     h1 {
@@ -43,17 +43,37 @@
       font-size: 17px;
     }
 
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    nav a {
+      padding: 9px 14px;
+      color: white;
+      background: #101b2c;
+      border: 1px solid #2b5682;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    nav a:hover { background: #17406a; }
+
     main {
       width: min(1000px, 94%);
       margin: 30px auto;
     }
 
     .panel {
+      padding: 22px;
+      margin-bottom: 22px;
       background: #0a111e;
       border: 1px solid #1b3555;
       border-radius: 15px;
-      padding: 22px;
-      margin-bottom: 22px;
       box-shadow: 0 10px 35px #0005;
     }
 
@@ -118,7 +138,6 @@
     }
 
     .logo-box img {
-      display: block;
       width: 100%;
       height: 100%;
       padding: 5px;
@@ -130,6 +149,10 @@
       font: bold 25px Arial, sans-serif;
     }
 
+    .fallback[hidden], .logo-box img[hidden] {
+      display: none !important;
+    }
+
     .preset-name {
       text-align: center;
       overflow-wrap: anywhere;
@@ -137,10 +160,10 @@
 
     label {
       display: block;
+      margin: 14px 0 6px;
       color: #b7cce5;
       font-size: 17px;
       font-weight: 700;
-      margin: 14px 0 6px;
     }
 
     input {
@@ -165,11 +188,11 @@
     }
 
     .action {
+      padding: 11px 20px;
+      color: white;
+      background: #1476cf;
       border: 1px solid #358de0;
       border-radius: 8px;
-      padding: 11px 20px;
-      background: #1476cf;
-      color: white;
       cursor: pointer;
       font: 700 18px 'Rajdhani', sans-serif;
     }
@@ -196,8 +219,6 @@
       text-decoration: none;
     }
 
-    .back:hover { text-decoration: underline; }
-
     @media (max-width: 450px) {
       h1 { font-size: 25px; }
       .panel { padding: 15px; }
@@ -210,45 +231,32 @@
   <header>
     <h1>VOID NETWORK V6</h1>
     <p>Tab Cloaker Settings</p>
+    <nav>
+      <a href="index.html">🎮 Games</a>
+      <a href="settings.html">⚙ Tab Settings</a>
+    </nav>
   </header>
 
   <main>
     <section class="panel">
       <h2>Choose a Tab Icon</h2>
-      <p class="description">
-        Select a preset to change the browser tab title and icon.
-      </p>
+      <p class="description">Select a preset to change the browser tab title and icon.</p>
       <div class="grid" id="presetGrid"></div>
     </section>
 
     <section class="panel">
       <h2>Custom Tab</h2>
-      <p class="description">
-        Enter a custom browser tab title and an optional icon image URL.
-      </p>
+      <p class="description">Enter a custom browser tab title and an optional icon image URL.</p>
 
       <label for="customTitle">Tab title</label>
-      <input
-        id="customTitle"
-        type="text"
-        placeholder="Example: Google Classroom"
-        maxlength="100"
-      >
+      <input id="customTitle" type="text" maxlength="100" placeholder="Example: Google Classroom">
 
       <label for="customIcon">Icon image URL</label>
-      <input
-        id="customIcon"
-        type="url"
-        placeholder="https://example.com/icon.png"
-      >
+      <input id="customIcon" type="url" placeholder="https://example.com/icon.png">
 
       <div class="actions">
-        <button class="action" id="saveCustom" type="button">
-          Save Custom Tab
-        </button>
-        <button class="action secondary" id="reset" type="button">
-          Reset Settings
-        </button>
+        <button class="action" id="saveCustom" type="button">Save Custom Tab</button>
+        <button class="action secondary" id="reset" type="button">Reset Settings</button>
       </div>
 
       <div id="status" role="status" aria-live="polite"></div>
@@ -258,12 +266,11 @@
   </main>
 
   <script>
-    // Keep these IDs, titles, and URLs synchronized with index.html.
     const presets = [
       {
         id: "Default",
         name: "Default",
-        title: "Void Network V6",
+        title: "VOID NETWORK V6",
         icon: "favicon.ico",
         letter: "V"
       },
@@ -337,96 +344,118 @@
     const titleInput = document.getElementById("customTitle");
     const iconInput = document.getElementById("customIcon");
 
-    let selectedId = localStorage.getItem("userCloak") || "Default";
+    function readSetting(key, fallback = "") {
+      try {
+        return localStorage.getItem(key) ?? fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function writeSettings(id, title, icon) {
+      try {
+        localStorage.setItem("userCloak", id);
+        localStorage.setItem("customTabTitle", title);
+        localStorage.setItem("selectedTabIcon", icon);
+        return true;
+      } catch {
+        showStatus("Could not save settings in this browser.");
+        return false;
+      }
+    }
 
     function showStatus(message) {
       status.textContent = message;
     }
 
-    function renderPresets() {
-      grid.replaceChildren();
-
-      presets.forEach(preset => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "preset";
-        button.dataset.id = preset.id;
-        button.setAttribute("aria-pressed", "false");
-
-        const logoBox = document.createElement("span");
-        logoBox.className = "logo-box";
-
-        const fallback = document.createElement("span");
-        fallback.className = "fallback";
-        fallback.textContent = preset.letter;
-
-        if (preset.icon) {
-          fallback.hidden = true;
-
-          const img = document.createElement("img");
-          img.alt = "";
-          img.loading = "eager";
-          img.decoding = "async";
-          img.referrerPolicy = "no-referrer";
-          img.src = preset.icon;
-
-          img.addEventListener("error", () => {
-            img.hidden = true;
-            fallback.hidden = false;
-          });
-
-          img.addEventListener("load", () => {
-            img.hidden = false;
-            fallback.hidden = true;
-          });
-
-          logoBox.appendChild(img);
-        }
-
-        logoBox.appendChild(fallback);
-
-        const name = document.createElement("span");
-        name.className = "preset-name";
-        name.textContent = preset.name;
-
-        button.append(logoBox, name);
-        button.addEventListener("click", () => selectPreset(preset.id));
-
-        grid.appendChild(button);
-      });
-
-      updateSelectedStyle();
+    function applySettingsToThisTab(title, icon) {
+      document.title = title || "VOID NETWORK V6";
+      document.getElementById("settingsFavicon").href = icon || "favicon.ico";
     }
 
-    function updateSelectedStyle() {
+    function updateSelected() {
+      const selected = readSetting("userCloak", "Default");
+
       document.querySelectorAll(".preset").forEach(button => {
-        const selected = button.dataset.id === selectedId;
-        button.classList.toggle("selected", selected);
-        button.setAttribute("aria-pressed", String(selected));
+        const active = button.dataset.id === selected;
+        button.classList.toggle("selected", active);
+        button.setAttribute("aria-pressed", String(active));
       });
     }
 
-    function fillCustomFields(title, icon) {
-      titleInput.value = title || "";
-      iconInput.value = icon || "";
+    function selectPreset(preset) {
+      if (!writeSettings(preset.id, preset.title, preset.icon)) return;
+
+      titleInput.value = preset.title;
+      iconInput.value = preset.icon;
+
+      applySettingsToThisTab(preset.title, preset.icon);
+      updateSelected();
+      showStatus(preset.name + " selected and saved. The hub will use these settings when opened or refreshed.");
     }
 
-    function selectPreset(id) {
-      const preset = presets.find(item => item.id === id);
-      if (!preset) return;
+    function createPreset(preset) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "preset";
+      button.dataset.id = preset.id;
+      button.setAttribute("aria-pressed", "false");
 
-      selectedId = preset.id;
+      const logoBox = document.createElement("span");
+      logoBox.className = "logo-box";
 
-      localStorage.setItem("userCloak", preset.id);
-      localStorage.setItem("customTabTitle", preset.title);
-      localStorage.setItem("selectedTabIcon", preset.icon);
+      const img = document.createElement("img");
+      img.alt = "";
+      img.loading = "eager";
+      img.referrerPolicy = "no-referrer";
 
-      fillCustomFields(preset.title, preset.icon);
-      updateSelectedStyle();
+      const fallback = document.createElement("span");
+      fallback.className = "fallback";
+      fallback.textContent = preset.letter;
+      fallback.hidden = Boolean(preset.icon);
 
-      showStatus(
-        preset.name + " saved. Open or refresh the hub to apply the tab settings."
-      );
+      if (preset.icon) {
+        img.src = preset.icon;
+        img.addEventListener("error", () => {
+          img.hidden = true;
+          fallback.hidden = false;
+        });
+        img.addEventListener("load", () => {
+          img.hidden = false;
+          fallback.hidden = true;
+        });
+        logoBox.appendChild(img);
+      }
+
+      logoBox.appendChild(fallback);
+
+      const name = document.createElement("span");
+      name.className = "preset-name";
+      name.textContent = preset.name;
+
+      button.append(logoBox, name);
+      button.addEventListener("click", () => selectPreset(preset));
+      grid.appendChild(button);
+    }
+
+    presets.forEach(createPreset);
+
+    function loadSavedSettings() {
+      const savedTitle = readSetting("customTabTitle", "");
+      const savedIcon = readSetting("selectedTabIcon", "");
+      const savedId = readSetting("userCloak", "Default");
+
+      titleInput.value = savedTitle;
+      iconInput.value = savedIcon;
+
+      applySettingsToThisTab(savedTitle, savedIcon);
+
+      // Unknown or custom IDs intentionally have no preset highlighted.
+      document.querySelectorAll(".preset").forEach(button => {
+        const active = button.dataset.id === savedId;
+        button.classList.toggle("selected", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
     }
 
     document.getElementById("saveCustom").addEventListener("click", () => {
@@ -442,9 +471,8 @@
       if (icon) {
         try {
           const url = new URL(icon);
-
-          if (url.protocol !== "https:" && url.protocol !== "http:") {
-            showStatus("The icon URL must start with http:// or https://.");
+          if (!["https:", "http:"].includes(url.protocol)) {
+            showStatus("Use an HTTP or HTTPS icon URL.");
             return;
           }
         } catch {
@@ -454,36 +482,18 @@
         }
       }
 
-      selectedId = "Custom";
-      localStorage.setItem("userCloak", "Custom");
-      localStorage.setItem("customTabTitle", title);
-      localStorage.setItem("selectedTabIcon", icon);
+      if (!writeSettings("Custom", title, icon)) return;
 
-      updateSelectedStyle();
-      showStatus("Custom tab settings saved. Return to the hub to apply them.");
+      applySettingsToThisTab(title, icon);
+      updateSelected();
+      showStatus("Custom tab settings saved. The hub will use them when opened or refreshed.");
     });
 
     document.getElementById("reset").addEventListener("click", () => {
-      selectPreset("Default");
+      const defaultPreset = presets.find(item => item.id === "Default");
+      selectPreset(defaultPreset);
     });
 
-    function loadSavedSettings() {
-      const savedTitle = localStorage.getItem("customTabTitle");
-      const savedIcon = localStorage.getItem("selectedTabIcon");
-
-      if (savedTitle !== null || savedIcon !== null) {
-        fillCustomFields(savedTitle, savedIcon);
-      } else {
-        fillCustomFields("", "");
-      }
-
-      const savedId = localStorage.getItem("userCloak") || "Default";
-      selectedId = savedId;
-
-      updateSelectedStyle();
-    }
-
-    renderPresets();
     loadSavedSettings();
   </script>
 </body>
