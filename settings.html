@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VOID NETWORK V6 | Settings</title>
+  <link id="settingsFavicon" rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
   <style>
     * { box-sizing: border-box; }
 
@@ -74,8 +76,14 @@
     }
 
     .preset {
+      min-width: 0;
       min-height: 125px;
       padding: 15px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
       color: #eaf4ff;
       background: #101b2c;
       border: 1px solid #263e5d;
@@ -98,9 +106,9 @@
     }
 
     .logo-box {
-      height: 55px;
       width: 55px;
-      margin: 0 auto 9px;
+      height: 55px;
+      flex: 0 0 55px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -113,14 +121,18 @@
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: contain;
       padding: 5px;
+      object-fit: contain;
     }
 
     .fallback {
-      display: none;
       color: #1674d1;
       font: bold 25px Arial, sans-serif;
+    }
+
+    .preset-name {
+      text-align: center;
+      overflow-wrap: anywhere;
     }
 
     label {
@@ -193,6 +205,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>VOID NETWORK V6</h1>
@@ -215,15 +228,29 @@
       </p>
 
       <label for="customTitle">Tab title</label>
-      <input id="customTitle" type="text" placeholder="Example: Google Classroom">
+      <input
+        id="customTitle"
+        type="text"
+        placeholder="Example: Google Classroom"
+        maxlength="100"
+      >
 
       <label for="customIcon">Icon image URL</label>
-      <input id="customIcon" type="url" placeholder="https://example.com/icon.png">
+      <input
+        id="customIcon"
+        type="url"
+        placeholder="https://example.com/icon.png"
+      >
 
       <div class="actions">
-        <button class="action" id="saveCustom">Save Custom Tab</button>
-        <button class="action secondary" id="reset">Reset Settings</button>
+        <button class="action" id="saveCustom" type="button">
+          Save Custom Tab
+        </button>
+        <button class="action secondary" id="reset" type="button">
+          Reset Settings
+        </button>
       </div>
+
       <div id="status" role="status" aria-live="polite"></div>
     </section>
 
@@ -231,85 +258,85 @@
   </main>
 
   <script>
-    /*
-      These use public image URLs. If an image fails to load,
-      the button displays a letter instead of a broken-image box.
-    */
+    // Keep these IDs, titles, and URLs synchronized with index.html.
     const presets = [
       {
         id: "Default",
         name: "Default",
-        title: "VOID NETWORK V6",
-        icon: "",
+        title: "Void Network V6",
+        icon: "favicon.ico",
         letter: "V"
       },
       {
         id: "Khan",
         name: "Khan Academy",
         title: "Khan Academy",
-        icon: "https://www.khanacademy.org/favicon.ico",
+        icon: "https://cdn.kastatic.org/images/favicon.ico",
         letter: "K"
       },
       {
         id: "Google",
         name: "Google",
         title: "Google",
-        icon: "https://www.google.com/favicon.ico",
+        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png",
         letter: "G"
       },
       {
         id: "YouTube",
         name: "YouTube",
         title: "YouTube",
-        icon: "https://www.youtube.com/favicon.ico",
-        letter: "▶"
+        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png",
+        letter: "Y"
       },
       {
         id: "Canvas",
         name: "Canvas",
-        title: "Canvas",
-        icon: "https://www.instructure.com/favicon.ico",
+        title: "Dashboard",
+        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico",
         letter: "C"
       },
       {
         id: "Docs",
         name: "Google Docs",
         title: "Google Docs",
-        icon: "https://docs.google.com/favicon.ico",
+        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico",
         letter: "D"
       },
       {
         id: "Desmos",
         name: "Desmos",
-        title: "Desmos",
+        title: "Desmos | Graphing Calculator",
         icon: "https://www.desmos.com/favicon.ico",
         letter: "D"
       },
       {
         id: "Drive",
         name: "Google Drive",
-        title: "Google Drive",
-        icon: "https://drive.google.com/favicon.ico",
+        title: "My Drive - Google Drive",
+        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png",
         letter: "D"
       },
       {
         id: "Google Classroom",
         name: "Google Classroom",
-        title: "Google Classroom",
-        icon: "https://classroom.google.com/favicon.ico",
+        title: "Home - Classroom",
+        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg",
         letter: "C"
       },
       {
         id: "XtraMath",
         name: "XtraMath",
         title: "XtraMath",
-        icon: "https://xtramath.org/favicon.ico",
+        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png",
         letter: "X"
       }
     ];
 
     const grid = document.getElementById("presetGrid");
     const status = document.getElementById("status");
+    const titleInput = document.getElementById("customTitle");
+    const iconInput = document.getElementById("customIcon");
+
     let selectedId = localStorage.getItem("userCloak") || "Default";
 
     function showStatus(message) {
@@ -332,23 +359,25 @@
         const fallback = document.createElement("span");
         fallback.className = "fallback";
         fallback.textContent = preset.letter;
-        fallback.style.display = preset.icon ? "none" : "block";
 
         if (preset.icon) {
+          fallback.hidden = true;
+
           const img = document.createElement("img");
-          img.alt = preset.name + " logo";
+          img.alt = "";
           img.loading = "eager";
+          img.decoding = "async";
           img.referrerPolicy = "no-referrer";
           img.src = preset.icon;
 
           img.addEventListener("error", () => {
-            img.style.display = "none";
-            fallback.style.display = "block";
+            img.hidden = true;
+            fallback.hidden = false;
           });
 
           img.addEventListener("load", () => {
-            img.style.display = "block";
-            fallback.style.display = "none";
+            img.hidden = false;
+            fallback.hidden = true;
           });
 
           logoBox.appendChild(img);
@@ -357,6 +386,7 @@
         logoBox.appendChild(fallback);
 
         const name = document.createElement("span");
+        name.className = "preset-name";
         name.textContent = preset.name;
 
         button.append(logoBox, name);
@@ -370,10 +400,15 @@
 
     function updateSelectedStyle() {
       document.querySelectorAll(".preset").forEach(button => {
-        const isSelected = button.dataset.id === selectedId;
-        button.classList.toggle("selected", isSelected);
-        button.setAttribute("aria-pressed", String(isSelected));
+        const selected = button.dataset.id === selectedId;
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
       });
+    }
+
+    function fillCustomFields(title, icon) {
+      titleInput.value = title || "";
+      iconInput.value = icon || "";
     }
 
     function selectPreset(id) {
@@ -386,31 +421,35 @@
       localStorage.setItem("customTabTitle", preset.title);
       localStorage.setItem("selectedTabIcon", preset.icon);
 
-      document.getElementById("customTitle").value = preset.title;
-      document.getElementById("customIcon").value = preset.icon;
-
+      fillCustomFields(preset.title, preset.icon);
       updateSelectedStyle();
-      showStatus(preset.name + " selected and saved. Return to the hub to apply it.");
+
+      showStatus(
+        preset.name + " saved. Open or refresh the hub to apply the tab settings."
+      );
     }
 
     document.getElementById("saveCustom").addEventListener("click", () => {
-      const title = document.getElementById("customTitle").value.trim();
-      const icon = document.getElementById("customIcon").value.trim();
+      const title = titleInput.value.trim();
+      const icon = iconInput.value.trim();
 
       if (!title) {
         showStatus("Please enter a tab title.");
+        titleInput.focus();
         return;
       }
 
       if (icon) {
         try {
           const url = new URL(icon);
+
           if (url.protocol !== "https:" && url.protocol !== "http:") {
-            showStatus("Use an HTTP or HTTPS image URL.");
+            showStatus("The icon URL must start with http:// or https://.");
             return;
           }
         } catch {
           showStatus("Please enter a valid icon image URL.");
+          iconInput.focus();
           return;
         }
       }
@@ -426,21 +465,20 @@
 
     document.getElementById("reset").addEventListener("click", () => {
       selectPreset("Default");
-      document.getElementById("customTitle").value = "";
-      document.getElementById("customIcon").value = "";
-      showStatus("Settings reset to Default.");
     });
 
     function loadSavedSettings() {
-      const savedTitle = localStorage.getItem("customTabTitle") || "";
-      const savedIcon = localStorage.getItem("selectedTabIcon") || "";
+      const savedTitle = localStorage.getItem("customTabTitle");
+      const savedIcon = localStorage.getItem("selectedTabIcon");
 
-      document.getElementById("customTitle").value = savedTitle;
-      document.getElementById("customIcon").value = savedIcon;
-
-      if (!presets.some(preset => preset.id === selectedId)) {
-        selectedId = "Default";
+      if (savedTitle !== null || savedIcon !== null) {
+        fillCustomFields(savedTitle, savedIcon);
+      } else {
+        fillCustomFields("", "");
       }
+
+      const savedId = localStorage.getItem("userCloak") || "Default";
+      selectedId = savedId;
 
       updateSelectedStyle();
     }
