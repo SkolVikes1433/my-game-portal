@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Void Network V6</title>
-<link id="favicon" rel="icon" href="favicon.ico">
+<title>VOID NETWORK V6 | Tab Settings</title>
+<link rel="icon" href="favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -29,20 +29,20 @@ header {
     border-bottom: 2px solid #168cff;
 }
 
-.logo, h2, .category-title {
+.logo, h2 {
     font-family: 'Black Ops One', cursive;
     color: #168cff;
 }
 
 .logo { margin: 0; font-size: 25px; }
 
-nav, .game-actions {
+nav {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.nav-button, .action-button {
+.nav-button {
     padding: 10px 14px;
     background: #0b1420;
     color: white;
@@ -50,90 +50,138 @@ nav, .game-actions {
     border-radius: 4px;
     text-decoration: none;
     cursor: pointer;
-    font-family: 'Rajdhani', sans-serif;
     font-size: 16px;
 }
 
-.nav-button:hover, .action-button:hover {
-    background: #168cff;
-    color: black;
+.nav-button:hover { background: #168cff; color: black; }
+
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 24px;
 }
 
-main { max-width: 1250px; margin: auto; padding: 24px; }
-.intro p, .note { color: #a1b0c3; }
+h2 { margin-top: 0; }
 
-#search {
-    width: 100%;
-    padding: 13px;
-    margin: 12px 0 20px;
-    color: white;
-    background: #0b111b;
-    border: 1px solid #243a53;
-    border-radius: 4px;
-    font-size: 16px;
+.description { color: #a1b0c3; }
+
+.panel {
+    padding: 20px;
+    margin-bottom: 22px;
+    background: #080d15;
+    border: 1px solid #1c2c40;
+    border-radius: 5px;
 }
 
-.game-grid {
+.preset-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
-    gap: 10px;
+    gap: 12px;
 }
 
-.game-card {
-    min-height: 55px;
+.preset {
+    min-height: 120px;
     padding: 12px 8px;
-    color: #eaf3ff;
     background: #0b111b;
+    color: #eaf3ff;
     border: 1px solid #1c2c40;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    font-family: 'Black Ops One', cursive;
-    font-size: 12px;
+    font: 700 16px 'Rajdhani', sans-serif;
     overflow-wrap: anywhere;
 }
 
-.game-card:hover {
+.preset:hover {
     background: #101d2e;
     border-color: #168cff;
 }
 
-#noResults { display: none; color: #a1b0c3; }
-#gameScreen { display: none; padding: 16px; }
+.preset.selected {
+    border: 2px solid #168cff;
+    background: #10213a;
+    box-shadow: 0 0 12px #168cff33;
+}
 
-.game-toolbar {
+.logo-container {
+    height: 48px;
+    width: 48px;
+    margin: 0 auto 10px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+}
+
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo-fallback {
+    display: none;
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #10213a;
+    border: 1px solid #168cff;
+    color: #55b2ff;
+    font: bold 24px Arial, sans-serif;
+}
+
+label {
+    display: block;
+    margin: 14px 0 6px;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    color: white;
+    background: #0b111b;
+    border: 1px solid #243a53;
+    border-radius: 4px;
+    font: 16px 'Rajdhani', sans-serif;
+}
+
+.actions {
+    display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 12px;
+    margin-top: 18px;
 }
 
-#gameTitle { margin: 0; font-size: 20px; }
-
-#gameFrame {
-    display: block;
-    width: 100%;
-    height: 75vh;
-    min-height: 400px;
-    background: black;
+.action-button {
+    padding: 10px 16px;
+    color: white;
+    background: #0b1420;
     border: 1px solid #168cff;
     border-radius: 4px;
+    cursor: pointer;
+    font: 700 16px 'Rajdhani', sans-serif;
 }
 
-footer {
-    padding: 24px;
-    margin-top: 30px;
-    text-align: center;
-    color: #66778c;
-    border-top: 1px solid #172536;
+.action-button:hover { background: #168cff; color: black; }
+
+#status {
+    min-height: 24px;
+    margin-top: 12px;
+    color: #70e6a0;
+}
+
+.back {
+    color: #55b2ff;
+    text-decoration: none;
+    font-size: 17px;
 }
 
 @media (max-width: 600px) {
     header { padding: 15px; }
     main { padding: 15px; }
-    .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #gameFrame { height: 65vh; min-height: 350px; }
+    .preset-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 </style>
 </head>
@@ -147,225 +195,233 @@ footer {
     </nav>
 </header>
 
-<main id="homeScreen">
-    <section class="intro">
-        <h2>GAME PORTAL</h2>
-        <p>Select a game below to play.</p>
+<main>
+    <section class="panel">
+        <h2>Tab Cloaker</h2>
+        <p class="description">Choose a tab title and icon.</p>
+        <div class="preset-grid" id="presetGrid"></div>
     </section>
 
-    <input id="search" type="search" placeholder="Search games..." aria-label="Search games">
+    <section class="panel">
+        <h2>Custom Tab</h2>
+        <p class="description">Set your own tab title and icon URL.</p>
 
-    <h3 class="category-title">ALL GAMES</h3>
-    <div class="game-grid" id="gameGrid"></div>
-    <p id="noResults">No games found. Try another search.</p>
+        <label for="customTitle">Tab title</label>
+        <input id="customTitle" type="text" placeholder="Enter tab title">
+
+        <label for="customIcon">Icon URL</label>
+        <input id="customIcon" type="url" placeholder="Enter an icon image URL">
+
+        <div class="actions">
+            <button class="action-button" id="saveCustom" type="button">Save Custom Tab</button>
+            <button class="action-button" id="reset" type="button">Reset Settings</button>
+        </div>
+
+        <div id="status" role="status" aria-live="polite"></div>
+    </section>
+
+    <a class="back" href="index.html">← Back to Hub</a>
 </main>
 
-<section id="gameScreen">
-    <div class="game-toolbar">
-        <h2 id="gameTitle">Game</h2>
-        <div class="game-actions">
-            <button class="action-button" id="backButton">← Back to Games</button>
-            <button class="action-button" id="fullscreenButton">Fullscreen</button>
-        </div>
-    </div>
-
-    <iframe id="gameFrame" src="about:blank" title="Game player"
-        allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
-
-    <p class="note">Some game websites block embedded play, so a few games may not load inside the portal.</p>
-</section>
-
-<footer>VOID NETWORK V6</footer>
-
 <script>
-/* TAB CLOAKER PRESETS */
-const tabPresets = {
-    "Default": {
+/* EXACT SAME PRESET IDS, TITLES, AND ICON URLS AS index.html */
+const presets = [
+    {
+        id: "Default",
+        name: "Default",
         title: "Void Network V6",
-        icon: "favicon.ico"
+        icon: "favicon.ico",
+        letter: "V"
     },
-    "Khan": {
+    {
+        id: "Khan",
+        name: "Khan Academy",
         title: "Khan Academy",
-        icon: "https://cdn.kastatic.org/images/favicon.ico"
+        icon: "https://cdn.kastatic.org/images/favicon.ico",
+        letter: "K"
     },
-    "Google": {
+    {
+        id: "Google",
+        name: "Google",
         title: "Google",
-        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
+        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png",
+        letter: "G"
     },
-    "YouTube": {
+    {
+        id: "YouTube",
+        name: "YouTube",
         title: "YouTube",
-        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
+        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png",
+        letter: "Y"
     },
-    "Canvas": {
+    {
+        id: "Canvas",
+        name: "Canvas",
         title: "Dashboard",
-        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
+        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico",
+        letter: "C"
     },
-    "Docs": {
+    {
+        id: "Docs",
+        name: "Google Docs",
         title: "Google Docs",
-        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico",
+        letter: "D"
     },
-    "Desmos": {
+    {
+        id: "Desmos",
+        name: "Desmos",
         title: "Desmos | Graphing Calculator",
-        icon: "https://www.desmos.com/favicon.ico"
+        icon: "https://www.desmos.com/favicon.ico",
+        letter: "D"
     },
-    "Drive": {
+    {
+        id: "Drive",
+        name: "Google Drive",
         title: "My Drive - Google Drive",
-        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
+        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png",
+        letter: "D"
     },
-    "Google Classroom": {
+    {
+        id: "Google Classroom",
+        name: "Google Classroom",
         title: "Home - Classroom",
-        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
+        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg",
+        letter: "C"
     },
-    "XtraMath": {
+    {
+        id: "XtraMath",
+        name: "XtraMath",
         title: "XtraMath",
-        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
+        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png",
+        letter: "X"
     }
-};
-
-function applyTabSettings() {
-    let selected = "Default";
-    let customTitle = "";
-    let savedIcon = "";
-
-    try {
-        selected = localStorage.getItem("userCloak") || "Default";
-        customTitle = localStorage.getItem("customTabTitle") || "";
-        savedIcon = localStorage.getItem("selectedTabIcon") || "";
-    } catch (error) {}
-
-    const preset = tabPresets[selected] || tabPresets.Default;
-
-    document.title = customTitle.trim() || preset.title;
-
-    let favicon = document.getElementById("favicon");
-
-    if (!favicon) {
-        favicon = document.createElement("link");
-        favicon.id = "favicon";
-        favicon.rel = "icon";
-        document.head.appendChild(favicon);
-    }
-
-    favicon.href = savedIcon || preset.icon;
-}
-
-/* GAME LIST */
-const games = [
-    ["Gaming Escape", "https://badpiggies.global.ssl.fastly.net/index.html"],
-    ["Super Mario 64", "https://arkshocer.github.io/sm64/"],
-    ["Stickman Hook", "https://stickman-pi.vercel.app/"],
-    ["Subway Surfers", "https://testingherokuapp.github.io/subwaysurfer/"],
-    ["Geo Dash", "https://mecanixcreations.github.io/GeometryDashLite-unity-web/"],
-    ["Paper IO 2", "https://gameunblocked-2025.github.io/projects/paperio2/index.html"],
-    ["Slow Roads", "https://hackingschoolwebsites.github.io/slowroads/"],
-    ["Time Shooter", "https://unlocktheworld.github.io/Time-Shooter/index.html"],
-    ["There Is No Game", "https://unlocktheworld.github.io/There-is-no-game/index.html"],
-    ["The Annoying Button", "https://unlocktheworld.github.io/bigredbutton/index.html"],
-    ["Super Mario Bros Deluxe", "https://gamebackup.github.io/emu_games/games/super_mario_bros_deluxe/"],
-    ["FNF", "https://gamebackup.github.io/standalone_games/fnf/"],
-    ["Portal 2D", "https://gamebackup.github.io/flash_games/games/portal2d/"],
-    ["Deal Or No Deal", "https://unlocktheworld.github.io/deal-or-no-deal/index.html"],
-    ["Tanuki Sunset", "https://gamebackup.github.io/standalone_games/tanukisunset/"],
-    ["Doge Miner 1", "https://unlocktheworld.github.io/DogeMiner/index.html"],
-    ["Doge Miner 2", "https://unlocktheworld.github.io/Dogeminer2/index.html"],
-    ["Retro Bowl", "https://gamebackup.github.io/standalone_games/retro%20bowl/"],
-    ["Drive Mad", "https://unlocktheworld.github.io/drive-mad/index.html"],
-    ["Mario Kart", "https://gamebackup.github.io/standalone_games/supermariokart/"],
-    ["Unfair Mario", "https://unlocktheworld.github.io/unfair-mario/index.html"],
-    ["Mario Party", "https://gamebackup.github.io/emu_games/games/mario_party/"],
-    ["MK49", "https://mk49.cyou/"],
-    ["Mario Kart 64", "https://gamebackup.github.io/emu_games/games/mariokart64/"],
-    ["Smash Karts", "https://unlocktheworld.github.io/smash-karts/index.html"],
-    ["Super Mario Bros", "https://gamebackup.github.io/emu_games/games/mario3/"],
-    ["Doodle Jump", "https://unlocktheworld.github.io/doodle-jump/index.html"],
-    ["Paper Mario", "https://gamebackup.github.io/emu_games/games/paper_mario/"],
-    ["Tiny Fishing", "https://majesticwafer.github.io/tiny-fishing/"],
-    ["Mario Kart Super Circuit", "https://gamebackup.github.io/emu_games/games/mario_kart_super_circuit/"],
-    ["Snow Rider 3D", "https://itsvijaysingh.github.io/Snow-Rider3D/"],
-    ["Hacker Typing", "https://tanksapka.github.io/hacker-typer/"],
-    ["1v1 LOL", "https://unlocktheworld.github.io/1v1lol/index.html"],
-    ["Chrome Dino", "https://map-l.github.io/play/chromedino/"],
-    ["Granny", "https://map-l.github.io/play/granny/"],
-    ["Escape Road", "https://escaperoadx.github.io/"],
-    ["Tomb of the Mask", "https://map-l.github.io/play/totm/"],
-    ["FNAF 1", "https://dorukyum.github.io/FNAF-Web/"],
-    ["FNAF 2", "https://sussygamedeveloper.github.io/FNAF2/"],
-    ["Cookie Clicker", "https://ozh.github.io/cookieclicker/"],
-    ["Cluster Rush", "https://ethanyo.freetls.fastly.net/misc/cluster-rush/index.html"],
-    ["Block Blast", "https://reunbozdo.github.io/"],
-    ["Flappy Bird", "https://thorium.rocks/games/flappy-bird/"],
-    ["Crazy Cattle", "https://crazycattle3d.github.io/"],
-    ["Snake Game", "https://mohdriyaan.github.io/snake-game/"],
-    ["Minecraft", "https://astraclientorg.github.io/play/wasm/18/"],
-    ["Temple Run", "https://unlocktheworld.github.io"],
-    ["Xbox Cloud Gaming", "https://www.xbox.com/en-us/play"],
-    ["Wheelie Life", "https://scratch.mit.edu/projects/1231016758/fullscreen/"],
-    ["We Become What We Behold", "https://webecomewhatwebehold.github.io/#google_vignette"],
-    ["Notflix 2.0", "https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit?slide=id.g3950afba0ed_0_0&pli=1#slide=id.g3950afba0ed_0_0"]
 ];
 
-function renderGames() {
-    const grid = document.getElementById("gameGrid");
+const grid = document.getElementById("presetGrid");
+const status = document.getElementById("status");
+const titleInput = document.getElementById("customTitle");
+const iconInput = document.getElementById("customIcon");
 
-    games.forEach(([name, url]) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "game-card";
-        button.textContent = name;
-        button.dataset.name = name.toLowerCase();
-        button.addEventListener("click", () => openGame(name, url));
-        grid.appendChild(button);
-    });
-}
-
-function filterGames() {
-    const query = document.getElementById("search").value.toLowerCase().trim();
-    let visibleCount = 0;
-
-    document.querySelectorAll(".game-card").forEach(button => {
-        const matches = button.dataset.name.includes(query);
-        button.style.display = matches ? "" : "none";
-        if (matches) visibleCount++;
-    });
-
-    document.getElementById("noResults").style.display =
-        visibleCount ? "none" : "block";
-}
-
-function openGame(name, url) {
-    document.getElementById("homeScreen").style.display = "none";
-    document.getElementById("gameScreen").style.display = "block";
-    document.getElementById("gameTitle").textContent = name;
-    document.getElementById("gameFrame").src = url;
-    window.scrollTo(0, 0);
-}
-
-function backToGames() {
-    document.getElementById("gameFrame").src = "about:blank";
-    document.getElementById("gameScreen").style.display = "none";
-    document.getElementById("homeScreen").style.display = "block";
-    window.scrollTo(0, 0);
-}
-
-function fullscreenGame() {
-    const frame = document.getElementById("gameFrame");
-
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    } else if (frame.requestFullscreen) {
-        frame.requestFullscreen();
+function readStorage(key, fallback = "") {
+    try {
+        return localStorage.getItem(key) ?? fallback;
+    } catch (error) {
+        return fallback;
     }
 }
 
-document.getElementById("search").addEventListener("input", filterGames);
-document.getElementById("backButton").addEventListener("click", backToGames);
-document.getElementById("fullscreenButton").addEventListener("click", fullscreenGame);
+function writeSettings(id, title, icon) {
+    try {
+        localStorage.setItem("userCloak", id);
+        localStorage.setItem("customTabTitle", title);
+        localStorage.setItem("selectedTabIcon", icon);
+        return true;
+    } catch (error) {
+        status.textContent = "Could not save settings in this browser.";
+        return false;
+    }
+}
 
-renderGames();
-applyTabSettings();
+function updateSelected() {
+    const selected = readStorage("userCloak", "Default");
 
-window.addEventListener("pageshow", applyTabSettings);
-window.addEventListener("storage", applyTabSettings);
+    document.querySelectorAll(".preset").forEach(button => {
+        const active = button.dataset.id === selected;
+        button.classList.toggle("selected", active);
+        button.setAttribute("aria-pressed", String(active));
+    });
+}
+
+function selectPreset(preset) {
+    if (!writeSettings(preset.id, preset.title, preset.icon)) return;
+
+    titleInput.value = preset.title;
+    iconInput.value = preset.icon;
+
+    updateSelected();
+    status.textContent = preset.name + " selected and saved.";
+}
+
+function createPreset(preset) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "preset";
+    button.dataset.id = preset.id;
+
+    const logoContainer = document.createElement("div");
+    logoContainer.className = "logo-container";
+
+    const img = document.createElement("img");
+    img.alt = preset.name + " logo";
+    img.loading = "eager";
+    img.referrerPolicy = "no-referrer";
+
+    const fallback = document.createElement("span");
+    fallback.className = "logo-fallback";
+    fallback.textContent = preset.letter;
+
+    function showFallback() {
+        img.style.display = "none";
+        fallback.style.display = "flex";
+    }
+
+    img.addEventListener("error", showFallback);
+    img.addEventListener("load", () => {
+        img.style.display = "block";
+        fallback.style.display = "none";
+    });
+
+    img.src = preset.icon;
+    logoContainer.append(img, fallback);
+
+    const label = document.createElement("span");
+    label.textContent = preset.name;
+
+    button.append(logoContainer, label);
+    button.addEventListener("click", () => selectPreset(preset));
+
+    grid.appendChild(button);
+}
+
+presets.forEach(createPreset);
+
+titleInput.value = readStorage("customTabTitle");
+iconInput.value = readStorage("selectedTabIcon");
+updateSelected();
+
+document.getElementById("saveCustom").addEventListener("click", () => {
+    const title = titleInput.value.trim();
+    const icon = iconInput.value.trim();
+
+    if (!title) {
+        status.textContent = "Enter a tab title first.";
+        return;
+    }
+
+    if (icon) {
+        try {
+            const url = new URL(icon);
+            if (!["https:", "http:"].includes(url.protocol)) {
+                status.textContent = "Use a valid HTTP or HTTPS icon URL.";
+                return;
+            }
+        } catch {
+            status.textContent = "That icon URL is not valid.";
+            return;
+        }
+    }
+
+    if (writeSettings("Custom", title, icon)) {
+        updateSelected();
+        status.textContent = "Custom tab settings saved.";
+    }
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+    const defaultPreset = presets.find(preset => preset.id === "Default");
+    selectPreset(defaultPreset);
+});
 </script>
 </body>
 </html>
