@@ -3,10 +3,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Settings | Void Network V6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tab Settings</title>
 <link id="favicon" rel="icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
@@ -14,272 +14,320 @@
 body {
     margin: 0;
     background: #05070b;
-    color: #edf5ff;
+    color: #eaf3ff;
     font-family: 'Rajdhani', sans-serif;
 }
 
 header {
-    padding: 18px 24px;
-    background: #080c13;
+    padding: 20px;
+    background: #080d15;
     border-bottom: 2px solid #168cff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    text-align: center;
 }
 
 .logo {
+    margin: 0;
     color: #168cff;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-family: 'Black Ops One', cursive;
+    font-size: 25px;
 }
 
-main { max-width: 800px; margin: 30px auto; padding: 0 18px 35px; }
-h1, h2 { color: #168cff; }
-.muted { color: #91a7bf; }
+main {
+    max-width: 850px;
+    margin: auto;
+    padding: 24px 18px;
+}
 
-.panel {
+h2 {
+    color: #168cff;
+    font-family: 'Black Ops One', cursive;
+}
+
+.description { color: #a1b0c3; }
+
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.app-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 125px;
+    padding: 15px 8px;
     background: #0b111b;
-    border: 1px solid #203650;
-    border-radius: 8px;
-    padding: 22px;
-    margin-bottom: 18px;
+    color: #eaf3ff;
+    border: 1px solid #263b53;
+    border-radius: 7px;
+    font-family: 'Black Ops One', cursive;
+    font-size: 12px;
+    cursor: pointer;
 }
 
-button, input { font: inherit; font-size: 17px; }
+.app-button:hover {
+    background: #101d2e;
+    border-color: #168cff;
+}
 
-button {
-    background: #101927;
+.app-button.selected {
+    background: #10243a;
+    border: 2px solid #168cff;
+    box-shadow: 0 0 12px #168cff33;
+}
+
+.app-button img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.bottom-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 12px 18px;
+    background: #0b1420;
     color: white;
     border: 1px solid #168cff;
-    border-radius: 5px;
-    padding: 11px 15px;
-    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
     font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-button:hover, button.selected {
+.action-button:hover {
     background: #168cff;
-    color: #05070b;
+    color: black;
 }
 
-.icon-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+#status {
+    min-height: 24px;
+    margin-top: 16px;
+    color: #72c2ff;
 }
 
-.icon-option {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-height: 62px;
-    text-align: left;
+footer {
+    padding: 20px;
+    color: #66778c;
+    text-align: center;
+    border-top: 1px solid #172536;
 }
 
-.icon-option img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    background: white;
-    border-radius: 5px;
-    padding: 3px;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    background: #05070b;
-    border: 1px solid #29415b;
-    color: white;
-    border-radius: 5px;
-    margin: 8px 0 12px;
-}
-
-.actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-#status { min-height: 24px; color: #69b7ff; }
-
-@media (max-width: 480px) {
-    header { padding: 14px; }
-    .panel { padding: 15px; }
-    .icon-grid { grid-template-columns: 1fr; }
+@media (max-width: 450px) {
+    .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 </style>
 </head>
 
 <body>
 <header>
-    <div class="logo">VOID NETWORK V6</div>
-    <a href="index.html"><button type="button">← BACK</button></a>
+    <h1 class="logo">VOID NETWORK V6</h1>
 </header>
 
 <main>
-    <h1>⚙ SETTINGS</h1>
-    <p class="muted">Customize your browser tab icon and title.</p>
+    <h2>⚙ SETTINGS</h2>
+    <h3>Tab Icon</h3>
+    <p class="description">Click an app to apply its browser-tab appearance.</p>
 
-    <section class="panel">
-        <h2>Tab Icon</h2>
-        <p class="muted">Choose an icon, then save your settings.</p>
-        <div class="icon-grid" id="iconGrid"></div>
-    </section>
+    <div class="app-grid" id="appGrid"></div>
 
-    <section class="panel">
-        <h2>Custom Tab Title</h2>
-        <label for="customTitle">Browser tab name</label>
-        <input id="customTitle" maxlength="80" placeholder="Example: Khan Academy">
-        <p class="muted">Leave blank to use the selected preset's title.</p>
-    </section>
+    <div class="bottom-buttons">
+        <button class="action-button" id="resetButton">DEFAULT</button>
+        <a class="action-button" href="index.html">← BACK</a>
+    </div>
 
-    <section class="panel">
-        <h2>Save Settings</h2>
-        <div class="actions">
-            <button type="button" id="saveButton">SAVE SETTINGS</button>
-            <button type="button" id="resetButton">RESET SETTINGS</button>
-        </div>
-        <p id="status" role="status" aria-live="polite"></p>
-    </section>
-
-    <a href="index.html"><button type="button">← BACK TO GAMES</button></a>
+    <p id="status" role="status" aria-live="polite"></p>
 </main>
 
+<footer>VOID NETWORK V6</footer>
+
 <script>
-const presets = {
-    "Default": {
+const presets = [
+    {
+        id: "Default",
+        label: "Default",
         title: "Void Network V6",
-        icon: "favicon.ico"
+        icon: "favicon.ico",
+        image: "https://www.google.com/s2/favicons?domain=github.com&sz=64"
     },
-    "Khan": {
+    {
+        id: "Khan",
+        label: "Khan Academy",
         title: "Khan Academy",
-        icon: "https://cdn.kastatic.org/images/favicon.ico"
+        icon: "https://cdn.kastatic.org/images/favicon.ico",
+        image: "https://cdn.kastatic.org/images/favicon.ico"
     },
-    "Google": {
+    {
+        id: "Google",
+        label: "Google",
         title: "Google",
-        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
+        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png",
+        image: "https://www.google.com/s2/favicons?domain=google.com&sz=64"
     },
-    "YouTube": {
+    {
+        id: "YouTube",
+        label: "YouTube",
         title: "YouTube",
-        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
+        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png",
+        image: "https://www.google.com/s2/favicons?domain=youtube.com&sz=64"
     },
-    "Canvas": {
+    {
+        id: "Canvas",
+        label: "Canvas",
         title: "Dashboard",
-        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
+        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico",
+        image: "https://www.google.com/s2/favicons?domain=instructure.com&sz=64"
     },
-    "Docs": {
+    {
+        id: "Docs",
+        label: "Google Docs",
         title: "Google Docs",
-        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico",
+        image: "https://www.google.com/s2/favicons?domain=docs.google.com&sz=64"
     },
-    "Desmos": {
+    {
+        id: "Desmos",
+        label: "Desmos",
         title: "Desmos | Graphing Calculator",
-        icon: "https://www.desmos.com/favicon.ico"
+        icon: "https://www.desmos.com/favicon.ico",
+        image: "https://www.google.com/s2/favicons?domain=desmos.com&sz=64"
     },
-    "Drive": {
+    {
+        id: "Drive",
+        label: "Google Drive",
         title: "My Drive - Google Drive",
-        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
+        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png",
+        image: "https://www.google.com/s2/favicons?domain=drive.google.com&sz=64"
     },
-    "Google Classroom": {
+    {
+        id: "Google Classroom",
+        label: "Google Classroom",
         title: "Home - Classroom",
-        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
+        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg",
+        image: "https://www.google.com/s2/favicons?domain=classroom.google.com&sz=64"
     },
-    "XtraMath": {
+    {
+        id: "XtraMath",
+        label: "XtraMath",
         title: "XtraMath",
-        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
+        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png",
+        image: "https://www.google.com/s2/favicons?domain=xtramath.org&sz=64"
     }
-};
+];
 
-let selectedKey = "Default";
-
-try {
-    selectedKey = localStorage.getItem("userCloak") || "Default";
-} catch (error) {}
-
-if (!presets[selectedKey]) selectedKey = "Default";
-
-const iconGrid = document.getElementById("iconGrid");
-const titleInput = document.getElementById("customTitle");
+const appGrid = document.getElementById("appGrid");
 const statusText = document.getElementById("status");
 
-function updateSelection() {
-    iconGrid.querySelectorAll("button").forEach(button => {
-        const selected = button.dataset.key === selectedKey;
-        button.classList.toggle("selected", selected);
-        button.setAttribute("aria-pressed", String(selected));
+function getSavedPreset() {
+    try {
+        return localStorage.getItem("userCloak") || "Default";
+    } catch (error) {
+        return "Default";
+    }
+}
+
+function applyFavicon(icon) {
+    let favicon = document.getElementById("favicon");
+
+    if (!favicon) {
+        favicon = document.createElement("link");
+        favicon.id = "favicon";
+        favicon.rel = "icon";
+        document.head.appendChild(favicon);
+    }
+
+    favicon.href = icon;
+}
+
+function updateButtonSelection() {
+    const selected = getSavedPreset();
+
+    document.querySelectorAll(".app-button").forEach(button => {
+        const active = button.dataset.preset === selected;
+        button.classList.toggle("selected", active);
+        button.setAttribute("aria-pressed", String(active));
     });
 }
 
-Object.entries(presets).forEach(([key, preset]) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "icon-option";
-    button.dataset.key = key;
-
-    const img = document.createElement("img");
-    img.src = preset.icon;
-    img.alt = "";
-
-    const label = document.createElement("span");
-    label.textContent = preset.title;
-
-    button.append(img, label);
-    button.addEventListener("click", () => {
-        selectedKey = key;
-        updateSelection();
-        statusText.textContent = preset.title + " selected. Click Save Settings.";
-    });
-
-    iconGrid.appendChild(button);
-});
-
-try {
-    titleInput.value = localStorage.getItem("customTabTitle") || "";
-} catch (error) {}
-
-document.getElementById("saveButton").addEventListener("click", () => {
-    const preset = presets[selectedKey];
-    const customTitle = titleInput.value.trim();
-
+function choosePreset(preset) {
     try {
-        localStorage.setItem("userCloak", selectedKey);
+        localStorage.setItem("userCloak", preset.id);
+        localStorage.setItem("customTabTitle", "");
         localStorage.setItem("selectedTabIcon", preset.icon);
 
-        if (customTitle) {
-            localStorage.setItem("customTabTitle", customTitle);
-        } else {
-            localStorage.removeItem("customTabTitle");
-        }
+        document.title = preset.title;
+        applyFavicon(preset.icon);
+        updateButtonSelection();
 
-        document.title = customTitle || preset.title;
-        document.getElementById("favicon").href = preset.icon;
-
-        statusText.textContent = "Settings saved! Return to the hub and refresh.";
+        statusText.textContent = preset.label + " selected!";
     } catch (error) {
-        statusText.textContent = "Could not save settings in this browser.";
+        statusText.textContent =
+            "Settings could not be saved. Check your browser settings.";
     }
-});
+}
+
+function renderButtons() {
+    presets.forEach(preset => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "app-button";
+        button.dataset.preset = preset.id;
+        button.setAttribute("aria-pressed", "false");
+
+        const img = document.createElement("img");
+        img.src = preset.image;
+        img.alt = "";
+        img.onerror = () => {
+            img.style.visibility = "hidden";
+        };
+
+        const label = document.createElement("span");
+        label.textContent = preset.label;
+
+        button.appendChild(img);
+        button.appendChild(label);
+        button.addEventListener("click", () => choosePreset(preset));
+
+        appGrid.appendChild(button);
+    });
+
+    updateButtonSelection();
+}
 
 document.getElementById("resetButton").addEventListener("click", () => {
-    selectedKey = "Default";
-    titleInput.value = "";
-
-    try {
-        localStorage.removeItem("userCloak");
-        localStorage.removeItem("selectedTabIcon");
-        localStorage.removeItem("customTabTitle");
-    } catch (error) {}
-
-    document.title = presets.Default.title;
-    document.getElementById("favicon").href = presets.Default.icon;
-    updateSelection();
-    statusText.textContent = "Settings reset.";
+    choosePreset(presets[0]);
 });
 
-updateSelection();
+renderButtons();
+
+/* Show the saved appearance on the settings tab too */
+const current = presets.find(item => item.id === getSavedPreset()) || presets[0];
+let savedCustomTitle = "";
+
+try {
+    savedCustomTitle = localStorage.getItem("customTabTitle") || "";
+} catch (error) {}
+
+document.title = savedCustomTitle.trim() || current.title;
+
+try {
+    applyFavicon(localStorage.getItem("selectedTabIcon") || current.icon);
+} catch (error) {
+    applyFavicon(current.icon);
+}
 </script>
 </body>
 </html>
