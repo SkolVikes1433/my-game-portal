@@ -143,7 +143,7 @@ footer {
     <h1 class="logo">VOID NETWORK V6</h1>
     <nav>
         <a class="nav-button" href="index.html">Games</a>
-        <a class="nav-button" href="settings.html">Tab Settings</a>
+        <a class="nav-button" href="settings.html">⚙ Tab Settings</a>
     </nav>
 </header>
 
@@ -172,13 +172,13 @@ footer {
     <iframe id="gameFrame" src="about:blank" title="Game player"
         allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
 
-    <p class="note">Some websites block embedded play, so not every game is guaranteed to load.</p>
+    <p class="note">Some game websites block embedded play, so a few games may not load inside the portal.</p>
 </section>
 
 <footer>VOID NETWORK V6</footer>
 
 <script>
-/* TAB SETTINGS — uses the same saved settings as settings.html */
+/* TAB CLOAKER PRESETS */
 const tabPresets = {
     "Default": {
         title: "Void Network V6",
@@ -234,6 +234,7 @@ function applyTabSettings() {
     } catch (error) {}
 
     const preset = tabPresets[selected] || tabPresets.Default;
+
     document.title = customTitle.trim() || preset.title;
 
     let favicon = document.getElementById("favicon");
@@ -248,7 +249,7 @@ function applyTabSettings() {
     favicon.href = savedIcon || preset.icon;
 }
 
-/* GAME LIST — SLOPE BALL AND BALDI'S BASICS REMOVED */
+/* GAME LIST */
 const games = [
     ["Gaming Escape", "https://badpiggies.global.ssl.fastly.net/index.html"],
     ["Super Mario 64", "https://arkshocer.github.io/sm64/"],
@@ -300,12 +301,9 @@ const games = [
     ["Xbox Cloud Gaming", "https://www.xbox.com/en-us/play"],
     ["Wheelie Life", "https://scratch.mit.edu/projects/1231016758/fullscreen/"],
     ["We Become What We Behold", "https://webecomewhatwebehold.github.io/#google_vignette"],
-
-    /* Corrected Notflix 2.0 link */
     ["Notflix 2.0", "https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit?slide=id.g3950afba0ed_0_0&pli=1#slide=id.g3950afba0ed_0_0"]
 ];
 
-/* CREATE GAME CARDS */
 function renderGames() {
     const grid = document.getElementById("gameGrid");
 
@@ -320,7 +318,6 @@ function renderGames() {
     });
 }
 
-/* SEARCH */
 function filterGames() {
     const query = document.getElementById("search").value.toLowerCase().trim();
     let visibleCount = 0;
@@ -335,7 +332,6 @@ function filterGames() {
         visibleCount ? "none" : "block";
 }
 
-/* OPEN GAME IN THE SAME TAB */
 function openGame(name, url) {
     document.getElementById("homeScreen").style.display = "none";
     document.getElementById("gameScreen").style.display = "block";
@@ -344,7 +340,6 @@ function openGame(name, url) {
     window.scrollTo(0, 0);
 }
 
-/* BACK BUTTON */
 function backToGames() {
     document.getElementById("gameFrame").src = "about:blank";
     document.getElementById("gameScreen").style.display = "none";
@@ -352,7 +347,6 @@ function backToGames() {
     window.scrollTo(0, 0);
 }
 
-/* FULLSCREEN */
 function fullscreenGame() {
     const frame = document.getElementById("gameFrame");
 
@@ -372,10 +366,6 @@ applyTabSettings();
 
 window.addEventListener("pageshow", applyTabSettings);
 window.addEventListener("storage", applyTabSettings);
-
-document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) applyTabSettings();
-});
 </script>
 </body>
 </html>
