@@ -1,15 +1,21 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tab Settings</title>
-<link id="favicon" rel="icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link id="favicon" rel="icon"
+      href="https://www.google.com/favicon.ico">
+
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap"
+      rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -19,108 +25,119 @@ body {
 }
 
 header {
-    padding: 20px;
+    padding: 22px 15px;
+    text-align: center;
     background: #080d15;
     border-bottom: 2px solid #168cff;
-    text-align: center;
 }
 
 .logo {
     margin: 0;
     color: #168cff;
     font-family: 'Black Ops One', cursive;
-    font-size: 25px;
+    font-size: 26px;
 }
 
 main {
-    max-width: 850px;
+    max-width: 900px;
     margin: auto;
-    padding: 24px 18px;
+    padding: 25px 18px;
+}
+
+h2, h3 {
+    font-family: 'Black Ops One', cursive;
 }
 
 h2 {
     color: #168cff;
-    font-family: 'Black Ops One', cursive;
 }
 
-.description { color: #a1b0c3; }
+.description {
+    color: #a1b0c3;
+    line-height: 1.6;
+}
 
 .app-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(135px, 1fr)
+    );
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 22px;
 }
 
 .app-button {
+    min-height: 125px;
+    padding: 14px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    min-height: 125px;
-    padding: 15px 8px;
+
     background: #0b111b;
     color: #eaf3ff;
     border: 1px solid #263b53;
     border-radius: 7px;
+
     font-family: 'Black Ops One', cursive;
-    font-size: 12px;
+    font-size: 11px;
     cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
+    overflow-wrap: anywhere;
 }
 
 .app-button:hover {
-    background: #101d2e;
+    background: #102039;
     border-color: #168cff;
 }
 
 .app-button.selected {
     background: #10243a;
     border: 2px solid #168cff;
-    box-shadow: 0 0 12px #168cff33;
+    box-shadow: 0 0 12px #168cff44;
 }
 
 .icon-box {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
+    background: white;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .app-button img {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     object-fit: contain;
 }
 
-.app-button img.wide-icon {
-    width: 44px;
-    height: 44px;
+.app-button .letter-icon {
+    font-family: Arial, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .bottom-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 24px;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 .action-button {
-    display: inline-block;
-    padding: 12px 18px;
+    padding: 12px 20px;
     background: #0b1420;
     color: white;
     border: 1px solid #168cff;
     border-radius: 4px;
+    text-decoration: none;
     font-family: 'Rajdhani', sans-serif;
     font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -131,18 +148,19 @@ h2 {
 
 #status {
     min-height: 24px;
-    margin-top: 16px;
+    margin-top: 18px;
     color: #72c2ff;
 }
 
 footer {
-    padding: 20px;
-    color: #66778c;
+    margin-top: 30px;
+    padding: 22px;
     text-align: center;
+    color: #66778c;
     border-top: 1px solid #172536;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 400px) {
     .app-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -151,6 +169,7 @@ footer {
 </head>
 
 <body>
+
 <header>
     <h1 class="logo">VOID NETWORK V6</h1>
 </header>
@@ -158,13 +177,22 @@ footer {
 <main>
     <h2>⚙ SETTINGS</h2>
     <h3>Tab Icon</h3>
-    <p class="description">Click an app to change your browser tab.</p>
+
+    <p class="description">
+        Choose an app to change the browser tab title and icon.
+        Your selection saves automatically.
+    </p>
 
     <div class="app-grid" id="appGrid"></div>
 
     <div class="bottom-buttons">
-        <button class="action-button" id="resetButton">DEFAULT</button>
-        <a class="action-button" href="index.html">← BACK</a>
+        <button class="action-button" id="resetButton">
+            DEFAULT
+        </button>
+
+        <a class="action-button" href="index.html">
+            ← BACK
+        </a>
     </div>
 
     <p id="status" role="status" aria-live="polite"></p>
@@ -173,219 +201,204 @@ footer {
 <footer>VOID NETWORK V6</footer>
 
 <script>
-/*
-  Each button has a separate icon image.
-  The saved IDs and storage keys match index.html.
-*/
-
 const presets = [
     {
         id: "Default",
         label: "Default",
         title: "Void Network V6",
-        icon: "favicon.ico",
-        image: "https://cdn.simpleicons.org/GitHub/181717",
-        background: "#ffffff"
+        icon: "https://www.google.com/favicon.ico",
+        image: "https://github.githubassets.com/favicons/favicon.png"
     },
     {
         id: "Khan",
         label: "Khan Academy",
         title: "Khan Academy",
         icon: "https://cdn.kastatic.org/images/favicon.ico",
-        image: "https://cdn.simpleicons.org/KhanAcademy/14BF96",
-        background: "#ffffff"
+        image: "https://cdn.kastatic.org/images/favicon.ico"
     },
     {
         id: "Google",
         label: "Google",
         title: "Google",
         icon: "https://www.google.com/favicon.ico",
-        image: "https://cdn.simpleicons.org/Google/4285F4",
-        background: "#ffffff"
+        image: "https://www.google.com/favicon.ico"
+    },
+    {
+        id: "Google Images",
+        label: "Google Images",
+        title: "Google Images",
+        icon: "https://www.google.com/favicon.ico",
+        image: "https://www.google.com/favicon.ico"
     },
     {
         id: "YouTube",
         label: "YouTube",
         title: "YouTube",
         icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png",
-        image: "https://cdn.simpleicons.org/YouTube/FF0033",
-        background: "#ffffff"
+        image: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
     },
     {
         id: "Canvas",
         label: "Canvas",
         title: "Dashboard",
         icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico",
-        image: "https://cdn.simpleicons.org/Canvas/E72429",
-        background: "#ffffff"
+        image: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
     },
     {
         id: "Docs",
         label: "Google Docs",
         title: "Google Docs",
         icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico",
-        image: "https://cdn.simpleicons.org/Googledocs/4285F4",
-        background: "#ffffff"
+        image: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
     },
     {
         id: "Desmos",
         label: "Desmos",
         title: "Desmos | Graphing Calculator",
         icon: "https://www.desmos.com/favicon.ico",
-        image: "https://cdn.simpleicons.org/Desmos/0066FF",
-        background: "#ffffff"
+        image: "https://www.desmos.com/favicon.ico"
     },
     {
         id: "Drive",
         label: "Google Drive",
         title: "My Drive - Google Drive",
         icon: "https://drive.google.com/favicon.ico",
-        image: "https://cdn.simpleicons.org/Googledrive/34A853",
-        background: "#ffffff"
+        image: "https://drive.google.com/favicon.ico"
     },
     {
         id: "Google Classroom",
         label: "Google Classroom",
         title: "Home - Classroom",
         icon: "https://ssl.gstatic.com/classroom/favicon.png",
-        image: "https://cdn.simpleicons.org/Googleclassroom/0F9D58",
-        background: "#ffffff"
+        image: "https://ssl.gstatic.com/classroom/favicon.png"
     },
     {
         id: "XtraMath",
         label: "XtraMath",
         title: "XtraMath",
         icon: "https://xtramath.org/favicon.ico",
-        image: "https://xtramath.org/favicon.ico",
-        background: "#ffffff",
-        wide: true
+        image: "https://xtramath.org/favicon.ico"
     }
 ];
 
-const appGrid = document.getElementById("appGrid");
-const statusText = document.getElementById("status");
+const grid = document.getElementById("appGrid");
+const status = document.getElementById("status");
 
-function readSavedPreset() {
+function readSetting(key, fallback) {
     try {
-        return localStorage.getItem("userCloak") || "Default";
+        return localStorage.getItem(key) || fallback;
     } catch (error) {
-        return "Default";
+        return fallback;
     }
 }
 
-function updateSelectedButton() {
-    const selected = readSavedPreset();
+function setFavicon(url) {
+    let link = document.getElementById("favicon");
+
+    if (!link) {
+        link = document.createElement("link");
+        link.id = "favicon";
+        link.rel = "icon";
+        document.head.appendChild(link);
+    }
+
+    link.href = url;
+}
+
+function updateSelection() {
+    const selected = readSetting("userCloak", "Default");
 
     document.querySelectorAll(".app-button").forEach(button => {
         const active = button.dataset.preset === selected;
+
         button.classList.toggle("selected", active);
         button.setAttribute("aria-pressed", String(active));
     });
 }
 
-function applyFavicon(url) {
-    let favicon = document.getElementById("favicon");
-
-    if (!favicon) {
-        favicon = document.createElement("link");
-        favicon.id = "favicon";
-        favicon.rel = "icon";
-        document.head.appendChild(favicon);
-    }
-
-    favicon.href = url;
-}
-
-function choosePreset(preset) {
+function selectPreset(preset) {
     try {
         localStorage.setItem("userCloak", preset.id);
         localStorage.setItem("customTabTitle", "");
         localStorage.setItem("selectedTabIcon", preset.icon);
 
         document.title = preset.title;
-        applyFavicon(preset.icon);
+        setFavicon(preset.icon);
+        updateSelection();
 
-        updateSelectedButton();
-        statusText.textContent = preset.label + " selected!";
+        status.textContent = preset.label + " selected!";
     } catch (error) {
-        statusText.textContent =
-            "Could not save settings. Please check browser storage.";
+        status.textContent =
+            "Could not save. Check your browser storage settings.";
     }
 }
 
-function createButton(preset) {
+function makeButton(preset) {
     const button = document.createElement("button");
+
     button.type = "button";
     button.className = "app-button";
     button.dataset.preset = preset.id;
     button.setAttribute("aria-pressed", "false");
 
-    const iconBox = document.createElement("span");
-    iconBox.className = "icon-box";
-    iconBox.style.background = preset.background;
+    const box = document.createElement("span");
+    box.className = "icon-box";
 
     const img = document.createElement("img");
     img.src = preset.image;
     img.alt = "";
     img.loading = "eager";
 
-    if (preset.wide) {
-        img.classList.add("wide-icon");
-    }
-
-    img.onerror = () => {
+    img.onerror = function () {
         /*
-          If an image fails, try that app's own favicon.
-          This prevents a wrong app logo from being substituted.
+          Do not substitute another app's logo.
+          Show a letter if the app icon cannot load.
         */
-        if (img.src !== preset.icon) {
-            img.src = preset.icon;
-        } else {
-            img.style.visibility = "hidden";
-        }
+        box.replaceChildren();
+
+        const letter = document.createElement("span");
+        letter.className = "letter-icon";
+        letter.textContent = preset.label.charAt(0);
+        letter.style.color = "#168cff";
+
+        box.appendChild(letter);
     };
+
+    box.appendChild(img);
 
     const label = document.createElement("span");
     label.textContent = preset.label;
 
-    iconBox.appendChild(img);
-    button.appendChild(iconBox);
+    button.appendChild(box);
     button.appendChild(label);
 
-    button.addEventListener("click", () => choosePreset(preset));
-
-    return button;
-}
-
-function renderButtons() {
-    presets.forEach(preset => {
-        appGrid.appendChild(createButton(preset));
+    button.addEventListener("click", () => {
+        selectPreset(preset);
     });
 
-    updateSelectedButton();
+    grid.appendChild(button);
 }
+
+presets.forEach(makeButton);
 
 document.getElementById("resetButton").addEventListener("click", () => {
-    choosePreset(presets[0]);
+    selectPreset(presets[0]);
 });
 
-renderButtons();
+const savedId = readSetting("userCloak", "Default");
+const savedPreset =
+    presets.find(preset => preset.id === savedId) || presets[0];
 
-/* Display the saved preset when the settings page opens. */
-const currentPreset =
-    presets.find(preset => preset.id === readSavedPreset()) || presets[0];
+document.title =
+    readSetting("customTabTitle", "").trim() || savedPreset.title;
 
-try {
-    const customTitle = localStorage.getItem("customTabTitle") || "";
-    document.title = customTitle.trim() || currentPreset.title;
+setFavicon(
+    readSetting("selectedTabIcon", savedPreset.icon)
+);
 
-    applyFavicon(
-        localStorage.getItem("selectedTabIcon") || currentPreset.icon
-    );
-} catch (error) {
-    document.title = currentPreset.title;
-    applyFavicon(currentPreset.icon);
-}
+updateSelection();
 </script>
+
 </body>
 </html>
+```
