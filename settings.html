@@ -2,303 +2,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tab Settings</title>
-  <link rel="icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tab Settings</title>
+<link id="favicon" rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #05070d;
-      color: #eaf4ff;
-      font-family: 'Rajdhani', sans-serif;
-      background-image:
-        radial-gradient(ellipse at top, #10264b 0%, transparent 55%),
-        linear-gradient(#05070d, #080b13);
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #05070b;
+  color: #eaf3ff;
+  font-family: 'Rajdhani', sans-serif;
+}
 
-    header {
-      padding: 25px 18px;
-      text-align: center;
-      background: #03060de8;
-      border-bottom: 1px solid #19385e;
-    }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 18px 22px;
+  background: #080d15;
+  border-bottom: 2px solid #168cff;
+}
 
-    h1 {
-      margin: 0;
-      color: #48a9ff;
-      font: 30px 'Black Ops One', cursive;
-      letter-spacing: 2px;
-      text-shadow: 0 0 18px #087cff66;
-    }
+h1 {
+  margin: 0;
+  color: #168cff;
+  font-family: 'Black Ops One', cursive;
+  font-size: 25px;
+}
 
-    header p {
-      margin: 8px 0 0;
-      color: #9bb5d6;
-      font-size: 17px;
-    }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
+nav a {
+  padding: 10px 14px;
+  background: #0b1420;
+  color: white;
+  border: 1px solid #168cff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+}
 
-    nav a {
-      padding: 9px 15px;
-      color: #eaf4ff;
-      background: #101b2c;
-      border: 1px solid #2b5682;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-    }
+nav a:hover {
+  background: #168cff;
+  color: black;
+}
 
-    nav a:hover {
-      background: #17406a;
-      border-color: #48a9ff;
-    }
+main {
+  width: min(850px, 94%);
+  margin: 35px auto;
+}
 
-    main {
-      width: min(900px, 94%);
-      margin: 30px auto;
-    }
+.panel {
+  padding: 24px;
+  background: #0b111b;
+  border: 1px solid #1c2c40;
+  border-radius: 8px;
+}
 
-    .panel {
-      padding: 22px;
-      background: #0a111e;
-      border: 1px solid #1b3555;
-      border-radius: 15px;
-      box-shadow: 0 10px 35px #0005;
-    }
+h2 {
+  margin-top: 0;
+  color: #168cff;
+  font-family: 'Black Ops One', cursive;
+}
 
-    h2 {
-      margin: 0 0 8px;
-      color: #55b2ff;
-      font-size: 25px;
-    }
+p {
+  color: #a1b0c3;
+  font-size: 17px;
+}
 
-    .description {
-      margin: 0 0 20px;
-      color: #9cb2ce;
-      font-size: 17px;
-    }
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
+.preset-button {
+  min-height: 52px;
+  padding: 12px;
+  background: #0b1420;
+  color: #eaf3ff;
+  border: 1px solid #294362;
+  border-radius: 5px;
+  font: 700 16px 'Rajdhani', sans-serif;
+  cursor: pointer;
+}
 
-    .preset {
-      min-height: 58px;
-      padding: 13px 10px;
-      color: #eaf4ff;
-      background: #101b2c;
-      border: 1px solid #263e5d;
-      border-radius: 10px;
-      cursor: pointer;
-      font: 700 18px 'Rajdhani', sans-serif;
-      transition: background .18s, border-color .18s;
-    }
+.preset-button:hover {
+  background: #101d2e;
+  border-color: #168cff;
+}
 
-    .preset:hover {
-      background: #142945;
-      border-color: #43a5ff;
-    }
+.preset-button.selected {
+  background: #102b49;
+  border: 2px solid #168cff;
+}
 
-    .preset.selected {
-      background: #102b49;
-      border: 2px solid #42a5ff;
-      box-shadow: 0 0 18px #168bff30;
-    }
+#status {
+  min-height: 25px;
+  margin-top: 20px;
+  color: #76e6a2;
+}
 
-    #status {
-      min-height: 25px;
-      margin-top: 18px;
-      color: #71e6a2;
-      font-size: 17px;
-    }
+footer {
+  padding: 24px;
+  text-align: center;
+  color: #66778c;
+}
 
-    footer {
-      padding: 20px;
-      color: #7189a8;
-      text-align: center;
-    }
+@media (max-width: 500px) {
+  header { padding: 15px; }
+  h1 { font-size: 21px; }
+  .panel { padding: 16px; }
 
-    @media (max-width: 430px) {
-      h1 { font-size: 24px; }
-      .panel { padding: 15px; }
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  .preset-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <h1>VOID NETWORK V6</h1>
-    <p>Tab Cloaker Settings</p>
-    <nav>
-      <a href="index.html">🎮 Games</a>
-      <a href="settings.html">⚙ Tab Settings</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="panel">
-      <h2>Choose a Tab Icon</h2>
-      <p class="description">
-        Click a button to change the browser tab title and icon.
-      </p>
+<header>
+  <h1>VOID NETWORK V6</h1>
+  <nav>
+    <a href="index.html">Games</a>
+    <a href="settings.html">Tab Settings</a>
+  </nav>
+</header>
 
-      <div class="grid" id="presetGrid"></div>
-      <div id="status" role="status" aria-live="polite"></div>
-    </section>
-  </main>
+<main>
+  <section class="panel">
+    <h2>TAB CLOAKER</h2>
+    <p>Choose a preset to change the browser tab title and favicon.</p>
 
-  <footer>VOID NETWORK V6</footer>
+    <div class="preset-grid" id="presetGrid"></div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+</main>
 
-  <script>
-    // IDs, titles, and URLs match the original hub presets.
-    const presets = [
-      {
-        id: "Default",
-        name: "Default",
-        title: "Void Network V6",
-        icon: "favicon.ico"
-      },
-      {
-        id: "Khan",
-        name: "Khan Academy",
-        title: "Khan Academy",
-        icon: "https://cdn.kastatic.org/images/favicon.ico"
-      },
-      {
-        id: "Google",
-        name: "Google",
-        title: "Google",
-        icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
-      },
-      {
-        id: "YouTube",
-        name: "YouTube",
-        title: "YouTube",
-        icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
-      },
-      {
-        id: "Canvas",
-        name: "Canvas",
-        title: "Dashboard",
-        icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
-      },
-      {
-        id: "Docs",
-        name: "Google Docs",
-        title: "Google Docs",
-        icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
-      },
-      {
-        id: "Desmos",
-        name: "Desmos",
-        title: "Desmos",
-        icon: "https://www.desmos.com/favicon.ico"
-      },
-      {
-        id: "Drive",
-        name: "Google Drive",
-        title: "Google Drive",
-        icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
-      },
-      {
-        id: "Google Classroom",
-        name: "Google Classroom",
-        title: "Google Classroom",
-        icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
-      },
-      {
-        id: "XtraMath",
-        name: "XtraMath",
-        title: "XtraMath",
-        icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
-      }
-    ];
+<footer>VOID NETWORK V6</footer>
 
-    const grid = document.getElementById("presetGrid");
-    const status = document.getElementById("status");
+<script>
+const presets = [
+  {
+    id: "Default",
+    name: "Default",
+    title: "Void Network V6",
+    icon: "favicon.ico"
+  },
+  {
+    id: "Khan",
+    name: "Khan Academy",
+    title: "Khan Academy",
+    icon: "https://cdn.kastatic.org/images/favicon.ico"
+  },
+  {
+    id: "Google",
+    name: "Google",
+    title: "Google",
+    icon: "https://cdn.jsdelivr.net/gh/gamebackup/gamebackup.github.io@main/images/googleiconv2.png"
+  },
+  {
+    id: "YouTube",
+    name: "YouTube",
+    title: "YouTube",
+    icon: "https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png"
+  },
+  {
+    id: "Canvas",
+    name: "Canvas",
+    title: "Dashboard",
+    icon: "https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico"
+  },
+  {
+    id: "Docs",
+    name: "Google Docs",
+    title: "Google Docs",
+    icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+  },
+  {
+    id: "Desmos",
+    name: "Desmos",
+    title: "Desmos | Graphing Calculator",
+    icon: "https://www.desmos.com/favicon.ico"
+  },
+  {
+    id: "Drive",
+    name: "Google Drive",
+    title: "My Drive - Google Drive",
+    icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
+  },
+  {
+    id: "Google Classroom",
+    name: "Google Classroom",
+    title: "Home - Classroom",
+    icon: "https://edu.google.com/images/svg/gsuite-icons/classroom.svg"
+  },
+  {
+    id: "XtraMath",
+    name: "XtraMath",
+    title: "XtraMath",
+    icon: "https://cdn.prod.website-files.com/62db0786ca1a5127000f16e6/68f393b6311816a40a8da3c6_XM-FAVICON.png"
+  }
+];
 
-    function getSaved(key, fallback = "") {
-      try {
-        return localStorage.getItem(key) ?? fallback;
-      } catch {
-        return fallback;
-      }
-    }
+const grid = document.getElementById("presetGrid");
+const status = document.getElementById("status");
 
-    function savePreset(preset) {
-      try {
-        localStorage.setItem("userCloak", preset.id);
-        localStorage.setItem("customTabTitle", preset.title);
-        localStorage.setItem("selectedTabIcon", preset.icon);
-      } catch {
-        status.textContent = "Could not save settings in this browser.";
-        return;
-      }
+function readStorage(key, fallback = "") {
+  try {
+    return localStorage.getItem(key) || fallback;
+  } catch {
+    return fallback;
+  }
+}
 
-      document.title = preset.title;
-      updateFavicon(preset.icon);
-      updateButtons();
+function setFavicon(url) {
+  document.getElementById("favicon").href = url || "favicon.ico";
+}
 
-      status.textContent =
-        preset.name + " selected. Open or refresh the Games page to apply it there.";
-    }
+function updateSelectedButton() {
+  const current = readStorage("userCloak", "Default");
 
-    function updateFavicon(url) {
-      let link = document.querySelector('link[rel~="icon"]');
+  document.querySelectorAll(".preset-button").forEach(button => {
+    const selected = button.dataset.id === current;
+    button.classList.toggle("selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+}
 
-      if (!link) {
-        link = document.createElement("link");
-        link.rel = "icon";
-        document.head.appendChild(link);
-      }
+function selectPreset(preset) {
+  try {
+    localStorage.setItem("userCloak", preset.id);
+    localStorage.setItem("customTabTitle", preset.title);
+    localStorage.setItem("selectedTabIcon", preset.icon);
+  } catch {
+    status.textContent = "Could not save settings in this browser.";
+    return;
+  }
 
-      link.href = url || "favicon.ico";
-    }
+  document.title = preset.title;
+  setFavicon(preset.icon);
+  updateSelectedButton();
+  status.textContent = preset.name + " selected! Your Games page will use this preset.";
+}
 
-    function updateButtons() {
-      const selected = getSaved("userCloak", "Default");
+presets.forEach(preset => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "preset-button";
+  button.dataset.id = preset.id;
+  button.textContent = preset.name;
+  button.addEventListener("click", () => selectPreset(preset));
+  grid.appendChild(button);
+});
 
-      document.querySelectorAll(".preset").forEach(button => {
-        const active = button.dataset.id === selected;
-        button.classList.toggle("selected", active);
-        button.setAttribute("aria-pressed", String(active));
-      });
-    }
+const savedTitle = readStorage("customTabTitle");
+const savedIcon = readStorage("selectedTabIcon");
 
-    presets.forEach(preset => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "preset";
-      button.dataset.id = preset.id;
-      button.textContent = preset.name;
-      button.addEventListener("click", () => savePreset(preset));
-      grid.appendChild(button);
-    });
+if (savedTitle) document.title = savedTitle;
+if (savedIcon) setFavicon(savedIcon);
 
-    // Show the currently saved preset when opening Settings.
-    const savedTitle = getSaved("customTabTitle", "");
-    const savedIcon = getSaved("selectedTabIcon", "");
+updateSelectedButton();
+</script>
 
-    if (savedTitle) document.title = savedTitle;
-    if (savedIcon) updateFavicon(savedIcon);
-
-    updateButtons();
-  </script>
 </body>
 </html>
