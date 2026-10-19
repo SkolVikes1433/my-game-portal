@@ -1,362 +1,133 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOID NETWORK V6 | Settings</title>
-
-  <link id="tab-icon" rel="icon" type="image/png" href="./void-logo.png">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 30px 18px;
-      background: #050914;
-      color: #eef5ff;
-      font-family: Arial, sans-serif;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .back {
-      display: inline-block;
-      margin-bottom: 24px;
-      color: #36baff;
-      text-decoration: none;
-    }
-
-    .panel {
-      padding: 28px;
-      background: #0b1425;
-      border: 1px solid #17365a;
-      border-radius: 18px;
-      box-shadow: 0 0 35px #007bff12;
-    }
-
-    .brand {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .brand img {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-      border-radius: 14px;
-    }
-
-    h1 {
-      margin: 12px 0 8px;
-      font-size: 28px;
-      letter-spacing: 2px;
-    }
-
-    h1 span {
-      color: #20aaff;
-    }
-
-    .subtitle {
-      color: #93a9c6;
-      font-size: 14px;
-    }
-
-    h2 {
-      margin-top: 28px;
-      font-size: 17px;
-    }
-
-    .presets {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    button {
-      border: 1px solid #203e61;
-      border-radius: 10px;
-      background: #101e33;
-      color: #eaf5ff;
-      padding: 13px 12px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      border-color: #21aaff;
-      background: #122b49;
-    }
-
-    button.active {
-      border-color: #20aaff;
-      box-shadow: 0 0 12px #009dff30;
-    }
-
-    .field {
-      margin-top: 16px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #b9cce4;
-      font-size: 13px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      color: white;
-      background: #060d19;
-      border: 1px solid #203e61;
-      border-radius: 9px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #20aaff;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .primary {
-      background: #087bd0;
-      border-color: #169fff;
-    }
-
-    .primary:hover {
-      background: #1095f0;
-    }
-
-    .status {
-      min-height: 20px;
-      margin-top: 14px;
-      color: #70d5ff;
-      font-size: 13px;
-    }
-
-    .note {
-      margin-top: 24px;
-      color: #8298b5;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 480px) {
-      .panel {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 23px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tab Settings</title>
+<link id="favicon" rel="icon" type="image/png" href="./void-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#05070d;color:#eaf4ff;font-family:Rajdhani,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:18px 24px;background:#03060d;border-bottom:1px solid #19385e}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:42px;height:42px;object-fit:contain}
+h1{margin:0;color:#48a9ff;font:24px 'Black Ops One',cursive}
+nav{display:flex;flex-wrap:wrap;gap:10px}
+nav a,.action{padding:10px 15px;color:#eaf4ff;background:#101b2c;border:1px solid #2b5682;border-radius:8px;text-decoration:none;font:700 16px Rajdhani,sans-serif;cursor:pointer}
+nav a:hover,.action:hover{background:#17406a;border-color:#48a9ff}
+main{width:min(950px,94%);margin:30px auto}
+.panel{padding:22px;margin-bottom:22px;background:#0a111e;border:1px solid #1b3555;border-radius:12px}
+h2{margin:0 0 8px;color:#55b2ff;font-size:25px}
+.description{margin:0 0 20px;color:#9cb2ce;font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
+.preset{min-height:120px;padding:14px 8px;color:#eaf4ff;background:#101b2c;border:1px solid #263e5d;border-radius:10px;cursor:pointer;font:700 17px Rajdhani,sans-serif}
+.preset:hover{background:#142945;border-color:#43a5ff}
+.preset.selected{border:2px solid #42a5ff;background:#102b49}
+.badge{display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin:0 auto 9px;border-radius:12px;background:#eaf4ff;color:#1266bd;font:bold 25px Arial,sans-serif}
+.preset[data-id="YouTube"] .badge{background:#f22;color:white}
+.preset[data-id="Default"] .badge{background:#0c1c30;color:#48a9ff;border:1px solid #48a9ff}
+#status{min-height:24px;margin-top:16px;color:#71e6a2;font-size:17px}
+.back{display:inline-block;color:#72bdff;font-size:18px;text-decoration:none}
+.back:hover{text-decoration:underline}
+@media(max-width:500px){header{padding:15px}h1{font-size:19px}.panel{padding:15px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
 </head>
-
 <body>
-  <main class="container">
-    <a class="back" href="./index.html">← Back to VOID NETWORK</a>
+<header>
+  <div class="brand">
+    <img src="./void-logo.png" alt="Void Network logo">
+    <h1>VOID NETWORK V6</h1>
+  </div>
+  <nav>
+    <a href="./index.html">🎮 Games</a>
+    <a href="./settings.html">⚙ Settings</a>
+  </nav>
+</header>
 
-    <section class="panel">
-      <header class="brand">
-        <img src="./void-logo.png"
-             alt="VOID NETWORK logo"
-             onerror="this.style.display='none'">
+<main>
+  <section class="panel">
+    <h2>Tab Cloaker</h2>
+    <p class="description">Choose a button to change the browser tab title and icon. Your choice is saved automatically.</p>
+    <div class="grid" id="presetGrid"></div>
+    <div id="status" role="status" aria-live="polite"></div>
+  </section>
+  <a class="back" href="./index.html">← Back to Hub</a>
+</main>
 
-        <h1>VOID <span>NETWORK</span></h1>
-        <div class="subtitle">V6 CONTROL PANEL · TAB SETTINGS</div>
-      </header>
+<script>
+const presets=[
+{id:"Default",name:"Default",title:"VOID NETWORK V6",icon:"./void-logo.png",letter:"V"},
+{id:"Khan",name:"Khan Academy",title:"Khan Academy",icon:"https://cdn.kastatic.org/images/favicon.ico",letter:"K"},
+{id:"Google",name:"Google",title:"Google",icon:"https://www.google.com/favicon.ico",letter:"G"},
+{id:"YouTube",name:"YouTube",title:"YouTube",icon:"https://www.youtube.com/s/desktop/2f549df7/img/favicon_32x32.png",letter:"▶"},
+{id:"Canvas",name:"Canvas",title:"Canvas",icon:"https://du11hjcvx0uqb.cloudfront.net/br/dist/images/favicon-e10d657a73.ico",letter:"C"},
+{id:"Docs",name:"Google Docs",title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico",letter:"D"},
+{id:"Desmos",name:"Desmos",title:"Desmos",icon:"https://www.desmos.com/favicon.ico",letter:"D"},
+{id:"Drive",name:"Google Drive",title:"Google Drive",icon:"https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png",letter:"D"},
+{id:"Google Classroom",name:"Google Classroom",title:"Google Classroom",icon:"https://classroom.google.com/favicon.ico",letter:"C"},
+{id:"XtraMath",name:"XtraMath",title:"XtraMath",icon:"https://xtramath.org/favicon.ico",letter:"X"}
+];
 
-      <h2>Tab Cloaker Presets</h2>
-      <div class="subtitle">
-        Choose a preset to change the browser tab title and icon.
-      </div>
+const grid=document.getElementById("presetGrid");
+const status=document.getElementById("status");
+let selectedId="Default";
 
-      <div class="presets" id="presets">
-        <button type="button" data-preset="default">🔷 Default</button>
-        <button type="button" data-preset="google">🔎 Google</button>
-        <button type="button" data-preset="classroom">📚 Classroom</button>
-        <button type="button" data-preset="drive">📁 Drive</button>
-        <button type="button" data-preset="docs">📄 Docs</button>
-        <button type="button" data-preset="wikipedia">🌐 Wikipedia</button>
-      </div>
+try{
+  selectedId=localStorage.getItem("userCloak")||"Default";
+}catch(error){}
 
-      <h2>Custom Tab</h2>
+function updateSelection(){
+  document.querySelectorAll(".preset").forEach(button=>{
+    const selected=button.dataset.id===selectedId;
+    button.classList.toggle("selected",selected);
+    button.setAttribute("aria-pressed",String(selected));
+  });
+}
 
-      <div class="field">
-        <label for="custom-title">Tab title</label>
-        <input id="custom-title"
-               type="text"
-               maxlength="100"
-               placeholder="Enter a tab title">
-      </div>
+function choosePreset(id){
+  const preset=presets.find(item=>item.id===id);
+  if(!preset)return;
 
-      <div class="field">
-        <label for="custom-icon">Icon image URL or file path</label>
-        <input id="custom-icon"
-               type="text"
-               placeholder="./void-logo.png">
-      </div>
+  selectedId=id;
 
-      <div class="actions">
-        <button type="button" class="primary" id="apply-custom">
-          Apply Custom Tab
-        </button>
+  try{
+    localStorage.setItem("userCloak",preset.id);
+    localStorage.setItem("customTabTitle",preset.title);
+    localStorage.setItem("selectedTabIcon",preset.icon);
+  }catch(error){
+    status.textContent="Your browser blocked saving settings. Check your browser storage permissions.";
+    return;
+  }
 
-        <button type="button" id="reset">
-          Reset to Default
-        </button>
-      </div>
+  document.title=preset.title;
+  document.getElementById("favicon").href=preset.icon;
+  updateSelection();
+  status.textContent=preset.name+" selected and saved. Your hub will use this tab setting.";
+}
 
-      <div class="status" id="status" role="status" aria-live="polite"></div>
+presets.forEach(preset=>{
+  const button=document.createElement("button");
+  button.type="button";
+  button.className="preset";
+  button.dataset.id=preset.id;
+  button.setAttribute("aria-pressed","false");
 
-      <p class="note">
-        Presets apply to this settings tab. Browser storage remembers your
-        selection on this device. To make the icon work, keep void-logo.png
-        in the same repository folder as this file. Changes made here do not
-        automatically change the tab of a different open page.
-      </p>
-    </section>
-  </main>
+  const badge=document.createElement("span");
+  badge.className="badge";
+  badge.textContent=preset.letter;
 
-  <script>
-    const presets = {
-      default: {
-        title: "VOID NETWORK V6",
-        icon: "./void-logo.png"
-      },
+  const name=document.createElement("span");
+  name.textContent=preset.name;
 
-      google: {
-        title: "Google",
-        icon: "https://www.google.com/favicon.ico"
-      },
+  button.append(badge,name);
+  button.addEventListener("click",()=>choosePreset(preset.id));
+  grid.appendChild(button);
+});
 
-      classroom: {
-        title: "Google Classroom",
-        icon: "https://www.gstatic.com/classroom/favicon.png"
-      },
-
-      drive: {
-        title: "Google Drive",
-        icon: "https://drive.google.com/favicon.ico"
-      },
-
-      docs: {
-        title: "Google Docs",
-        icon: "https://docs.google.com/favicon.ico"
-      },
-
-      wikipedia: {
-        title: "Wikipedia",
-        icon: "https://www.wikipedia.org/static/favicon/wikipedia.ico"
-      }
-    };
-
-    const iconLink = document.getElementById("tab-icon");
-    const status = document.getElementById("status");
-    const titleInput = document.getElementById("custom-title");
-    const iconInput = document.getElementById("custom-icon");
-    const presetButtons = document.querySelectorAll("[data-preset]");
-
-    function applyTab(title, icon, selectedPreset) {
-      document.title = title || "VOID NETWORK V6";
-      iconLink.href = icon || "./void-logo.png";
-
-      titleInput.value = document.title;
-      iconInput.value = iconLink.href.startsWith(location.origin)
-        ? "./" + iconLink.href.slice(location.origin.length + 1)
-        : iconLink.href;
-
-      presetButtons.forEach(button => {
-        button.classList.toggle(
-          "active",
-          button.dataset.preset === selectedPreset
-        );
-      });
-
-      try {
-        localStorage.setItem("void-tab-title", document.title);
-        localStorage.setItem("void-tab-icon", iconLink.getAttribute("href"));
-        localStorage.setItem("void-tab-preset", selectedPreset || "custom");
-      } catch (error) {
-        // The tab still changes if browser storage is unavailable.
-      }
-
-      status.textContent = "Tab settings applied.";
-    }
-
-    presetButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        const preset = presets[button.dataset.preset];
-        applyTab(preset.title, preset.icon, button.dataset.preset);
-      });
-    });
-
-    document.getElementById("apply-custom").addEventListener("click", () => {
-      const title = titleInput.value.trim();
-      const icon = iconInput.value.trim();
-
-      if (!title) {
-        status.textContent = "Please enter a tab title.";
-        return;
-      }
-
-      if (!icon) {
-        status.textContent = "Please enter an icon path or URL.";
-        return;
-      }
-
-      applyTab(title, icon, "custom");
-    });
-
-    document.getElementById("reset").addEventListener("click", () => {
-      applyTab(
-        presets.default.title,
-        presets.default.icon,
-        "default"
-      );
-    });
-
-    try {
-      const savedTitle = localStorage.getItem("void-tab-title");
-      const savedIcon = localStorage.getItem("void-tab-icon");
-      const savedPreset = localStorage.getItem("void-tab-preset");
-
-      if (savedTitle && savedIcon) {
-        applyTab(savedTitle, savedIcon, savedPreset);
-        status.textContent = "Your saved tab settings were restored.";
-      } else {
-        applyTab(
-          presets.default.title,
-          presets.default.icon,
-          "default"
-        );
-      }
-    } catch (error) {
-      applyTab(
-        presets.default.title,
-        presets.default.icon,
-        "default"
-      );
-    }
-  </script>
+if(!presets.some(item=>item.id===selectedId))selectedId="Default";
+updateSelection();
+</script>
 </body>
 </html>
-```
