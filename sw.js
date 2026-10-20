@@ -1,101 +1,96 @@
 
-"use strict";
-
-const VERSION = "void-network-v3";
-const SITE_CACHE = VERSION + "-site";
-
+const CACHE_NAME = "void-network-v7";
 const APP_FILES = [
   "./",
   "./index.html",
   "./settings.html",
-  "./void-logo.png",
-  "./khan-academy.jpg"
+  "./manifest.json",
+  "./void-logo.png"
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil((async () => {
-    const cache = await caches.open(SITE_CACHE);
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
 
-    // Save each available local file independently.
-    // A missing optional image won't block the other files.
-    await Promise.allSettled(
-      APP_FILES.map(async file => {
-        try {
-          const response = await fetch(file, {
-            cache: "reload"
-          });
+      await Promise.allSettled(
+        APP_FILES.map(async file => {
+          const response = await fetch(file, { cache: "reload" });
 
           if (response.ok && response.type === "basic") {
             await cache.put(file, response);
           }
-        } catch (error) {
-          // Ignore unavailable optional files.
-        }
-      })
-    );
+        })
+      );
 
-    await self.skipWaiting();
-  })());
+      await self.skipWaiting();
+    })()
+  );
 });
 
 self.addEventListener("activate", event => {
-  event.waitUntil((async () => {
-    const keys = await caches.keys();
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
 
-    await Promise.all(
-      keys
-        .filter(key =>
-          key.startsWith("void-network-") &&
-          key !== SITE_CACHE
-        )
-        .map(key => caches.delete(key))
-    );
+      await Promise.all(
+        keys
+          .filter(key =>
+            key.startsWith("void-network-") &&
+            key !== CACHE_NAME
+          )
+          .map(key => caches.delete(key))
+      );
 
-    await self.clients.claim();
-  })());
+      await self.clients.claim();
+    })()
+  );
 });
 
 self.addEventListener("fetch", event => {
   const request = event.request;
-  const url = new URL(request.url);
 
-  // Only handle this website's GET requests.
   if (
-    url.origin !== self.location.origin ||
     request.method !== "GET" ||
     request.headers.has("range")
   ) {
     return;
   }
 
-  // Don't cache requests that are not ordinary page or asset requests.
-  if (
-    request.destination === "document" ||
-    ["style", "script", "image", "font"].includes(request.destination)
-  ) {
-    event.respondWith((async () => {
-      const cache = await caches.open(SITE_CACHE);
-      const cached = await cache.match(request);
+  const requestURL = new URL(request.url);
 
-      // Prefer the network when available for normal navigation.
+  if (requestURL.origin !== self.location.origin) {
+    return;
+  }
+
+  event.respondWith(
+    (async () => {
+      const cached = await caches.match(request);
+
+      if (cached) {
+        return cached;
+      }
+
       try {
         const response = await fetch(request);
 
         if (response.ok && response.type === "basic") {
+          const cache = await caches.open(CACHE_NAME);
           await cache.put(request, response.clone());
         }
 
         return response;
-      } catch (error) {
-        if (cached) return cached;
-
+      } catch {
         if (request.mode === "navigate") {
-          const home = await cache.match("./index.html");
-          if (home) return home;
+          const home = await caches.match("./index.html");
+
+          if (home) {
+            return home;
+          }
         }
 
         return new Response(
-          "This file is not saved for offline use. Connect to the internet and open it first.",
+          "This page is not cached yet. Connect to the internet and reload.",
           {
             status: 503,
             headers: {
@@ -104,6 +99,6 @@ self.addEventListener("fetch", event => {
           }
         );
       }
-    })());
-  }
+    })()
+  );
 });
