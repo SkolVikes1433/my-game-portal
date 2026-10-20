@@ -1,6 +1,8 @@
 
+"use strict";
+
 const VERSION = "void-network-v3";
-const SITE_CACHE = `${VERSION}-site`;
+const SITE_CACHE = VERSION + "-site";
 
 const APP_FILES = [
   "./",
@@ -14,14 +16,20 @@ self.addEventListener("install", event => {
   event.waitUntil((async () => {
     const cache = await caches.open(SITE_CACHE);
 
+    // Save each available local file independently.
+    // A missing optional image won't block the other files.
     await Promise.allSettled(
-      APP_FILES.map(async path => {
-        const response = await fetch(path, {
-          cache: "reload"
-        });
+      APP_FILES.map(async file => {
+        try {
+          const response = await fetch(file, {
+            cache: "reload"
+          });
 
-        if (response.ok && response.type === "basic") {
-          await cache.put(path, response);
+          if (response.ok && response.type === "basic") {
+            await cache.put(file, response);
+          }
+        } catch (error) {
+          // Ignore unavailable optional files.
         }
       })
     );
@@ -38,8 +46,7 @@ self.addEventListener("activate", event => {
       keys
         .filter(key =>
           key.startsWith("void-network-") &&
-          key !== SITE_CACHE &&
-          key !== "void-network-offline-v1"
+          key !== SITE_CACHE
         )
         .map(key => caches.delete(key))
     );
@@ -52,6 +59,7 @@ self.addEventListener("fetch", event => {
   const request = event.request;
   const url = new URL(request.url);
 
+  // Only handle this website's GET requests.
   if (
     url.origin !== self.location.origin ||
     request.method !== "GET" ||
@@ -60,35 +68,42 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  event.respondWith((async () => {
-    const cached = await caches.match(request);
+  // Don't cache requests that are not ordinary page or asset requests.
+  if (
+    request.destination === "document" ||
+    ["style", "script", "image", "font"].includes(request.destination)
+  ) {
+    event.respondWith((async () => {
+      const cache = await caches.open(SITE_CACHE);
+      const cached = await cache.match(request);
 
-    if (cached) return cached;
+      // Prefer the network when available for normal navigation.
+      try {
+        const response = await fetch(request);
 
-    try {
-      const response = await fetch(request);
-
-      if (response.ok && response.type === "basic") {
-        const cache = await caches.open(SITE_CACHE);
-        await cache.put(request, response.clone());
-      }
-
-      return response;
-    } catch {
-      if (request.mode === "navigate") {
-        const home = await caches.match("./index.html");
-        if (home) return home;
-      }
-
-      return new Response(
-        "This page is not saved for offline use. Reconnect to the internet and open it first.",
-        {
-          status: 503,
-          headers: {
-            "Content-Type": "text/plain; charset=utf-8"
-          }
+        if (response.ok && response.type === "basic") {
+          await cache.put(request, response.clone());
         }
-      );
-    }
-  })());
+
+        return response;
+      } catch (error) {
+        if (cached) return cached;
+
+        if (request.mode === "navigate") {
+          const home = await cache.match("./index.html");
+          if (home) return home;
+        }
+
+        return new Response(
+          "This file is not saved for offline use. Connect to the internet and open it first.",
+          {
+            status: 503,
+            headers: {
+              "Content-Type": "text/plain; charset=utf-8"
+            }
+          }
+        );
+      }
+    })());
+  }
 });
