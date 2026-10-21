@@ -7,16 +7,10 @@
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "any",
+  "orientation": "landscape",
   "background_color": "#05070b",
   "theme_color": "#05070b",
   "icons": [
-    {
-      "src": "./void-logo.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
     {
       "src": "./void-logo.png",
       "sizes": "512x512",
