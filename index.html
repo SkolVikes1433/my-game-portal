@@ -2,484 +2,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#05070b">
-  <meta name="description" content="VOID NETWORK V6 game portal">
-  <title>VOID NETWORK V6</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05070b">
+<meta name="description" content="VOID NETWORK V6 game portal">
+<title>VOID NETWORK V6</title>
+<link rel="manifest" href="./manifest.json">
+<link id="tabIcon" rel="icon" href="./void-logo.png">
+<link rel="apple-touch-icon" href="./void-logo.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap">
 
-  <link id="tabIcon" rel="icon" href="./void-logo.png">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./void-logo.png">
-
-  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #05070b;
-      --panel: #080d15;
-      --panel2: #0b1420;
-      --blue: #168cff;
-      --text: #eaf3ff;
-      --muted: #a1b0c3;
-      --border: #1c2c40;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Rajdhani", sans-serif;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding: 16px 22px;
-      background: #080d15;
-      border-bottom: 2px solid var(--blue);
-    }
-
-    h1 {
-      margin: 0;
-      color: var(--blue);
-      font: 25px "Black Ops One", cursive;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    a, button {
-      font: inherit;
-    }
-
-    nav a, .action {
-      display: inline-block;
-      padding: 9px 13px;
-      color: var(--text);
-      background: var(--panel2);
-      border: 1px solid var(--blue);
-      border-radius: 4px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    nav a:hover, .action:hover {
-      background: var(--blue);
-      color: #05070b;
-    }
-
-    main {
-      width: min(1400px, 96%);
-      margin: 22px auto;
-    }
-
-    .intro {
-      padding: 18px;
-      margin-bottom: 18px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .intro h2 {
-      margin: 0 0 6px;
-      color: var(--blue);
-      font: 21px "Black Ops One", cursive;
-    }
-
-    .intro p, .muted {
-      color: var(--muted);
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 14px 0;
-    }
-
-    #search {
-      flex: 1 1 220px;
-      min-width: 0;
-      padding: 12px;
-      color: var(--text);
-      background: #0b111b;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font: 600 16px "Rajdhani", sans-serif;
-    }
-
-    #status {
-      min-height: 24px;
-      color: #76e3a0;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .game-panel, .player-panel {
-      min-width: 0;
-      padding: 14px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .game-panel h2, .player-panel h2 {
-      margin: 0 0 12px;
-      color: var(--blue);
-      font: 19px "Black Ops One", cursive;
-    }
-
-    #gameGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-      gap: 9px;
-    }
-
-    .game-card {
-      min-height: 62px;
-      padding: 10px;
-      color: var(--text);
-      text-align: left;
-      background: #0b111b;
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      cursor: pointer;
-      font: 700 16px "Rajdhani", sans-serif;
-      overflow-wrap: anywhere;
-    }
-
-    .game-card:hover, .game-card.selected {
-      background: #101d2e;
-      border-color: var(--blue);
-    }
-
-    .player-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    #gameFrame {
-      display: block;
-      width: 100%;
-      height: min(68vh, 650px);
-      min-height: 340px;
-      background: #000;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
-
-    #emptyState {
-      display: grid;
-      place-items: center;
-      min-height: 340px;
-      padding: 24px;
-      color: var(--muted);
-      text-align: center;
-      background: #030508;
-      border: 1px dashed var(--border);
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    footer {
-      padding: 24px;
-      margin-top: 28px;
-      color: #66778c;
-      text-align: center;
-      border-top: 1px solid #172536;
-    }
-
-    @media (max-width: 850px) {
-      .layout { grid-template-columns: 1fr; }
-      #gameFrame { height: 65vh; }
-    }
-
-    @media (max-width: 500px) {
-      header { padding: 14px; }
-      h1 { font-size: 21px; }
-      main { width: 94%; }
-      #gameGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      #gameFrame { min-height: 280px; }
-    }
-  </style>
+<style>
+:root {
+  --bg:#05070b;
+  --panel:#0b111b;
+  --blue:#168cff;
+  --text:#eaf3ff;
+  --muted:#9badc4;
+  --border:#183b60;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'Rajdhani',sans-serif
+}
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:14px;flex-wrap:wrap;padding:18px 5%;
+  background:#080d15;border-bottom:1px solid var(--border)
+}
+.brand{
+  color:var(--text);text-decoration:none;
+  font:24px 'Black Ops One',cursive
+}
+nav{display:flex;gap:10px;flex-wrap:wrap}
+nav a,.btn{
+  display:inline-block;padding:10px 15px;
+  border:1px solid var(--blue);border-radius:7px;
+  background:#0b1726;color:var(--text);
+  font:700 16px 'Rajdhani',sans-serif;
+  text-decoration:none;cursor:pointer
+}
+nav a:hover,.btn:hover,.game-card:hover{
+  background:#102b47;box-shadow:0 0 14px #168cff25
+}
+main{width:min(1200px,92%);margin:30px auto}
+.hero{
+  padding:30px 15px;margin-bottom:25px;text-align:center;
+  background:linear-gradient(145deg,#0c1726,#070b12);
+  border:1px solid var(--border);border-radius:12px
+}
+h1{margin:0;font:clamp(30px,6vw,48px) 'Black Ops One',cursive}
+h2{font:24px 'Black Ops One',cursive}
+.hero p{color:var(--muted);font-size:19px}
+#search{
+  width:100%;padding:14px 16px;border:1px solid var(--border);
+  border-radius:8px;background:#080d15;color:var(--text);
+  font:600 18px 'Rajdhani',sans-serif
+}
+#gameGrid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+  gap:13px
+}
+.game-card{
+  min-height:78px;padding:14px 10px;
+  border:1px solid var(--border);border-radius:8px;
+  background:var(--panel);color:var(--text);
+  font:700 18px 'Rajdhani',sans-serif;cursor:pointer;
+  overflow-wrap:anywhere
+}
+#noResults{display:none;color:var(--muted)}
+#gameScreen{display:none}
+.game-heading{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;flex-wrap:wrap
+}
+.game-heading h2{overflow-wrap:anywhere}
+#player{
+  overflow:hidden;border:1px solid var(--blue);
+  border-radius:9px;background:#000
+}
+#gameFrame{
+  display:block;width:100%;height:75vh;min-height:400px;
+  border:0;background:#000
+}
+#offlinePlay{
+  margin-top:35px;padding:24px;border:1px solid var(--border);
+  border-radius:10px;background:linear-gradient(145deg,#0b111b,#070b12)
+}
+#offlinePlay h2{color:var(--blue);font-size:20px;letter-spacing:2px}
+#offlinePlay p{color:var(--muted);font-size:16px}
+.offline-btn{
+  margin:6px 6px 6px 0;padding:12px 16px;
+  border:1px solid var(--blue);border-radius:7px;
+  background:#0b1726;color:var(--text);
+  font:700 16px 'Rajdhani',sans-serif;cursor:pointer
+}
+#cachePicker{
+  margin-top:16px;padding:14px;border:1px solid var(--border);
+  border-radius:8px
+}
+#cacheGameList label{display:block;padding:7px 0}
+#cacheGameList input{accent-color:var(--blue);margin-right:9px}
+[hidden]{display:none!important}
+#offlineStatus{overflow-wrap:anywhere}
+footer{
+  margin-top:40px;padding:22px;border-top:1px solid var(--border);
+  color:var(--muted);text-align:center;letter-spacing:2px
+}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:2px solid #8bcaff;outline-offset:3px
+}
+@media(max-width:600px){
+  header{padding:15px 4%}.brand{font-size:20px}
+  main{margin-top:22px}
+  #gameGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #gameFrame{height:65vh;min-height:350px}
+  #offlinePlay{padding:17px}
+  .offline-btn{width:100%;margin:6px 0}
+}
+</style>
 </head>
-
 <body>
-  <header>
+<header>
+  <a class="brand" href="./index.html">VOID NETWORK V6</a>
+  <nav>
+    <a href="./index.html">Games</a>
+    <a href="./settings.html">Tab Settings</a>
+  </nav>
+</header>
+
+<main>
+<section id="homeScreen">
+  <div class="hero">
     <h1>VOID NETWORK V6</h1>
-    <nav>
-      <a href="./index.html">Games</a>
-      <a href="./settings.html">Tab Settings</a>
-      <button class="action" id="installButton" hidden>Install App</button>
-    </nav>
-  </header>
+    <p>Your games, all in one place.</p>
+  </div>
 
-  <main>
-    <section class="intro">
-      <h2>VOID NETWORK V6</h2>
-      <p>Choose a game below to open it in the player.</p>
-      <div class="toolbar">
-        <input id="search" type="search" placeholder="Search games..." aria-label="Search games">
-        <button class="action" id="openExternal" disabled>Open Game in New Tab</button>
-        <button class="action" id="fullscreenButton" disabled>Fullscreen</button>
-      </div>
-      <p id="status" role="status" aria-live="polite"></p>
-    </section>
+  <input id="search" type="search" placeholder="Search games..."
+         aria-label="Search games">
+  <h2>ALL GAMES</h2>
+  <div id="gameGrid"></div>
+  <p id="noResults">No games found. Try another search.</p>
 
-    <div class="layout">
-      <section class="game-panel">
-        <h2>GAME LIBRARY (<span id="gameCount">49</span>)</h2>
-        <div id="gameGrid"></div>
-        <p id="noResults" class="muted" hidden>No games match your search.</p>
-      </section>
+  <section id="offlinePlay">
+    <h2>OFFLINE PLAY</h2>
+    <p>Choose up to five game URLs to try to save. Saving a game page does not guarantee the complete game will work offline.</p>
+    <button class="offline-btn" id="selectCacheButton">Select Games to Cache</button>
 
-      <section class="player-panel">
-        <div class="player-head">
-          <h2 id="playerTitle">GAME PLAYER</h2>
-        </div>
-        <div id="emptyState">
-          Select a game from the library to load it here.
-        </div>
-        <iframe
-          id="gameFrame"
-          title="Selected game"
-          allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write"
-          referrerpolicy="no-referrer"
-          allowfullscreen
-          hidden>
-        </iframe>
-        <p class="note">
-          Some external game sites block embedded players or require an internet connection.
-          If a game does not load here, try “Open Game in New Tab.”
-        </p>
-      </section>
+    <div id="cachePicker" hidden>
+      <p>Select up to five games:</p>
+      <div id="cacheGameList"></div>
+      <button class="offline-btn" id="startCacheButton">Cache Selected Games</button>
     </div>
-  </main>
 
-  <footer>VOID NETWORK V6</footer>
+    <button class="offline-btn" id="unloadCacheButton">Clear Saved Game Pages</button>
+    <p id="offlineStatus" role="status" aria-live="polite">Checking offline support...</p>
+  </section>
+</section>
 
-  <script>
-    "use strict";
+<section id="gameScreen">
+  <div class="game-heading">
+    <h2 id="gameTitle">Game</h2>
+    <div>
+      <button class="btn" id="backButton">← Back to Games</button>
+      <button class="btn" id="fullscreenButton">Fullscreen</button>
+    </div>
+  </div>
+  <div id="player">
+    <iframe id="gameFrame" src="about:blank" title="Game player"
+      allow="fullscreen; autoplay; gamepad"
+      allowfullscreen></iframe>
+  </div>
+  <p id="gameMessage" role="status"></p>
+</section>
+</main>
 
-    const games = [
-      { name: "Gaming Escape", url: "https://badpiggies.global.ssl.fastly.net/index.html" },
-      { name: "Super Mario 64", url: "https://arkshocer.github.io/sm64/" },
-      { name: "Stickman Hook", url: "https://stickman-pi.vercel.app/" },
-      { name: "Subway Surfers", url: "https://testingherokuapp.github.io/subwaysurfer/" },
-      { name: "Geo Dash", url: "https://mecanixcreations.github.io/GeometryDashLite-unity-web/" },
-      { name: "Paper IO 2", url: "https://gameunblocked-2025.github.io/projects/paperio2/index.html" },
-      { name: "Slow Roads", url: "https://hackingschoolwebsites.github.io/slowroads/" },
-      { name: "Time Shooter", url: "https://unlocktheworld.github.io/Time-Shooter/index.html" },
-      { name: "There Is No Game", url: "https://unlocktheworld.github.io/There-is-no-game/index.html" },
-      { name: "The Annoying Button", url: "https://unlocktheworld.github.io/bigredbutton/index.html" },
-      { name: "Super Mario Bros Deluxe", url: "https://gamebackup.github.io/emu_games/games/super_mario_bros_deluxe/" },
-      { name: "FNF", url: "https://gamebackup.github.io/standalone_games/fnf/" },
-      { name: "Portal 2D", url: "https://gamebackup.github.io/flash_games/games/portal2d/" },
-      { name: "Deal Or No Deal", url: "https://unlocktheworld.github.io/deal-or-no-deal/index.html" },
-      { name: "Tanuki Sunset", url: "https://gamebackup.github.io/standalone_games/tanukisunset/" },
-      { name: "Doge Miner 1", url: "https://unlocktheworld.github.io/DogeMiner/index.html" },
-      { name: "Doge Miner 2", url: "https://unlocktheworld.github.io/Dogeminer2/index.html" },
-      { name: "Retro Bowl", url: "https://gamebackup.github.io/standalone_games/retro%20bowl/" },
-      { name: "Drive Mad", url: "https://unlocktheworld.github.io/drive-mad/index.html" },
-      { name: "Mario Kart", url: "https://gamebackup.github.io/standalone_games/supermariokart/" },
-      { name: "Unfair Mario", url: "https://unlocktheworld.github.io/unfair-mario/index.html" },
-      { name: "Mario Party", url: "https://gamebackup.github.io/emu_games/games/mario-party/" },
-      { name: "Mario Kart 64", url: "https://gamebackup.github.io/emu_games/games/mario-kart-64/" },
-      { name: "Super Mario Bros", url: "https://gamebackup.github.io/emu_games/games/super-mario-bros/" },
-      { name: "Paper Mario", url: "https://gamebackup.github.io/emu_games/games/paper-mario/" },
-      { name: "Mario Kart Super Circuit", url: "https://gamebackup.github.io/emu_games/games/mario-kart-super-circuit/" },
-      { name: "MK49", url: "https://mk49.cyou/" },
-      { name: "Smash Karts", url: "https://unlocktheworld.github.io/smash-karts/index.html" },
-      { name: "Doodle Jump", url: "https://unlocktheworld.github.io/doodle-jump/index.html" },
-      { name: "1v1 LOL", url: "https://unlocktheworld.github.io/1v1-lol/index.html" },
-      { name: "Temple Run", url: "https://unlocktheworld.github.io/temple-run/index.html" },
-      { name: "Tiny Fishing", url: "https://majesticwafer.github.io/tiny-fishing/" },
-      { name: "Snow Rider 3D", url: "https://itsvijaysingh.github.io/Snow-Rider3D/" },
-      { name: "Hacker Typing", url: "https://tanksapka.github.io/hacker-typer/" },
-      { name: "Chrome Dino", url: "https://map-l.github.io/play/dino/" },
-      { name: "Granny", url: "https://map-l.github.io/play/granny/" },
-      { name: "Tomb of the Mask", url: "https://map-l.github.io/play/tomb-of-the-mask/" },
-      { name: "Escape Road", url: "https://escaperoadx.github.io/" },
-      { name: "FNAF 1", url: "https://dorukyum.github.io/FNAF-Web/" },
-      { name: "FNAF 2", url: "https://sussygamedeveloper.github.io/FNAF2/" },
-      { name: "Cluster Rush", url: "https://ethanyo.freetls.fastly.net/misc/cluster-rush/index.html" },
-      { name: "Block Blast", url: "https://reunbozdo.github.io/" },
-      { name: "Flappy Bird", url: "https://thorium.rocks/games/flappy-bird/" },
-      { name: "Crazy Cattle", url: "https://crazycattle3d.github.io/" },
-      { name: "Snake Game", url: "https://mohdriyaan.github.io/snake-game/" },
-      { name: "Minecraft", url: "https://astraclientorg.github.io/play/wasm/18/" },
-      { name: "Wheelie Life", url: "https://scratch.mit.edu/projects/1231016758/embed" },
-      { name: "We Become What We Behold", url: "https://webecomewhatwebehold.github.io/#google_vignette" },
-      { name: "Notflix 2.0", url: "https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit#slide=id.g3950afba0ed_0_0" }
-    ];
+<footer>VOID NETWORK V6</footer>
 
-    const grid = document.getElementById("gameGrid");
-    const search = document.getElementById("search");
-    const gameCount = document.getElementById("gameCount");
-    const noResults = document.getElementById("noResults");
-    const frame = document.getElementById("gameFrame");
-    const emptyState = document.getElementById("emptyState");
-    const playerTitle = document.getElementById("playerTitle");
-    const status = document.getElementById("status");
-    const openExternal = document.getElementById("openExternal");
-    const fullscreenButton = document.getElementById("fullscreenButton");
-    const installButton = document.getElementById("installButton");
+<script>
+"use strict";
 
-    let selectedGame = null;
-    let installPrompt = null;
+const PRESETS = {
+  "Default":{title:"VOID NETWORK V6",icon:"./void-logo.png"},
+  "Khan Academy":{title:"Khan Academy",icon:"https://cdn.kastatic.org/images/favicon.ico"},
+  "Google":{title:"Google",icon:"https://www.google.com/favicon.ico"},
+  "YouTube":{title:"YouTube",icon:"https://www.youtube.com/favicon.ico"},
+  "Google Docs":{title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"},
+  "Desmos":{title:"Desmos",icon:"https://www.desmos.com/favicon.ico"},
+  "Google Drive":{title:"Google Drive",icon:"https://drive.google.com/favicon.ico"},
+  "Google Classroom":{title:"Home - Classroom",icon:"https://ssl.gstatic.com/classroom/favicon.png"},
+  "XtraMath":{title:"XtraMath",icon:"https://xtramath.org/favicon.ico"}
+};
 
-    function readStorage(key, fallback = "") {
-      try {
-        return localStorage.getItem(key) || fallback;
-      } catch {
-        return fallback;
+function loadPreset(){
+  let name="Default";
+  try{name=localStorage.getItem("userCloak")||"Default"}catch(e){}
+  const preset=PRESETS[name]||PRESETS.Default;
+  document.title=preset.title;
+  document.getElementById("tabIcon").href=preset.icon;
+}
+loadPreset();
+window.addEventListener("pageshow",loadPreset);
+window.addEventListener("storage",e=>{
+  if(e.key==="userCloak"||e.key===null)loadPreset();
+});
+
+const games = [
+  ["Gaming Escape","https://badpiggies.global.ssl.fastly.net/index.html"],
+  ["Super Mario 64","https://arkshocer.github.io/sm64/"],
+  ["Stickman Hook","https://stickman-pi.vercel.app/"],
+  ["Subway Surfers","https://testingherokuapp.github.io/subwaysurfer/"],
+  ["Geo Dash","https://mecanixcreations.github.io/GeometryDashLite-unity-web/"],
+  ["Paper IO 2","https://gameunblocked-2025.github.io/projects/paperio2/index.html"],
+  ["Slow Roads","https://hackingschoolwebsites.github.io/slowroads/"],
+  ["Time Shooter","https://unlocktheworld.github.io/Time-Shooter/index.html"],
+  ["There Is No Game","https://unlocktheworld.github.io/There-is-no-game/index.html"],
+  ["The Annoying Button","https://unlocktheworld.github.io/bigredbutton/index.html"],
+  ["Super Mario Bros Deluxe","https://gamebackup.github.io/emu_games/games/super_mario_bros_deluxe/"],
+  ["FNF","https://gamebackup.github.io/standalone_games/fnf/"],
+  ["Portal 2D","https://gamebackup.github.io/flash_games/games/portal2d/"],
+  ["Deal Or No Deal","https://unlocktheworld.github.io/deal-or-no-deal/index.html"],
+  ["Tanuki Sunset","https://gamebackup.github.io/standalone_games/tanukisunset/"],
+  ["Doge Miner 1","https://unlocktheworld.github.io/DogeMiner/index.html"],
+  ["Doge Miner 2","https://unlocktheworld.github.io/Dogeminer2/index.html"],
+  ["Retro Bowl","https://gamebackup.github.io/standalone_games/retro%20bowl/"],
+  ["Drive Mad","https://unlocktheworld.github.io/drive-mad/index.html"],
+  ["Mario Kart","https://gamebackup.github.io/standalone_games/supermariokart/"],
+  ["Unfair Mario","https://unlocktheworld.github.io/unfair-mario/index.html"],
+  ["Mario Party","https://gamebackup.github.io/emu_games/games/mario-party/"],
+  ["Mario Kart 64","https://gamebackup.github.io/emu_games/games/mario-kart-64/"],
+  ["Super Mario Bros","https://gamebackup.github.io/emu_games/games/super-mario-bros/"],
+  ["Paper Mario","https://gamebackup.github.io/emu_games/games/paper-mario/"],
+  ["Mario Kart Super Circuit","https://gamebackup.github.io/emu_games/games/mario-kart-super-circuit/"],
+  ["MK49","https://mk49.cyou/"],
+  ["Smash Karts","https://unlocktheworld.github.io/smash-karts/index.html"],
+  ["Doodle Jump","https://unlocktheworld.github.io/doodle-jump/index.html"],
+  ["1v1 LOL","https://unlocktheworld.github.io/1v1-lol/index.html"],
+  ["Temple Run","https://unlocktheworld.github.io/temple-run/index.html"],
+  ["Tiny Fishing","https://majesticwafer.github.io/tiny-fishing/"],
+  ["Snow Rider 3D","https://itsvijaysingh.github.io/Snow-Rider3D/"],
+  ["Hacker Typing","https://tanksapka.github.io/hacker-typer/"],
+  ["Chrome Dino","https://map-l.github.io/play/dino/"],
+  ["Granny","https://map-l.github.io/play/granny/"],
+  ["Tomb of the Mask","https://map-l.github.io/play/tomb-of-the-mask/"],
+  ["Escape Road","https://escaperoadx.github.io/"],
+  ["FNAF 1","https://dorukyum.github.io/FNAF-Web/"],
+  ["FNAF 2","https://sussygamedeveloper.github.io/FNAF2/"],
+  ["Cluster Rush","https://ethanyo.freetls.fastly.net/misc/cluster-rush/index.html"],
+  ["Block Blast","https://reunbozdo.github.io/"],
+  ["Flappy Bird","https://thorium.rocks/games/flappy-bird/"],
+  ["Crazy Cattle","https://crazycattle3d.github.io/"],
+  ["Snake Game","https://mohdriyaan.github.io/snake-game/"],
+  ["Minecraft","https://astraclientorg.github.io/play/wasm/18/"],
+  ["Wheelie Life","https://scratch.mit.edu/projects/1231016758/embed"],
+  ["We Become What We Behold","https://webecomewhatwebehold.github.io/#google_vignette"],
+  ["Notflix 2.0","https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit#slide=id.g3950afba0ed_0_0"]
+];
+
+const grid=document.getElementById("gameGrid");
+const search=document.getElementById("search");
+const home=document.getElementById("homeScreen");
+const screen=document.getElementById("gameScreen");
+const frame=document.getElementById("gameFrame");
+const status=document.getElementById("offlineStatus");
+
+function renderGames(){
+  grid.replaceChildren();
+  const query=search.value.trim().toLowerCase();
+  const results=games.filter(g=>g[0].toLowerCase().includes(query));
+  results.forEach(([name,url])=>{
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="game-card";
+    button.textContent=name;
+    button.addEventListener("click",()=>{
+      document.getElementById("gameTitle").textContent=name;
+      document.getElementById("gameMessage").textContent=
+        "If this game does not load, its host may block embedded playback.";
+      frame.src=url;
+      home.style.display="none";
+      screen.style.display="block";
+      window.scrollTo(0,0);
+    });
+    grid.appendChild(button);
+  });
+  document.getElementById("noResults").style.display=results.length?"none":"block";
+}
+search.addEventListener("input",renderGames);
+
+document.getElementById("backButton").addEventListener("click",()=>{
+  frame.src="about:blank";
+  screen.style.display="none";
+  home.style.display="block";
+  window.scrollTo(0,0);
+});
+document.getElementById("fullscreenButton").addEventListener("click",async()=>{
+  try{
+    if(document.fullscreenElement)await document.exitFullscreen();
+    else await document.getElementById("player").requestFullscreen();
+  }catch(e){alert("Fullscreen is not available in this browser.");}
+});
+
+const cachePicker=document.getElementById("cachePicker");
+const cacheList=document.getElementById("cacheGameList");
+const GAME_CACHE="void-network-game-pages-v2";
+
+if("serviceWorker" in navigator && location.protocol==="https:"){
+  navigator.serviceWorker.register("./sw.js").then(()=>{
+    status.textContent="Offline site support is enabled. Game availability offline depends on each game's files and host.";
+  }).catch(()=>{
+    status.textContent="Could not register sw.js. Check that it is in the same folder as index.html.";
+  });
+}else{
+  status.textContent="Open this site through GitHub Pages HTTPS to use offline storage.";
+}
+
+document.getElementById("selectCacheButton").addEventListener("click",()=>{
+  cachePicker.hidden=!cachePicker.hidden;
+  if(cachePicker.hidden)return;
+  cacheList.replaceChildren();
+  games.forEach(([name],index)=>{
+    const label=document.createElement("label");
+    const checkbox=document.createElement("input");
+    checkbox.type="checkbox";
+    checkbox.value=String(index);
+    checkbox.addEventListener("change",()=>{
+      if(cacheList.querySelectorAll("input:checked").length>5){
+        checkbox.checked=false;
+        status.textContent="You can select up to five games.";
       }
-    }
-
-    function applySavedTabSettings() {
-      const savedTitle = readStorage("customTabTitle");
-      const savedIcon = readStorage("selectedTabIcon");
-
-      if (savedTitle) document.title = savedTitle;
-      if (savedIcon) document.getElementById("tabIcon").href = savedIcon;
-    }
-
-    function renderGames() {
-      const query = search.value.trim().toLowerCase();
-      const filtered = games.filter(game =>
-        game.name.toLowerCase().includes(query)
-      );
-
-      grid.replaceChildren();
-
-      filtered.forEach(game => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "game-card";
-        button.textContent = game.name;
-        button.setAttribute("aria-label", "Play " + game.name);
-
-        if (selectedGame && selectedGame.name === game.name) {
-          button.classList.add("selected");
-          button.setAttribute("aria-pressed", "true");
-        } else {
-          button.setAttribute("aria-pressed", "false");
-        }
-
-        button.addEventListener("click", () => selectGame(game));
-        grid.appendChild(button);
-      });
-
-      gameCount.textContent = String(filtered.length);
-      noResults.hidden = filtered.length !== 0;
-    }
-
-    function selectGame(game) {
-      selectedGame = game;
-      frame.src = game.url;
-      frame.hidden = false;
-      emptyState.hidden = true;
-      playerTitle.textContent = game.name;
-      openExternal.disabled = false;
-      fullscreenButton.disabled = false;
-      status.textContent = "Loading " + game.name + "...";
-      renderGames();
-    }
-
-    frame.addEventListener("load", () => {
-      if (selectedGame) {
-        status.textContent =
-          selectedGame.name + " was opened. If it stays blank, the site may block embedding.";
-      }
     });
+    label.append(checkbox,document.createTextNode(name));
+    cacheList.appendChild(label);
+  });
+});
 
-    search.addEventListener("input", renderGames);
+document.getElementById("startCacheButton").addEventListener("click",async()=>{
+  const selected=[...cacheList.querySelectorAll("input:checked")];
+  if(!selected.length){status.textContent="Select at least one game.";return;}
+  if(!("caches" in window)){status.textContent="Cache storage is unavailable.";return;}
 
-    openExternal.addEventListener("click", () => {
-      if (selectedGame) {
-        window.open(selectedGame.url, "_blank", "noopener,noreferrer");
-      }
-    });
+  status.textContent="Saving selected game pages...";
+  let saved=0,failed=0;
+  const cache=await caches.open(GAME_CACHE);
 
-    fullscreenButton.addEventListener("click", async () => {
-      try {
-        if (document.fullscreenElement) {
-          await document.exitFullscreen();
-        } else {
-          await frame.requestFullscreen();
-        }
-      } catch {
-        status.textContent = "Fullscreen is not supported for this game in this browser.";
-      }
-    });
+  for(const checkbox of selected){
+    const [,url]=games[Number(checkbox.value)];
+    try{
+      const response=await fetch(url,{mode:"cors"});
+      if(!response.ok||response.type==="opaque")throw new Error("Not cacheable");
+      await cache.put(url,response.clone());
+      saved++;
+    }catch(e){failed++;}
+  }
 
-    window.addEventListener("beforeinstallprompt", event => {
-      event.preventDefault();
-      installPrompt = event;
-      installButton.hidden = false;
-    });
+  status.textContent=`Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.`;
+});
 
-    installButton.addEventListener("click", async () => {
-      if (!installPrompt) {
-        status.textContent =
-          "If installation is available, use your browser menu and choose Install app or Add to Home screen.";
-        return;
-      }
+document.getElementById("unloadCacheButton").addEventListener("click",async()=>{
+  try{
+    await caches.delete(GAME_CACHE);
+    status.textContent="Saved game-page cache cleared.";
+  }catch(e){status.textContent="Could not clear saved pages.";}
+});
 
-      installPrompt.prompt();
-      await installPrompt.userChoice;
-      installPrompt = null;
-      installButton.hidden = true;
-    });
-
-    window.addEventListener("appinstalled", () => {
-      installButton.hidden = true;
-      status.textContent = "VOID NETWORK V6 has been installed.";
-    });
-
-    applySavedTabSettings();
-    renderGames();
-
-    if ("serviceWorker" in navigator && location.protocol === "https:") {
-      window.addEventListener("load", async () => {
-        try {
-          await navigator.serviceWorker.register("./sw.js");
-          status.textContent = "Website ready. The main page can be cached for offline visits.";
-        } catch (error) {
-          status.textContent = "Offline support could not start. Check the sw.js file and site path.";
-          console.error("Service worker registration failed:", error);
-        }
-      });
-    } else if (location.protocol !== "https:" && location.hostname !== "localhost") {
-      status.textContent = "Install and offline support require HTTPS. GitHub Pages provides HTTPS.";
-    }
-  </script>
+renderGames();
+</script>
 </body>
 </html>
