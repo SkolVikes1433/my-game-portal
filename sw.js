@@ -1,9 +1,7 @@
 
 "use strict";
 
-const VERSION = "void-network-v3";
-const SITE_CACHE = VERSION + "-site";
-
+const CACHE_NAME = "void-network-v3";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -12,78 +10,139 @@ const APP_FILES = [
   "./void-logo.png"
 ];
 
+// Install the new service worker and activate it immediately.
 self.addEventListener("install", event => {
-  event.waitUntil((async () => {
-    const cache = await caches.open(SITE_CACHE);
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
 
-    for (const file of APP_FILES) {
-      try {
-        const response = await fetch(file, { cache: "reload" });
-        if (response.ok && response.type === "basic") {
-          await cache.put(file, response);
-        }
-      } catch (error) {
-        // Continue if an optional file is unavailable.
-      }
-    }
+      // Cache files individually so one missing file
+      // does not prevent the entire worker from installing.
+      await Promise.allSettled(
+        APP_FILES.map(async file => {
+          const response = await fetch(file, {
+            cache: "reload"
+          });
 
-    await self.skipWaiting();
-  })());
+          if (response.ok) {
+            await cache.put(file, response);
+          }
+        })
+      );
+
+      await self.skipWaiting();
+    })()
+  );
 });
 
+// Take control of open site tabs.
 self.addEventListener("activate", event => {
-  event.waitUntil((async () => {
-    const keys = await caches.keys();
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
 
-    await Promise.all(
-      keys
-        .filter(key =>
-          key.startsWith("void-network-") &&
-          key !== SITE_CACHE &&
-          key !== "void-network-game-pages-v2"
-        )
-        .map(key => caches.delete(key))
-    );
+      // Remove old versions of this site's app cache.
+      await Promise.all(
+        keys
+          .filter(key =>
+            key.startsWith("void-network-v") &&
+            key !== CACHE_NAME
+          )
+          .map(key => caches.delete(key))
+      );
 
-    await self.clients.claim();
-  })());
+      await self.clients.claim();
+    })()
+  );
 });
 
 self.addEventListener("fetch", event => {
   const request = event.request;
+
+  // Only handle requests for this website.
   const url = new URL(request.url);
 
-  if (
-    url.origin !== self.location.origin ||
-    request.method !== "GET" ||
-    request.headers.has("range")
-  ) return;
+  if (url.origin !== self.location.origin) {
+    return;
+  }
 
-  event.respondWith((async () => {
-    const cached = await caches.match(request);
+  if (request.method !== "GET") {
+    return;
+  }
 
-    if (cached) return cached;
+  // Always check the network first for page navigation.
+  // This prevents the old home page from being served
+  // when the internet is available.
+  if (request.mode === "navigate") {
+    event.respondWith(
+      (async () => {
+        try {
+          const response = await fetch(request, {
+            cache: "no-cache"
+          });
 
-    try {
-      const response = await fetch(request);
+          if (response.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put("./index.html", response.clone());
+          }
 
-      if (response.ok && response.type === "basic") {
-        const copy = response.clone();
-        const cache = await caches.open(SITE_CACHE);
-        await cache.put(request, copy);
-      }
+          return response;
+        } catch (error) {
+          const cachedPage = await caches.match(request);
 
-      return response;
-    } catch (error) {
-      if (request.mode === "navigate") {
-        const home = await caches.match("./index.html");
-        if (home) return home;
-      }
+          if (cachedPage) {
+            return cachedPage;
+          }
 
-      return new Response("This page is not saved for offline use.", {
-        status: 503,
-        headers: { "Content-Type": "text/plain; charset=utf-8" }
+          const cachedHome = await caches.match("./index.html");
+
+          if (cachedHome) {
+            return cachedHome;
+          }
+
+          return new Response(
+            "You are offline. Reconnect to load VOID NETWORK V6.",
+            {
+              status: 503,
+              headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+              }
+            }
+          );
+        }
+      })()
+    );
+
+    return;
+  }
+
+  // For other local files, prefer the cached copy but
+  // refresh it from the network when possible.
+  event.respondWith(
+    (async () => {
+      const cached = await caches.match(request);
+
+      const networkRequest = fetch(request).then(async response => {
+        if (response.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(request, response.clone());
+        }
+
+        return response;
       });
-    }
-  })());
+
+      if (cached) {
+        event.waitUntil(networkRequest.catch(() => {}));
+        return cached;
+      }
+
+      try {
+        return await networkRequest;
+      } catch (error) {
+        return new Response("File unavailable offline.", {
+          status: 503
+        });
+      }
+    })()
+  );
 });
