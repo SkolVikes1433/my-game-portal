@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#05070b">
 <meta name="description" content="VOID NETWORK V6 game portal">
 <title>VOID NETWORK V6</title>
+
 <link rel="manifest" href="./manifest.json">
 <link id="tabIcon" rel="icon" href="./void-logo.png">
 <link rel="apple-touch-icon" href="./void-logo.png">
@@ -14,281 +15,191 @@
 
 <style>
 :root {
-  --bg:#05070b;
-  --panel:#0b111b;
-  --blue:#168cff;
-  --text:#eaf3ff;
-  --muted:#9badc4;
-  --border:#183b60;
+  --bg: #05070b;
+  --panel: #0b111b;
+  --blue: #168cff;
+  --text: #eaf3ff;
+  --muted: #9badc4;
+  --border: #183b60;
 }
-
-* { box-sizing:border-box; }
-
+* { box-sizing: border-box; }
 body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Rajdhani',sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
 }
-
 header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:14px;
-  flex-wrap:wrap;
-  padding:18px 5%;
-  background:#080d15;
-  border-bottom:1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 18px 5%;
+  background: #080d15;
+  border-bottom: 1px solid var(--border);
 }
-
 .brand {
-  color:var(--text);
-  text-decoration:none;
-  font:24px 'Black Ops One',cursive;
+  color: var(--text);
+  text-decoration: none;
+  font: 24px 'Black Ops One', cursive;
 }
-
-nav {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+nav { display: flex; gap: 10px; flex-wrap: wrap; }
+nav a, .btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border: 1px solid var(--blue);
+  border-radius: 7px;
+  background: #0b1726;
+  color: var(--text);
+  font: 700 16px 'Rajdhani', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
 }
-
-nav a,.btn {
-  display:inline-block;
-  padding:10px 15px;
-  border:1px solid var(--blue);
-  border-radius:7px;
-  background:#0b1726;
-  color:var(--text);
-  font:700 16px 'Rajdhani',sans-serif;
-  text-decoration:none;
-  cursor:pointer;
+nav a:hover, .btn:hover, .game-card:hover {
+  background: #102b47;
+  box-shadow: 0 0 14px #168cff25;
 }
-
-nav a:hover,.btn:hover,.game-card:hover {
-  background:#102b47;
-  box-shadow:0 0 14px #168cff25;
-}
-
-main {
-  width:min(1200px,92%);
-  margin:30px auto;
-}
-
+main { width: min(1200px, 92%); margin: 30px auto; }
 .hero {
-  padding:30px 15px;
-  margin-bottom:25px;
-  text-align:center;
-  background:linear-gradient(145deg,#0c1726,#070b12);
-  border:1px solid var(--border);
-  border-radius:12px;
+  padding: 30px 15px;
+  margin-bottom: 25px;
+  text-align: center;
+  background: linear-gradient(145deg, #0c1726, #070b12);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
-
 h1 {
-  margin:0;
-  font:clamp(30px,6vw,48px) 'Black Ops One',cursive;
+  margin: 0;
+  font: clamp(30px, 6vw, 48px) 'Black Ops One', cursive;
 }
-
-h2 {
-  font:24px 'Black Ops One',cursive;
-}
-
-.hero p {
-  color:var(--muted);
-  font-size:19px;
-}
-
+h2 { font: 24px 'Black Ops One', cursive; }
+.hero p { color: var(--muted); font-size: 19px; }
 #search {
-  width:100%;
-  padding:14px 16px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#080d15;
-  color:var(--text);
-  font:600 18px 'Rajdhani',sans-serif;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #080d15;
+  color: var(--text);
+  font: 600 18px 'Rajdhani', sans-serif;
 }
-
 #gameGrid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
-  gap:13px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  gap: 13px;
 }
-
 .game-card {
-  min-height:78px;
-  padding:14px 10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:var(--panel);
-  color:var(--text);
-  font:700 18px 'Rajdhani',sans-serif;
-  cursor:pointer;
-  overflow-wrap:anywhere;
+  min-height: 78px;
+  padding: 14px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font: 700 18px 'Rajdhani', sans-serif;
+  cursor: pointer;
+  overflow-wrap: anywhere;
 }
-
-#noResults {
-  display:none;
-  color:var(--muted);
-}
-
-#gameScreen {
-  display:none;
-}
-
+#noResults { display: none; color: var(--muted); }
+#gameScreen { display: none; }
 .game-heading {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-
-.game-heading h2 {
-  overflow-wrap:anywhere;
-}
-
+.game-heading h2 { overflow-wrap: anywhere; }
 #player {
-  overflow:hidden;
-  border:1px solid var(--blue);
-  border-radius:9px;
-  background:#000;
+  overflow: hidden;
+  border: 1px solid var(--blue);
+  border-radius: 9px;
+  background: #000;
 }
-
-#gameFrame {
-  display:block;
-  width:100%;
-  height:75vh;
-  min-height:400px;
-  border:0;
-  background:#000;
-}
-
-/* Fullscreen layout fix */
 #player:fullscreen {
-  position:fixed;
-  inset:0;
-  width:100vw;
-  height:100vh;
-  max-width:none;
-  margin:0;
-  padding:0;
-  border:0;
-  border-radius:0;
-  background:#000;
-  overflow:hidden;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
 }
-
 #player:fullscreen #gameFrame {
-  display:block;
-  width:100%;
-  height:100%;
-  min-height:0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
 }
-
-#player:-webkit-full-screen {
-  position:fixed;
-  inset:0;
-  width:100vw;
-  height:100vh;
-  margin:0;
-  padding:0;
-  border:0;
-  border-radius:0;
-  background:#000;
-  overflow:hidden;
+#gameFrame {
+  display: block;
+  width: 100%;
+  height: 75vh;
+  min-height: 400px;
+  border: 0;
+  background: #000;
 }
-
-#player:-webkit-full-screen #gameFrame {
-  width:100%;
-  height:100%;
-  min-height:0;
-}
-
-#gameFrame:fullscreen {
-  width:100vw;
-  height:100vh;
-  min-height:0;
-  border:0;
-}
-
 #offlinePlay {
-  margin-top:35px;
-  padding:24px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:linear-gradient(145deg,#0b111b,#070b12);
+  margin-top: 35px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(145deg, #0b111b, #070b12);
 }
-
 #offlinePlay h2 {
-  color:var(--blue);
-  font-size:20px;
-  letter-spacing:2px;
+  color: var(--blue);
+  font-size: 20px;
+  letter-spacing: 2px;
 }
-
-#offlinePlay p {
-  color:var(--muted);
-  font-size:16px;
-}
-
+#offlinePlay p { color: var(--muted); font-size: 16px; }
 .offline-btn {
-  margin:6px 6px 6px 0;
-  padding:12px 16px;
-  border:1px solid var(--blue);
-  border-radius:7px;
-  background:#0b1726;
-  color:var(--text);
-  font:700 16px 'Rajdhani',sans-serif;
-  cursor:pointer;
+  margin: 6px 6px 6px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--blue);
+  border-radius: 7px;
+  background: #0b1726;
+  color: var(--text);
+  font: 700 16px 'Rajdhani', sans-serif;
+  cursor: pointer;
 }
-
+.offline-btn:hover {
+  background: #102b47;
+}
 #cachePicker {
-  margin-top:16px;
-  padding:14px;
-  border:1px solid var(--border);
-  border-radius:8px;
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
-
 #cacheGameList label {
-  display:block;
-  padding:7px 0;
+  display: block;
+  padding: 7px 0;
 }
-
 #cacheGameList input {
-  accent-color:var(--blue);
-  margin-right:9px;
+  accent-color: var(--blue);
+  margin-right: 9px;
 }
-
-[hidden] {
-  display:none!important;
+[hidden] { display: none !important; }
+#offlineStatus, #gameMessage {
+  overflow-wrap: anywhere;
+  color: var(--muted);
 }
-
-#offlineStatus {
-  overflow-wrap:anywhere;
-}
-
 footer {
-  margin-top:40px;
-  padding:22px;
-  border-top:1px solid var(--border);
-  color:var(--muted);
-  text-align:center;
-  letter-spacing:2px;
+  margin-top: 40px;
+  padding: 22px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+  letter-spacing: 2px;
 }
-
-button:focus-visible,a:focus-visible,input:focus-visible {
-  outline:2px solid #8bcaff;
-  outline-offset:3px;
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid #8bcaff;
+  outline-offset: 3px;
 }
-
-@media(max-width:600px) {
-  header { padding:15px 4%; }
-  .brand { font-size:20px; }
-  main { margin-top:22px; }
-  #gameGrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  #gameFrame { height:65vh; min-height:350px; }
-  #offlinePlay { padding:17px; }
-  .offline-btn { width:100%; margin:6px 0; }
+@media(max-width: 600px) {
+  header { padding: 15px 4%; }
+  .brand { font-size: 20px; }
+  main { margin-top: 22px; }
+  #gameGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #gameFrame { height: 65vh; min-height: 350px; }
+  #offlinePlay { padding: 17px; }
+  .offline-btn { width: 100%; margin: 6px 0; }
 }
 </style>
 </head>
@@ -309,8 +220,7 @@ button:focus-visible,a:focus-visible,input:focus-visible {
   </div>
 
   <input id="search" type="search"
-         placeholder="Search games..."
-         aria-label="Search games">
+    placeholder="Search games..." aria-label="Search games">
 
   <h2>ALL GAMES</h2>
   <div id="gameGrid"></div>
@@ -318,17 +228,17 @@ button:focus-visible,a:focus-visible,input:focus-visible {
 
   <section id="offlinePlay">
     <h2>OFFLINE PLAY</h2>
-    <p>Choose up to five game URLs to try to save. Saving a game page does not guarantee the complete game will work offline.</p>
+    <p>Select up to five game pages to try to save. Saving a page does not guarantee the entire game will work offline.</p>
 
     <button class="offline-btn" id="selectCacheButton">
-      Select Games to Cache
+      💾 Select Games to Cache
     </button>
 
     <div id="cachePicker" hidden>
       <p>Select up to five games:</p>
       <div id="cacheGameList"></div>
       <button class="offline-btn" id="startCacheButton">
-        Cache Selected Games
+        Download Selected Games
       </button>
     </div>
 
@@ -347,18 +257,15 @@ button:focus-visible,a:focus-visible,input:focus-visible {
     <h2 id="gameTitle">Game</h2>
     <div>
       <button class="btn" id="backButton">← Back to Games</button>
-      <button class="btn" id="fullscreenButton">⛶ Fullscreen</button>
+      <button class="btn" id="fullscreenButton">Fullscreen</button>
     </div>
   </div>
 
   <div id="player">
-    <iframe
-      id="gameFrame"
-      src="about:blank"
+    <iframe id="gameFrame" src="about:blank"
       title="Game player"
       allow="fullscreen; autoplay; gamepad"
-      allowfullscreen>
-    </iframe>
+      allowfullscreen></iframe>
   </div>
 
   <p id="gameMessage" role="status"></p>
@@ -370,64 +277,67 @@ button:focus-visible,a:focus-visible,input:focus-visible {
 <script>
 "use strict";
 
+/* TAB CLOAKER */
 const PRESETS = {
   "Default": {
-    title:"VOID NETWORK V6",
-    icon:"./void-logo.png"
+    title: "VOID NETWORK V6",
+    icon: "./void-logo.png"
   },
   "Khan Academy": {
-    title:"Khan Academy",
-    icon:"https://cdn.kastatic.org/images/favicon.ico"
+    title: "Khan Academy",
+    icon: "https://cdn.kastatic.org/images/favicon.ico"
   },
   "Google": {
-    title:"Google",
-    icon:"https://www.google.com/favicon.ico"
+    title: "Google",
+    icon: "https://www.google.com/favicon.ico"
   },
   "YouTube": {
-    title:"YouTube",
-    icon:"https://www.youtube.com/favicon.ico"
+    title: "YouTube",
+    icon: "https://www.youtube.com/favicon.ico"
   },
   "Google Docs": {
-    title:"Google Docs",
-    icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+    title: "Google Docs",
+    icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
   },
   "Desmos": {
-    title:"Desmos | Graphing Calculator",
-    icon:"https://www.desmos.com/favicon.ico"
+    title: "Desmos",
+    icon: "https://www.desmos.com/favicon.ico"
   },
   "Google Drive": {
-    title:"Google Drive",
-    icon:"https://drive.google.com/favicon.ico"
+    title: "Google Drive",
+    icon: "https://drive.google.com/favicon.ico"
   },
   "Google Classroom": {
-    title:"Home - Classroom",
-    icon:"https://ssl.gstatic.com/classroom/favicon.png"
+    title: "Home - Classroom",
+    icon: "https://ssl.gstatic.com/classroom/favicon.png"
   },
   "XtraMath": {
-    title:"XtraMath",
-    icon:"https://xtramath.org/favicon.ico"
+    title: "XtraMath",
+    icon: "https://xtramath.org/favicon.ico"
   }
 };
 
 function loadPreset() {
-  let name="Default";
+  let name = "Default";
 
   try {
-    name=localStorage.getItem("userCloak")||"Default";
-  } catch(e) {}
+    name = localStorage.getItem("userCloak") || "Default";
+  } catch (error) {}
 
-  const preset=PRESETS[name]||PRESETS.Default;
-  document.title=preset.title;
-  document.getElementById("tabIcon").href=preset.icon;
+  const preset = PRESETS[name] || PRESETS.Default;
+  document.title = preset.title;
+  document.getElementById("tabIcon").href = preset.icon;
 }
 
 loadPreset();
-window.addEventListener("pageshow",loadPreset);
-
-window.addEventListener("storage",e=>{
-  if(e.key==="userCloak"||e.key===null) loadPreset();
+window.addEventListener("pageshow", loadPreset);
+window.addEventListener("storage", event => {
+  if (event.key === "userCloak" || event.key === null) {
+    loadPreset();
+  }
 });
 
+/* GAME LIST */
 const games = [
   ["Gaming Escape","https://badpiggies.global.ssl.fastly.net/index.html"],
   ["Super Mario 64","https://arkshocer.github.io/sm64/"],
@@ -454,7 +364,7 @@ const games = [
   ["Mario Kart 64","https://gamebackup.github.io/emu_games/games/mario-kart-64/"],
   ["Super Mario Bros","https://gamebackup.github.io/emu_games/games/super-mario-bros/"],
   ["Paper Mario","https://gamebackup.github.io/emu_games/games/paper-mario/"],
-  ["Mario Kart Super Circuit","https://gamebackup.github.io/emu_games/games/super-mario-kart-super-circuit/"],
+  ["Mario Kart Super Circuit","https://gamebackup.github.io/emu_games/games/mario-kart-super-circuit/"],
   ["MK49","https://mk49.cyou/"],
   ["Smash Karts","https://unlocktheworld.github.io/smash-karts/index.html"],
   ["Doodle Jump","https://unlocktheworld.github.io/doodle-jump/index.html"],
@@ -480,230 +390,227 @@ const games = [
   ["Notflix 2.0","https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit#slide=id.g3950afba0ed_0_0"]
 ];
 
-const grid=document.getElementById("gameGrid");
-const search=document.getElementById("search");
-const home=document.getElementById("homeScreen");
-const screen=document.getElementById("gameScreen");
-const frame=document.getElementById("gameFrame");
-const status=document.getElementById("offlineStatus");
-const player=document.getElementById("player");
-const fullscreenButton=document.getElementById("fullscreenButton");
+/* GAME PLAYER */
+const grid = document.getElementById("gameGrid");
+const search = document.getElementById("search");
+const home = document.getElementById("homeScreen");
+const screen = document.getElementById("gameScreen");
+const frame = document.getElementById("gameFrame");
+const status = document.getElementById("offlineStatus");
+const player = document.getElementById("player");
 
 function renderGames() {
   grid.replaceChildren();
 
-  const query=search.value.trim().toLowerCase();
-  const results=games.filter(g=>g[0].toLowerCase().includes(query));
+  const query = search.value.trim().toLowerCase();
+  const results = games.filter(game =>
+    game[0].toLowerCase().includes(query)
+  );
 
-  results.forEach(([name,url])=>{
-    const button=document.createElement("button");
-    button.type="button";
-    button.className="game-card";
-    button.textContent=name;
+  results.forEach(([name, url]) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "game-card";
+    button.textContent = name;
 
-    button.addEventListener("click",()=>{
-      document.getElementById("gameTitle").textContent=name;
-      document.getElementById("gameMessage").textContent=
+    button.addEventListener("click", () => {
+      document.getElementById("gameTitle").textContent = name;
+      document.getElementById("gameMessage").textContent =
         "If this game does not load, its host may block embedded playback.";
 
-      frame.src=url;
-      home.style.display="none";
-      screen.style.display="block";
-      window.scrollTo(0,0);
+      frame.src = url;
+      home.style.display = "none";
+      screen.style.display = "block";
+      window.scrollTo(0, 0);
     });
 
     grid.appendChild(button);
   });
 
-  document.getElementById("noResults").style.display=
+  document.getElementById("noResults").style.display =
     results.length ? "none" : "block";
 }
 
-search.addEventListener("input",renderGames);
+search.addEventListener("input", renderGames);
 
-document.getElementById("backButton").addEventListener("click",async()=>{
-  // Leave fullscreen before returning to the game list.
-  try {
-    if(document.fullscreenElement && document.exitFullscreen) {
-      await document.exitFullscreen();
-    } else if(document.webkitFullscreenElement && document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-  } catch(e) {}
-
-  frame.src="about:blank";
-  screen.style.display="none";
-  home.style.display="block";
-  window.scrollTo(0,0);
+/* BACK TO HOME - STAYS INSIDE THE WEBSITE */
+document.getElementById("backButton").addEventListener("click", () => {
+  frame.src = "about:blank";
+  screen.style.display = "none";
+  home.style.display = "block";
+  loadPreset();
+  window.scrollTo(0, 0);
 });
 
-/* FIXED FULLSCREEN BUTTON */
-fullscreenButton.addEventListener("click",async()=>{
+/* FULLSCREEN */
+function updateFullscreenButton() {
+  const isFullscreen =
+    document.fullscreenElement === player ||
+    document.webkitFullscreenElement === player;
+
+  document.getElementById("fullscreenButton").textContent =
+    isFullscreen ? "Exit Fullscreen" : "Fullscreen";
+}
+
+document.getElementById("fullscreenButton").addEventListener("click", async () => {
   try {
-    const isFullscreen =
-      document.fullscreenElement ||
-      document.webkitFullscreenElement;
-
-    if(isFullscreen) {
-      if(document.exitFullscreen) {
-        await document.exitFullscreen();
-      } else if(document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-      return;
-    }
-
-    // First try fullscreen on the complete game player.
-    if(player.requestFullscreen) {
-      await player.requestFullscreen({navigationUI:"hide"});
-      return;
-    }
-
-    if(player.webkitRequestFullscreen) {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) await document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } else if (player.requestFullscreen) {
+      await player.requestFullscreen();
+    } else if (player.webkitRequestFullscreen) {
       player.webkitRequestFullscreen();
-      return;
+    } else {
+      throw new Error("Fullscreen unsupported");
     }
-
-    // Fallback: try fullscreen directly on the game iframe.
-    if(frame.requestFullscreen) {
-      await frame.requestFullscreen();
-      return;
-    }
-
-    if(frame.webkitRequestFullscreen) {
-      frame.webkitRequestFullscreen();
-      return;
-    }
-
-    alert("Fullscreen is not supported by this browser.");
-  } catch(error) {
-    // Some browsers allow fullscreen on the iframe but not its container.
-    try {
-      if(frame.requestFullscreen) {
-        await frame.requestFullscreen();
-      } else if(frame.webkitRequestFullscreen) {
-        frame.webkitRequestFullscreen();
-      } else {
-        throw error;
-      }
-    } catch(fallbackError) {
-      alert(
-        "Fullscreen was blocked by the browser or game. " +
-        "Make sure you are using the HTTPS version of your site and try again."
-      );
-    }
+  } catch (error) {
+    alert("Fullscreen is unavailable. Try using your browser's fullscreen controls.");
   }
 });
 
-function updateFullscreenButton() {
-  const active=Boolean(
-    document.fullscreenElement ||
-    document.webkitFullscreenElement
-  );
+document.addEventListener("fullscreenchange", updateFullscreenButton);
+document.addEventListener("webkitfullscreenchange", updateFullscreenButton);
 
-  fullscreenButton.textContent=active
-    ? "⛶ Exit Fullscreen"
-    : "⛶ Fullscreen";
-}
+/* OFFLINE GAME PAGE CACHE */
+const cachePicker = document.getElementById("cachePicker");
+const cacheList = document.getElementById("cacheGameList");
+const GAME_CACHE = "void-network-game-pages-v2";
 
-document.addEventListener("fullscreenchange",updateFullscreenButton);
-document.addEventListener("webkitfullscreenchange",updateFullscreenButton);
-
-const cachePicker=document.getElementById("cachePicker");
-const cacheList=document.getElementById("cacheGameList");
-const GAME_CACHE="void-network-game-pages-v2";
-
-if("serviceWorker" in navigator && location.protocol==="https:") {
-  navigator.serviceWorker.register("./sw.js").then(()=>{
-    status.textContent=
-      "Offline site support is enabled. Game availability offline depends on each game's files and host.";
-  }).catch(()=>{
-    status.textContent=
-      "Could not register sw.js. Check that it is in the same folder as index.html.";
-  });
-} else {
-  status.textContent=
-    "Open this site through GitHub Pages HTTPS to use offline storage.";
-}
-
-document.getElementById("selectCacheButton").addEventListener("click",()=>{
-  cachePicker.hidden=!cachePicker.hidden;
-
-  if(cachePicker.hidden) return;
+document.getElementById("selectCacheButton").addEventListener("click", () => {
+  cachePicker.hidden = !cachePicker.hidden;
+  if (cachePicker.hidden) return;
 
   cacheList.replaceChildren();
 
-  games.forEach(([name],index)=>{
-    const label=document.createElement("label");
-    const checkbox=document.createElement("input");
+  games.forEach(([name], index) => {
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
 
-    checkbox.type="checkbox";
-    checkbox.value=String(index);
+    checkbox.type = "checkbox";
+    checkbox.value = String(index);
 
-    checkbox.addEventListener("change",()=>{
-      if(cacheList.querySelectorAll("input:checked").length>5) {
-        checkbox.checked=false;
-        status.textContent="You can select up to five games.";
+    checkbox.addEventListener("change", () => {
+      if (cacheList.querySelectorAll("input:checked").length > 5) {
+        checkbox.checked = false;
+        status.textContent = "You can select up to five games.";
       }
     });
 
-    label.append(checkbox,document.createTextNode(name));
+    label.append(checkbox, document.createTextNode(name));
     cacheList.appendChild(label);
   });
 });
 
-document.getElementById("startCacheButton").addEventListener("click",async()=>{
-  const selected=[...cacheList.querySelectorAll("input:checked")];
+document.getElementById("startCacheButton").addEventListener("click", async () => {
+  const selected = [...cacheList.querySelectorAll("input:checked")];
 
-  if(!selected.length) {
-    status.textContent="Select at least one game.";
+  if (!selected.length) {
+    status.textContent = "Select at least one game.";
     return;
   }
 
-  if(!("caches" in window)) {
-    status.textContent="Cache storage is unavailable.";
+  if (!("caches" in window)) {
+    status.textContent = "Cache storage is unavailable in this browser.";
     return;
   }
 
-  status.textContent="Saving selected game pages...";
+  status.textContent = "Trying to save selected game pages...";
 
-  let saved=0;
-  let failed=0;
+  let saved = 0;
+  let failed = 0;
 
-  const cache=await caches.open(GAME_CACHE);
-
-  for(const checkbox of selected) {
-    const [,url]=games[Number(checkbox.value)];
-
-    try {
-      const response=await fetch(url,{mode:"cors"});
-
-      if(!response.ok || response.type==="opaque") {
-        throw new Error("Not cacheable");
-      }
-
-      await cache.put(url,response.clone());
-      saved++;
-    } catch(e) {
-      failed++;
-    }
-  }
-
-  status.textContent=
-    `Saved ${saved} game page(s); ${failed} could not be saved. ` +
-    "This does not guarantee offline gameplay because games may need other files or block caching.";
-});
-
-document.getElementById("unloadCacheButton").addEventListener("click",async()=>{
   try {
-    await caches.delete(GAME_CACHE);
-    status.textContent="Saved game-page cache cleared.";
-  } catch(e) {
-    status.textContent="Could not clear saved pages.";
+    const cache = await caches.open(GAME_CACHE);
+
+    for (const checkbox of selected) {
+      const [, url] = games[Number(checkbox.value)];
+
+      try {
+        const response = await fetch(url, { mode: "cors" });
+
+        if (!response.ok || response.type === "opaque") {
+          throw new Error("Page is not cacheable");
+        }
+
+        await cache.put(url, response.clone());
+        saved++;
+      } catch (error) {
+        failed++;
+      }
+    }
+
+    status.textContent =
+      `Saved ${saved} page(s); ${failed} could not be saved. ` +
+      "This does not guarantee complete offline gameplay.";
+  } catch (error) {
+    status.textContent = "Could not save pages. Check browser storage permissions.";
   }
 });
+
+document.getElementById("unloadCacheButton").addEventListener("click", async () => {
+  try {
+    const deleted = await caches.delete(GAME_CACHE);
+    status.textContent = deleted
+      ? "Saved game-page cache cleared."
+      : "No saved game-page cache was found.";
+  } catch (error) {
+    status.textContent = "Could not clear saved pages.";
+  }
+});
+
+/* AUTOMATIC SERVICE WORKER UPDATES */
+async function registerOfflineSupport() {
+  if (!("serviceWorker" in navigator) || location.protocol !== "https:") {
+    status.textContent =
+      "Use the HTTPS GitHub Pages website for offline support.";
+    return;
+  }
+
+  try {
+    const registration = await navigator.serviceWorker.register("./sw.js", {
+      updateViaCache: "none"
+    });
+
+    // Check for new sw.js immediately.
+    await registration.update();
+
+    registration.addEventListener("updatefound", () => {
+      const worker = registration.installing;
+      if (!worker) return;
+
+      worker.addEventListener("statechange", () => {
+        if (
+          worker.state === "installed" &&
+          navigator.serviceWorker.controller
+        ) {
+          status.textContent =
+            "Update downloaded. Reload the page to use the latest version.";
+        }
+      });
+    });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      // Do not force repeated reloads. The new worker controls the next navigation.
+      status.textContent = "Offline support is ready.";
+    });
+
+    if (!navigator.serviceWorker.controller) {
+      status.textContent =
+        "Offline site support is enabled. Open the site online once to prepare it.";
+    } else {
+      status.textContent =
+        "Site is ready. Updates are checked automatically.";
+    }
+  } catch (error) {
+    console.error("Service worker registration failed:", error);
+    status.textContent =
+      "Could not register sw.js. Make sure it is in the same folder as index.html.";
+  }
+}
 
 renderGames();
+registerOfflineSupport();
 </script>
 </body>
 </html>
