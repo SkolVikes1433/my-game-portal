@@ -21,108 +21,278 @@
   --muted:#9badc4;
   --border:#183b60;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:'Rajdhani',sans-serif
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Rajdhani',sans-serif;
 }
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:14px;flex-wrap:wrap;padding:18px 5%;
-  background:#080d15;border-bottom:1px solid var(--border)
+
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  padding:18px 5%;
+  background:#080d15;
+  border-bottom:1px solid var(--border);
 }
-.brand{
-  color:var(--text);text-decoration:none;
-  font:24px 'Black Ops One',cursive
+
+.brand {
+  color:var(--text);
+  text-decoration:none;
+  font:24px 'Black Ops One',cursive;
 }
-nav{display:flex;gap:10px;flex-wrap:wrap}
-nav a,.btn{
-  display:inline-block;padding:10px 15px;
-  border:1px solid var(--blue);border-radius:7px;
-  background:#0b1726;color:var(--text);
+
+nav {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+nav a,.btn {
+  display:inline-block;
+  padding:10px 15px;
+  border:1px solid var(--blue);
+  border-radius:7px;
+  background:#0b1726;
+  color:var(--text);
   font:700 16px 'Rajdhani',sans-serif;
-  text-decoration:none;cursor:pointer
+  text-decoration:none;
+  cursor:pointer;
 }
-nav a:hover,.btn:hover,.game-card:hover{
-  background:#102b47;box-shadow:0 0 14px #168cff25
+
+nav a:hover,.btn:hover,.game-card:hover {
+  background:#102b47;
+  box-shadow:0 0 14px #168cff25;
 }
-main{width:min(1200px,92%);margin:30px auto}
-.hero{
-  padding:30px 15px;margin-bottom:25px;text-align:center;
+
+main {
+  width:min(1200px,92%);
+  margin:30px auto;
+}
+
+.hero {
+  padding:30px 15px;
+  margin-bottom:25px;
+  text-align:center;
   background:linear-gradient(145deg,#0c1726,#070b12);
-  border:1px solid var(--border);border-radius:12px
+  border:1px solid var(--border);
+  border-radius:12px;
 }
-h1{margin:0;font:clamp(30px,6vw,48px) 'Black Ops One',cursive}
-h2{font:24px 'Black Ops One',cursive}
-.hero p{color:var(--muted);font-size:19px}
-#search{
-  width:100%;padding:14px 16px;border:1px solid var(--border);
-  border-radius:8px;background:#080d15;color:var(--text);
-  font:600 18px 'Rajdhani',sans-serif
+
+h1 {
+  margin:0;
+  font:clamp(30px,6vw,48px) 'Black Ops One',cursive;
 }
-#gameGrid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
-  gap:13px
+
+h2 {
+  font:24px 'Black Ops One',cursive;
 }
-.game-card{
-  min-height:78px;padding:14px 10px;
-  border:1px solid var(--border);border-radius:8px;
-  background:var(--panel);color:var(--text);
-  font:700 18px 'Rajdhani',sans-serif;cursor:pointer;
-  overflow-wrap:anywhere
+
+.hero p {
+  color:var(--muted);
+  font-size:19px;
 }
-#noResults{display:none;color:var(--muted)}
-#gameScreen{display:none}
-.game-heading{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;flex-wrap:wrap
+
+#search {
+  width:100%;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#080d15;
+  color:var(--text);
+  font:600 18px 'Rajdhani',sans-serif;
 }
-.game-heading h2{overflow-wrap:anywhere}
-#player{
-  overflow:hidden;border:1px solid var(--blue);
-  border-radius:9px;background:#000
+
+#gameGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+  gap:13px;
 }
-#gameFrame{
-  display:block;width:100%;height:75vh;min-height:400px;
-  border:0;background:#000
+
+.game-card {
+  min-height:78px;
+  padding:14px 10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--panel);
+  color:var(--text);
+  font:700 18px 'Rajdhani',sans-serif;
+  cursor:pointer;
+  overflow-wrap:anywhere;
 }
-#offlinePlay{
-  margin-top:35px;padding:24px;border:1px solid var(--border);
-  border-radius:10px;background:linear-gradient(145deg,#0b111b,#070b12)
+
+#noResults {
+  display:none;
+  color:var(--muted);
 }
-#offlinePlay h2{color:var(--blue);font-size:20px;letter-spacing:2px}
-#offlinePlay p{color:var(--muted);font-size:16px}
-.offline-btn{
-  margin:6px 6px 6px 0;padding:12px 16px;
-  border:1px solid var(--blue);border-radius:7px;
-  background:#0b1726;color:var(--text);
-  font:700 16px 'Rajdhani',sans-serif;cursor:pointer
+
+#gameScreen {
+  display:none;
 }
-#cachePicker{
-  margin-top:16px;padding:14px;border:1px solid var(--border);
-  border-radius:8px
+
+.game-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
-#cacheGameList label{display:block;padding:7px 0}
-#cacheGameList input{accent-color:var(--blue);margin-right:9px}
-[hidden]{display:none!important}
-#offlineStatus{overflow-wrap:anywhere}
-footer{
-  margin-top:40px;padding:22px;border-top:1px solid var(--border);
-  color:var(--muted);text-align:center;letter-spacing:2px
+
+.game-heading h2 {
+  overflow-wrap:anywhere;
 }
-button:focus-visible,a:focus-visible,input:focus-visible{
-  outline:2px solid #8bcaff;outline-offset:3px
+
+#player {
+  overflow:hidden;
+  border:1px solid var(--blue);
+  border-radius:9px;
+  background:#000;
 }
-@media(max-width:600px){
-  header{padding:15px 4%}.brand{font-size:20px}
-  main{margin-top:22px}
-  #gameGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  #gameFrame{height:65vh;min-height:350px}
-  #offlinePlay{padding:17px}
-  .offline-btn{width:100%;margin:6px 0}
+
+#gameFrame {
+  display:block;
+  width:100%;
+  height:75vh;
+  min-height:400px;
+  border:0;
+  background:#000;
+}
+
+/* Fullscreen layout fix */
+#player:fullscreen {
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  max-width:none;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:#000;
+  overflow:hidden;
+}
+
+#player:fullscreen #gameFrame {
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+}
+
+#player:-webkit-full-screen {
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:#000;
+  overflow:hidden;
+}
+
+#player:-webkit-full-screen #gameFrame {
+  width:100%;
+  height:100%;
+  min-height:0;
+}
+
+#gameFrame:fullscreen {
+  width:100vw;
+  height:100vh;
+  min-height:0;
+  border:0;
+}
+
+#offlinePlay {
+  margin-top:35px;
+  padding:24px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:linear-gradient(145deg,#0b111b,#070b12);
+}
+
+#offlinePlay h2 {
+  color:var(--blue);
+  font-size:20px;
+  letter-spacing:2px;
+}
+
+#offlinePlay p {
+  color:var(--muted);
+  font-size:16px;
+}
+
+.offline-btn {
+  margin:6px 6px 6px 0;
+  padding:12px 16px;
+  border:1px solid var(--blue);
+  border-radius:7px;
+  background:#0b1726;
+  color:var(--text);
+  font:700 16px 'Rajdhani',sans-serif;
+  cursor:pointer;
+}
+
+#cachePicker {
+  margin-top:16px;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+
+#cacheGameList label {
+  display:block;
+  padding:7px 0;
+}
+
+#cacheGameList input {
+  accent-color:var(--blue);
+  margin-right:9px;
+}
+
+[hidden] {
+  display:none!important;
+}
+
+#offlineStatus {
+  overflow-wrap:anywhere;
+}
+
+footer {
+  margin-top:40px;
+  padding:22px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  text-align:center;
+  letter-spacing:2px;
+}
+
+button:focus-visible,a:focus-visible,input:focus-visible {
+  outline:2px solid #8bcaff;
+  outline-offset:3px;
+}
+
+@media(max-width:600px) {
+  header { padding:15px 4%; }
+  .brand { font-size:20px; }
+  main { margin-top:22px; }
+  #gameGrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #gameFrame { height:65vh; min-height:350px; }
+  #offlinePlay { padding:17px; }
+  .offline-btn { width:100%; margin:6px 0; }
 }
 </style>
 </head>
+
 <body>
 <header>
   <a class="brand" href="./index.html">VOID NETWORK V6</a>
@@ -138,8 +308,10 @@ button:focus-visible,a:focus-visible,input:focus-visible{
     <h1>Welcome</h1>
   </div>
 
-  <input id="search" type="search" placeholder="Search games..."
+  <input id="search" type="search"
+         placeholder="Search games..."
          aria-label="Search games">
+
   <h2>ALL GAMES</h2>
   <div id="gameGrid"></div>
   <p id="noResults">No games found. Try another search.</p>
@@ -147,16 +319,26 @@ button:focus-visible,a:focus-visible,input:focus-visible{
   <section id="offlinePlay">
     <h2>OFFLINE PLAY</h2>
     <p>Choose up to five game URLs to try to save. Saving a game page does not guarantee the complete game will work offline.</p>
-    <button class="offline-btn" id="selectCacheButton">Select Games to Cache</button>
+
+    <button class="offline-btn" id="selectCacheButton">
+      Select Games to Cache
+    </button>
 
     <div id="cachePicker" hidden>
       <p>Select up to five games:</p>
       <div id="cacheGameList"></div>
-      <button class="offline-btn" id="startCacheButton">Cache Selected Games</button>
+      <button class="offline-btn" id="startCacheButton">
+        Cache Selected Games
+      </button>
     </div>
 
-    <button class="offline-btn" id="unloadCacheButton">Clear Saved Game Pages</button>
-    <p id="offlineStatus" role="status" aria-live="polite">Checking offline support...</p>
+    <button class="offline-btn" id="unloadCacheButton">
+      Clear Saved Game Pages
+    </button>
+
+    <p id="offlineStatus" role="status" aria-live="polite">
+      Checking offline support...
+    </p>
   </section>
 </section>
 
@@ -165,14 +347,20 @@ button:focus-visible,a:focus-visible,input:focus-visible{
     <h2 id="gameTitle">Game</h2>
     <div>
       <button class="btn" id="backButton">← Back to Games</button>
-      <button class="btn" id="fullscreenButton">Fullscreen</button>
+      <button class="btn" id="fullscreenButton">⛶ Fullscreen</button>
     </div>
   </div>
+
   <div id="player">
-    <iframe id="gameFrame" src="about:blank" title="Game player"
+    <iframe
+      id="gameFrame"
+      src="about:blank"
+      title="Game player"
       allow="fullscreen; autoplay; gamepad"
-      allowfullscreen></iframe>
+      allowfullscreen>
+    </iframe>
   </div>
+
   <p id="gameMessage" role="status"></p>
 </section>
 </main>
@@ -183,28 +371,61 @@ button:focus-visible,a:focus-visible,input:focus-visible{
 "use strict";
 
 const PRESETS = {
-  "Default":{title:"VOID NETWORK V6",icon:"./void-logo.png"},
-  "Khan Academy":{title:"Khan Academy",icon:"https://cdn.kastatic.org/images/favicon.ico"},
-  "Google":{title:"Google",icon:"https://www.google.com/favicon.ico"},
-  "YouTube":{title:"YouTube",icon:"https://www.youtube.com/favicon.ico"},
-  "Google Docs":{title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"},
-  "Desmos":{title:"Desmos | Graphing Calculator",icon:"https://www.desmos.com/favicon.ico"},
-  "Google Drive":{title:"Google Drive",icon:"https://drive.google.com/favicon.ico"},
-  "Google Classroom":{title:"Home - Classroom",icon:"https://ssl.gstatic.com/classroom/favicon.png"},
-  "XtraMath":{title:"XtraMath",icon:"https://xtramath.org/favicon.ico"}
+  "Default": {
+    title:"VOID NETWORK V6",
+    icon:"./void-logo.png"
+  },
+  "Khan Academy": {
+    title:"Khan Academy",
+    icon:"https://cdn.kastatic.org/images/favicon.ico"
+  },
+  "Google": {
+    title:"Google",
+    icon:"https://www.google.com/favicon.ico"
+  },
+  "YouTube": {
+    title:"YouTube",
+    icon:"https://www.youtube.com/favicon.ico"
+  },
+  "Google Docs": {
+    title:"Google Docs",
+    icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+  },
+  "Desmos": {
+    title:"Desmos | Graphing Calculator",
+    icon:"https://www.desmos.com/favicon.ico"
+  },
+  "Google Drive": {
+    title:"Google Drive",
+    icon:"https://drive.google.com/favicon.ico"
+  },
+  "Google Classroom": {
+    title:"Home - Classroom",
+    icon:"https://ssl.gstatic.com/classroom/favicon.png"
+  },
+  "XtraMath": {
+    title:"XtraMath",
+    icon:"https://xtramath.org/favicon.ico"
+  }
 };
 
-function loadPreset(){
+function loadPreset() {
   let name="Default";
-  try{name=localStorage.getItem("userCloak")||"Default"}catch(e){}
+
+  try {
+    name=localStorage.getItem("userCloak")||"Default";
+  } catch(e) {}
+
   const preset=PRESETS[name]||PRESETS.Default;
   document.title=preset.title;
   document.getElementById("tabIcon").href=preset.icon;
 }
+
 loadPreset();
 window.addEventListener("pageshow",loadPreset);
+
 window.addEventListener("storage",e=>{
-  if(e.key==="userCloak"||e.key===null)loadPreset();
+  if(e.key==="userCloak"||e.key===null) loadPreset();
 });
 
 const games = [
@@ -233,7 +454,7 @@ const games = [
   ["Mario Kart 64","https://gamebackup.github.io/emu_games/games/mario-kart-64/"],
   ["Super Mario Bros","https://gamebackup.github.io/emu_games/games/super-mario-bros/"],
   ["Paper Mario","https://gamebackup.github.io/emu_games/games/paper-mario/"],
-  ["Mario Kart Super Circuit","https://gamebackup.github.io/emu_games/games/mario-kart-super-circuit/"],
+  ["Mario Kart Super Circuit","https://gamebackup.github.io/emu_games/games/super-mario-kart-super-circuit/"],
   ["MK49","https://mk49.cyou/"],
   ["Smash Karts","https://unlocktheworld.github.io/smash-karts/index.html"],
   ["Doodle Jump","https://unlocktheworld.github.io/doodle-jump/index.html"],
@@ -265,73 +486,167 @@ const home=document.getElementById("homeScreen");
 const screen=document.getElementById("gameScreen");
 const frame=document.getElementById("gameFrame");
 const status=document.getElementById("offlineStatus");
+const player=document.getElementById("player");
+const fullscreenButton=document.getElementById("fullscreenButton");
 
-function renderGames(){
+function renderGames() {
   grid.replaceChildren();
+
   const query=search.value.trim().toLowerCase();
   const results=games.filter(g=>g[0].toLowerCase().includes(query));
+
   results.forEach(([name,url])=>{
     const button=document.createElement("button");
     button.type="button";
     button.className="game-card";
     button.textContent=name;
+
     button.addEventListener("click",()=>{
       document.getElementById("gameTitle").textContent=name;
       document.getElementById("gameMessage").textContent=
         "If this game does not load, its host may block embedded playback.";
+
       frame.src=url;
       home.style.display="none";
       screen.style.display="block";
       window.scrollTo(0,0);
     });
+
     grid.appendChild(button);
   });
-  document.getElementById("noResults").style.display=results.length?"none":"block";
+
+  document.getElementById("noResults").style.display=
+    results.length ? "none" : "block";
 }
+
 search.addEventListener("input",renderGames);
 
-document.getElementById("backButton").addEventListener("click",()=>{
+document.getElementById("backButton").addEventListener("click",async()=>{
+  // Leave fullscreen before returning to the game list.
+  try {
+    if(document.fullscreenElement && document.exitFullscreen) {
+      await document.exitFullscreen();
+    } else if(document.webkitFullscreenElement && document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  } catch(e) {}
+
   frame.src="about:blank";
   screen.style.display="none";
   home.style.display="block";
   window.scrollTo(0,0);
 });
-document.getElementById("fullscreenButton").addEventListener("click",async()=>{
-  try{
-    if(document.fullscreenElement)await document.exitFullscreen();
-    else await document.getElementById("player").requestFullscreen();
-  }catch(e){alert("Fullscreen is not available in this browser.");}
+
+/* FIXED FULLSCREEN BUTTON */
+fullscreenButton.addEventListener("click",async()=>{
+  try {
+    const isFullscreen =
+      document.fullscreenElement ||
+      document.webkitFullscreenElement;
+
+    if(isFullscreen) {
+      if(document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if(document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+      return;
+    }
+
+    // First try fullscreen on the complete game player.
+    if(player.requestFullscreen) {
+      await player.requestFullscreen({navigationUI:"hide"});
+      return;
+    }
+
+    if(player.webkitRequestFullscreen) {
+      player.webkitRequestFullscreen();
+      return;
+    }
+
+    // Fallback: try fullscreen directly on the game iframe.
+    if(frame.requestFullscreen) {
+      await frame.requestFullscreen();
+      return;
+    }
+
+    if(frame.webkitRequestFullscreen) {
+      frame.webkitRequestFullscreen();
+      return;
+    }
+
+    alert("Fullscreen is not supported by this browser.");
+  } catch(error) {
+    // Some browsers allow fullscreen on the iframe but not its container.
+    try {
+      if(frame.requestFullscreen) {
+        await frame.requestFullscreen();
+      } else if(frame.webkitRequestFullscreen) {
+        frame.webkitRequestFullscreen();
+      } else {
+        throw error;
+      }
+    } catch(fallbackError) {
+      alert(
+        "Fullscreen was blocked by the browser or game. " +
+        "Make sure you are using the HTTPS version of your site and try again."
+      );
+    }
+  }
 });
+
+function updateFullscreenButton() {
+  const active=Boolean(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement
+  );
+
+  fullscreenButton.textContent=active
+    ? "⛶ Exit Fullscreen"
+    : "⛶ Fullscreen";
+}
+
+document.addEventListener("fullscreenchange",updateFullscreenButton);
+document.addEventListener("webkitfullscreenchange",updateFullscreenButton);
 
 const cachePicker=document.getElementById("cachePicker");
 const cacheList=document.getElementById("cacheGameList");
 const GAME_CACHE="void-network-game-pages-v2";
 
-if("serviceWorker" in navigator && location.protocol==="https:"){
+if("serviceWorker" in navigator && location.protocol==="https:") {
   navigator.serviceWorker.register("./sw.js").then(()=>{
-    status.textContent="Offline site support is enabled. Game availability offline depends on each game's files and host.";
+    status.textContent=
+      "Offline site support is enabled. Game availability offline depends on each game's files and host.";
   }).catch(()=>{
-    status.textContent="Could not register sw.js. Check that it is in the same folder as index.html.";
+    status.textContent=
+      "Could not register sw.js. Check that it is in the same folder as index.html.";
   });
-}else{
-  status.textContent="Open this site through GitHub Pages HTTPS to use offline storage.";
+} else {
+  status.textContent=
+    "Open this site through GitHub Pages HTTPS to use offline storage.";
 }
 
 document.getElementById("selectCacheButton").addEventListener("click",()=>{
   cachePicker.hidden=!cachePicker.hidden;
-  if(cachePicker.hidden)return;
+
+  if(cachePicker.hidden) return;
+
   cacheList.replaceChildren();
+
   games.forEach(([name],index)=>{
     const label=document.createElement("label");
     const checkbox=document.createElement("input");
+
     checkbox.type="checkbox";
     checkbox.value=String(index);
+
     checkbox.addEventListener("change",()=>{
-      if(cacheList.querySelectorAll("input:checked").length>5){
+      if(cacheList.querySelectorAll("input:checked").length>5) {
         checkbox.checked=false;
         status.textContent="You can select up to five games.";
       }
     });
+
     label.append(checkbox,document.createTextNode(name));
     cacheList.appendChild(label);
   });
@@ -339,31 +654,53 @@ document.getElementById("selectCacheButton").addEventListener("click",()=>{
 
 document.getElementById("startCacheButton").addEventListener("click",async()=>{
   const selected=[...cacheList.querySelectorAll("input:checked")];
-  if(!selected.length){status.textContent="Select at least one game.";return;}
-  if(!("caches" in window)){status.textContent="Cache storage is unavailable.";return;}
 
-  status.textContent="Saving selected game pages...";
-  let saved=0,failed=0;
-  const cache=await caches.open(GAME_CACHE);
-
-  for(const checkbox of selected){
-    const [,url]=games[Number(checkbox.value)];
-    try{
-      const response=await fetch(url,{mode:"cors"});
-      if(!response.ok||response.type==="opaque")throw new Error("Not cacheable");
-      await cache.put(url,response.clone());
-      saved++;
-    }catch(e){failed++;}
+  if(!selected.length) {
+    status.textContent="Select at least one game.";
+    return;
   }
 
-  status.textContent=`Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.`;
+  if(!("caches" in window)) {
+    status.textContent="Cache storage is unavailable.";
+    return;
+  }
+
+  status.textContent="Saving selected game pages...";
+
+  let saved=0;
+  let failed=0;
+
+  const cache=await caches.open(GAME_CACHE);
+
+  for(const checkbox of selected) {
+    const [,url]=games[Number(checkbox.value)];
+
+    try {
+      const response=await fetch(url,{mode:"cors"});
+
+      if(!response.ok || response.type==="opaque") {
+        throw new Error("Not cacheable");
+      }
+
+      await cache.put(url,response.clone());
+      saved++;
+    } catch(e) {
+      failed++;
+    }
+  }
+
+  status.textContent=
+    `Saved ${saved} game page(s); ${failed} could not be saved. ` +
+    "This does not guarantee offline gameplay because games may need other files or block caching.";
 });
 
 document.getElementById("unloadCacheButton").addEventListener("click",async()=>{
-  try{
+  try {
     await caches.delete(GAME_CACHE);
     status.textContent="Saved game-page cache cleared.";
-  }catch(e){status.textContent="Could not clear saved pages.";}
+  } catch(e) {
+    status.textContent="Could not clear saved pages.";
+  }
 });
 
 renderGames();
