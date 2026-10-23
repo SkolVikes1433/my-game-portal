@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +16,8 @@
   --bg:#05070b;
   --panel:#0b111b;
   --blue:#168cff;
+  --cyan:#00e5ff;
+  --pink:#ff35c8;
   --text:#eaf3ff;
   --muted:#9badc4;
   --border:#183b60;
@@ -44,20 +45,29 @@ header {
   border-bottom:1px solid var(--border);
 }
 
-/* TOP-LEFT GLITCH TITLE */
-.brand {
+/* CYAN + PINK GLITCH EFFECT */
+.glitch-target {
   position:relative;
   display:inline-block;
-  color:var(--text);
-  text-decoration:none;
-  font:24px 'Black Ops One',cursive;
   isolation:isolate;
-  transition:color .15s ease,text-shadow .15s ease;
-  text-shadow:1px 0 #ff1744,-1px 0 #00e5ff;
+  --glitch-x:0px;
+  --glitch-y:0px;
+  --glitch-skew:0deg;
+  --glitch-opacity:.12;
+  --glitch-glow:0px;
+  --glitch-speed:.2s;
+  transform:translate(var(--glitch-x),var(--glitch-y))
+            skewX(var(--glitch-skew));
+  text-shadow:
+    1px 0 var(--pink),
+    -1px 0 var(--cyan);
+  transition:
+    text-shadow .15s ease,
+    color .15s ease;
 }
 
-.brand::before,
-.brand::after {
+.glitch-target::before,
+.glitch-target::after {
   content:attr(data-text);
   position:absolute;
   inset:0;
@@ -65,56 +75,66 @@ header {
   height:100%;
   overflow:hidden;
   pointer-events:none;
-  opacity:.16;
+  opacity:var(--glitch-opacity);
+  white-space:inherit;
 }
 
-.brand::before {
-  color:#00e5ff;
-  text-shadow:-2px 0 #ff1744;
+.glitch-target::before {
+  color:var(--cyan);
+  text-shadow:2px 0 var(--pink);
   clip-path:inset(0 0 50% 0);
-  transform:translate(-1px,0);
+  transform:translate(-2px,0);
 }
 
-.brand::after {
-  color:#ff1744;
-  text-shadow:2px 0 #00e5ff;
+.glitch-target::after {
+  color:var(--pink);
+  text-shadow:-2px 0 var(--cyan);
   clip-path:inset(50% 0 0 0);
-  transform:translate(1px,0);
+  transform:translate(2px,0);
 }
 
-/* Original hover effect retained */
-.brand:hover {
+/* Stronger glitch when the pointer gets close */
+.glitch-target.proximity-active {
   color:#fff;
   text-shadow:
-    3px 0 #ff1744,
-    -3px 0 #00e5ff,
-    0 0 12px #168cff;
-  animation:brand-jitter .12s steps(2,end) infinite;
+    2px 0 var(--pink),
+    -2px 0 var(--cyan),
+    0 0 var(--glitch-glow) var(--blue);
 }
 
-.brand:hover::before {
+.glitch-target.proximity-active::before {
+  opacity:var(--glitch-opacity);
+  animation:glitch-cyan var(--glitch-speed) steps(2,end) infinite;
+}
+
+.glitch-target.proximity-active::after {
+  opacity:var(--glitch-opacity);
+  animation:glitch-pink var(--glitch-speed) steps(2,end) infinite;
+}
+
+/* Brief natural glitches */
+.glitch-target.glitch-active {
+  color:#fff;
+  text-shadow:
+    3px 0 var(--pink),
+    -3px 0 var(--cyan),
+    0 0 10px var(--blue);
+}
+
+.glitch-target.glitch-active::before {
   opacity:1;
-  animation:brand-slice-a .16s steps(2,end) infinite;
+  animation:glitch-cyan .12s steps(2,end) infinite;
 }
 
-.brand:hover::after {
+.glitch-target.glitch-active::after {
   opacity:1;
-  animation:brand-slice-b .12s steps(2,end) infinite;
+  animation:glitch-pink .14s steps(2,end) infinite;
 }
 
-@keyframes brand-jitter {
-  0%   { transform:translate(0,0) skewX(0); }
-  20%  { transform:translate(-2px,1px) skewX(-3deg); }
-  40%  { transform:translate(2px,-1px) skewX(2deg); }
-  60%  { transform:translate(-1px,0) skewX(0); }
-  80%  { transform:translate(2px,1px) skewX(-2deg); }
-  100% { transform:translate(0,0) skewX(0); }
-}
-
-@keyframes brand-slice-a {
+@keyframes glitch-cyan {
   0% {
     clip-path:inset(5% 0 80% 0);
-    transform:translate(-5px,-2px);
+    transform:translate(-4px,-2px);
   }
   20% {
     clip-path:inset(35% 0 45% 0);
@@ -138,7 +158,7 @@ header {
   }
 }
 
-@keyframes brand-slice-b {
+@keyframes glitch-pink {
   0% {
     clip-path:inset(70% 0 5% 0);
     transform:translate(4px,1px);
@@ -161,173 +181,20 @@ header {
   }
 }
 
-/* ==================================================
-   VOID NETWORK V6 - INDEPENDENT PROXIMITY GLITCH
-   Applies to the top-left title and Welcome heading.
-   ================================================== */
-
-.glitch-text {
-  position:relative;
-  isolation:isolate;
-  --glitch-x:0px;
-  --glitch-y:0px;
-  --glitch-strength:0;
-  transition:
-    text-shadow .12s ease,
-    filter .12s ease;
+/* Top-left title */
+.brand {
+  color:var(--text);
+  text-decoration:none;
+  font:24px 'Black Ops One',cursive;
+  white-space:nowrap;
 }
 
-/* Two independently offset color layers */
-.glitch-text::before,
-.glitch-text::after {
-  content:attr(data-text);
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  pointer-events:none;
-  opacity:var(--glitch-strength);
-  clip-path:inset(0);
-  transition:opacity .12s ease;
+/* Welcome heading */
+#welcomeTitle {
+  margin:0;
+  font:clamp(30px,6vw,48px) 'Black Ops One',cursive;
 }
 
-.glitch-text::before {
-  color:#00e5ff;
-  text-shadow:2px 0 #168cff;
-  transform:translate(
-    var(--glitch-x),
-    var(--glitch-y)
-  );
-}
-
-.glitch-text::after {
-  color:#168cff;
-  text-shadow:-2px 0 #00e5ff;
-  transform:translate(
-    calc(var(--glitch-x) * -1),
-    calc(var(--glitch-y) * -1)
-  );
-}
-
-/* JavaScript controls the intensity independently */
-.glitch-text.glitch-active {
-  color:#fff;
-  text-shadow:
-    var(--glitch-x) 0 #00e5ff,
-    calc(var(--glitch-x) * -1) 0 #168cff,
-    0 0 calc(var(--glitch-strength) * 12px) #168cff;
-}
-
-/* Natural, short bursts */
-.glitch-text.natural-glitch {
-  animation:network-flicker .10s steps(2,end) infinite;
-}
-
-.glitch-text.natural-glitch::before {
-  animation:network-slice-cyan .13s steps(2,end) infinite;
-}
-
-.glitch-text.natural-glitch::after {
-  animation:network-slice-blue .11s steps(2,end) infinite;
-}
-
-@keyframes network-flicker {
-  0% {
-    filter:brightness(1);
-    transform:translate(0,0) skewX(0);
-  }
-  20% {
-    filter:brightness(1.5);
-    transform:translate(-1px,1px) skewX(-1deg);
-  }
-  40% {
-    filter:brightness(.8);
-    transform:translate(2px,-1px) skewX(2deg);
-  }
-  60% {
-    filter:brightness(1.7);
-    transform:translate(-2px,0) skewX(-1deg);
-  }
-  80% {
-    filter:brightness(1.1);
-    transform:translate(1px,1px) skewX(1deg);
-  }
-  100% {
-    filter:brightness(1);
-    transform:translate(0,0) skewX(0);
-  }
-}
-
-@keyframes network-slice-cyan {
-  0% {
-    clip-path:inset(0 0 85% 0);
-    translate:-4px -1px;
-  }
-  25% {
-    clip-path:inset(35% 0 40% 0);
-    translate:4px 1px;
-  }
-  50% {
-    clip-path:inset(70% 0 10% 0);
-    translate:-3px 0;
-  }
-  75% {
-    clip-path:inset(15% 0 65% 0);
-    translate:3px -1px;
-  }
-  100% {
-    clip-path:inset(0 0 85% 0);
-    translate:0 0;
-  }
-}
-
-@keyframes network-slice-blue {
-  0% {
-    clip-path:inset(75% 0 0 0);
-    translate:4px 1px;
-  }
-  25% {
-    clip-path:inset(15% 0 60% 0);
-    translate:-3px 0;
-  }
-  50% {
-    clip-path:inset(40% 0 35% 0);
-    translate:4px -1px;
-  }
-  75% {
-    clip-path:inset(5% 0 80% 0);
-    translate:-4px 1px;
-  }
-  100% {
-    clip-path:inset(75% 0 0 0);
-    translate:0 0;
-  }
-}
-
-/* Keep the two text elements compatible with the effect */
-.brand.glitch-text {
-  transform-origin:center;
-}
-
-h1.glitch-text {
-  display:inline-block;
-}
-
-/* Accessibility: respect reduced-motion preferences */
-@media (prefers-reduced-motion:reduce) {
-  .brand,
-  .brand::before,
-  .brand::after,
-  .glitch-text,
-  .glitch-text::before,
-  .glitch-text::after {
-    animation:none !important;
-    transition:none !important;
-  }
-}
-
-/* Original layout */
 nav {
   display:flex;
   gap:10px;
@@ -433,6 +300,18 @@ h2 {
   border:1px solid var(--blue);
   border-radius:9px;
   background:#000;
+}
+
+#player:fullscreen {
+  width:100%;
+  height:100%;
+  border:0;
+  border-radius:0;
+}
+
+#player:fullscreen #gameFrame {
+  height:100%;
+  min-height:0;
 }
 
 #gameFrame {
@@ -546,12 +425,21 @@ input:focus-visible {
     margin:6px 0;
   }
 }
+
+@media(prefers-reduced-motion:reduce) {
+  .glitch-target,
+  .glitch-target::before,
+  .glitch-target::after {
+    animation:none !important;
+    transition:none !important;
+  }
+}
 </style>
 </head>
 
 <body>
 <header>
-  <a class="brand glitch-text"
+  <a class="brand glitch-target"
      data-text="VOID NETWORK V6"
      href="./index.html">VOID NETWORK V6</a>
 
@@ -564,10 +452,13 @@ input:focus-visible {
 <main>
 <section id="homeScreen">
   <div class="hero">
-    <h1 class="glitch-text" data-text="Welcome">Welcome</h1>
+    <h1 id="welcomeTitle"
+        class="glitch-target"
+        data-text="Welcome">Welcome</h1>
   </div>
 
-  <input id="search" type="search" placeholder="Search games..."
+  <input id="search" type="search"
+         placeholder="Search games..."
          aria-label="Search games">
 
   <h2>ALL GAMES</h2>
@@ -577,16 +468,26 @@ input:focus-visible {
   <section id="offlinePlay">
     <h2>OFFLINE PLAY</h2>
     <p>Choose up to five game URLs to try to save. Saving a game page does not guarantee the complete game will work offline.</p>
-    <button class="offline-btn" id="selectCacheButton">Select Games to Cache</button>
+
+    <button class="offline-btn" id="selectCacheButton">
+      Select Games to Cache
+    </button>
 
     <div id="cachePicker" hidden>
       <p>Select up to five games:</p>
       <div id="cacheGameList"></div>
-      <button class="offline-btn" id="startCacheButton">Cache Selected Games</button>
+      <button class="offline-btn" id="startCacheButton">
+        Cache Selected Games
+      </button>
     </div>
 
-    <button class="offline-btn" id="unloadCacheButton">Clear Saved Game Pages</button>
-    <p id="offlineStatus" role="status" aria-live="polite">Checking offline support...</p>
+    <button class="offline-btn" id="unloadCacheButton">
+      Clear Saved Game Pages
+    </button>
+
+    <p id="offlineStatus" role="status" aria-live="polite">
+      Checking offline support...
+    </p>
   </section>
 </section>
 
@@ -600,10 +501,13 @@ input:focus-visible {
   </div>
 
   <div id="player">
-    <iframe id="gameFrame" src="about:blank" title="Game player"
+    <iframe id="gameFrame"
+      src="about:blank"
+      title="Game player"
       allow="fullscreen; autoplay; gamepad"
       allowfullscreen></iframe>
   </div>
+
   <p id="gameMessage" role="status"></p>
 </section>
 </main>
@@ -613,16 +517,44 @@ input:focus-visible {
 <script>
 "use strict";
 
+/* TAB CLOAKER SETTINGS */
 const PRESETS = {
-  "Default":{title:"VOID NETWORK V6",icon:"./void-logo.png"},
-  "Khan Academy":{title:"Khan Academy",icon:"https://cdn.kastatic.org/images/favicon.ico"},
-  "Google":{title:"Google",icon:"https://www.google.com/favicon.ico"},
-  "YouTube":{title:"YouTube",icon:"https://www.youtube.com/favicon.ico"},
-  "Google Docs":{title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"},
-  "Desmos":{title:"Desmos | Graphing Calculator",icon:"https://www.desmos.com/favicon.ico"},
-  "Google Drive":{title:"Google Drive",icon:"https://drive.google.com/favicon.ico"},
-  "Google Classroom":{title:"Home - Classroom",icon:"https://ssl.gstatic.com/classroom/favicon.png"},
-  "XtraMath":{title:"XtraMath",icon:"https://xtramath.org/favicon.ico"}
+  "Default": {
+    title:"VOID NETWORK V6",
+    icon:"./void-logo.png"
+  },
+  "Khan Academy": {
+    title:"Khan Academy",
+    icon:"https://cdn.kastatic.org/images/favicon.ico"
+  },
+  "Google": {
+    title:"Google",
+    icon:"https://www.google.com/favicon.ico"
+  },
+  "YouTube": {
+    title:"YouTube",
+    icon:"https://www.youtube.com/favicon.ico"
+  },
+  "Google Docs": {
+    title:"Google Docs",
+    icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+  },
+  "Desmos": {
+    title:"Desmos | Graphing Calculator",
+    icon:"https://www.desmos.com/favicon.ico"
+  },
+  "Google Drive": {
+    title:"Google Drive",
+    icon:"https://drive.google.com/favicon.ico"
+  },
+  "Google Classroom": {
+    title:"Home - Classroom",
+    icon:"https://ssl.gstatic.com/classroom/favicon.png"
+  },
+  "XtraMath": {
+    title:"XtraMath",
+    icon:"https://xtramath.org/favicon.ico"
+  }
 };
 
 function loadPreset() {
@@ -642,131 +574,199 @@ loadPreset();
 window.addEventListener("pageshow",loadPreset);
 
 window.addEventListener("storage",e=>{
-  if(e.key==="userCloak"||e.key===null) loadPreset();
+  if(e.key==="userCloak"||e.key===null) {
+    loadPreset();
+  }
 });
 
-/* ==================================================
-   INDEPENDENT GLITCH CONTROLLER
-   Each heading has its own pointer-distance and timer.
-   ================================================== */
+/* NATURAL + POINTER-BASED GLITCH SYSTEM */
+(function initGlitch() {
+  const targets=[...document.querySelectorAll(".glitch-target")];
 
-(function setupNetworkGlitch() {
-  const reduceMotion=window.matchMedia(
+  if(!targets.length) return;
+
+  const reducedMotion=window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   );
 
-  if(reduceMotion.matches) return;
+  let pointerX=-10000;
+  let pointerY=-10000;
+  let ambientTimer=null;
+  let lastFrame=0;
 
-  const targets=[...document.querySelectorAll(".glitch-text")];
+  const random=(min,max)=>{
+    return Math.random()*(max-min)+min;
+  };
 
-  targets.forEach((element,index)=>{
-    let pointerX=null;
-    let pointerY=null;
-    let naturalTimer=null;
-    let nextBurst=null;
-    let naturalActive=false;
+  function resetTarget(target) {
+    target.classList.remove("glitch-active");
+    target.classList.remove("proximity-active");
 
-    const radius=190;
-    const strengthLimit=1;
+    target.style.setProperty("--glitch-x","0px");
+    target.style.setProperty("--glitch-y","0px");
+    target.style.setProperty("--glitch-skew","0deg");
+    target.style.setProperty("--glitch-opacity",".12");
+    target.style.setProperty("--glitch-glow","0px");
+    target.style.setProperty("--glitch-speed",".2s");
+  }
 
-    function updateGlitch() {
-      const rect=element.getBoundingClientRect();
-      let strength=0;
+  function ambientGlitch() {
+    if(reducedMotion.matches || document.hidden) return;
 
-      if(pointerX!==null && pointerY!==null) {
-        const closestX=Math.max(
-          rect.left,
-          Math.min(pointerX,rect.right)
-        );
+    /* Each text element glitches independently. */
+    const target=targets[
+      Math.floor(Math.random()*targets.length)
+    ];
 
-        const closestY=Math.max(
-          rect.top,
-          Math.min(pointerY,rect.bottom)
-        );
+    target.classList.add("glitch-active");
 
-        const dx=pointerX-closestX;
-        const dy=pointerY-closestY;
-        const distance=Math.sqrt(dx*dx+dy*dy);
-
-        strength=Math.max(0,1-distance/radius);
-        strength=strength*strength;
-      }
-
-      if(naturalActive) {
-        strength=Math.max(strength,0.85);
-      }
-
-      strength=Math.min(strength,strengthLimit);
-
-      const x=(Math.random()-0.5)*7*strength;
-      const y=(Math.random()-0.5)*3*strength;
-
-      element.style.setProperty(
-        "--glitch-strength",
-        strength.toFixed(3)
-      );
-
-      element.style.setProperty(
-        "--glitch-x",
-        x.toFixed(2)+"px"
-      );
-
-      element.style.setProperty(
-        "--glitch-y",
-        y.toFixed(2)+"px"
-      );
-
-      element.classList.toggle(
-        "glitch-active",
-        strength>0.025
-      );
-    }
-
-    function startNaturalBurst() {
-      naturalActive=true;
-      element.classList.add("natural-glitch");
-      updateGlitch();
-
-      naturalTimer=window.setTimeout(()=>{
-        naturalActive=false;
-        element.classList.remove("natural-glitch");
-        updateGlitch();
-
-        /* Roughly five seconds between bursts per element */
-        nextBurst=window.setTimeout(
-          startNaturalBurst,
-          4500+Math.random()*1000
-        );
-      },500);
-    }
-
-    function onPointerMove(event) {
-      pointerX=event.clientX;
-      pointerY=event.clientY;
-      updateGlitch();
-    }
-
-    function onPointerLeave() {
-      pointerX=null;
-      pointerY=null;
-      updateGlitch();
-    }
-
-    document.addEventListener("pointermove",onPointerMove,{
-      passive:true
-    });
-
-    document.addEventListener("pointerleave",onPointerLeave);
-
-    /* Independent initial delays stop both headings
-       from always glitching at exactly the same time. */
-    nextBurst=window.setTimeout(
-      startNaturalBurst,
-      500+index*1700+Math.random()*900
+    target.style.setProperty(
+      "--glitch-x",
+      random(-2,2).toFixed(1)+"px"
     );
+
+    target.style.setProperty(
+      "--glitch-y",
+      random(-1,1).toFixed(1)+"px"
+    );
+
+    target.style.setProperty(
+      "--glitch-skew",
+      random(-2,2).toFixed(1)+"deg"
+    );
+
+    window.setTimeout(()=>{
+      target.classList.remove("glitch-active");
+      updateProximity();
+    },500);
+  }
+
+  function updateProximity() {
+    if(reducedMotion.matches) {
+      targets.forEach(resetTarget);
+      return;
+    }
+
+    targets.forEach(target=>{
+      const rect=target.getBoundingClientRect();
+
+      const centerX=rect.left+rect.width/2;
+      const centerY=rect.top+rect.height/2;
+
+      const dx=pointerX-centerX;
+      const dy=pointerY-centerY;
+      const distance=Math.sqrt(dx*dx+dy*dy);
+
+      /* The effect builds smoothly as the pointer approaches. */
+      const radius=260;
+      const proximity=Math.max(0,1-distance/radius);
+      const eased=proximity*proximity;
+
+      if(proximity>.015) {
+        target.classList.add("proximity-active");
+
+        target.style.setProperty(
+          "--glitch-x",
+          (Math.sin(performance.now()/45)*eased*3).toFixed(2)+"px"
+        );
+
+        target.style.setProperty(
+          "--glitch-y",
+          (Math.cos(performance.now()/55)*eased*2).toFixed(2)+"px"
+        );
+
+        target.style.setProperty(
+          "--glitch-skew",
+          (Math.sin(performance.now()/70)*eased*4).toFixed(2)+"deg"
+        );
+
+        target.style.setProperty(
+          "--glitch-opacity",
+          (.12+eased*.88).toFixed(2)
+        );
+
+        target.style.setProperty(
+          "--glitch-glow",
+          (eased*14).toFixed(1)+"px"
+        );
+
+        target.style.setProperty(
+          "--glitch-speed",
+          Math.max(.07,.24-eased*.17).toFixed(2)+"s"
+        );
+      } else {
+        target.classList.remove("proximity-active");
+
+        target.style.setProperty("--glitch-x","0px");
+        target.style.setProperty("--glitch-y","0px");
+        target.style.setProperty("--glitch-skew","0deg");
+        target.style.setProperty("--glitch-opacity",".12");
+        target.style.setProperty("--glitch-glow","0px");
+        target.style.setProperty("--glitch-speed",".2s");
+      }
+    });
+  }
+
+  window.addEventListener("pointermove",event=>{
+    pointerX=event.clientX;
+    pointerY=event.clientY;
+
+    if(!lastFrame) {
+      updateProximity();
+      lastFrame=performance.now();
+      return;
+    }
+
+    const now=performance.now();
+
+    if(now-lastFrame>25) {
+      lastFrame=now;
+      updateProximity();
+    }
+  },{passive:true});
+
+  window.addEventListener("pointerleave",()=>{
+    pointerX=-10000;
+    pointerY=-10000;
+    updateProximity();
   });
+
+  window.addEventListener("scroll",updateProximity,{passive:true});
+
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden) {
+      targets.forEach(resetTarget);
+    } else {
+      updateProximity();
+    }
+  });
+
+  reducedMotion.addEventListener?.("change",()=>{
+    if(reducedMotion.matches) {
+      targets.forEach(resetTarget);
+    } else {
+      updateProximity();
+    }
+  });
+
+  /* First glitch occurs after about five seconds. */
+  function scheduleAmbientGlitch() {
+    if(ambientTimer!==null) {
+      clearTimeout(ambientTimer);
+    }
+
+    ambientTimer=window.setTimeout(()=>{
+      ambientGlitch();
+
+      /* Repeat naturally about every five seconds. */
+      scheduleAmbientGlitch();
+    },5000);
+  }
+
+  scheduleAmbientGlitch();
 })();
 
+/* GAME LIBRARY — ORIGINAL GAME URLS */
 const games = [
   ["Gaming Escape","https://badpiggies.global.ssl.fastly.net/index.html"],
   ["Super Mario 64","https://arkshocer.github.io/sm64/"],
@@ -819,6 +819,7 @@ const games = [
   ["Notflix 2.0","https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit#slide=id.g3950afba0ed_0_0"]
 ];
 
+/* GAME GRID */
 const grid=document.getElementById("gameGrid");
 const search=document.getElementById("search");
 const home=document.getElementById("homeScreen");
@@ -830,7 +831,9 @@ function renderGames() {
   grid.replaceChildren();
 
   const query=search.value.trim().toLowerCase();
-  const results=games.filter(g=>g[0].toLowerCase().includes(query));
+  const results=games.filter(g=>
+    g[0].toLowerCase().includes(query)
+  );
 
   results.forEach(([name,url])=>{
     const button=document.createElement("button");
@@ -840,6 +843,7 @@ function renderGames() {
 
     button.addEventListener("click",()=>{
       document.getElementById("gameTitle").textContent=name;
+
       document.getElementById("gameMessage").textContent=
         "If this game does not load, its host may block embedded playback.";
 
@@ -858,6 +862,7 @@ function renderGames() {
 
 search.addEventListener("input",renderGames);
 
+/* BACK BUTTON — KEEP GAME PLAYER INSIDE THE WEBSITE */
 document.getElementById("backButton").addEventListener("click",()=>{
   frame.src="about:blank";
   screen.style.display="none";
@@ -865,6 +870,7 @@ document.getElementById("backButton").addEventListener("click",()=>{
   window.scrollTo(0,0);
 });
 
+/* FULLSCREEN */
 document.getElementById("fullscreenButton").addEventListener("click",async()=>{
   try {
     if(document.fullscreenElement) {
@@ -877,6 +883,15 @@ document.getElementById("fullscreenButton").addEventListener("click",async()=>{
   }
 });
 
+document.addEventListener("fullscreenchange",()=>{
+  const button=document.getElementById("fullscreenButton");
+
+  button.textContent=document.fullscreenElement
+    ?"Exit Fullscreen"
+    :"Fullscreen";
+});
+
+/* OFFLINE CACHE SETTINGS */
 const cachePicker=document.getElementById("cachePicker");
 const cacheList=document.getElementById("cacheGameList");
 const GAME_CACHE="void-network-game-pages-v2";
@@ -885,7 +900,9 @@ if("serviceWorker" in navigator && location.protocol==="https:") {
   navigator.serviceWorker.register("./sw.js",{
     updateViaCache:"none"
   }).then(async registration=>{
-    await registration.update();
+    try {
+      await registration.update();
+    } catch(e) {}
 
     status.textContent=
       "Offline site support is enabled. Game availability offline depends on each game's files and host.";
@@ -900,8 +917,10 @@ if("serviceWorker" in navigator && location.protocol==="https:") {
     "Open this site through GitHub Pages HTTPS to use offline storage.";
 }
 
+/* SELECT GAMES TO CACHE */
 document.getElementById("selectCacheButton").addEventListener("click",()=>{
   cachePicker.hidden=!cachePicker.hidden;
+
   if(cachePicker.hidden) return;
 
   cacheList.replaceChildren();
@@ -925,8 +944,11 @@ document.getElementById("selectCacheButton").addEventListener("click",()=>{
   });
 });
 
+/* SAVE SELECTED GAME PAGES */
 document.getElementById("startCacheButton").addEventListener("click",async()=>{
-  const selected=[...cacheList.querySelectorAll("input:checked")];
+  const selected=[
+    ...cacheList.querySelectorAll("input:checked")
+  ];
 
   if(!selected.length) {
     status.textContent="Select at least one game.";
@@ -943,29 +965,34 @@ document.getElementById("startCacheButton").addEventListener("click",async()=>{
   let saved=0;
   let failed=0;
 
-  const cache=await caches.open(GAME_CACHE);
+  try {
+    const cache=await caches.open(GAME_CACHE);
 
-  for(const checkbox of selected) {
-    const [,url]=games[Number(checkbox.value)];
+    for(const checkbox of selected) {
+      const [,url]=games[Number(checkbox.value)];
 
-    try {
-      const response=await fetch(url,{mode:"cors"});
+      try {
+        const response=await fetch(url,{mode:"cors"});
 
-      if(!response.ok||response.type==="opaque") {
-        throw new Error("Not cacheable");
+        if(!response.ok||response.type==="opaque") {
+          throw new Error("Not cacheable");
+        }
+
+        await cache.put(url,response.clone());
+        saved++;
+      } catch(e) {
+        failed++;
       }
-
-      await cache.put(url,response.clone());
-      saved++;
-    } catch(e) {
-      failed++;
     }
-  }
 
-  status.textContent=
-    `Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.`;
+    status.textContent=
+      `Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.`;
+  } catch(e) {
+    status.textContent="Could not open the saved-game cache.";
+  }
 });
 
+/* CLEAR SAVED GAME PAGES */
 document.getElementById("unloadCacheButton").addEventListener("click",async()=>{
   try {
     await caches.delete(GAME_CACHE);
