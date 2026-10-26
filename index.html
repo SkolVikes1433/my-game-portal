@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,191 +16,382 @@
   --bg:#05070b;
   --panel:#0b111b;
   --blue:#168cff;
-  --cyan:#00e5ff;
-  --pink:#ff1493;
   --text:#eaf3ff;
   --muted:#9badc4;
   --border:#183b60;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:'Rajdhani',sans-serif
-}
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:14px;flex-wrap:wrap;padding:18px 5%;
-  background:#080d15;border-bottom:1px solid var(--border)
-}
-.brand{
-  color:var(--text);text-decoration:none;
-  font:24px 'Black Ops One',cursive
-}
-nav{display:flex;gap:10px;flex-wrap:wrap}
-nav a,.btn{
-  display:inline-block;padding:10px 15px;
-  border:1px solid var(--blue);border-radius:7px;
-  background:#0b1726;color:var(--text);
-  font:700 16px 'Rajdhani',sans-serif;
-  text-decoration:none;cursor:pointer
-}
-nav a:hover,.btn:hover,.game-card:hover{
-  background:#102b47;box-shadow:0 0 14px #168cff25
-}
-main{width:min(1200px,92%);margin:30px auto}
-.hero{
-  padding:30px 15px;margin-bottom:25px;text-align:center;
-  background:linear-gradient(145deg,#0c1726,#070b12);
-  border:1px solid var(--border);border-radius:12px
-}
-h1{margin:0;font:clamp(30px,6vw,48px) 'Black Ops One',cursive}
-h2{font:24px 'Black Ops One',cursive}
-.hero p{color:var(--muted);font-size:19px}
 
-/* Subtle cyan and pink glitch: readable while idle */
-.glitch-target{
-  --gx:0px;
-  --gy:0px;
-  --pink-shadow:0px;
-  --cyan-shadow:0px;
-  --slice-opacity:0;
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Rajdhani',sans-serif;
+}
+
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  padding:18px 5%;
+  background:#080d15;
+  border-bottom:1px solid var(--border);
+}
+
+/* TOP-LEFT GLITCH TITLE */
+.brand {
   position:relative;
   display:inline-block;
+  color:var(--text);
+  text-decoration:none;
+  font:24px 'Black Ops One',cursive;
   isolation:isolate;
-  transform:translate(var(--gx),var(--gy));
-  text-shadow:
-    var(--pink-shadow) 0 0 #ff1493,
-    var(--cyan-shadow) 0 0 #00e5ff;
-  transition:transform .15s ease,text-shadow .15s ease;
+  transition:color .15s ease,text-shadow .15s ease;
+  text-shadow:1px 0 #ff1744,-1px 0 #00e5ff;
 }
-.glitch-target::before,
-.glitch-target::after{
+
+.brand::before,
+.brand::after {
   content:attr(data-text);
   position:absolute;
   inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
   pointer-events:none;
-  white-space:inherit;
-  opacity:var(--slice-opacity);
-}
-.glitch-target::before{
-  color:#00e5ff;
-  clip-path:inset(0 0 55% 0);
-  transform:translateX(var(--cyan-shadow));
-}
-.glitch-target::after{
-  color:#ff1493;
-  clip-path:inset(55% 0 0 0);
-  transform:translateX(var(--pink-shadow));
-}
-.glitch-target.ambient-glitch{
-  animation:ambient-glitch .5s steps(2,end);
-}
-.glitch-target.ambient-glitch::before{
-  animation:cyan-slice .5s steps(2,end);
-  opacity:.75;
-}
-.glitch-target.ambient-glitch::after{
-  animation:pink-slice .5s steps(2,end);
-  opacity:.75;
-}
-@keyframes ambient-glitch{
-  0%,100%{transform:translate(0,0)}
-  20%{transform:translate(-2px,1px)}
-  45%{transform:translate(2px,-1px)}
-  70%{transform:translate(-1px,0)}
-}
-@keyframes cyan-slice{
-  0%,100%{clip-path:inset(0 0 90% 0)}
-  30%{clip-path:inset(15% 0 60% 0)}
-  65%{clip-path:inset(55% 0 25% 0)}
-}
-@keyframes pink-slice{
-  0%,100%{clip-path:inset(90% 0 0 0)}
-  30%{clip-path:inset(60% 0 15% 0)}
-  65%{clip-path:inset(25% 0 55% 0)}
+  opacity:.16;
 }
 
-#search{
-  width:100%;padding:14px 16px;border:1px solid var(--border);
-  border-radius:8px;background:#080d15;color:var(--text);
-  font:600 18px 'Rajdhani',sans-serif
+.brand::before {
+  color:#00e5ff;
+  text-shadow:-2px 0 #ff1744;
+  clip-path:inset(0 0 50% 0);
+  transform:translate(-1px,0);
 }
-#search:focus{
-  outline:none;border-color:var(--cyan);
-  box-shadow:0 0 10px #00e5ff20
+
+.brand::after {
+  color:#ff1744;
+  text-shadow:2px 0 #00e5ff;
+  clip-path:inset(50% 0 0 0);
+  transform:translate(1px,0);
 }
-#gameGrid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
-  gap:13px
+
+/* STRONGER GLITCH WHEN HOVERED */
+.brand:hover {
+  color:#fff;
+  text-shadow:
+    3px 0 #ff1744,
+    -3px 0 #00e5ff,
+    0 0 12px #168cff;
+  animation:brand-jitter .12s steps(2,end) infinite;
 }
-.game-card{
-  min-height:78px;padding:14px 10px;
-  border:1px solid var(--border);border-radius:8px;
-  background:var(--panel);color:var(--text);
-  font:700 18px 'Rajdhani',sans-serif;cursor:pointer;
-  overflow-wrap:anywhere
+
+.brand:hover::before {
+  opacity:1;
+  animation:brand-slice-a .16s steps(2,end) infinite;
 }
-#noResults{display:none;color:var(--muted)}
-#gameScreen{display:none}
-.game-heading{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;flex-wrap:wrap
+
+.brand:hover::after {
+  opacity:1;
+  animation:brand-slice-b .12s steps(2,end) infinite;
 }
-.game-heading h2{overflow-wrap:anywhere}
-#player{
-  overflow:hidden;border:1px solid var(--blue);
-  border-radius:9px;background:#000
+
+@keyframes brand-jitter {
+  0%   { transform:translate(0,0) skewX(0); }
+  20%  { transform:translate(-2px,1px) skewX(-3deg); }
+  40%  { transform:translate(2px,-1px) skewX(2deg); }
+  60%  { transform:translate(-1px,0) skewX(0); }
+  80%  { transform:translate(2px,1px) skewX(-2deg); }
+  100% { transform:translate(0,0) skewX(0); }
 }
-#gameFrame{
-  display:block;width:100%;height:75vh;min-height:400px;
-  border:0;background:#000
+
+@keyframes brand-slice-a {
+  0% {
+    clip-path:inset(5% 0 80% 0);
+    transform:translate(-5px,-2px);
+  }
+  20% {
+    clip-path:inset(35% 0 45% 0);
+    transform:translate(4px,1px);
+  }
+  40% {
+    clip-path:inset(65% 0 20% 0);
+    transform:translate(-3px,0);
+  }
+  60% {
+    clip-path:inset(15% 0 65% 0);
+    transform:translate(5px,-1px);
+  }
+  80% {
+    clip-path:inset(45% 0 35% 0);
+    transform:translate(-4px,2px);
+  }
+  100% {
+    clip-path:inset(5% 0 80% 0);
+    transform:translate(0,0);
+  }
 }
-#offlinePlay{
-  margin-top:35px;padding:24px;border:1px solid var(--border);
-  border-radius:10px;background:linear-gradient(145deg,#0b111b,#070b12)
+
+@keyframes brand-slice-b {
+  0% {
+    clip-path:inset(70% 0 5% 0);
+    transform:translate(4px,1px);
+  }
+  25% {
+    clip-path:inset(20% 0 60% 0);
+    transform:translate(-5px,0);
+  }
+  50% {
+    clip-path:inset(45% 0 30% 0);
+    transform:translate(3px,-2px);
+  }
+  75% {
+    clip-path:inset(5% 0 75% 0);
+    transform:translate(-4px,1px);
+  }
+  100% {
+    clip-path:inset(70% 0 5% 0);
+    transform:translate(0,0);
+  }
 }
-#offlinePlay h2{color:var(--cyan);font-size:20px;letter-spacing:2px}
-#offlinePlay p{color:var(--muted);font-size:16px}
-.offline-btn{
-  margin:6px 6px 6px 0;padding:12px 16px;
-  border:1px solid var(--blue);border-radius:7px;
-  background:#0b1726;color:var(--text);
-  font:700 16px 'Rajdhani',sans-serif;cursor:pointer
+
+@media (prefers-reduced-motion:reduce) {
+  .brand,
+  .brand::before,
+  .brand::after {
+    animation:none !important;
+  }
 }
-.offline-btn:hover{border-color:var(--pink)}
-#cachePicker{
-  margin-top:16px;padding:14px;border:1px solid var(--border);
-  border-radius:8px
+
+nav {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
-#cacheGameList label{display:block;padding:7px 0}
-#cacheGameList input{accent-color:var(--cyan);margin-right:9px}
-[hidden]{display:none!important}
-#offlineStatus{overflow-wrap:anywhere}
-footer{
-  margin-top:40px;padding:22px;border-top:1px solid var(--border);
-  color:var(--muted);text-align:center;letter-spacing:2px
+
+nav a,.btn {
+  display:inline-block;
+  padding:10px 15px;
+  border:1px solid var(--blue);
+  border-radius:7px;
+  background:#0b1726;
+  color:var(--text);
+  font:700 16px 'Rajdhani',sans-serif;
+  text-decoration:none;
+  cursor:pointer;
 }
-button:focus-visible,a:focus-visible,input:focus-visible{
-  outline:2px solid #8bcaff;outline-offset:3px
+
+nav a:hover,.btn:hover,.game-card:hover {
+  background:#102b47;
+  box-shadow:0 0 14px #168cff25;
 }
-@media(max-width:600px){
-  header{padding:15px 4%}.brand{font-size:20px}
-  main{margin-top:22px}
-  #gameGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  #gameFrame{height:65vh;min-height:350px}
-  #offlinePlay{padding:17px}
-  .offline-btn{width:100%;margin:6px 0}
+
+main {
+  width:min(1200px,92%);
+  margin:30px auto;
 }
-@media(prefers-reduced-motion:reduce){
-  .glitch-target,.glitch-target::before,.glitch-target::after{
-    animation:none!important;transition:none!important
+
+.hero {
+  padding:30px 15px;
+  margin-bottom:25px;
+  text-align:center;
+  background:linear-gradient(145deg,#0c1726,#070b12);
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+h1 {
+  margin:0;
+  font:clamp(30px,6vw,48px) 'Black Ops One',cursive;
+}
+
+h2 {
+  font:24px 'Black Ops One',cursive;
+}
+
+.hero p {
+  color:var(--muted);
+  font-size:19px;
+}
+
+#search {
+  width:100%;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#080d15;
+  color:var(--text);
+  font:600 18px 'Rajdhani',sans-serif;
+}
+
+#gameGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+  gap:13px;
+}
+
+.game-card {
+  min-height:78px;
+  padding:14px 10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--panel);
+  color:var(--text);
+  font:700 18px 'Rajdhani',sans-serif;
+  cursor:pointer;
+  overflow-wrap:anywhere;
+}
+
+#noResults {
+  display:none;
+  color:var(--muted);
+}
+
+#gameScreen {
+  display:none;
+}
+
+.game-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.game-heading h2 {
+  overflow-wrap:anywhere;
+}
+
+#player {
+  overflow:hidden;
+  border:1px solid var(--blue);
+  border-radius:9px;
+  background:#000;
+}
+
+#gameFrame {
+  display:block;
+  width:100%;
+  height:75vh;
+  min-height:400px;
+  border:0;
+  background:#000;
+}
+
+#offlinePlay {
+  margin-top:35px;
+  padding:24px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:linear-gradient(145deg,#0b111b,#070b12);
+}
+
+#offlinePlay h2 {
+  color:var(--blue);
+  font-size:20px;
+  letter-spacing:2px;
+}
+
+#offlinePlay p {
+  color:var(--muted);
+  font-size:16px;
+}
+
+.offline-btn {
+  margin:6px 6px 6px 0;
+  padding:12px 16px;
+  border:1px solid var(--blue);
+  border-radius:7px;
+  background:#0b1726;
+  color:var(--text);
+  font:700 16px 'Rajdhani',sans-serif;
+  cursor:pointer;
+}
+
+#cachePicker {
+  margin-top:16px;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+
+#cacheGameList label {
+  display:block;
+  padding:7px 0;
+}
+
+#cacheGameList input {
+  accent-color:var(--blue);
+  margin-right:9px;
+}
+
+[hidden] {
+  display:none !important;
+}
+
+#offlineStatus {
+  overflow-wrap:anywhere;
+}
+
+footer {
+  margin-top:40px;
+  padding:22px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  text-align:center;
+  letter-spacing:2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline:2px solid #8bcaff;
+  outline-offset:3px;
+}
+
+@media(max-width:600px) {
+  header {
+    padding:15px 4%;
+  }
+
+  .brand {
+    font-size:20px;
+  }
+
+  main {
+    margin-top:22px;
+  }
+
+  #gameGrid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  #gameFrame {
+    height:65vh;
+    min-height:350px;
+  }
+
+  #offlinePlay {
+    padding:17px;
+  }
+
+  .offline-btn {
+    width:100%;
+    margin:6px 0;
   }
 }
 </style>
 </head>
+
 <body>
 <header>
-  <a class="brand glitch-target" data-text="VOID NETWORK V6" href="./index.html">VOID NETWORK V6</a>
+  <a class="brand" data-text="VOID NETWORK V6" href="./index.html">VOID NETWORK V6</a>
   <nav>
     <a href="./index.html">Games</a>
     <a href="./settings.html">Tab Settings</a>
@@ -211,11 +401,12 @@ button:focus-visible,a:focus-visible,input:focus-visible{
 <main>
 <section id="homeScreen">
   <div class="hero">
-    <h1 class="glitch-target" data-text="Welcome">Welcome</h1>
+    <h1>Welcome</h1>
   </div>
 
   <input id="search" type="search" placeholder="Search games..."
          aria-label="Search games">
+
   <h2>ALL GAMES</h2>
   <div id="gameGrid"></div>
   <p id="noResults">No games found. Try another search.</p>
@@ -224,11 +415,13 @@ button:focus-visible,a:focus-visible,input:focus-visible{
     <h2>OFFLINE PLAY</h2>
     <p>Choose up to five game URLs to try to save. Saving a game page does not guarantee the complete game will work offline.</p>
     <button class="offline-btn" id="selectCacheButton">Select Games to Cache</button>
+
     <div id="cachePicker" hidden>
       <p>Select up to five games:</p>
       <div id="cacheGameList"></div>
       <button class="offline-btn" id="startCacheButton">Cache Selected Games</button>
     </div>
+
     <button class="offline-btn" id="unloadCacheButton">Clear Saved Game Pages</button>
     <p id="offlineStatus" role="status" aria-live="polite">Checking offline support...</p>
   </section>
@@ -242,9 +435,11 @@ button:focus-visible,a:focus-visible,input:focus-visible{
       <button class="btn" id="fullscreenButton">Fullscreen</button>
     </div>
   </div>
+
   <div id="player">
     <iframe id="gameFrame" src="about:blank" title="Game player"
-      allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+      allow="fullscreen; autoplay; gamepad"
+      allowfullscreen></iframe>
   </div>
   <p id="gameMessage" role="status"></p>
 </section>
@@ -261,23 +456,30 @@ const PRESETS = {
   "Google":{title:"Google",icon:"https://www.google.com/favicon.ico"},
   "YouTube":{title:"YouTube",icon:"https://www.youtube.com/favicon.ico"},
   "Google Docs":{title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"},
-  "Desmos":{title:"Desmos",icon:"https://www.desmos.com/favicon.ico"},
+  "Desmos":{title:"Desmos | Graphing Calculator",icon:"https://www.desmos.com/favicon.ico"},
   "Google Drive":{title:"Google Drive",icon:"https://drive.google.com/favicon.ico"},
   "Google Classroom":{title:"Home - Classroom",icon:"https://ssl.gstatic.com/classroom/favicon.png"},
   "XtraMath":{title:"XtraMath",icon:"https://xtramath.org/favicon.ico"}
 };
 
-function loadPreset(){
+function loadPreset() {
   let name="Default";
-  try{name=localStorage.getItem("userCloak")||"Default"}catch(e){}
+
+  try {
+    name=localStorage.getItem("userCloak")||"Default";
+  } catch(e) {}
+
   const preset=PRESETS[name]||PRESETS.Default;
   document.title=preset.title;
   document.getElementById("tabIcon").href=preset.icon;
 }
+
 loadPreset();
+
 window.addEventListener("pageshow",loadPreset);
+
 window.addEventListener("storage",e=>{
-  if(e.key==="userCloak"||e.key===null)loadPreset();
+  if(e.key==="userCloak"||e.key===null) loadPreset();
 });
 
 const games = [
@@ -339,28 +541,36 @@ const screen=document.getElementById("gameScreen");
 const frame=document.getElementById("gameFrame");
 const status=document.getElementById("offlineStatus");
 
-function renderGames(){
+function renderGames() {
   grid.replaceChildren();
+
   const query=search.value.trim().toLowerCase();
   const results=games.filter(g=>g[0].toLowerCase().includes(query));
+
   results.forEach(([name,url])=>{
     const button=document.createElement("button");
     button.type="button";
     button.className="game-card";
     button.textContent=name;
+
     button.addEventListener("click",()=>{
       document.getElementById("gameTitle").textContent=name;
       document.getElementById("gameMessage").textContent=
         "If this game does not load, its host may block embedded playback.";
+
       frame.src=url;
       home.style.display="none";
       screen.style.display="block";
       window.scrollTo(0,0);
     });
+
     grid.appendChild(button);
   });
-  document.getElementById("noResults").style.display=results.length?"none":"block";
+
+  document.getElementById("noResults").style.display=
+    results.length?"none":"block";
 }
+
 search.addEventListener("input",renderGames);
 
 document.getElementById("backButton").addEventListener("click",()=>{
@@ -369,95 +579,56 @@ document.getElementById("backButton").addEventListener("click",()=>{
   home.style.display="block";
   window.scrollTo(0,0);
 });
+
 document.getElementById("fullscreenButton").addEventListener("click",async()=>{
-  try{
-    if(document.fullscreenElement)await document.exitFullscreen();
-    else await document.getElementById("player").requestFullscreen();
-  }catch(e){alert("Fullscreen is not available in this browser.");}
+  try {
+    if(document.fullscreenElement) {
+      await document.exitFullscreen();
+    } else {
+      await document.getElementById("player").requestFullscreen();
+    }
+  } catch(e) {
+    alert("Fullscreen is not available in this browser.");
+  }
 });
-
-/* Each heading responds to the pointer independently */
-const glitchTargets=[...document.querySelectorAll(".glitch-target")];
-const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-function updateGlitchProximity(x,y){
-  if(reducedMotion)return;
-
-  glitchTargets.forEach(target=>{
-    const r=target.getBoundingClientRect();
-    const nx=Math.max(r.left,Math.min(x,r.right));
-    const ny=Math.max(r.top,Math.min(y,r.bottom));
-    const distance=Math.hypot(x-nx,y-ny);
-    const strength=Math.max(0,1-distance/180);
-    const cx=r.left+r.width/2;
-    const cy=r.top+r.height/2;
-    const sx=x<cx?1:-1;
-    const sy=y<cy?1:-1;
-
-    target.style.setProperty("--gx",`${sx*strength*1.2}px`);
-    target.style.setProperty("--gy",`${sy*strength*.6}px`);
-    target.style.setProperty("--pink-shadow",`${strength*2}px`);
-    target.style.setProperty("--cyan-shadow",`${strength*-2}px`);
-    target.style.setProperty("--slice-opacity",`${strength*.25}`);
-  });
-}
-
-window.addEventListener("pointermove",e=>{
-  updateGlitchProximity(e.clientX,e.clientY);
-});
-
-window.addEventListener("pointerleave",()=>{
-  glitchTargets.forEach(target=>{
-    target.style.setProperty("--gx","0px");
-    target.style.setProperty("--gy","0px");
-    target.style.setProperty("--pink-shadow","0px");
-    target.style.setProperty("--cyan-shadow","0px");
-    target.style.setProperty("--slice-opacity","0");
-  });
-});
-
-/* Brief half-second glitch about every five seconds per heading */
-function scheduleGlitch(target){
-  if(reducedMotion)return;
-  setTimeout(()=>{
-    target.classList.add("ambient-glitch");
-    setTimeout(()=>{
-      target.classList.remove("ambient-glitch");
-      scheduleGlitch(target);
-    },500);
-  },4500+Math.random()*1000);
-}
-glitchTargets.forEach(scheduleGlitch);
 
 const cachePicker=document.getElementById("cachePicker");
 const cacheList=document.getElementById("cacheGameList");
 const GAME_CACHE="void-network-game-pages-v2";
 
-if("serviceWorker" in navigator && location.protocol==="https:"){
+if("serviceWorker" in navigator && location.protocol==="https:") {
   navigator.serviceWorker.register("./sw.js").then(()=>{
-    status.textContent="Offline site support is enabled. Game availability offline depends on each game's files and host.";
+    status.textContent=
+      "Offline site support is enabled. Game availability offline depends on each game's files and host.";
   }).catch(()=>{
-    status.textContent="Could not register sw.js. Check that it is in the same folder as index.html.";
+    status.textContent=
+      "Could not register sw.js. Check that it is in the same folder as index.html.";
   });
-}else{
-  status.textContent="Open this site through GitHub Pages HTTPS to use offline storage.";
+} else {
+  status.textContent=
+    "Open this site through GitHub Pages HTTPS to use offline storage.";
 }
 
 document.getElementById("selectCacheButton").addEventListener("click",()=>{
   cachePicker.hidden=!cachePicker.hidden;
-  if(cachePicker.hidden)return;
+  if(cachePicker.hidden) return;
+
   cacheList.replaceChildren();
+
   games.forEach(([name],index)=>{
     const label=document.createElement("label");
     const checkbox=document.createElement("input");
+
     checkbox.type="checkbox";
     checkbox.value=String(index);
+
     checkbox.addEventListener("change",()=>{
-      if(cacheList.querySelectorAll("input:checked").length>5){
+      if(cacheList.querySelectorAll("input:checked").length>5) {
         checkbox.checked=false;
         status.textContent="You can select up to five games.";
       }
     });
+
     label.append(checkbox,document.createTextNode(name));
     cacheList.appendChild(label);
   });
@@ -465,35 +636,55 @@ document.getElementById("selectCacheButton").addEventListener("click",()=>{
 
 document.getElementById("startCacheButton").addEventListener("click",async()=>{
   const selected=[...cacheList.querySelectorAll("input:checked")];
-  if(!selected.length){status.textContent="Select at least one game.";return;}
-  if(!("caches" in window)){status.textContent="Cache storage is unavailable.";return;}
 
-  status.textContent="Saving selected game pages...";
-  let saved=0,failed=0;
-  const cache=await caches.open(GAME_CACHE);
-
-  for(const checkbox of selected){
-    const [,url]=games[Number(checkbox.value)];
-    try{
-      const response=await fetch(url,{mode:"cors"});
-      if(!response.ok||response.type==="opaque")throw new Error("Not cacheable");
-      await cache.put(url,response.clone());
-      saved++;
-    }catch(e){failed++;}
+  if(!selected.length) {
+    status.textContent="Select at least one game.";
+    return;
   }
 
-  status.textContent=`Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.`;
+  if(!("caches" in window)) {
+    status.textContent="Cache storage is unavailable.";
+    return;
+  }
+
+  status.textContent="Saving selected game pages...";
+
+  let saved=0;
+  let failed=0;
+
+  const cache=await caches.open(GAME_CACHE);
+
+  for(const checkbox of selected) {
+    const [,url]=games[Number(checkbox.value)];
+
+    try {
+      const response=await fetch(url,{mode:"cors"});
+
+      if(!response.ok||response.type==="opaque") {
+        throw new Error("Not cacheable");
+      }
+
+      await cache.put(url,response.clone());
+      saved++;
+    } catch(e) {
+      failed++;
+    }
+  }
+
+  status.textContent=
+    Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.;
 });
 
 document.getElementById("unloadCacheButton").addEventListener("click",async()=>{
-  try{
+  try {
     await caches.delete(GAME_CACHE);
     status.textContent="Saved game-page cache cleared.";
-  }catch(e){status.textContent="Could not clear saved pages.";}
+  } catch(e) {
+    status.textContent="Could not clear saved pages.";
+  }
 });
 
 renderGames();
 </script>
 </body>
 </html>
-```
