@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,9 +23,7 @@
   --border:#183b60;
 }
 
-* {
-  box-sizing:border-box;
-}
+* { box-sizing:border-box; }
 
 body {
   margin:0;
@@ -46,191 +43,13 @@ header {
   border-bottom:1px solid var(--border);
 }
 
-/* GLITCH TARGETS: BRAND AND WELCOME */
-.glitch-target {
-  --gx:0px;
-  --gy:0px;
-  --gskew:0deg;
-  --pink-offset:1px;
-  --cyan-offset:-1px;
-  --slice-opacity:0;
-
+.brand {
   position:relative;
   display:inline-block;
-  isolation:isolate;
-  transform:translate(var(--gx),var(--gy)) skewX(var(--gskew));
-  text-shadow:
-    var(--pink-offset) 0 0 var(--pink),
-    var(--cyan-offset) 0 0 var(--cyan);
-  transition:
-    text-shadow .08s linear,
-    filter .08s linear;
-}
-
-/* Keep the brand's original appearance and link behavior */
-.brand {
   color:var(--text);
   text-decoration:none;
   font:24px 'Black Ops One',cursive;
-}
-
-/* Both duplicated text layers are clipped into moving slices */
-.glitch-target::before,
-.glitch-target::after {
-  content:attr(data-text);
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  pointer-events:none;
-  white-space:inherit;
-  opacity:var(--slice-opacity);
-  will-change:clip-path,transform,opacity;
-}
-
-.glitch-target::before {
-  color:var(--cyan);
-  text-shadow:-2px 0 var(--pink);
-  clip-path:inset(0 0 50% 0);
-  transform:translateX(calc(var(--cyan-offset) * 1));
-}
-
-.glitch-target::after {
-  color:var(--pink);
-  text-shadow:2px 0 var(--cyan);
-  clip-path:inset(50% 0 0 0);
-  transform:translateX(var(--pink-offset));
-}
-
-/* The main letters physically jump during a glitch burst */
-.glitch-target.ambient-glitch {
-  animation:glitch-jitter .5s steps(2,end);
-}
-
-.glitch-target.ambient-glitch::before {
-  opacity:.95;
-  animation:glitch-cyan-slice .5s steps(2,end);
-}
-
-.glitch-target.ambient-glitch::after {
-  opacity:.95;
-  animation:glitch-pink-slice .5s steps(2,end);
-}
-
-@keyframes glitch-jitter {
-  0% {
-    transform:translate(0,0) skewX(0);
-    filter:none;
-  }
-  10% {
-    transform:translate(-4px,1px) skewX(-4deg);
-    filter:drop-shadow(2px 0 var(--pink));
-  }
-  20% {
-    transform:translate(4px,-2px) skewX(3deg);
-  }
-  30% {
-    transform:translate(-2px,1px) skewX(-2deg);
-    filter:drop-shadow(-2px 0 var(--cyan));
-  }
-  40% {
-    transform:translate(3px,0) skewX(4deg);
-  }
-  50% {
-    transform:translate(-5px,-1px) skewX(-3deg);
-    filter:drop-shadow(3px 0 var(--pink));
-  }
-  60% {
-    transform:translate(2px,2px) skewX(2deg);
-  }
-  70% {
-    transform:translate(-3px,-1px) skewX(-4deg);
-    filter:drop-shadow(-3px 0 var(--cyan));
-  }
-  80% {
-    transform:translate(4px,1px) skewX(3deg);
-  }
-  90% {
-    transform:translate(-1px,0) skewX(-1deg);
-  }
-  100% {
-    transform:translate(0,0) skewX(0);
-    filter:none;
-  }
-}
-
-/* Cyan slice jumps between different vertical bands */
-@keyframes glitch-cyan-slice {
-  0% {
-    clip-path:inset(5% 0 80% 0);
-    transform:translate(-6px,-2px);
-  }
-  15% {
-    clip-path:inset(35% 0 45% 0);
-    transform:translate(5px,1px);
-  }
-  30% {
-    clip-path:inset(65% 0 15% 0);
-    transform:translate(-4px,0);
-  }
-  45% {
-    clip-path:inset(15% 0 65% 0);
-    transform:translate(7px,-1px);
-  }
-  60% {
-    clip-path:inset(48% 0 30% 0);
-    transform:translate(-5px,2px);
-  }
-  75% {
-    clip-path:inset(75% 0 5% 0);
-    transform:translate(4px,-2px);
-  }
-  90% {
-    clip-path:inset(25% 0 55% 0);
-    transform:translate(-3px,1px);
-  }
-  100% {
-    clip-path:inset(5% 0 80% 0);
-    transform:translate(0,0);
-  }
-}
-
-/* Pink slice moves independently in the opposite direction */
-@keyframes glitch-pink-slice {
-  0% {
-    clip-path:inset(75% 0 5% 0);
-    transform:translate(5px,1px);
-  }
-  15% {
-    clip-path:inset(20% 0 60% 0);
-    transform:translate(-6px,0);
-  }
-  30% {
-    clip-path:inset(45% 0 35% 0);
-    transform:translate(4px,-2px);
-  }
-  45% {
-    clip-path:inset(5% 0 75% 0);
-    transform:translate(-7px,1px);
-  }
-  60% {
-    clip-path:inset(60% 0 20% 0);
-    transform:translate(5px,2px);
-  }
-  75% {
-    clip-path:inset(30% 0 45% 0);
-    transform:translate(-4px,-1px);
-  }
-  90% {
-    clip-path:inset(55% 0 25% 0);
-    transform:translate(6px,1px);
-  }
-  100% {
-    clip-path:inset(75% 0 5% 0);
-    transform:translate(0,0);
-  }
+  isolation:isolate;
 }
 
 nav {
@@ -268,6 +87,7 @@ main {
   background:linear-gradient(145deg,#0c1726,#070b12);
   border:1px solid var(--border);
   border-radius:12px;
+  overflow:hidden;
 }
 
 h1 {
@@ -290,6 +110,203 @@ h2 {
   font-size:19px;
 }
 
+/* Cyan and hot-pink RGB glitch targets */
+.glitch-target {
+  position:relative;
+  display:inline-block;
+  isolation:isolate;
+  --pink-offset:1px;
+  --cyan-offset:-1px;
+  --slice-opacity:0;
+  will-change:transform,filter;
+  text-shadow:
+    var(--pink-offset) 0 0 var(--pink),
+    var(--cyan-offset) 0 0 var(--cyan);
+}
+
+/* The duplicated text layers actually move independently */
+.glitch-target::before,
+.glitch-target::after {
+  content:attr(data-text);
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:var(--slice-opacity);
+  will-change:transform,clip-path;
+}
+
+.glitch-target::before {
+  color:var(--cyan);
+  text-shadow:-2px 0 var(--cyan);
+  clip-path:inset(0 0 50% 0);
+  transform:translateX(var(--cyan-offset));
+}
+
+.glitch-target::after {
+  color:var(--pink);
+  text-shadow:2px 0 var(--pink);
+  clip-path:inset(50% 0 0 0);
+  transform:translateX(var(--pink-offset));
+}
+
+/* Natural glitch burst: half a second */
+.glitch-target.ambient-glitch {
+  animation:ambient-glitch .5s steps(2,end) both;
+}
+
+.glitch-target.ambient-glitch::before {
+  opacity:1;
+  animation:cyan-slice .5s steps(2,end) both;
+}
+
+.glitch-target.ambient-glitch::after {
+  opacity:1;
+  animation:pink-slice .5s steps(2,end) both;
+}
+
+/* Hover repeats the SAME glitch rapidly */
+.glitch-target:hover {
+  animation:hover-glitch .12s steps(2,end) infinite;
+}
+
+.glitch-target:hover::before {
+  opacity:1;
+  animation:cyan-slice .12s steps(2,end) infinite;
+}
+
+.glitch-target:hover::after {
+  opacity:1;
+  animation:pink-slice .12s steps(2,end) infinite;
+}
+
+@keyframes ambient-glitch {
+  0% {
+    transform:translate(0,0) skewX(0);
+    filter:none;
+  }
+  12% {
+    transform:translate(-5px,1px) skewX(-5deg);
+    filter:drop-shadow(3px 0 var(--pink));
+  }
+  24% {
+    transform:translate(4px,-2px) skewX(3deg);
+    filter:drop-shadow(-3px 0 var(--cyan));
+  }
+  38% {
+    transform:translate(-3px,2px) skewX(-2deg);
+    filter:contrast(1.7);
+  }
+  52% {
+    transform:translate(5px,-1px) skewX(4deg);
+    filter:drop-shadow(3px 0 var(--cyan));
+  }
+  68% {
+    transform:translate(-4px,0) skewX(-3deg);
+    filter:drop-shadow(-3px 0 var(--pink));
+  }
+  82% {
+    transform:translate(2px,1px) skewX(2deg);
+    filter:contrast(1.4);
+  }
+  100% {
+    transform:translate(0,0) skewX(0);
+    filter:none;
+  }
+}
+
+@keyframes hover-glitch {
+  0% {
+    transform:translate(0,0) skewX(0);
+    filter:none;
+  }
+  20% {
+    transform:translate(-5px,2px) skewX(-5deg);
+    filter:drop-shadow(3px 0 var(--pink));
+  }
+  40% {
+    transform:translate(5px,-2px) skewX(4deg);
+    filter:drop-shadow(-4px 0 var(--cyan));
+  }
+  60% {
+    transform:translate(-3px,-1px) skewX(-3deg);
+    filter:contrast(1.8);
+  }
+  80% {
+    transform:translate(4px,2px) skewX(4deg);
+    filter:drop-shadow(3px 0 var(--cyan));
+  }
+  100% {
+    transform:translate(0,0) skewX(0);
+    filter:none;
+  }
+}
+
+@keyframes cyan-slice {
+  0% {
+    clip-path:inset(0 0 90% 0);
+    transform:translate(-7px,-2px);
+  }
+  15% {
+    clip-path:inset(12% 0 62% 0);
+    transform:translate(6px,1px);
+  }
+  30% {
+    clip-path:inset(42% 0 35% 0);
+    transform:translate(-5px,-1px);
+  }
+  48% {
+    clip-path:inset(65% 0 15% 0);
+    transform:translate(7px,2px);
+  }
+  66% {
+    clip-path:inset(25% 0 55% 0);
+    transform:translate(-6px,0);
+  }
+  82% {
+    clip-path:inset(52% 0 28% 0);
+    transform:translate(5px,-2px);
+  }
+  100% {
+    clip-path:inset(0 0 90% 0);
+    transform:translate(-2px,0);
+  }
+}
+
+@keyframes pink-slice {
+  0% {
+    clip-path:inset(90% 0 0 0);
+    transform:translate(6px,2px);
+  }
+  18% {
+    clip-path:inset(60% 0 18% 0);
+    transform:translate(-7px,-1px);
+  }
+  35% {
+    clip-path:inset(20% 0 55% 0);
+    transform:translate(5px,1px);
+  }
+  52% {
+    clip-path:inset(45% 0 35% 0);
+    transform:translate(-6px,-2px);
+  }
+  72% {
+    clip-path:inset(12% 0 70% 0);
+    transform:translate(7px,1px);
+  }
+  88% {
+    clip-path:inset(68% 0 12% 0);
+    transform:translate(-4px,0);
+  }
+  100% {
+    clip-path:inset(90% 0 0 0);
+    transform:translate(2px,0);
+  }
+}
+
 #search {
   width:100%;
   padding:14px 16px;
@@ -301,9 +318,9 @@ h2 {
 }
 
 #search:focus {
-  outline:none;
   border-color:var(--cyan);
   box-shadow:0 0 12px #00e5ff25;
+  outline:none;
 }
 
 #gameGrid {
@@ -580,7 +597,7 @@ window.addEventListener("storage",e=>{
   if(e.key==="userCloak"||e.key===null) loadPreset();
 });
 
-/* ALL 48 GAMES */
+/* All 48 games retained */
 const games = [
   ["Gaming Escape","https://badpiggies.global.ssl.fastly.net/index.html"],
   ["Super Mario 64","https://arkshocer.github.io/sm64/"],
@@ -691,102 +708,77 @@ document.getElementById("fullscreenButton").addEventListener("click",async()=>{
   }
 });
 
-/* INDEPENDENT POINTER PROXIMITY FOR BOTH HEADINGS */
-const glitchTargets=[
-  ...document.querySelectorAll(".glitch-target")
-];
-const reducedMotion=window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-).matches;
+/* Independent natural glitch bursts for both text elements.
+   Hover uses the same visual glitch, but repeats much faster. */
+const glitchTargets=[...document.querySelectorAll(".glitch-target")];
+const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
 
-function updateGlitchProximity(x,y) {
-  if(reducedMotion) return;
-
-  glitchTargets.forEach(target=>{
-    const rect=target.getBoundingClientRect();
-
-    /* Distance from pointer to the nearest point of this heading */
-    const nearestX=Math.max(rect.left,Math.min(x,rect.right));
-    const nearestY=Math.max(rect.top,Math.min(y,rect.bottom));
-    const distance=Math.hypot(x-nearestX,y-nearestY);
-
-    /* Effect grows stronger within 180 pixels */
-    const strength=Math.max(0,1-distance/180);
-
-    const centerX=rect.left+rect.width/2;
-    const centerY=rect.top+rect.height/2;
-    const directionX=x<centerX?1:-1;
-    const directionY=y<centerY?1:-1;
-
-    target.style.setProperty(
-      "--gx",
-      `${directionX*strength*2}px`
-    );
-    target.style.setProperty(
-      "--gy",
-      `${directionY*strength}px`
-    );
-    target.style.setProperty(
-      "--gskew",
-      `${directionX*strength*1.5}deg`
-    );
-
-    target.style.setProperty(
-      "--pink-offset",
-      `${1+strength*5}px`
-    );
-    target.style.setProperty(
-      "--cyan-offset",
-      `${-1-strength*5}px`
-    );
-
-    /* Colored slices stay hidden at a distance */
-    target.style.setProperty(
-      "--slice-opacity",
-      `${strength*.85}`
-    );
-
-    target.style.filter=strength>0
-      ?`drop-shadow(${strength*2}px 0 var(--pink))`
-      :"none";
-  });
-}
-
-window.addEventListener("pointermove",event=>{
-  updateGlitchProximity(event.clientX,event.clientY);
-});
-
-window.addEventListener("pointerleave",()=>{
-  glitchTargets.forEach(target=>{
-    target.style.setProperty("--gx","0px");
-    target.style.setProperty("--gy","0px");
-    target.style.setProperty("--gskew","0deg");
-    target.style.setProperty("--pink-offset","1px");
-    target.style.setProperty("--cyan-offset","-1px");
-    target.style.setProperty("--slice-opacity","0");
-    target.style.filter="none";
-  });
-});
-
-/* NATURAL GLITCH: INDEPENDENT HALF-SECOND BURSTS */
 function scheduleGlitch(target) {
-  if(reducedMotion) return;
+  if(reducedMotion.matches) return;
 
   const delay=4500+Math.random()*1000;
 
   window.setTimeout(()=>{
-    target.classList.add("ambient-glitch");
-
-    window.setTimeout(()=>{
+    if(!target.matches(":hover")) {
       target.classList.remove("ambient-glitch");
-      scheduleGlitch(target);
-    },500);
+      void target.offsetWidth;
+      target.classList.add("ambient-glitch");
+
+      window.setTimeout(()=>{
+        target.classList.remove("ambient-glitch");
+      },500);
+    }
+
+    scheduleGlitch(target);
   },delay);
 }
 
-glitchTargets.forEach(scheduleGlitch);
+glitchTargets.forEach(target=>{
+  scheduleGlitch(target);
 
-/* OFFLINE PAGE CACHING */
+  target.addEventListener("pointerenter",()=>{
+    target.classList.remove("ambient-glitch");
+  });
+});
+
+reducedMotion.addEventListener?.("change",()=>{
+  if(reducedMotion.matches) {
+    glitchTargets.forEach(target=>{
+      target.classList.remove("ambient-glitch");
+    });
+  }
+});
+
+/* Pointer proximity independently strengthens both targets */
+function updateGlitchProximity(x,y) {
+  if(reducedMotion.matches) return;
+
+  glitchTargets.forEach(target=>{
+    const rect=target.getBoundingClientRect();
+    const nearestX=Math.max(rect.left,Math.min(x,rect.right));
+    const nearestY=Math.max(rect.top,Math.min(y,rect.bottom));
+    const distance=Math.hypot(x-nearestX,y-nearestY);
+    const strength=Math.max(0,1-distance/180);
+
+    target.style.setProperty("--pink-offset",`${1+strength*5}px`);
+    target.style.setProperty("--cyan-offset",`${-1-strength*5}px`);
+    target.style.setProperty("--slice-opacity",`${strength*.25}`);
+  });
+}
+
+window.addEventListener("pointermove",e=>{
+  updateGlitchProximity(e.clientX,e.clientY);
+});
+
+window.addEventListener("pointerleave",()=>{
+  glitchTargets.forEach(target=>{
+    target.style.setProperty("--pink-offset","1px");
+    target.style.setProperty("--cyan-offset","-1px");
+    target.style.setProperty("--slice-opacity","0");
+  });
+});
+
+/* Offline page caching */
 const cachePicker=document.getElementById("cachePicker");
 const cacheList=document.getElementById("cacheGameList");
 const GAME_CACHE="void-network-game-pages-v2";
@@ -830,9 +822,7 @@ document.getElementById("selectCacheButton").addEventListener("click",()=>{
 });
 
 document.getElementById("startCacheButton").addEventListener("click",async()=>{
-  const selected=[
-    ...cacheList.querySelectorAll("input:checked")
-  ];
+  const selected=[...cacheList.querySelectorAll("input:checked")];
 
   if(!selected.length) {
     status.textContent="Select at least one game.";
@@ -872,7 +862,7 @@ document.getElementById("startCacheButton").addEventListener("click",async()=>{
     status.textContent=
       `Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.`;
   } catch(e) {
-    status.textContent="Could not access the saved-page cache.";
+    status.textContent="Could not access cache storage.";
   }
 });
 
