@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,30 +46,30 @@ header {
   border-bottom:1px solid var(--border);
 }
 
-/* CYAN + HOT PINK GLITCH */
-.glitch-target {
-  --gx:0px;
-  --gy:0px;
-  --skew:0deg;
-  --pink-offset:1px;
-  --cyan-offset:-1px;
-  --slice-opacity:.08;
-
+/* CYAN + HOT PINK GLITCH BRAND */
+.brand {
   position:relative;
   display:inline-block;
+  color:var(--text);
+  text-decoration:none;
+  font:24px 'Black Ops One',cursive;
   isolation:isolate;
-  transition:
-    text-shadow .12s ease,
-    filter .12s ease;
-  transform:
-    translate(var(--gx),var(--gy))
-    skewX(var(--skew));
+  --gx:0px;
+  --gy:0px;
+  --gs:0deg;
+  --pink-x:2px;
+  --cyan-x:-2px;
+  --slice-opacity:.20;
+  transform:translate(var(--gx),var(--gy)) skewX(var(--gs));
   text-shadow:
-    var(--pink-offset) 0 0 var(--pink),
-    var(--cyan-offset) 0 0 var(--cyan);
+    var(--pink-x) 0 0 var(--pink),
+    var(--cyan-x) 0 0 var(--cyan);
+  transition:
+    color .12s ease,
+    text-shadow .12s ease,
+    transform .12s ease;
 }
 
-/* Separate color-offset text layers */
 .glitch-target::before,
 .glitch-target::after {
   content:attr(data-text);
@@ -77,145 +78,27 @@ header {
   width:100%;
   height:100%;
   overflow:hidden;
-  white-space:inherit;
   pointer-events:none;
+  white-space:inherit;
   opacity:var(--slice-opacity);
+  will-change:clip-path,transform,opacity;
 }
 
 .glitch-target::before {
   color:var(--cyan);
-  text-shadow:2px 0 var(--cyan);
+  text-shadow:-2px 0 var(--pink);
   clip-path:inset(0 0 55% 0);
-  transform:translateX(var(--cyan-offset));
+  transform:translateX(var(--cyan-x));
 }
 
 .glitch-target::after {
   color:var(--pink);
-  text-shadow:-2px 0 var(--pink);
+  text-shadow:2px 0 var(--cyan);
   clip-path:inset(55% 0 0 0);
-  transform:translateX(var(--pink-offset));
+  transform:translateX(var(--pink-x));
 }
 
-/* Short, natural glitch bursts */
-.glitch-target.ambient-glitch {
-  animation:glitch-jitter .5s steps(2,end);
-}
-
-.glitch-target.ambient-glitch::before {
-  opacity:.95;
-  animation:cyan-slice .5s steps(2,end);
-}
-
-.glitch-target.ambient-glitch::after {
-  opacity:.95;
-  animation:pink-slice .5s steps(2,end);
-}
-
-@keyframes glitch-jitter {
-  0%,100% {
-    transform:translate(0,0) skewX(0);
-    filter:none;
-  }
-  12% {
-    transform:translate(-3px,1px) skewX(-3deg);
-    filter:drop-shadow(2px 0 var(--pink));
-  }
-  25% {
-    transform:translate(3px,-1px) skewX(2deg);
-  }
-  42% {
-    transform:translate(-2px,0) skewX(-1deg);
-    filter:drop-shadow(-2px 0 var(--cyan));
-  }
-  58% {
-    transform:translate(2px,1px) skewX(3deg);
-  }
-  76% {
-    transform:translate(-1px,-1px) skewX(-2deg);
-  }
-  90% {
-    transform:translate(1px,0) skewX(1deg);
-  }
-}
-
-@keyframes cyan-slice {
-  0%,100% {
-    clip-path:inset(0 0 90% 0);
-    transform:translateX(-1px);
-  }
-  15% {
-    clip-path:inset(10% 0 65% 0);
-    transform:translateX(-6px);
-  }
-  35% {
-    clip-path:inset(40% 0 35% 0);
-    transform:translateX(5px);
-  }
-  55% {
-    clip-path:inset(65% 0 15% 0);
-    transform:translateX(-4px);
-  }
-  78% {
-    clip-path:inset(25% 0 50% 0);
-    transform:translateX(3px);
-  }
-}
-
-@keyframes pink-slice {
-  0%,100% {
-    clip-path:inset(90% 0 0 0);
-    transform:translateX(1px);
-  }
-  20% {
-    clip-path:inset(55% 0 25% 0);
-    transform:translateX(5px);
-  }
-  40% {
-    clip-path:inset(15% 0 65% 0);
-    transform:translateX(-5px);
-  }
-  65% {
-    clip-path:inset(45% 0 35% 0);
-    transform:translateX(4px);
-  }
-  82% {
-    clip-path:inset(70% 0 10% 0);
-    transform:translateX(-3px);
-  }
-}
-
-/* Top-left title */
-.brand {
-  color:var(--text);
-  text-decoration:none;
-  font:24px 'Black Ops One',cursive;
-}
-
-/* Navigation */
-nav {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-nav a,.btn {
-  display:inline-block;
-  padding:10px 15px;
-  border:1px solid var(--blue);
-  border-radius:7px;
-  background:#0b1726;
-  color:var(--text);
-  font:700 16px 'Rajdhani',sans-serif;
-  text-decoration:none;
-  cursor:pointer;
-  transition:background .2s,box-shadow .2s;
-}
-
-nav a:hover,.btn:hover,.game-card:hover {
-  background:#102b47;
-  box-shadow:0 0 14px #168cff25;
-}
-
+/* HERO */
 main {
   width:min(1200px,92%);
   margin:30px auto;
@@ -240,9 +123,154 @@ h2 {
   font:24px 'Black Ops One',cursive;
 }
 
+.hero h1 {
+  position:relative;
+  display:inline-block;
+  isolation:isolate;
+}
+
 .hero p {
   color:var(--muted);
   font-size:19px;
+}
+
+/* ACTUAL GLITCH ANIMATION */
+.glitch-target.ambient-glitch {
+  animation:glitch-jitter .5s steps(2,end);
+  color:#fff;
+  text-shadow:
+    4px 0 var(--pink),
+    -4px 0 var(--cyan),
+    0 0 12px #168cff;
+}
+
+.glitch-target.ambient-glitch::before {
+  opacity:1;
+  animation:cyan-slice .5s steps(2,end);
+}
+
+.glitch-target.ambient-glitch::after {
+  opacity:1;
+  animation:pink-slice .5s steps(2,end);
+}
+
+@keyframes glitch-jitter {
+  0% {
+    transform:translate(0,0) skewX(0);
+    filter:none;
+  }
+  10% {
+    transform:translate(-3px,1px) skewX(-4deg);
+    filter:drop-shadow(3px 0 var(--pink));
+  }
+  20% {
+    transform:translate(4px,-1px) skewX(3deg);
+  }
+  30% {
+    transform:translate(-2px,0) skewX(-2deg);
+    filter:drop-shadow(-3px 0 var(--cyan));
+  }
+  40% {
+    transform:translate(3px,1px) skewX(4deg);
+  }
+  50% {
+    transform:translate(-4px,-1px) skewX(-3deg);
+    filter:contrast(1.4);
+  }
+  65% {
+    transform:translate(2px,0) skewX(2deg);
+  }
+  80% {
+    transform:translate(-2px,1px) skewX(-1deg);
+  }
+  90% {
+    transform:translate(1px,-1px);
+  }
+  100% {
+    transform:translate(0,0) skewX(0);
+    filter:none;
+  }
+}
+
+@keyframes cyan-slice {
+  0% {
+    clip-path:inset(5% 0 80% 0);
+    transform:translate(-5px,-2px);
+  }
+  15% {
+    clip-path:inset(35% 0 45% 0);
+    transform:translate(4px,1px);
+  }
+  30% {
+    clip-path:inset(65% 0 20% 0);
+    transform:translate(-3px,0);
+  }
+  45% {
+    clip-path:inset(15% 0 65% 0);
+    transform:translate(5px,-1px);
+  }
+  60% {
+    clip-path:inset(45% 0 35% 0);
+    transform:translate(-4px,2px);
+  }
+  80% {
+    clip-path:inset(25% 0 55% 0);
+    transform:translate(3px,-1px);
+  }
+  100% {
+    clip-path:inset(5% 0 80% 0);
+    transform:translate(0,0);
+  }
+}
+
+@keyframes pink-slice {
+  0% {
+    clip-path:inset(70% 0 5% 0);
+    transform:translate(4px,1px);
+  }
+  20% {
+    clip-path:inset(20% 0 60% 0);
+    transform:translate(-5px,0);
+  }
+  40% {
+    clip-path:inset(45% 0 30% 0);
+    transform:translate(3px,-2px);
+  }
+  60% {
+    clip-path:inset(5% 0 75% 0);
+    transform:translate(-4px,1px);
+  }
+  80% {
+    clip-path:inset(55% 0 20% 0);
+    transform:translate(5px,-1px);
+  }
+  100% {
+    clip-path:inset(70% 0 5% 0);
+    transform:translate(0,0);
+  }
+}
+
+nav {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+nav a,.btn {
+  display:inline-block;
+  padding:10px 15px;
+  border:1px solid var(--blue);
+  border-radius:7px;
+  background:#0b1726;
+  color:var(--text);
+  font:700 16px 'Rajdhani',sans-serif;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+nav a:hover,.btn:hover,.game-card:hover {
+  background:#102b47;
+  box-shadow:0 0 14px #168cff25;
 }
 
 #search {
@@ -277,7 +305,6 @@ h2 {
   font:700 18px 'Rajdhani',sans-serif;
   cursor:pointer;
   overflow-wrap:anywhere;
-  transition:background .2s,box-shadow .2s,border-color .2s;
 }
 
 .game-card:hover {
@@ -374,7 +401,7 @@ h2 {
 }
 
 [hidden] {
-  display:none!important;
+  display:none !important;
 }
 
 #offlineStatus {
@@ -393,7 +420,7 @@ footer {
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
-  outline:2px solid var(--cyan);
+  outline:2px solid #8bcaff;
   outline-offset:3px;
 }
 
@@ -433,8 +460,8 @@ input:focus-visible {
   .glitch-target,
   .glitch-target::before,
   .glitch-target::after {
-    animation:none!important;
-    transition:none!important;
+    animation:none !important;
+    transition:none !important;
   }
 }
 </style>
@@ -458,8 +485,7 @@ input:focus-visible {
     <h1 class="glitch-target" data-text="Welcome">Welcome</h1>
   </div>
 
-  <input id="search" type="search"
-         placeholder="Search games..."
+  <input id="search" type="search" placeholder="Search games..."
          aria-label="Search games">
 
   <h2>ALL GAMES</h2>
@@ -469,26 +495,16 @@ input:focus-visible {
   <section id="offlinePlay">
     <h2>OFFLINE PLAY</h2>
     <p>Choose up to five game URLs to try to save. Saving a game page does not guarantee the complete game will work offline.</p>
-
-    <button class="offline-btn" id="selectCacheButton">
-      Select Games to Cache
-    </button>
+    <button class="offline-btn" id="selectCacheButton">Select Games to Cache</button>
 
     <div id="cachePicker" hidden>
       <p>Select up to five games:</p>
       <div id="cacheGameList"></div>
-      <button class="offline-btn" id="startCacheButton">
-        Cache Selected Games
-      </button>
+      <button class="offline-btn" id="startCacheButton">Cache Selected Games</button>
     </div>
 
-    <button class="offline-btn" id="unloadCacheButton">
-      Clear Saved Game Pages
-    </button>
-
-    <p id="offlineStatus" role="status" aria-live="polite">
-      Checking offline support...
-    </p>
+    <button class="offline-btn" id="unloadCacheButton">Clear Saved Game Pages</button>
+    <p id="offlineStatus" role="status" aria-live="polite">Checking offline support...</p>
   </section>
 </section>
 
@@ -502,13 +518,10 @@ input:focus-visible {
   </div>
 
   <div id="player">
-    <iframe id="gameFrame"
-      src="about:blank"
-      title="Game player"
+    <iframe id="gameFrame" src="about:blank" title="Game player"
       allow="fullscreen; autoplay; gamepad"
       allowfullscreen></iframe>
   </div>
-
   <p id="gameMessage" role="status"></p>
 </section>
 </main>
@@ -518,44 +531,16 @@ input:focus-visible {
 <script>
 "use strict";
 
-/* TAB SETTINGS INTEGRATION */
 const PRESETS = {
-  "Default": {
-    title:"VOID NETWORK V6",
-    icon:"./void-logo.png"
-  },
-  "Khan Academy": {
-    title:"Khan Academy",
-    icon:"https://cdn.kastatic.org/images/favicon.ico"
-  },
-  "Google": {
-    title:"Google",
-    icon:"https://www.google.com/favicon.ico"
-  },
-  "YouTube": {
-    title:"YouTube",
-    icon:"https://www.youtube.com/favicon.ico"
-  },
-  "Google Docs": {
-    title:"Google Docs",
-    icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
-  },
-  "Desmos": {
-    title:"Desmos | Graphing Calculator",
-    icon:"https://www.desmos.com/favicon.ico"
-  },
-  "Google Drive": {
-    title:"Google Drive",
-    icon:"https://drive.google.com/favicon.ico"
-  },
-  "Google Classroom": {
-    title:"Home - Classroom",
-    icon:"https://ssl.gstatic.com/classroom/favicon.png"
-  },
-  "XtraMath": {
-    title:"XtraMath",
-    icon:"https://xtramath.org/favicon.ico"
-  }
+  "Default":{title:"VOID NETWORK V6",icon:"./void-logo.png"},
+  "Khan Academy":{title:"Khan Academy",icon:"https://cdn.kastatic.org/images/favicon.ico"},
+  "Google":{title:"Google",icon:"https://www.google.com/favicon.ico"},
+  "YouTube":{title:"YouTube",icon:"https://www.youtube.com/favicon.ico"},
+  "Google Docs":{title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"},
+  "Desmos":{title:"Desmos | Graphing Calculator",icon:"https://www.desmos.com/favicon.ico"},
+  "Google Drive":{title:"Google Drive",icon:"https://drive.google.com/favicon.ico"},
+  "Google Classroom":{title:"Home - Classroom",icon:"https://ssl.gstatic.com/classroom/favicon.png"},
+  "XtraMath":{title:"XtraMath",icon:"https://xtramath.org/favicon.ico"}
 };
 
 function loadPreset() {
@@ -571,15 +556,14 @@ function loadPreset() {
 }
 
 loadPreset();
+
 window.addEventListener("pageshow",loadPreset);
 
 window.addEventListener("storage",e=>{
-  if(e.key==="userCloak"||e.key===null) {
-    loadPreset();
-  }
+  if(e.key==="userCloak"||e.key===null) loadPreset();
 });
 
-/* ALL 48 GAMES */
+/* ALL 48 ORIGINAL GAMES */
 const games = [
   ["Gaming Escape","https://badpiggies.global.ssl.fastly.net/index.html"],
   ["Super Mario 64","https://arkshocer.github.io/sm64/"],
@@ -606,7 +590,7 @@ const games = [
   ["Mario Kart 64","https://gamebackup.github.io/emu_games/games/mario-kart-64/"],
   ["Super Mario Bros","https://gamebackup.github.io/emu_games/games/super-mario-bros/"],
   ["Paper Mario","https://gamebackup.github.io/emu_games/games/paper-mario/"],
-  ["Mario Kart Super Circuit","https://gamebackup.github.io/emu_games/games/super-mario-kart-super-circuit/"],
+  ["Mario Kart Super Circuit","https://gamebackup.github.io/emu_games/games/mario-kart-super-circuit/"],
   ["MK49","https://mk49.cyou/"],
   ["Smash Karts","https://unlocktheworld.github.io/smash-karts/index.html"],
   ["Doodle Jump","https://unlocktheworld.github.io/doodle-jump/index.html"],
@@ -632,7 +616,6 @@ const games = [
   ["Notflix 2.0","https://docs.google.com/presentation/d/1zpAdr_JhbDVscrOgxY1dgiW4Z6blgoU_eqcN_7m8bY0/edit#slide=id.g3950afba0ed_0_0"]
 ];
 
-/* GAME GRID AND SEARCH */
 const grid=document.getElementById("gameGrid");
 const search=document.getElementById("search");
 const home=document.getElementById("homeScreen");
@@ -644,9 +627,7 @@ function renderGames() {
   grid.replaceChildren();
 
   const query=search.value.trim().toLowerCase();
-  const results=games.filter(g=>
-    g[0].toLowerCase().includes(query)
-  );
+  const results=games.filter(g=>g[0].toLowerCase().includes(query));
 
   results.forEach(([name,url])=>{
     const button=document.createElement("button");
@@ -674,7 +655,6 @@ function renderGames() {
 
 search.addEventListener("input",renderGames);
 
-/* BACK BUTTON */
 document.getElementById("backButton").addEventListener("click",()=>{
   frame.src="about:blank";
   screen.style.display="none";
@@ -682,7 +662,6 @@ document.getElementById("backButton").addEventListener("click",()=>{
   window.scrollTo(0,0);
 });
 
-/* FULLSCREEN */
 document.getElementById("fullscreenButton").addEventListener("click",async()=>{
   try {
     if(document.fullscreenElement) {
@@ -695,7 +674,7 @@ document.getElementById("fullscreenButton").addEventListener("click",async()=>{
   }
 });
 
-/* INDEPENDENT POINTER-PROXIMITY GLITCH */
+/* INDEPENDENT POINTER PROXIMITY FOR BOTH HEADINGS */
 const glitchTargets=[
   ...document.querySelectorAll(".glitch-target")
 ];
@@ -710,16 +689,17 @@ function updateGlitchProximity(x,y) {
   glitchTargets.forEach(target=>{
     const rect=target.getBoundingClientRect();
 
-    /* Distance from the pointer to this specific text */
     const nearestX=Math.max(rect.left,Math.min(x,rect.right));
     const nearestY=Math.max(rect.top,Math.min(y,rect.bottom));
+
     const distance=Math.hypot(x-nearestX,y-nearestY);
 
-    /* Effect ramps up within 180 pixels */
+    /* The effect starts 180 pixels away and grows stronger nearby. */
     const strength=Math.max(0,1-distance/180);
 
     const centerX=rect.left+rect.width/2;
     const centerY=rect.top+rect.height/2;
+
     const directionX=x<centerX?1:-1;
     const directionY=y<centerY?1:-1;
 
@@ -730,34 +710,28 @@ function updateGlitchProximity(x,y) {
 
     target.style.setProperty(
       "--gy",
-      `${directionY*strength*1.5}px`
+      `${directionY*strength*1.2}px`
     );
 
     target.style.setProperty(
-      "--skew",
-      `${directionX*strength*2}deg`
+      "--gs",
+      `${directionX*strength*2.5}deg`
     );
 
     target.style.setProperty(
-      "--pink-offset",
-      `${1+strength*6}px`
+      "--pink-x",
+      `${2+strength*6}px`
     );
 
     target.style.setProperty(
-      "--cyan-offset",
-      `${-1-strength*6}px`
+      "--cyan-x",
+      `${-2-strength*6}px`
     );
 
     target.style.setProperty(
       "--slice-opacity",
-      `${.08+strength*.8}`
+      `${0.20+strength*0.65}`
     );
-
-    target.style.textShadow=`
-      ${1+strength*6}px 0 var(--pink),
-      ${-1-strength*6}px 0 var(--cyan),
-      0 0 ${strength*12}px #168cff
-    `;
   });
 }
 
@@ -769,17 +743,15 @@ window.addEventListener("pointerleave",()=>{
   glitchTargets.forEach(target=>{
     target.style.setProperty("--gx","0px");
     target.style.setProperty("--gy","0px");
-    target.style.setProperty("--skew","0deg");
-    target.style.setProperty("--pink-offset","1px");
-    target.style.setProperty("--cyan-offset","-1px");
-    target.style.setProperty("--slice-opacity",".08");
-    target.style.textShadow="";
+    target.style.setProperty("--gs","0deg");
+    target.style.setProperty("--pink-x","2px");
+    target.style.setProperty("--cyan-x","-2px");
+    target.style.setProperty("--slice-opacity",".20");
   });
 });
 
-/* NATURAL GLITCH: ABOUT EVERY 5 SECONDS
-   EACH TEXT HAS ITS OWN INDEPENDENT SCHEDULE */
-function scheduleGlitch(target) {
+/* NATURAL GLITCH: EACH HEADING RUNS ITS OWN TIMER */
+function scheduleAmbientGlitch(target) {
   if(reducedMotion) return;
 
   const delay=4500+Math.random()*1000;
@@ -789,12 +761,12 @@ function scheduleGlitch(target) {
 
     window.setTimeout(()=>{
       target.classList.remove("ambient-glitch");
-      scheduleGlitch(target);
+      scheduleAmbientGlitch(target);
     },500);
   },delay);
 }
 
-glitchTargets.forEach(scheduleGlitch);
+glitchTargets.forEach(scheduleAmbientGlitch);
 
 /* OFFLINE PAGE CACHING */
 const cachePicker=document.getElementById("cachePicker");
@@ -814,7 +786,6 @@ if("serviceWorker" in navigator && location.protocol==="https:") {
     "Open this site through GitHub Pages HTTPS to use offline storage.";
 }
 
-/* SELECT GAMES TO CACHE */
 document.getElementById("selectCacheButton").addEventListener("click",()=>{
   cachePicker.hidden=!cachePicker.hidden;
 
@@ -841,7 +812,6 @@ document.getElementById("selectCacheButton").addEventListener("click",()=>{
   });
 });
 
-/* CACHE SELECTED GAME PAGES */
 document.getElementById("startCacheButton").addEventListener("click",async()=>{
   const selected=[
     ...cacheList.querySelectorAll("input:checked")
@@ -885,11 +855,10 @@ document.getElementById("startCacheButton").addEventListener("click",async()=>{
     status.textContent=
       `Saved ${saved} game page(s); ${failed} could not be saved. This does not guarantee offline gameplay because games may need other files or block caching.`;
   } catch(e) {
-    status.textContent="Could not access cache storage.";
+    status.textContent="Could not open cache storage.";
   }
 });
 
-/* CLEAR SAVED GAME PAGES */
 document.getElementById("unloadCacheButton").addEventListener("click",async()=>{
   try {
     await caches.delete(GAME_CACHE);
@@ -899,7 +868,6 @@ document.getElementById("unloadCacheButton").addEventListener("click",async()=>{
   }
 });
 
-/* INITIALIZE THE GAME GRID */
 renderGames();
 </script>
 </body>
