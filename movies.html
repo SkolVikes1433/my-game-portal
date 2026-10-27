@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070b">
+  <title>Movies | VOID NETWORK V6</title>
+  <link rel="icon" href="./void-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05070b;
+      --panel: #0b111b;
+      --blue: #168cff;
+      --text: #eaf3ff;
+      --muted: #9badc4;
+      --border: #183b60;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 16px 5%;
+      background: #080d15;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      color: var(--blue);
+      font: 24px 'Black Ops One', cursive;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text);
+      background: #0b1726;
+      border: 1px solid var(--border);
+      padding: 9px 15px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    nav a:hover, nav a.active {
+      background: #102b47;
+      border-color: var(--blue);
+      color: white;
+    }
+
+    main {
+      width: min(1200px, 92%);
+      margin: 35px auto;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 35px 15px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0c1726, #070b12);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font: clamp(30px, 5vw, 48px) 'Black Ops One', cursive;
+      color: var(--blue);
+    }
+
+    .hero p { color: var(--muted); font-size: 18px; }
+
+    #search {
+      display: block;
+      width: min(600px, 100%);
+      margin: 22px auto 0;
+      padding: 14px 16px;
+      color: var(--text);
+      background: #070c14;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      font: 17px 'Rajdhani', sans-serif;
+    }
+
+    #search:focus { border-color: var(--blue); }
+
+    .section-title {
+      font: 24px 'Black Ops One', cursive;
+      margin: 25px 0 16px;
+    }
+
+    #movieGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .movie-card {
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue);
+      box-shadow: 0 8px 25px #168cff18;
+    }
+
+    .movie-card h2 {
+      margin: 0 0 16px;
+      font-size: 21px;
+      overflow-wrap: anywhere;
+    }
+
+    .movie-card a {
+      display: block;
+      padding: 10px 12px;
+      text-align: center;
+      color: white;
+      background: #0b1726;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .movie-card a:hover {
+      background: #102b47;
+      border-color: var(--blue);
+    }
+
+    #emptyMessage {
+      display: none;
+      color: var(--muted);
+      text-align: center;
+      padding: 30px;
+    }
+
+    footer {
+      margin-top: 55px;
+      padding: 22px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 520px) {
+      header { justify-content: center; }
+      .brand { font-size: 21px; }
+      #movieGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .movie-card { padding: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="brand" href="./index.html">VOID NETWORK V6</a>
+    <nav>
+      <a href="./index.html">Games</a>
+      <a href="./settings.html">Tab Settings</a>
+      <a href="./movies.html" class="active">Movies</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Movies & Shows</h1>
+      <p>Your movie and TV collection, all in one place.</p>
+      <input id="search" type="search" placeholder="Search movies and shows..." autocomplete="off">
+    </section>
+
+    <h2 class="section-title">ALL TITLES</h2>
+    <section id="movieGrid"></section>
+    <p id="emptyMessage">No titles found. Try another search.</p>
+  </main>
+
+  <footer>© VOID NETWORK V6</footer>
+
+  <script>
+    // ADD YOUR TITLES AND AUTHORIZED LINKS HERE.
+    // Copy a line, change the title and URL, and add a comma between entries.
+    const movies = [
+      // { title: "Example Movie", url: "https://your-authorized-link-here.com" },
+      // { title: "Example TV Show", url: "https://your-authorized-link-here.com" },
+    ];
+
+    const grid = document.getElementById("movieGrid");
+    const search = document.getElementById("search");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    function renderMovies(query = "") {
+      grid.replaceChildren();
+
+      const filtered = movies.filter(movie =>
+        movie.title.toLowerCase().includes(query.toLowerCase())
+      );
+
+      filtered.forEach(movie => {
+        const card = document.createElement("article");
+        card.className = "movie-card";
+
+        const title = document.createElement("h2");
+        title.textContent = movie.title;
+
+        const link = document.createElement("a");
+        link.href = movie.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Open Title";
+
+        card.append(title, link);
+        grid.appendChild(card);
+      });
+
+      emptyMessage.style.display = filtered.length ? "none" : "block";
+    }
+
+    search.addEventListener("input", () => renderMovies(search.value));
+    renderMovies();
+  </script>
+</body>
+</html>
