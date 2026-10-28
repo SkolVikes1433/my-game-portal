@@ -315,7 +315,10 @@
     search.addEventListener("input", () => renderMovies(search.value));
     renderMovies();
   </script>
-  <script>
+<script>
+(function () {
+  "use strict";
+
   const TAB_PRESETS = {
     "Default": {
       title: "VOID NETWORK V6",
@@ -356,22 +359,31 @@
   };
 
   function applyMovieTabPreset() {
-    const selected = localStorage.getItem("userCloak") || "Default";
-    const preset = TAB_PRESETS[selected] || TAB_PRESETS["Default"];
+    let selected = "Default";
 
+    try {
+      selected = localStorage.getItem("userCloak") || "Default";
+    } catch (error) {}
+
+    const preset = TAB_PRESETS[selected] || TAB_PRESETS["Default"];
     document.title = preset.title;
-    document.getElementById("tabIcon").href = preset.icon;
+
+    const icon = document.getElementById("tabIcon");
+    if (icon) {
+      icon.href = preset.icon;
+    }
   }
 
   applyMovieTabPreset();
-
   window.addEventListener("pageshow", applyMovieTabPreset);
+  window.addEventListener("focus", applyMovieTabPreset);
 
   window.addEventListener("storage", function (event) {
     if (event.key === "userCloak" || event.key === null) {
       applyMovieTabPreset();
     }
   });
+})();
 </script>
 </body>
 </html>
