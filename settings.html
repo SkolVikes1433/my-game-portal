@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#05070b">
 <title>Settings - VOID NETWORK V6</title>
 <link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./void-logo.png">
+<link id="tabIcon" rel="icon" href="./void-logo.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap">
 <style>
 :root{--bg:#05070b;--panel:#0b111b;--blue:#168cff;--text:#eaf3ff;--muted:#9badc4;--border:#183b60}
@@ -56,33 +56,43 @@ button:focus-visible,a:focus-visible{outline:2px solid #8bcaff;outline-offset:3p
 
 <script>
 "use strict";
+
 const PRESETS={
-"Default":{title:"VOID NETWORK V6",icon:"./void-logo.png"},
-"Khan Academy":{title:"Khan Academy",icon:"https://cdn.kastatic.org/images/favicon.ico"},
-"Google":{title:"Google",icon:"https://www.google.com/favicon.ico"},
-"YouTube":{title:"YouTube",icon:"https://www.youtube.com/favicon.ico"},
-"Google Docs":{title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"},
-"Desmos":{title:"Desmos | Graphing Calculator",icon:"https://www.desmos.com/favicon.ico"},
-"Google Drive":{title:"Google Drive",icon:"https://drive.google.com/favicon.ico"},
-"Google Classroom":{title:"Home - Classroom",icon:"https://ssl.gstatic.com/classroom/favicon.png"},
-"XtraMath":{title:"XtraMath",icon:"https://xtramath.org/favicon.ico"}
+  "Default":{title:"VOID NETWORK V6",icon:"./void-logo.png"},
+  "Schoology":{title:"Schoology",icon:"https://asset-cdn.schoology.com/sites/all/themes/schoology_theme/favicon.ico"},
+  "Khan Academy":{title:"Khan Academy",icon:"https://cdn.kastatic.org/images/favicon.ico"},
+  "Google":{title:"Google",icon:"https://www.google.com/favicon.ico"},
+  "YouTube":{title:"YouTube",icon:"https://www.youtube.com/favicon.ico"},
+  "Google Docs":{title:"Google Docs",icon:"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"},
+  "Desmos":{title:"Desmos | Graphing Calculator",icon:"https://www.desmos.com/favicon.ico"},
+  "Google Drive":{title:"Google Drive",icon:"https://drive.google.com/favicon.ico"},
+  "Google Classroom":{title:"Home - Classroom",icon:"https://ssl.gstatic.com/classroom/favicon.png"},
+  "XtraMath":{title:"XtraMath",icon:"https://xtramath.org/favicon.ico"}
 };
+
 const grid=document.getElementById("appGrid");
 const status=document.getElementById("status");
 
 function applyAppearance(name){
   const preset=PRESETS[name]||PRESETS.Default;
   document.title=preset.title;
-  let icon=document.querySelector('link[rel="icon"]');
-  if(!icon){icon=document.createElement("link");icon.rel="icon";document.head.appendChild(icon);}
+  let icon=document.getElementById("tabIcon");
+  if(!icon){
+    icon=document.createElement("link");
+    icon.id="tabIcon";
+    icon.rel="icon";
+    document.head.appendChild(icon);
+  }
   icon.href=preset.icon;
 }
+
 function getSavedPreset(){
   try{
     const saved=localStorage.getItem("userCloak")||"Default";
     return Object.prototype.hasOwnProperty.call(PRESETS,saved)?saved:"Default";
   }catch(e){return "Default";}
 }
+
 function updateButtons(selected){
   grid.querySelectorAll(".app-button").forEach(button=>{
     const active=button.dataset.preset===selected;
@@ -90,20 +100,25 @@ function updateButtons(selected){
     button.setAttribute("aria-pressed",String(active));
   });
 }
+
 function selectPreset(name){
   const preset=PRESETS[name];
   if(!preset)return;
+
   try{
     localStorage.setItem("userCloak",name);
     localStorage.setItem("customTabTitle",preset.title);
     localStorage.setItem("selectedTabIcon",preset.icon);
     applyAppearance(name);
     updateButtons(name);
-    status.textContent=name==="Default"?"Default tab appearance saved.":name+" tab appearance saved.";
+    status.textContent=name==="Default"
+      ?"Default tab appearance saved."
+      :name+" tab appearance saved.";
   }catch(e){
     status.textContent="Could not save the preset. Check browser storage settings.";
   }
 }
+
 Object.keys(PRESETS).forEach(name=>{
   const button=document.createElement("button");
   button.type="button";
@@ -113,10 +128,20 @@ Object.keys(PRESETS).forEach(name=>{
   button.addEventListener("click",()=>selectPreset(name));
   grid.appendChild(button);
 });
+
 document.getElementById("resetButton").addEventListener("click",()=>selectPreset("Default"));
-const saved=getSavedPreset();
-applyAppearance(saved);
-updateButtons(saved);
+
+function syncPreset(){
+  const saved=getSavedPreset();
+  applyAppearance(saved);
+  updateButtons(saved);
+}
+
+syncPreset();
+window.addEventListener("pageshow",syncPreset);
+window.addEventListener("storage",event=>{
+  if(event.key==="userCloak"||event.key===null)syncPreset();
+});
 </script>
 </body>
 </html>
