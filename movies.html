@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#05070b">
   <title>VOID NETWORK V6</title>
-<link id="tabIcon" rel="icon" href="./void-logo.png">
+  <link id="tabIcon" rel="icon" href="./void-logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
@@ -20,7 +20,9 @@
       --border: #183b60;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -44,8 +46,9 @@
       border-bottom: 1px solid var(--border);
     }
 
+    /* VOID NETWORK V6 BRAND — WHITE */
     .brand {
-      color: var(--blue);
+      color: #ffffff;
       font: 24px 'Black Ops One', cursive;
       text-decoration: none;
     }
@@ -67,10 +70,11 @@
       transition: .2s;
     }
 
-    nav a:hover, nav a.active {
+    nav a:hover,
+    nav a.active {
       background: #102b47;
       border-color: var(--blue);
-      color: white;
+      color: #ffffff;
     }
 
     main {
@@ -87,13 +91,17 @@
       background: linear-gradient(135deg, #0c1726, #070b12);
     }
 
+    /* MOVIES & SHOWS HEADING — WHITE */
     h1 {
       margin: 0 0 8px;
       font: clamp(30px, 5vw, 48px) 'Black Ops One', cursive;
-      color: var(--blue);
+      color: #ffffff;
     }
 
-    .hero p { color: var(--muted); font-size: 18px; }
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+    }
 
     #search {
       display: block;
@@ -108,7 +116,9 @@
       font: 17px 'Rajdhani', sans-serif;
     }
 
-    #search:focus { border-color: var(--blue); }
+    #search:focus {
+      border-color: var(--blue);
+    }
 
     .section-title {
       font: 24px 'Black Ops One', cursive;
@@ -142,29 +152,24 @@
       overflow-wrap: anywhere;
     }
 
-   .movie-card a {
-  display: block;
-  padding: 10px 12px;
-  text-align: center;
-  color: #ffffff;
-  background: #0b1726;
-  border: 1px solid #183b60;
-  border-radius: 7px;
-  font-weight: 700;
-  text-decoration: none;
-}
+    .movie-card a {
+      display: block;
+      padding: 10px 12px;
+      text-align: center;
+      color: #ffffff;
+      background: #0b1726;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .2s;
+    }
 
-.movie-card a:visited,
-.movie-card a:hover,
-.movie-card a:active {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.movie-card a:hover {
-  background: #102b47;
-  border-color: #168cff;
-}
+    .movie-card a:visited,
+    .movie-card a:hover,
+    .movie-card a:active {
+      color: #ffffff;
+      text-decoration: none;
     }
 
     .movie-card a:hover {
@@ -188,10 +193,21 @@
     }
 
     @media (max-width: 520px) {
-      header { justify-content: center; }
-      .brand { font-size: 21px; }
-      #movieGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .movie-card { padding: 14px; }
+      header {
+        justify-content: center;
+      }
+
+      .brand {
+        font-size: 21px;
+      }
+
+      #movieGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .movie-card {
+        padding: 14px;
+      }
     }
   </style>
 </head>
@@ -199,6 +215,7 @@
 <body>
   <header>
     <a class="brand" href="./index.html">VOID NETWORK V6</a>
+
     <nav>
       <a href="./index.html">Games</a>
       <a href="./settings.html">Tab Settings</a>
@@ -208,12 +225,18 @@
 
   <main>
     <section class="hero">
-      <h1>Movies & Shows</h1>
+      <h1>Movies &amp; Shows</h1>
       <p></p>
-      <input id="search" type="search" placeholder="Search movies and shows..." autocomplete="off">
+      <input
+        id="search"
+        type="search"
+        placeholder="Search movies and shows..."
+        autocomplete="off"
+      >
     </section>
 
     <h2 class="section-title">ALL TITLES</h2>
+
     <section id="movieGrid"></section>
     <p id="emptyMessage">No titles found. Try another search.</p>
   </main>
@@ -221,65 +244,63 @@
   <footer>© VOID NETWORK V6</footer>
 
   <script>
-    // ADD YOUR TITLES AND AUTHORIZED LINKS HERE.
-    // Copy a line, change the title and URL, and add a comma between entries.
     const movies = [
-  { title: "Deadpool", url: "https://drive.google.com/file/d/1VH_yELQQxJxhuyxsU80q8eMsEeaxNomz/view?usp=drive_link" },
-  { title: "Deadpool and Wolverine", url: "https://drive.google.com/file/d/1aBzsoTJAjhZeFFDkIV2SN7p7ZHagUEDc/view?t=1" },
-  { title: "Space Jam", url: "https://drive.google.com/file/d/1Jn-9YsKif3wVxnDfH3ZW3HwSq1iTyb6r/view" },
-  { title: "Ted", url: "https://drive.google.com/drive/folders/1-6hBb-KZsUoc7ErXnaw2udeQv9u1THRJ?usp=drive_link" },
-  { title: "South Park", url: "https://drive.google.com/drive/folders/1PzKaoaK4blzlaoxnwC20gZoeYE5mDxWL?usp=drive_link" },
-  { title: "Rick and Morty", url: "https://drive.google.com/drive/folders/1EhzdG061fossyvUWpAWzDB_b6WhAWvbS?dmr=1&ec=wgc-drive-hero-goto" },
-  { title: "Regular Show", url: "https://drive.google.com/drive/folders/1tedaT2-lJvdIToqgsBx7lDo4tJl3TY-U?usp=drive_link" },
-  { title: "Gravity Falls", url: "https://drive.google.com/drive/folders/0B2lfcnXrxDFsUHl1OHdVc0pnWUU?resourcekey=0-14k0yy6znJA05TWl8GyMHw" },
-  { title: "Family Guy", url: "https://drive.google.com/drive/folders/11W6C-Jqv9iQVasqjfiaYz77puax1UTjH?usp=drive_link" },
-  { title: "Adventure Time", url: "https://drive.google.com/drive/folders/1UG2cvB5MfeODfLo_yrNazezoXF8UFZXt?usp=drive_link" },
-  { title: "Moana 2", url: "https://drive.google.com/file/d/1iVJq1FsNG577gesP7CaTWPLgdqAtnaEg/view" },
-  { title: "Home", url: "https://drive.google.com/file/d/1PvzOPEZp09GjSj3PEDuxb0Y1ceQvo1AX/view" },
-  { title: "Hamilton", url: "https://drive.google.com/file/d/1c47Nko9vdJfe-KKF4nkpd-U-aMT_ZaQe/view" },
-  { title: "Real Steel", url: "https://drive.google.com/file/d/1MS1zDRnMpf2Hk9g0Oqg1GiZp8ZdRLYEi/view?usp=sharing" },
-  { title: "Spider-Man: Into the Spider-Verse", url: "https://drive.google.com/file/d/1EJi2wrRs9rJY06WYR9Fk3lQYJZ9JBzoJ/view?usp=drive_link" },
-  { title: "Spider-Man: Across the Spider-Verse", url: "https://drive.google.com/file/d/19usev5SheTqkOKEJbwCM4tYHlM9Nv_Tm/view?usp=drive_link" },
-  { title: "Fnaf", url: "https://drive.google.com/file/d/1S5mSHUFiRv-7B94ut02EYJgRwidFYldV/view?usp=drive_link" },
-  { title: "Bad Guys", url: "https://drive.google.com/file/d/1PZLefVcdcOJEOlUc82tlQp1n354MXlzZ/view?usp=drive_link" },
-  { title: "Major Payne", url: "https://drive.google.com/file/d/1t1hsuqPVcOZEXWOloXDi25CuhB_YEUrZ/view?usp=drive_link" },
-  { title: "Avengers: Endgame", url: "https://drive.google.com/file/d/18R4gFyxfmqmzT3--ysuH6a1pWjnKCu3m/view?usp=drive_link" },
-  { title: "Pacific Rim", url: "https://drive.google.com/file/d/1tMCw8mPPaew2SaCWGByxGt81LSdOTzt4/view?usp=drive_link" },
-  { title: "Pacific Rim Uprising", url: "https://drive.google.com/file/d/129-QuiU8M0wDzpIglUmbE8m_JxPahEHI/view?usp=drive_link" },
-  { title: "Interstellar", url: "https://drive.google.com/file/d/1N2jGm24ka4DC3gl6VBpFMFcaoNprD_hT/view?usp=drive_link" },
-  { title: "Rio", url: "https://drive.google.com/file/d/1caMqzWQyUnwUvmOyVk9InA8ITtJO29vy/view?usp=drive_link" },
-  { title: "Sonic", url: "https://drive.google.com/file/d/1dzF0yDomxIxm_MWcTfc4M12W4U0tjRhR/view?usp=drive_link" },
-  { title: "Sonic 2", url: "https://drive.google.com/file/d/1YJyTr-9EmSXVfAPGDXyJiAN9H32VMNgi/view?usp=drive_link" },
-  { title: "Sonic 3", url: "https://drive.google.com/file/d/1hsSj1n0qsp9UVjWXBd-OUU-Jir3v6JBw/view?usp=drive_link" },
-  { title: "Ratatouille", url: "https://drive.google.com/file/d/1FWUl2vudrknhOJyQAIoyfWRJPhYVqD5v/view?usp=drive_link" },
-  { title: "Sandlot", url: "https://drive.google.com/file/d/17LFOeWBdJy9P11PqMGbRX3U47WC-QU-5/view?usp=drive_link" },
-  { title: "Lorax", url: "https://drive.google.com/file/d/1v9REIpEq2POchjXZGzGny6d8NSj3D1AP/view?usp=drive_link" },
-  { title: "Venom", url: "https://drive.google.com/file/d/1W8YeaRBrC4LVDWfntFvKgE6a7NPBFlIO/view?usp=drive_link" },
-  { title: "Venom 2", url: "https://drive.google.com/file/d/1P2FNBX8C943FZkacnhtYh21gXwseU8pX/view?usp=drive_link" },
-  { title: "The Mask", url: "https://drive.google.com/file/d/1K1i0lNIVRUDOvLlzr_qqj24wOAWvNZGy/view?usp=drive_link" },
-  { title: "Friday the 13th 1", url: "https://drive.google.com/file/d/1_m59Zx4a-Hee0sEWF0eEVc_15gsOySZ-/view?usp=drive_link" },
-  { title: "Friday the 13th 2", url: "https://drive.google.com/file/d/1uscXsUoKES-Wie8-PKx6nadhccTF6q9A/view?usp=drive_link" },
-  { title: "Friday the 13th 3", url: "https://drive.google.com/file/d/15ZtduQTe8804up37j28MpwXXMrVBIrpd/view?usp=drive_link" },
-  { title: "Friday the 13th 4", url: "https://drive.google.com/file/d/1hBvluTscPtWFFdwEkAqpwcmrTBS12guI/view?usp=drive_link" },
-  { title: "Friday the 13th 5", url: "https://drive.google.com/file/d/1-Yhg1Bx-1stlbpwvR1XYGSzQWJ8Zcekb/view?usp=drive_link" },
-  { title: "Friday the 13th 6", url: "https://drive.google.com/file/d/1RRgtJCbQWRvxvk62PRY1JdwLznMJsV24/view?usp=drive_link" },
-  { title: "Friday the 13th 7", url: "https://drive.google.com/file/d/14fFOtu2t6ABp4q5X4F4AzTGo4Tt-RjtA/view?usp=drive_link" },
-  { title: "Friday the 13th 8", url: "https://drive.google.com/file/d/1GGBxXH38xA22DRmrDKnYlcjj4uuHDNY4/view?usp=drive_link" },
-  { title: "Saw 1", url: "https://drive.google.com/file/d/1nZn3QfKiiZgg4nx3GRA4-K6obuJLlepm/view" },
-  { title: "Saw 2", url: "https://drive.google.com/file/d/1eQLt5qFXYBjdvN05Jryfkc0MUF6eLZfS/view" },
-  { title: "Saw 3", url: "https://drive.google.com/file/d/1afqsupX8WtCzEt3AbeKe_Ffwfb4oXzsa/view" },
-  { title: "Saw 4", url: "https://drive.google.com/file/d/1XmKqBrU4I1QqPnKG5WGpVImeTFvBjy0n/view" },
-  { title: "Saw 5", url: "https://drive.google.com/file/d/1Rng7E07HcEPZmWvxYHk2gnrhArp_0MsS/view" },
-  { title: "Saw 6", url: "https://drive.google.com/file/d/18f0L2Kmx3qilMb9s-RabQSwNSSLfCsFu/view?usp=drive_link" },
-  { title: "Saw 7", url: "https://drive.google.com/file/d/1uMSvmCNTmuuY_imm9J8ZvipQW8rWMcCJ/view" },
-  { title: "Saw 9", url: "https://drive.google.com/file/d/10Wn3otVUN00Sfc6sRZSnDFfaYDJ5VTNR/view?usp=drive_link" },
-  { title: "Scream 1", url: "https://drive.google.com/file/d/1K0v8NXcyS-ShrwaNpyvQ-1X-RbgUBihO/view" },
-  { title: "Scream 2", url: "https://drive.google.com/file/d/1i8w5FlmSFp3hixLRHeodPPtQq5r5VDQh/view" },
-  { title: "Scream 3", url: "https://drive.google.com/file/d/1IzaFo-PmeI3AiQ_qoDdjCbUdiu8Ohs-w/view" },
-  { title: "Scream 4", url: "https://drive.google.com/file/d/1erEdSoN1ToiEEMu0UxKWYdj2eDlycjse/view?usp=sharing" },
-  { title: "Scream 5", url: "https://drive.google.com/file/d/1dUxJw1LdOKB4RxNkQLuxas9JJbaJPGlz/view" },
-  { title: "Scream 6", url: "https://drive.google.com/file/d/1zLFZE5jEzvjRSAawv9gOk-E5FYhsYblJ/view" }
-];
+      { title: "Deadpool", url: "https://drive.google.com/file/d/1VH_yELQQxJxhuyxsU80q8eMsEeaxNomz/view?usp=drive_link" },
+      { title: "Deadpool and Wolverine", url: "https://drive.google.com/file/d/1aBzsoTJAjhZeFFDkIV2SN7p7ZHagUEDc/view?t=1" },
+      { title: "Space Jam", url: "https://drive.google.com/file/d/1Jn-9YsKif3wVxnDfH3ZW3HwSq1iTyb6r/view" },
+      { title: "Ted", url: "https://drive.google.com/drive/folders/1-6hBb-KZsUoc7ErXnaw2udeQv9u1THRJ?usp=drive_link" },
+      { title: "South Park", url: "https://drive.google.com/drive/folders/1PzKaoaK4blzlaoxnwC20gZoeYE5mDxWL?usp=drive_link" },
+      { title: "Rick and Morty", url: "https://drive.google.com/drive/folders/1EhzdG061fossyvUWpAWzDB_b6WhAWvbS?dmr=1&ec=wgc-drive-hero-goto" },
+      { title: "Regular Show", url: "https://drive.google.com/drive/folders/1tedaT2-lJvdIToqgsBx7lDo4tJl3TY-U?usp=drive_link" },
+      { title: "Gravity Falls", url: "https://drive.google.com/drive/folders/0B2lfcnXrxDFsUHl1OHdVc0pnWUU?resourcekey=0-14k0yy6znJA05TWl8GyMHw" },
+      { title: "Family Guy", url: "https://drive.google.com/drive/folders/11W6C-Jqv9iQVasqjfiaYz77puax1UTjH?usp=drive_link" },
+      { title: "Adventure Time", url: "https://drive.google.com/drive/folders/1UG2cvB5MfeODfLo_yrNazezoXF8UFZXt?usp=drive_link" },
+      { title: "Moana 2", url: "https://drive.google.com/file/d/1iVJq1FsNG577gesP7CaTWPLgdqAtnaEg/view" },
+      { title: "Home", url: "https://drive.google.com/file/d/1PvzOPEZp09GjSj3PEDuxb0Y1ceQvo1AX/view" },
+      { title: "Hamilton", url: "https://drive.google.com/file/d/1c47Nko9vdJfe-KKF4nkpd-U-aMT_ZaQe/view" },
+      { title: "Real Steel", url: "https://drive.google.com/file/d/1MS1zDRnMpf2Hk9g0Oqg1GiZp8ZdRLYEi/view?usp=sharing" },
+      { title: "Spider-Man: Into the Spider-Verse", url: "https://drive.google.com/file/d/1EJi2wrRs9rJY06WYR9Fk3lQYJZ9JBzoJ/view?usp=drive_link" },
+      { title: "Spider-Man: Across the Spider-Verse", url: "https://drive.google.com/file/d/19usev5SheTqkOKEJbwCM4tYHlM9Nv_Tm/view?usp=drive_link" },
+      { title: "Fnaf", url: "https://drive.google.com/file/d/1S5mSHUFiRv-7B94ut02EYJgRwidFYldV/view?usp=drive_link" },
+      { title: "Bad Guys", url: "https://drive.google.com/file/d/1PZLefVcdcOJEOlUc82tlQp1n354MXlzZ/view?usp=drive_link" },
+      { title: "Major Payne", url: "https://drive.google.com/file/d/1t1hsuqPVcOZEXWOloXDi25CuhB_YEUrZ/view?usp=drive_link" },
+      { title: "Avengers: Endgame", url: "https://drive.google.com/file/d/18R4gFyxfmqmzT3--ysuH6a1pWjnKCu3m/view?usp=drive_link" },
+      { title: "Pacific Rim", url: "https://drive.google.com/file/d/1tMCw8mPPaew2SaCWGByxGt81LSdOTzt4/view?usp=drive_link" },
+      { title: "Pacific Rim Uprising", url: "https://drive.google.com/file/d/129-QuiU8M0wDzpIglUmbE8m_JxPahEHI/view?usp=drive_link" },
+      { title: "Interstellar", url: "https://drive.google.com/file/d/1N2jGm24ka4DC3gl6VBpFMFcaoNprD_hT/view?usp=drive_link" },
+      { title: "Rio", url: "https://drive.google.com/file/d/1caMqzWQyUnwUvmOyVk9InA8ITtJO29vy/view?usp=drive_link" },
+      { title: "Sonic", url: "https://drive.google.com/file/d/1dzF0yDomxIxm_MWcTfc4M12W4U0tjRhR/view?usp=drive_link" },
+      { title: "Sonic 2", url: "https://drive.google.com/file/d/1YJyTr-9EmSXVfAPGDXyJiAN9H32VMNgi/view?usp=drive_link" },
+      { title: "Sonic 3", url: "https://drive.google.com/file/d/1hsSj1n0qsp9UVjWXBd-OUU-Jir3v6JBw/view?usp=drive_link" },
+      { title: "Ratatouille", url: "https://drive.google.com/file/d/1FWUl2vudrknhOJyQAIoyfWRJPhYVqD5v/view?usp=drive_link" },
+      { title: "Sandlot", url: "https://drive.google.com/file/d/17LFOeWBdJy9P11PqMGbRX3U47WC-QU-5/view?usp=drive_link" },
+      { title: "Lorax", url: "https://drive.google.com/file/d/1v9REIpEq2POchjXZGzGny6d8NSj3D1AP/view?usp=drive_link" },
+      { title: "Venom", url: "https://drive.google.com/file/d/1W8YeaRBrC4LVDWfntFvKgE6a7NPBFlIO/view?usp=drive_link" },
+      { title: "Venom 2", url: "https://drive.google.com/file/d/1P2FNBX8C943FZkacnhtYh21gXwseU8pX/view?usp=drive_link" },
+      { title: "The Mask", url: "https://drive.google.com/file/d/1K1i0lNIVRUDOvLlzr_qqj24wOAWvNZGy/view?usp=drive_link" },
+      { title: "Friday the 13th 1", url: "https://drive.google.com/file/d/1_m59Zx4a-Hee0sEWF0eEVc_15gsOySZ-/view?usp=drive_link" },
+      { title: "Friday the 13th 2", url: "https://drive.google.com/file/d/1uscXsUoKES-Wie8-PKx6nadhccTF6q9A/view?usp=drive_link" },
+      { title: "Friday the 13th 3", url: "https://drive.google.com/file/d/15ZtduQTe8804up37j28MpwXXMrVBIrpd/view?usp=drive_link" },
+      { title: "Friday the 13th 4", url: "https://drive.google.com/file/d/1hBvluTscPtWFFdwEkAqpwcmrTBS12guI/view?usp=drive_link" },
+      { title: "Friday the 13th 5", url: "https://drive.google.com/file/d/1-Yhg1Bx-1stlbpwvR1XYGSzQWJ8Zcekb/view?usp=drive_link" },
+      { title: "Friday the 13th 6", url: "https://drive.google.com/file/d/1RRgtJCbQWRvxvk62PRY1JdwLznMJsV24/view?usp=drive_link" },
+      { title: "Friday the 13th 7", url: "https://drive.google.com/file/d/14fFOtu2t6ABp4q5X4F4AzTGo4Tt-RjtA/view?usp=drive_link" },
+      { title: "Friday the 13th 8", url: "https://drive.google.com/file/d/1GGBxXH38xA22DRmrDKnYlcjj4uuHDNY4/view?usp=drive_link" },
+      { title: "Saw 1", url: "https://drive.google.com/file/d/1nZn3QfKiiZgg4nx3GRA4-K6obuJLlepm/view" },
+      { title: "Saw 2", url: "https://drive.google.com/file/d/1eQLt5qFXYBjdvN05Jryfkc0MUF6eLZfS/view" },
+      { title: "Saw 3", url: "https://drive.google.com/file/d/1afqsupX8WtCzEt3AbeKe_Ffwfb4oXzsa/view" },
+      { title: "Saw 4", url: "https://drive.google.com/file/d/1XmKqBrU4I1QqPnKG5WGpVImeTFvBjy0n/view" },
+      { title: "Saw 5", url: "https://drive.google.com/file/d/1Rng7E07HcEPZmWvxYHk2gnrhArp_0MsS/view" },
+      { title: "Saw 6", url: "https://drive.google.com/file/d/18f0L2Kmx3qilMb9s-RabQSwNSSLfCsFu/view?usp=drive_link" },
+      { title: "Saw 7", url: "https://drive.google.com/file/d/1uMSvmCNTmuuY_imm9J8ZvipQW8rWMcCJ/view" },
+      { title: "Saw 9", url: "https://drive.google.com/file/d/10Wn3otVUN00Sfc6sRZSnDFfaYDJ5VTNR/view?usp=drive_link" },
+      { title: "Scream 1", url: "https://drive.google.com/file/d/1K0v8NXcyS-ShrwaNpyvQ-1X-RbgUBihO/view" },
+      { title: "Scream 2", url: "https://drive.google.com/file/d/1i8w5FlmSFp3hixLRHeodPPtQq5r5VDQh/view" },
+      { title: "Scream 3", url: "https://drive.google.com/file/d/1IzaFo-PmeI3AiQ_qoDdjCbUdiu8Ohs-w/view" },
+      { title: "Scream 4", url: "https://drive.google.com/file/d/1erEdSoN1ToiEEMu0UxKWYdj2eDlycjse/view?usp=sharing" },
+      { title: "Scream 5", url: "https://drive.google.com/file/d/1dUxJw1LdOKB4RxNkQLuxas9JJbaJPGlz/view" },
+      { title: "Scream 6", url: "https://drive.google.com/file/d/1zLFZE5jEzvjRSAawv9gOk-E5FYhsYblJ/view" }
+    ];
 
     const grid = document.getElementById("movieGrid");
     const search = document.getElementById("search");
@@ -315,75 +336,77 @@
     search.addEventListener("input", () => renderMovies(search.value));
     renderMovies();
   </script>
-<script>
-(function () {
-  "use strict";
 
-  const TAB_PRESETS = {
-    "Default": {
-      title: "VOID NETWORK V6",
-      icon: "./void-logo.png"
-    },
-    "Khan Academy": {
-      title: "Khan Academy",
-      icon: "https://cdn.kastatic.org/images/favicon.ico"
-    },
-    "Google": {
-      title: "Google",
-      icon: "https://www.google.com/favicon.ico"
-    },
-    "YouTube": {
-      title: "YouTube",
-      icon: "https://www.youtube.com/favicon.ico"
-    },
-    "Google Docs": {
-      title: "Google Docs",
-      icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
-    },
-    "Desmos": {
-      title: "Desmos",
-      icon: "https://www.desmos.com/favicon.ico"
-    },
-    "Google Drive": {
-      title: "Google Drive",
-      icon: "https://drive.google.com/favicon.ico"
-    },
-    "Google Classroom": {
-      title: "Home - Classroom",
-      icon: "https://ssl.gstatic.com/classroom/favicon.png"
-    },
-    "XtraMath": {
-      title: "XtraMath",
-      icon: "https://xtramath.org/favicon.ico"
-    }
-  };
+  <script>
+    (function () {
+      "use strict";
 
-  function applyMovieTabPreset() {
-    let selected = "Default";
+      const TAB_PRESETS = {
+        "Default": {
+          title: "VOID NETWORK V6",
+          icon: "./void-logo.png"
+        },
+        "Khan Academy": {
+          title: "Khan Academy",
+          icon: "https://cdn.kastatic.org/images/favicon.ico"
+        },
+        "Google": {
+          title: "Google",
+          icon: "https://www.google.com/favicon.ico"
+        },
+        "YouTube": {
+          title: "YouTube",
+          icon: "https://www.youtube.com/favicon.ico"
+        },
+        "Google Docs": {
+          title: "Google Docs",
+          icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+        },
+        "Desmos": {
+          title: "Desmos",
+          icon: "https://www.desmos.com/favicon.ico"
+        },
+        "Google Drive": {
+          title: "Google Drive",
+          icon: "https://drive.google.com/favicon.ico"
+        },
+        "Google Classroom": {
+          title: "Home - Classroom",
+          icon: "https://ssl.gstatic.com/classroom/favicon.png"
+        },
+        "XtraMath": {
+          title: "XtraMath",
+          icon: "https://xtramath.org/favicon.ico"
+        }
+      };
 
-    try {
-      selected = localStorage.getItem("userCloak") || "Default";
-    } catch (error) {}
+      function applyMovieTabPreset() {
+        let selected = "Default";
 
-    const preset = TAB_PRESETS[selected] || TAB_PRESETS["Default"];
-    document.title = preset.title;
+        try {
+          selected = localStorage.getItem("userCloak") || "Default";
+        } catch (error) {}
 
-    const icon = document.getElementById("tabIcon");
-    if (icon) {
-      icon.href = preset.icon;
-    }
-  }
+        const preset = TAB_PRESETS[selected] || TAB_PRESETS["Default"];
+        document.title = preset.title;
 
-  applyMovieTabPreset();
-  window.addEventListener("pageshow", applyMovieTabPreset);
-  window.addEventListener("focus", applyMovieTabPreset);
+        const icon = document.getElementById("tabIcon");
+        if (icon) {
+          icon.href = preset.icon;
+        }
+      }
 
-  window.addEventListener("storage", function (event) {
-    if (event.key === "userCloak" || event.key === null) {
       applyMovieTabPreset();
-    }
-  });
-})();
-</script>
+
+      window.addEventListener("pageshow", applyMovieTabPreset);
+      window.addEventListener("focus", applyMovieTabPreset);
+
+      window.addEventListener("storage", function (event) {
+        if (event.key === "userCloak" || event.key === null) {
+          applyMovieTabPreset();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
