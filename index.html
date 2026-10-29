@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +111,7 @@ h2 {
   font-size:19px;
 }
 
-/* Cyan and hot-pink RGB glitch targets */
+/* Original RGB glitch effects */
 .glitch-target {
   position:relative;
   display:inline-block;
@@ -124,7 +125,6 @@ h2 {
     var(--cyan-offset) 0 0 var(--cyan);
 }
 
-/* The duplicated text layers actually move independently */
 .glitch-target::before,
 .glitch-target::after {
   content:attr(data-text);
@@ -153,7 +153,6 @@ h2 {
   transform:translateX(var(--pink-offset));
 }
 
-/* Natural glitch burst: half a second */
 .glitch-target.ambient-glitch {
   animation:ambient-glitch .5s steps(2,end) both;
 }
@@ -168,7 +167,6 @@ h2 {
   animation:pink-slice .5s steps(2,end) both;
 }
 
-/* Hover repeats the SAME glitch rapidly */
 .glitch-target:hover {
   animation:hover-glitch .12s steps(2,end) infinite;
 }
@@ -184,127 +182,43 @@ h2 {
 }
 
 @keyframes ambient-glitch {
-  0% {
-    transform:translate(0,0) skewX(0);
-    filter:none;
-  }
-  12% {
-    transform:translate(-5px,1px) skewX(-5deg);
-    filter:drop-shadow(3px 0 var(--pink));
-  }
-  24% {
-    transform:translate(4px,-2px) skewX(3deg);
-    filter:drop-shadow(-3px 0 var(--cyan));
-  }
-  38% {
-    transform:translate(-3px,2px) skewX(-2deg);
-    filter:contrast(1.7);
-  }
-  52% {
-    transform:translate(5px,-1px) skewX(4deg);
-    filter:drop-shadow(3px 0 var(--cyan));
-  }
-  68% {
-    transform:translate(-4px,0) skewX(-3deg);
-    filter:drop-shadow(-3px 0 var(--pink));
-  }
-  82% {
-    transform:translate(2px,1px) skewX(2deg);
-    filter:contrast(1.4);
-  }
-  100% {
-    transform:translate(0,0) skewX(0);
-    filter:none;
-  }
+  0% { transform:translate(0,0) skewX(0); filter:none; }
+  12% { transform:translate(-5px,1px) skewX(-5deg); filter:drop-shadow(3px 0 var(--pink)); }
+  24% { transform:translate(4px,-2px) skewX(3deg); filter:drop-shadow(-3px 0 var(--cyan)); }
+  38% { transform:translate(-3px,2px) skewX(-2deg); filter:contrast(1.7); }
+  52% { transform:translate(5px,-1px) skewX(4deg); filter:drop-shadow(3px 0 var(--cyan)); }
+  68% { transform:translate(-4px,0) skewX(-3deg); filter:drop-shadow(-3px 0 var(--pink)); }
+  82% { transform:translate(2px,1px) skewX(2deg); filter:contrast(1.4); }
+  100% { transform:translate(0,0) skewX(0); filter:none; }
 }
 
 @keyframes hover-glitch {
-  0% {
-    transform:translate(0,0) skewX(0);
-    filter:none;
-  }
-  20% {
-    transform:translate(-5px,2px) skewX(-5deg);
-    filter:drop-shadow(3px 0 var(--pink));
-  }
-  40% {
-    transform:translate(5px,-2px) skewX(4deg);
-    filter:drop-shadow(-4px 0 var(--cyan));
-  }
-  60% {
-    transform:translate(-3px,-1px) skewX(-3deg);
-    filter:contrast(1.8);
-  }
-  80% {
-    transform:translate(4px,2px) skewX(4deg);
-    filter:drop-shadow(3px 0 var(--cyan));
-  }
-  100% {
-    transform:translate(0,0) skewX(0);
-    filter:none;
-  }
+  0% { transform:translate(0,0) skewX(0); filter:none; }
+  20% { transform:translate(-5px,2px) skewX(-5deg); filter:drop-shadow(3px 0 var(--pink)); }
+  40% { transform:translate(5px,-2px) skewX(4deg); filter:drop-shadow(-4px 0 var(--cyan)); }
+  60% { transform:translate(-3px,-1px) skewX(-3deg); filter:contrast(1.8); }
+  80% { transform:translate(4px,2px) skewX(4deg); filter:drop-shadow(3px 0 var(--cyan)); }
+  100% { transform:translate(0,0) skewX(0); filter:none; }
 }
 
 @keyframes cyan-slice {
-  0% {
-    clip-path:inset(0 0 90% 0);
-    transform:translate(-7px,-2px);
-  }
-  15% {
-    clip-path:inset(12% 0 62% 0);
-    transform:translate(6px,1px);
-  }
-  30% {
-    clip-path:inset(42% 0 35% 0);
-    transform:translate(-5px,-1px);
-  }
-  48% {
-    clip-path:inset(65% 0 15% 0);
-    transform:translate(7px,2px);
-  }
-  66% {
-    clip-path:inset(25% 0 55% 0);
-    transform:translate(-6px,0);
-  }
-  82% {
-    clip-path:inset(52% 0 28% 0);
-    transform:translate(5px,-2px);
-  }
-  100% {
-    clip-path:inset(0 0 90% 0);
-    transform:translate(-2px,0);
-  }
+  0% { clip-path:inset(0 0 90% 0); transform:translate(-7px,-2px); }
+  15% { clip-path:inset(12% 0 62% 0); transform:translate(6px,1px); }
+  30% { clip-path:inset(42% 0 35% 0); transform:translate(-5px,-1px); }
+  48% { clip-path:inset(65% 0 15% 0); transform:translate(7px,2px); }
+  66% { clip-path:inset(25% 0 55% 0); transform:translate(-6px,0); }
+  82% { clip-path:inset(52% 0 28% 0); transform:translate(5px,-2px); }
+  100% { clip-path:inset(0 0 90% 0); transform:translate(-2px,0); }
 }
 
 @keyframes pink-slice {
-  0% {
-    clip-path:inset(90% 0 0 0);
-    transform:translate(6px,2px);
-  }
-  18% {
-    clip-path:inset(60% 0 18% 0);
-    transform:translate(-7px,-1px);
-  }
-  35% {
-    clip-path:inset(20% 0 55% 0);
-    transform:translate(5px,1px);
-  }
-  52% {
-    clip-path:inset(45% 0 35% 0);
-    transform:translate(-6px,-2px);
-  }
-  72% {
-    clip-path:inset(12% 0 70% 0);
-    transform:translate(7px,1px);
-  }
-  88% {
-    clip-path:inset(68% 0 12% 0);
-    transform:translate(-4px,0);
-  }
-  100% {
-    clip-path:inset(90% 0 0 0);
-    transform:translate(2px,0);
-  }
+  0% { clip-path:inset(90% 0 0 0); transform:translate(6px,2px); }
+  18% { clip-path:inset(60% 0 18% 0); transform:translate(-7px,-1px); }
+  35% { clip-path:inset(20% 0 55% 0); transform:translate(5px,1px); }
+  52% { clip-path:inset(45% 0 35% 0); transform:translate(-6px,-2px); }
+  72% { clip-path:inset(12% 0 70% 0); transform:translate(7px,1px); }
+  88% { clip-path:inset(68% 0 12% 0); transform:translate(-4px,0); }
+  100% { clip-path:inset(90% 0 0 0); transform:translate(2px,0); }
 }
 
 #search {
@@ -341,18 +255,14 @@ h2 {
   overflow-wrap:anywhere;
 }
 
-.game-card:hover {
-  border-color:var(--cyan);
-}
+.game-card:hover { border-color:var(--cyan); }
 
 #noResults {
   display:none;
   color:var(--muted);
 }
 
-#gameScreen {
-  display:none;
-}
+#gameScreen { display:none; }
 
 .game-heading {
   display:flex;
@@ -362,9 +272,7 @@ h2 {
   flex-wrap:wrap;
 }
 
-.game-heading h2 {
-  overflow-wrap:anywhere;
-}
+.game-heading h2 { overflow-wrap:anywhere; }
 
 #player {
   overflow:hidden;
@@ -379,6 +287,66 @@ h2 {
   height:75vh;
   min-height:400px;
   border:0;
+  background:#000;
+}
+
+/* FULLSCREEN FIX: fill the actual viewport */
+#player:fullscreen,
+#player:-webkit-full-screen {
+  width:100vw;
+  height:100vh;
+  max-width:none;
+  max-height:none;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  overflow:hidden;
+  background:#000;
+}
+
+#player:fullscreen #gameFrame,
+#player:-webkit-full-screen #gameFrame {
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+  max-width:none;
+  max-height:none;
+  border:0;
+  border-radius:0;
+  background:#000;
+}
+
+/* Also handle the iframe itself entering fullscreen */
+#gameFrame:fullscreen,
+#gameFrame:-webkit-full-screen {
+  width:100vw;
+  height:100vh;
+  min-width:100vw;
+  min-height:100vh;
+  max-width:none;
+  max-height:none;
+  border:0;
+  border-radius:0;
+  background:#000;
+}
+
+/* Browser fullscreen fallback */
+html:fullscreen,
+html:-webkit-full-screen {
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+}
+
+html:fullscreen body,
+html:-webkit-full-screen body {
+  width:100%;
+  height:100%;
+  margin:0;
+  overflow:hidden;
   background:#000;
 }
 
@@ -434,13 +402,9 @@ h2 {
   margin-right:9px;
 }
 
-[hidden] {
-  display:none!important;
-}
+[hidden] { display:none!important; }
 
-#offlineStatus {
-  overflow-wrap:anywhere;
-}
+#offlineStatus { overflow-wrap:anywhere; }
 
 footer {
   margin-top:40px;
@@ -459,35 +423,13 @@ input:focus-visible {
 }
 
 @media(max-width:600px) {
-  header {
-    padding:15px 4%;
-  }
-
-  .brand {
-    font-size:20px;
-  }
-
-  main {
-    margin-top:22px;
-  }
-
-  #gameGrid {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  #gameFrame {
-    height:65vh;
-    min-height:350px;
-  }
-
-  #offlinePlay {
-    padding:17px;
-  }
-
-  .offline-btn {
-    width:100%;
-    margin:6px 0;
-  }
+  header { padding:15px 4%; }
+  .brand { font-size:20px; }
+  main { margin-top:22px; }
+  #gameGrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #gameFrame { height:65vh; min-height:350px; }
+  #offlinePlay { padding:17px; }
+  .offline-btn { width:100%; margin:6px 0; }
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -580,7 +522,6 @@ const PRESETS = {
 
 function loadPreset() {
   let name="Default";
-
   try {
     name=localStorage.getItem("userCloak")||"Default";
   } catch(e) {}
@@ -591,14 +532,12 @@ function loadPreset() {
 }
 
 loadPreset();
-
 window.addEventListener("pageshow",loadPreset);
-
 window.addEventListener("storage",e=>{
   if(e.key==="userCloak"||e.key===null) loadPreset();
 });
 
-/* All 48 games retained */
+/* All original games retained */
 const games = [
   ["Gaming Escape","https://badpiggies.global.ssl.fastly.net/index.html"],
   ["Super Mario 64","https://arkshocer.github.io/sm64/"],
@@ -656,7 +595,9 @@ const search=document.getElementById("search");
 const home=document.getElementById("homeScreen");
 const screen=document.getElementById("gameScreen");
 const frame=document.getElementById("gameFrame");
+const player=document.getElementById("player");
 const status=document.getElementById("offlineStatus");
+const fullscreenButton=document.getElementById("fullscreenButton");
 
 function renderGames() {
   grid.replaceChildren();
@@ -690,27 +631,43 @@ function renderGames() {
 
 search.addEventListener("input",renderGames);
 
-document.getElementById("backButton").addEventListener("click",()=>{
+document.getElementById("backButton").addEventListener("click",async()=>{
+  if(document.fullscreenElement) {
+    try { await document.exitFullscreen(); } catch(e) {}
+  }
   frame.src="about:blank";
   screen.style.display="none";
   home.style.display="block";
   window.scrollTo(0,0);
 });
 
-document.getElementById("fullscreenButton").addEventListener("click",async()=>{
+/* Fullscreen: use the entire player container, not the small iframe alone */
+fullscreenButton.addEventListener("click",async()=>{
   try {
     if(document.fullscreenElement) {
       await document.exitFullscreen();
-    } else {
-      await document.getElementById("player").requestFullscreen();
+      return;
     }
-  } catch(e) {
-    alert("Fullscreen is not available in this browser.");
+
+    if(player.requestFullscreen) {
+      await player.requestFullscreen();
+    } else if(frame.requestFullscreen) {
+      await frame.requestFullscreen();
+    } else {
+      status.textContent="Fullscreen is not supported by this browser.";
+    }
+  } catch(error) {
+    status.textContent=
+      "Fullscreen was blocked by the browser or game host. Try the game's own fullscreen control if available.";
   }
 });
 
-/* Independent natural glitch bursts for both text elements.
-   Hover uses the same visual glitch, but repeats much faster. */
+document.addEventListener("fullscreenchange",()=>{
+  fullscreenButton.textContent=
+    document.fullscreenElement?"Exit Fullscreen":"Fullscreen";
+});
+
+/* Original glitch timing and movement */
 const glitchTargets=[...document.querySelectorAll(".glitch-target")];
 const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -736,7 +693,6 @@ function scheduleGlitch(target) {
 
 glitchTargets.forEach(target=>{
   scheduleGlitch(target);
-
   target.addEventListener("pointerenter",()=>{
     target.classList.remove("ambient-glitch");
   });
@@ -750,7 +706,6 @@ reducedMotion.addEventListener?.("change",()=>{
   }
 });
 
-/* Pointer proximity independently strengthens both targets */
 function updateGlitchProximity(x,y) {
   if(reducedMotion.matches) return;
 
